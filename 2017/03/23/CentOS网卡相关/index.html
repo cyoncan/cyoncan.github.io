@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ftp,vsftp," />
+  <meta name="keywords" content="网卡,驱动," />
 
 
 
@@ -87,19 +87,49 @@
 
 
 
-<meta name="description" content="安装(源码编译或者yum install)1234$ yum -y install vsftpd$ service vsftpd start$ chkconfig vsftpd on$ yum install -y  db4 db4-utils (基于虚拟账户权限认证依赖)
-目录文件说明  /etc/vsftpd/vsftpd.conf              vsftpd的核心配置文件  /e">
+<meta name="description" content="CentOS网卡相关信息查看
+1.首先安装工具,已安装请忽略.
+1$ yum install pciutiles
+
+2.查看网卡型号
+1$ lspci | grep -i ethernet
+
+3.查看网卡驱动版本
+1$ ethtool -i eth0
+
+4网卡驱动安装
+1234567891011$yum install kernel-devel kernel-headers  $ yum inst">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vsftp安装">
-<meta property="og:url" content="http://cyocan.github.io/2017/03/19/vsftpd/index.html">
+<meta property="og:title" content="Linux查看网卡信息">
+<meta property="og:url" content="http://cyocan.github.io/2017/03/23/CentOS网卡相关/index.html">
 <meta property="og:site_name" content="Cyoncan">
-<meta property="og:description" content="安装(源码编译或者yum install)1234$ yum -y install vsftpd$ service vsftpd start$ chkconfig vsftpd on$ yum install -y  db4 db4-utils (基于虚拟账户权限认证依赖)
-目录文件说明  /etc/vsftpd/vsftpd.conf              vsftpd的核心配置文件  /e">
-<meta property="og:updated_time" content="2017-03-19T15:49:48.497Z">
+<meta property="og:description" content="CentOS网卡相关信息查看
+1.首先安装工具,已安装请忽略.
+1$ yum install pciutiles
+
+2.查看网卡型号
+1$ lspci | grep -i ethernet
+
+3.查看网卡驱动版本
+1$ ethtool -i eth0
+
+4网卡驱动安装
+1234567891011$yum install kernel-devel kernel-headers  $ yum inst">
+<meta property="og:updated_time" content="2017-03-23T14:13:39.307Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vsftp安装">
-<meta name="twitter:description" content="安装(源码编译或者yum install)1234$ yum -y install vsftpd$ service vsftpd start$ chkconfig vsftpd on$ yum install -y  db4 db4-utils (基于虚拟账户权限认证依赖)
-目录文件说明  /etc/vsftpd/vsftpd.conf              vsftpd的核心配置文件  /e">
+<meta name="twitter:title" content="Linux查看网卡信息">
+<meta name="twitter:description" content="CentOS网卡相关信息查看
+1.首先安装工具,已安装请忽略.
+1$ yum install pciutiles
+
+2.查看网卡型号
+1$ lspci | grep -i ethernet
+
+3.查看网卡驱动版本
+1$ ethtool -i eth0
+
+4网卡驱动安装
+1234567891011$yum install kernel-devel kernel-headers  $ yum inst">
 
 
 
@@ -127,13 +157,13 @@
 
 
 
-  <link rel="canonical" href="http://cyocan.github.io/2017/03/19/vsftpd/"/>
+  <link rel="canonical" href="http://cyocan.github.io/2017/03/23/CentOS网卡相关/"/>
 
 
 
 
 
-  <title> vsftp安装 | Cyoncan </title>
+  <title> Linux查看网卡信息 | Cyoncan </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -262,7 +292,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/03/19/vsftpd/">
+    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/03/23/CentOS网卡相关/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cyoncan">
@@ -283,7 +313,7 @@
             
             
               
-                vsftp安装
+                Linux查看网卡信息
               
             
           </h1>
@@ -298,8 +328,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-19T23:44:21+08:00">
-                2017-03-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-23T22:16:21+08:00">
+                2017-03-23
               </time>
             
 
@@ -321,8 +351,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
+                  <a href="/categories/系统硬件/" itemprop="url" rel="index">
+                    <span itemprop="name">系统硬件</span>
                   </a>
                 </span>
 
@@ -356,27 +386,20 @@
       
 
       
-        <h3 id="安装-源码编译或者yum-install"><a href="#安装-源码编译或者yum-install" class="headerlink" title="安装(源码编译或者yum install)"></a>安装(源码编译或者yum install)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ yum -y install vsftpd</div><div class="line">$ service vsftpd start</div><div class="line">$ chkconfig vsftpd on</div><div class="line">$ yum install -y  db4 db4-utils (基于虚拟账户权限认证依赖)</div></pre></td></tr></table></figure>
-<h3 id="目录文件说明"><a href="#目录文件说明" class="headerlink" title="目录文件说明"></a>目录文件说明</h3><p>  /etc/vsftpd/vsftpd.conf              vsftpd的核心配置文件<br>  /etc/vsftpd/ftpusers                 用于指定哪些用户不能访问FTP服务器<br>  /etc/vsftpd/user_list                指定允许使用vsftpd的用户列表文件<br>  /etc/vsftpd/vsftpd_conf_migrate.sh   是vsftpd操作的一些变量和设置脚本<br>  /var/ftp/                            默认情况下匿名用户的根目录</p>
-<p>=================================基于虚拟账户权限认证====================================</p>
-<p><em>sftpd的虚拟用户采用单独的用户名/口令保存方式，与系统账户分离，很大程度上增强了系统的安全性.vsftpd可以采用数据库文件来保存用户/口令，eg:hash;也可以将用户/口令保存在数据库服务器中，eg:MySQL。vsftpd验证虚拟用户，则采用PAM方式.</em></p>
-<p>=======================================================================================</p>
-<h3 id="创建虚拟用户账号和密码"><a href="#创建虚拟用户账号和密码" class="headerlink" title="创建虚拟用户账号和密码"></a>创建虚拟用户账号和密码</h3><p> (奇数行为用户名，偶数行为用户密码）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ vim /etc/vsftpd/virtual.users</div><div class="line">  ftpuser  (虚拟用户名)</div><div class="line">  123456   (用户口令)</div></pre></td></tr></table></figure>
-<p>生成虚拟用户认证的db文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ db_load -T -t <span class="built_in">hash</span> <span class="_">-f</span> /etc/vsftpd/virtual.users /etc/vsftpd/vsftpd.login.db</div><div class="line">$ chmod 600 /etc/vsftpd/vsftpd.login.db</div></pre></td></tr></table></figure>
-<h3 id="配置PAM信息"><a href="#配置PAM信息" class="headerlink" title="配置PAM信息"></a>配置PAM信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ vim /etc/pam.d/vsftpd.pam</div><div class="line">auth required /lib64/security/pam_userdb.so db=/etc/vsftpd/vsftpd.login</div><div class="line">account required /lib64/security/pam_userdb.so db=/etc/vsftpd/vsftpd.login</div></pre></td></tr></table></figure>
-<h3 id="配置vsftpd-conf"><a href="#配置vsftpd-conf" class="headerlink" title="配置vsftpd.conf"></a>配置vsftpd.conf</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$ cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.bak</div><div class="line">$ vim /etc/vsftpd/vsftpd.conf</div><div class="line">  anonymous_enable=NO</div><div class="line">  local_enable=YES</div><div class="line">  local_umask=022</div><div class="line">  anon_umask=022   </div><div class="line">  xferlog_enable=YES</div><div class="line">  connect_from_port_20=YES</div><div class="line">  xferlog_std_format=YES</div><div class="line">  ascii_upload_enable=YES</div><div class="line">  ascii_download_enable=YES</div><div class="line">  ftpd_banner=Welcome to blah FTP service.</div><div class="line">  chroot_local_user=YES</div><div class="line">  listen=YES</div><div class="line">  userlist_enable=YES</div><div class="line">  pam_service_name=vsftpd.pam</div><div class="line">  guest_username=ftp</div><div class="line">  guest_enable=YES</div><div class="line">  user_config_dir=/etc/vsftpd/vsftpd_user_conf</div><div class="line">  tcp_wrappers=YES</div></pre></td></tr></table></figure>
-<h3 id="创建用户名的配置文件"><a href="#创建用户名的配置文件" class="headerlink" title="创建用户名的配置文件"></a>创建用户名的配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$ mkdir -p /etc/vsftpd/vsftpd_user_conf</div><div class="line">$ <span class="built_in">cd</span> /etc/vsftpd/vsftpd_user_conf</div><div class="line">$ vim ftpuser (ftpuser文件名就是上面创建虚拟用户名字)</div><div class="line">　local_root=/data/www</div><div class="line">　write_enable=yes</div><div class="line">　download_enable=yes</div><div class="line">　anon_upload_enable=yes</div><div class="line">　anon_mkdir_write_enable=yes</div><div class="line">　anon_other_write_enable=yes</div><div class="line">　anon_world_readable_only=no</div><div class="line">　idle_session_timeout=600</div><div class="line">　data_connection_timeout=120</div><div class="line">　max_clients=2</div><div class="line">　max_per_ip=3</div><div class="line">　local_max_rate=512000 (拥有全部权限)</div></pre></td></tr></table></figure>
-<h3 id="日常管理虚拟用户账号和密码"><a href="#日常管理虚拟用户账号和密码" class="headerlink" title="日常管理虚拟用户账号和密码"></a>日常管理虚拟用户账号和密码</h3><ol>
-<li><p>1.修改文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ vi /etc/vsftpd/virtual.users</div></pre></td></tr></table></figure>
+        <h3 id="CentOS网卡相关信息查看"><a href="#CentOS网卡相关信息查看" class="headerlink" title="CentOS网卡相关信息查看"></a>CentOS网卡相关信息查看</h3><ol>
+<li><p>1.首先安装工具,已安装请忽略.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yum install pciutiles</div></pre></td></tr></table></figure>
 </li>
-<li><p>2生成虚拟用户认证的db文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db_load -T -t <span class="built_in">hash</span> <span class="_">-f</span> /etc/vsftpd/virtual.users /etc/vsftpd/vsftpd.login.db</div></pre></td></tr></table></figure>
+<li><p>2.查看网卡型号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ lspci | grep -i ethernet</div></pre></td></tr></table></figure>
 </li>
-<li><p>3.重启ftp服务(能登录就不重启)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service vsftpd restart</div></pre></td></tr></table></figure></li>
+<li><p>3.查看网卡驱动版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ethtool -i eth0</div></pre></td></tr></table></figure>
+</li>
+<li><p>4网卡驱动安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$yum</span> install kernel-devel kernel-headers  </div><div class="line">$ yum install gcc</div><div class="line">$ tar zxvf r1000.tgz</div><div class="line">$ <span class="built_in">cd</span> r1000/</div><div class="line">$ make clean modules</div><div class="line">$ make install</div><div class="line">$ modprobe r1000</div><div class="line">$ reboot</div><div class="line">$ lsmod | grep r1000 或者 ifconfig <span class="_">-a</span> 查看网卡eth0是否加载</div><div class="line">$ service network restart</div><div class="line">假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可.</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
 </ol>
 
       
@@ -407,9 +430,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ftp/" rel="tag"># ftp</a>
+            <a href="/tags/网卡/" rel="tag"># 网卡</a>
           
-            <a href="/tags/vsftp/" rel="tag"># vsftp</a>
+            <a href="/tags/驱动/" rel="tag"># 驱动</a>
           
         </div>
       
@@ -422,8 +445,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/19/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2017/03/23/Linux之SCP互传文件/" rel="next" title="Linux互传文件之SCP使用">
+                <i class="fa fa-chevron-left"></i> Linux互传文件之SCP使用
               </a>
             
           </div>
@@ -432,8 +455,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/23/crontab使用之备份SVN/" rel="prev" title="Crontab使用之SVN备份">
-                Crontab使用之SVN备份 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/23/MySQL备份与恢复/" rel="prev" title="MySQL数据库备份恢复">
+                MySQL数据库备份恢复 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -563,7 +586,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-源码编译或者yum-install"><span class="nav-number">1.</span> <span class="nav-text">安装(源码编译或者yum install)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录文件说明"><span class="nav-number">2.</span> <span class="nav-text">目录文件说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建虚拟用户账号和密码"><span class="nav-number">3.</span> <span class="nav-text">创建虚拟用户账号和密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置PAM信息"><span class="nav-number">4.</span> <span class="nav-text">配置PAM信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置vsftpd-conf"><span class="nav-number">5.</span> <span class="nav-text">配置vsftpd.conf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户名的配置文件"><span class="nav-number">6.</span> <span class="nav-text">创建用户名的配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日常管理虚拟用户账号和密码"><span class="nav-number">7.</span> <span class="nav-text">日常管理虚拟用户账号和密码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#CentOS网卡相关信息查看"><span class="nav-number">1.</span> <span class="nav-text">CentOS网卡相关信息查看</span></a></li></ol></div>
             
 
           </div>

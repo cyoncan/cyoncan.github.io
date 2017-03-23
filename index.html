@@ -260,6 +260,634 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/03/23/MySQL备份与恢复/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cyoncan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cyoncan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/23/MySQL备份与恢复/" itemprop="url">
+                  MySQL数据库备份恢复
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-23T22:20:21+08:00">
+                2017-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="MySQL单库备份恢复-导出导入"><a href="#MySQL单库备份恢复-导出导入" class="headerlink" title="MySQL单库备份恢复/导出导入"></a>MySQL单库备份恢复/导出导入</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ msyql/bin/mysqldump -uroot -p dbname &gt; bak.sql</div><div class="line">  mysqldump 默认不会导出事件表，执行此命令会出现警告 -- Warning: Skipping the data of table mysql.event. Specify the --events option explicitly</div></pre></td></tr></table></figure>
+<h4 id="导出MySQL事件"><a href="#导出MySQL事件" class="headerlink" title="导出MySQL事件"></a>导出MySQL事件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mysql/bin/mysqldump -uroot -p --events --ignore-table=mysql.event  dbname &gt; bak.sql</div></pre></td></tr></table></figure>
+<h4 id="导入MySQL备份"><a href="#导入MySQL备份" class="headerlink" title="导入MySQL备份"></a>导入MySQL备份</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ mysql -uroot -p mysql &lt; bak.sql</div><div class="line">或者</div><div class="line">$ mysql -uroot -p</div><div class="line">Enter password:</div><div class="line"><span class="variable">$mysql</span>&gt;use dbname;</div><div class="line"><span class="variable">$mysql</span>&gt;<span class="built_in">source</span> /data/backup/bak.sql;</div></pre></td></tr></table></figure>
+<h3 id="MySQL备份所有的库脚本"><a href="#MySQL备份所有的库脚本" class="headerlink" title="MySQL备份所有的库脚本"></a>MySQL备份所有的库脚本</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment">#-----------------------------------------------#</span></div><div class="line"><span class="comment">#This is a  free GNU GPL version 3.0 or abover</span></div><div class="line"><span class="comment">#Copyright (C) 2008 06 05</span></div><div class="line"><span class="comment">#mysql_backup Dedicated copyright by My</span></div><div class="line"><span class="comment">#-----------------------------------------------#</span></div><div class="line"><span class="built_in">echo</span> <span class="_">-e</span> [`date +<span class="string">"%Y-%m-%d %H:%M:%S"</span>`] start</div><div class="line"><span class="comment">#system time</span></div><div class="line">time=`date +<span class="string">"%y-%m-%d"</span>`</div><div class="line"><span class="comment">#host IP</span></div><div class="line">host=<span class="string">"127.0.0.1"</span></div><div class="line"><span class="comment">#database backup user</span></div><div class="line">user=<span class="string">"root"</span></div><div class="line"><span class="comment">#database password</span></div><div class="line">passwd=<span class="string">"yourpasswd"</span></div><div class="line"><span class="comment">#Create a backup directory</span></div><div class="line">mkdir -p /backup/db/<span class="string">"<span class="variable">$time</span>"</span></div><div class="line"><span class="comment">#list database name</span></div><div class="line">all_database=`/usr/bin/mysql -u<span class="variable">$user</span> -p<span class="variable">$passwd</span> -Bse <span class="string">'show databases'</span>`</div><div class="line"><span class="comment">#in the table from the database backup</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable">$all_database</span></div><div class="line"><span class="keyword">do</span></div><div class="line">/usr/bin/mysqldump -u<span class="variable">$user</span> -p<span class="variable">$passwd</span> <span class="variable">$i</span> &gt; /backup/db/<span class="string">"<span class="variable">$time</span>"</span>/<span class="string">"<span class="variable">$i</span>"</span>_<span class="string">"<span class="variable">$time</span>"</span>.sql</div><div class="line"><span class="keyword">done</span></div><div class="line"><span class="built_in">echo</span> <span class="_">-e</span> [`date +<span class="string">"%Y-%m-%d %H:%M:%S"</span>`]  end</div><div class="line"><span class="built_in">exit</span> 0</div><div class="line"></div><div class="line"></div><div class="line">运行 crontab <span class="_">-e</span>，写入以下内容:</div><div class="line">30 5 * * * root sh /root/autobackup.sh &gt;/dev/null 2&gt;&amp;1</div></pre></td></tr></table></figure>
+<p><strong>Tip:</strong> 如果提示 <em>mysql: [Warning] Using a password on the command line interface can be insecure.</em><br>请参考另一篇写nginx + php-fpm + mysql 那篇的mysql部分,写用 mysql_config_editor 去解决 这个提示明文不安全问题.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/03/23/CentOS网卡相关/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cyoncan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cyoncan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/23/CentOS网卡相关/" itemprop="url">
+                  Linux查看网卡信息
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-23T22:16:21+08:00">
+                2017-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/系统硬件/" itemprop="url" rel="index">
+                    <span itemprop="name">系统硬件</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="CentOS网卡相关信息查看"><a href="#CentOS网卡相关信息查看" class="headerlink" title="CentOS网卡相关信息查看"></a>CentOS网卡相关信息查看</h3><ol>
+<li><p>1.首先安装工具,已安装请忽略.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yum install pciutiles</div></pre></td></tr></table></figure>
+</li>
+<li><p>2.查看网卡型号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ lspci | grep -i ethernet</div></pre></td></tr></table></figure>
+</li>
+<li><p>3.查看网卡驱动版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ethtool -i eth0</div></pre></td></tr></table></figure>
+</li>
+<li><p>4网卡驱动安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$yum</span> install kernel-devel kernel-headers  </div><div class="line">$ yum install gcc</div><div class="line">$ tar zxvf r1000.tgz</div><div class="line">$ <span class="built_in">cd</span> r1000/</div><div class="line">$ make clean modules</div><div class="line">$ make install</div><div class="line">$ modprobe r1000</div><div class="line">$ reboot</div><div class="line">$ lsmod | grep r1000 或者 ifconfig <span class="_">-a</span> 查看网卡eth0是否加载</div><div class="line">$ service network restart</div><div class="line">假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可.</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/03/23/Linux之SCP互传文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cyoncan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cyoncan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/23/Linux之SCP互传文件/" itemprop="url">
+                  Linux互传文件之SCP使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-23T22:16:21+08:00">
+                2017-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/系统命令/" itemprop="url" rel="index">
+                    <span itemprop="name">系统命令</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Linux互相传输之SCP的使用"><a href="#Linux互相传输之SCP的使用" class="headerlink" title="Linux互相传输之SCP的使用"></a>Linux互相传输之SCP的使用</h3><ol>
+<li><p>1.从服务器上拉取目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -p 22 -r user@192.168.2.1:/data/www /data/www/</div></pre></td></tr></table></figure>
+</li>
+<li><p>2从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r /data/www user@192.168.2.1:/data/www/</div></pre></td></tr></table></figure>
+</li>
+<li><p>3使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa  (生成在~/.ssh/目录下id_rsa.pub和id_rsa)</div></pre></td></tr></table></figure>
+</li>
+<li><p>4将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r /root/.ssh/id_rsa.pub user@serverip:/root/.ssh/authorized_keys</div></pre></td></tr></table></figure>
+</li>
+<li><p>5如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /root/.ssh/id_rsa.pub | ssh user@serverip <span class="string">'cat &gt;&gt; /root/.ssh/authorized_keys'</span></div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/03/23/crontab使用之备份SVN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cyoncan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cyoncan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/23/crontab使用之备份SVN/" itemprop="url">
+                  Crontab使用之SVN备份
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-23T22:16:21+08:00">
+                2017-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/脚本/" itemprop="url" rel="index">
+                    <span itemprop="name">脚本</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="crontab使用之SVN备份"><a href="#crontab使用之SVN备份" class="headerlink" title="crontab使用之SVN备份"></a>crontab使用之SVN备份</h3><ol>
+<li><p>1.直接crontab -e 加入定时</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">*/5 * * * * /data/script/svnbak.pl</div></pre></td></tr></table></figure>
+</li>
+<li><p>2修改/etc/crontab</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">SHELL=/bin/bash</div><div class="line">PATH=/sbin:/bin:/usr/sbin:/usr/bin</div><div class="line">MAILTO=root  (设置=<span class="string">""</span>就不会发出电子邮件)</div><div class="line">HOME=/</div><div class="line"><span class="comment">#run-parts</span></div><div class="line">*/5 * * * * /data/script/svnbak.pl</div><div class="line"><span class="comment"># For details see man 4 crontabs</span></div><div class="line"></div><div class="line"><span class="comment"># Example of job definition:</span></div><div class="line"><span class="comment"># .---------------- minute (0 - 59)</span></div><div class="line"><span class="comment"># |  .------------- hour (0 - 23)</span></div><div class="line"><span class="comment"># |  |  .---------- day of month (1 - 31)</span></div><div class="line"><span class="comment"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span></div><div class="line"><span class="comment"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span></div><div class="line"><span class="comment"># |  |  |  |  |</span></div><div class="line"><span class="comment"># *  *  *  *  * user-name command to be executed</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>3编写SVN备份脚本(perl)</p>
+<p>日备份增量备份:</p>
+</li>
+</ol>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">$ vim gnu.com.pl</div><div class="line"><span class="comment">#!/usr/bin/perl -w</span></div><div class="line"><span class="keyword">my</span> $svn_repos=<span class="string">"/data/repos/gnu.com"</span>;</div><div class="line"><span class="keyword">my</span> $backup_dir=<span class="string">"/data/backup/svn/"</span>;</div><div class="line"><span class="keyword">my</span> $next_backup_file = <span class="string">"daily_incremental_backup."</span>.<span class="string">`date +%Y%m%d`</span>;</div><div class="line"><span class="keyword">open</span>(IN,<span class="string">"$backup_dir/last_backed_up"</span>);</div><div class="line">$previous_youngest = &lt;IN&gt;;</div><div class="line"><span class="keyword">chomp</span> $previous_youngest;</div><div class="line"><span class="keyword">close</span> IN;</div><div class="line">$youngest=<span class="string">`svnlook youngest $svn_repos`</span>;</div><div class="line"><span class="keyword">chomp</span> $youngest;</div><div class="line"><span class="keyword">if</span> ($youngest eq $previous_youngest)</div><div class="line">&#123;</div><div class="line">  <span class="keyword">print</span> <span class="string">"No new revisions to backup.n"</span>;</div><div class="line">  <span class="keyword">exit</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">my</span> $first_rev = $previous_youngest + <span class="number">1</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"Backing up revisions $youngest ...n"</span>;</div><div class="line"><span class="keyword">my</span> $svnadmin_cmd = <span class="string">"svnadmin dump --incremental --revision $first_revyoungest $svn_repos &gt; $backup_dir/$next_backup_file"</span>;</div><div class="line"><span class="string">`$svnadmin_cmd`</span>;</div><div class="line"><span class="keyword">open</span>(LOG,<span class="string">"&gt;$backup_dir/last_backed_up"</span>); </div><div class="line"><span class="keyword">print</span> LOG $youngest;</div><div class="line"><span class="keyword">close</span> LOG;</div><div class="line"><span class="keyword">print</span> <span class="string">"Compressing dump file...n"</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">`gzip -g $backup_dir/$next_backup_file`</span>;</div></pre></td></tr></table></figure>
+<p>​    周备份完整备份:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$ vim gnu.com.pl</div><div class="line"><span class="comment">#!/usr/bin/perl -w</span></div><div class="line"><span class="keyword">my</span> $svn_repos=<span class="string">"/data/repos/gnu.com"</span>;</div><div class="line"><span class="keyword">my</span> $backup_dir=<span class="string">"/data/backup/svn/"</span>;</div><div class="line"><span class="keyword">my</span> $next_backup_file = <span class="string">"weekly_fully_backup."</span>.<span class="string">`date +%Y%m%d`</span>;</div><div class="line">$youngest=<span class="string">`svnlook youngest $svn_repos`</span>;</div><div class="line"><span class="keyword">chomp</span> $youngest;</div><div class="line"><span class="keyword">print</span> <span class="string">"Backing up to revision $youngestn"</span>;</div><div class="line"><span class="keyword">my</span> $svnadmin_cmd=<span class="string">"svnadmin dump --revision 0youngest $svn_repos &gt;$backup_dir/$next_backup_file"</span>;</div><div class="line"><span class="string">`$svnadmin_cmd`</span>;</div><div class="line"><span class="keyword">open</span>(LOG,<span class="string">"&gt;$backup_dir/last_backed_up"</span>);</div><div class="line"><span class="keyword">print</span> LOG $youngest;</div><div class="line"><span class="keyword">close</span> LOG;</div><div class="line"><span class="keyword">print</span> <span class="string">"Compressing dump file...n"</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">`gzip -g $backup_dir/$next_backup_file`</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chmod +x gnu.com.pl   (需要给每一个脚本修改可执行属性 chmod +x *)</div></pre></td></tr></table></figure>
+<p>4.4脚本加入定时执行(日备份周一到五23点,周备份每周六23点)</p>
+<p> 方法一:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ crontab -e</div><div class="line">SHELL=/bin/zsh</div><div class="line">PATH=/etc:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin</div><div class="line">HOME=/var/log</div><div class="line">0 23 * * 6 /data/script/svn/weekly/gnu.com.pl</div><div class="line">0 23 * * 1-5 /data/script/svn/daily/gnu.com.pl</div></pre></td></tr></table></figure>
+<p>方法二:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ vim /etc/crontab</div><div class="line">  0 23 * * 6 /data/script/svn/weekly/gnu.com.pl</div><div class="line">  0 23 * * 1-5 /data/script/svn/daily/gnu.com.pl</div></pre></td></tr></table></figure>
+<p>5.5 几个定时例子</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">00 03 * * 1-5 find /home <span class="string">"*.xxx"</span> -mtime +4 -exec rm &#123;&#125; \;</div><div class="line">每周一至周五3点钟，在目录/home中，查找文件名为*.xxx的文件，并删除4天前的文件.</div><div class="line">0 */2 * * * /sbin/service httpd restart</div><div class="line">每两个小时重启一次apache</div><div class="line">50 7 * * * /sbin/service sshd start</div><div class="line">每天7：50开启ssh服务</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/03/19/vsftpd/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -589,7 +1217,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -600,7 +1228,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -611,7 +1239,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
