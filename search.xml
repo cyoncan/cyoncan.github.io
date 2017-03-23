@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+    
+    <entry>
+      <title><![CDATA[MySQL数据库备份恢复]]></title>
+      <url>%2F2017%2F03%2F23%2FMySQL%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D%2F</url>
+      <content type="text"><![CDATA[MySQL单库备份恢复/导出导入12$ msyql/bin/mysqldump -uroot -p dbname &gt; bak.sql mysqldump 默认不会导出事件表，执行此命令会出现警告 -- Warning: Skipping the data of table mysql.event. Specify the --events option explicitly 导出MySQL事件1$ mysql/bin/mysqldump -uroot -p --events --ignore-table=mysql.event dbname &gt; bak.sql 导入MySQL备份123456$ mysql -uroot -p mysql &lt; bak.sql或者$ mysql -uroot -pEnter password:$mysql&gt;use dbname;$mysql&gt;source /data/backup/bak.sql; MySQL备份所有的库脚本123456789101112131415161718192021222324252627282930#!/bin/bash#-----------------------------------------------##This is a free GNU GPL version 3.0 or abover#Copyright (C) 2008 06 05#mysql_backup Dedicated copyright by My#-----------------------------------------------#echo -e [`date +"%Y-%m-%d %H:%M:%S"`] start#system timetime=`date +"%y-%m-%d"`#host IPhost="127.0.0.1"#database backup useruser="root"#database passwordpasswd="yourpasswd"#Create a backup directorymkdir -p /backup/db/"$time"#list database nameall_database=`/usr/bin/mysql -u$user -p$passwd -Bse 'show databases'`#in the table from the database backupfor i in $all_databasedo/usr/bin/mysqldump -u$user -p$passwd $i &gt; /backup/db/"$time"/"$i"_"$time".sqldoneecho -e [`date +"%Y-%m-%d %H:%M:%S"`] endexit 0运行 crontab -e，写入以下内容:30 5 * * * root sh /root/autobackup.sh &gt;/dev/null 2&gt;&amp;1 Tip: 如果提示 mysql: [Warning] Using a password on the command line interface can be insecure.请参考另一篇写nginx + php-fpm + mysql 那篇的mysql部分,写用 mysql_config_editor 去解决 这个提示明文不安全问题.]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Linux查看网卡信息]]></title>
+      <url>%2F2017%2F03%2F23%2FCentOS%E7%BD%91%E5%8D%A1%E7%9B%B8%E5%85%B3%2F</url>
+      <content type="text"><![CDATA[CentOS网卡相关信息查看 1.首先安装工具,已安装请忽略. 1$ yum install pciutiles 2.查看网卡型号 1$ lspci | grep -i ethernet 3.查看网卡驱动版本 1$ ethtool -i eth0 4网卡驱动安装 1234567891011$yum install kernel-devel kernel-headers $ yum install gcc$ tar zxvf r1000.tgz$ cd r1000/$ make clean modules$ make install$ modprobe r1000$ reboot$ lsmod | grep r1000 或者 ifconfig -a 查看网卡eth0是否加载$ service network restart假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可. ​]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Linux互传文件之SCP使用]]></title>
+      <url>%2F2017%2F03%2F23%2FLinux%E4%B9%8BSCP%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6%2F</url>
+      <content type="text"><![CDATA[Linux互相传输之SCP的使用 1.从服务器上拉取目录 1scp -p 22 -r user@192.168.2.1:/data/www /data/www/ 2从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归) 1scp -r /data/www user@192.168.2.1:/data/www/ 3使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码. 1ssh-keygen -t rsa (生成在~/.ssh/目录下id_rsa.pub和id_rsa) 4将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys. 1scp -r /root/.ssh/id_rsa.pub user@serverip:/root/.ssh/authorized_keys 5如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中. 1cat /root/.ssh/id_rsa.pub | ssh user@serverip 'cat &gt;&gt; /root/.ssh/authorized_keys' ​]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Crontab使用之SVN备份]]></title>
+      <url>%2F2017%2F03%2F23%2Fcrontab%E4%BD%BF%E7%94%A8%E4%B9%8B%E5%A4%87%E4%BB%BDSVN%2F</url>
+      <content type="text"><![CDATA[crontab使用之SVN备份 1.直接crontab -e 加入定时 1*/5 * * * * /data/script/svnbak.pl 2修改/etc/crontab 12345678910111213141516SHELL=/bin/bashPATH=/sbin:/bin:/usr/sbin:/usr/binMAILTO=root (设置=""就不会发出电子邮件)HOME=/#run-parts*/5 * * * * /data/script/svnbak.pl# For details see man 4 crontabs# Example of job definition:# .---------------- minute (0 - 59)# | .------------- hour (0 - 23)# | | .---------- day of month (1 - 31)# | | | .------- month (1 - 12) OR jan,feb,mar,apr ...# | | | | .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat# | | | | |# * * * * * user-name command to be executed 3编写SVN备份脚本(perl) 日备份增量备份: 12345678910111213141516171819202122232425$ vim gnu.com.pl#!/usr/bin/perl -wmy $svn_repos="/data/repos/gnu.com";my $backup_dir="/data/backup/svn/";my $next_backup_file = "daily_incremental_backup.".`date +%Y%m%d`;open(IN,"$backup_dir/last_backed_up");$previous_youngest = &lt;IN&gt;;chomp $previous_youngest;close IN;$youngest=`svnlook youngest $svn_repos`;chomp $youngest;if ($youngest eq $previous_youngest)&#123; print "No new revisions to backup.n"; exit 0;&#125;my $first_rev = $previous_youngest + 1;print "Backing up revisions $youngest ...n";my $svnadmin_cmd = "svnadmin dump --incremental --revision $first_revyoungest $svn_repos &gt; $backup_dir/$next_backup_file";`$svnadmin_cmd`;open(LOG,"&gt;$backup_dir/last_backed_up"); print LOG $youngest;close LOG;print "Compressing dump file...n";print `gzip -g $backup_dir/$next_backup_file`; ​ 周备份完整备份: 123456789101112131415$ vim gnu.com.pl#!/usr/bin/perl -wmy $svn_repos="/data/repos/gnu.com";my $backup_dir="/data/backup/svn/";my $next_backup_file = "weekly_fully_backup.".`date +%Y%m%d`;$youngest=`svnlook youngest $svn_repos`;chomp $youngest;print "Backing up to revision $youngestn";my $svnadmin_cmd="svnadmin dump --revision 0youngest $svn_repos &gt;$backup_dir/$next_backup_file";`$svnadmin_cmd`;open(LOG,"&gt;$backup_dir/last_backed_up");print LOG $youngest;close LOG;print "Compressing dump file...n";print `gzip -g $backup_dir/$next_backup_file`; 1$ chmod +x gnu.com.pl (需要给每一个脚本修改可执行属性 chmod +x *) 4.4脚本加入定时执行(日备份周一到五23点,周备份每周六23点) 方法一: 123456$ crontab -eSHELL=/bin/zshPATH=/etc:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbinHOME=/var/log0 23 * * 6 /data/script/svn/weekly/gnu.com.pl0 23 * * 1-5 /data/script/svn/daily/gnu.com.pl 方法二: 123$ vim /etc/crontab 0 23 * * 6 /data/script/svn/weekly/gnu.com.pl 0 23 * * 1-5 /data/script/svn/daily/gnu.com.pl 5.5 几个定时例子 12345600 03 * * 1-5 find /home "*.xxx" -mtime +4 -exec rm &#123;&#125; \;每周一至周五3点钟，在目录/home中，查找文件名为*.xxx的文件，并删除4天前的文件.0 */2 * * * /sbin/service httpd restart每两个小时重启一次apache50 7 * * * /sbin/service sshd start每天7：50开启ssh服务]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[vsftp安装]]></title>
+      <url>%2F2017%2F03%2F19%2Fvsftpd%2F</url>
+      <content type="text"><![CDATA[安装(源码编译或者yum install)1234$ yum -y install vsftpd$ service vsftpd start$ chkconfig vsftpd on$ yum install -y db4 db4-utils (基于虚拟账户权限认证依赖) 目录文件说明 /etc/vsftpd/vsftpd.conf vsftpd的核心配置文件 /etc/vsftpd/ftpusers 用于指定哪些用户不能访问FTP服务器 /etc/vsftpd/user_list 指定允许使用vsftpd的用户列表文件 /etc/vsftpd/vsftpd_conf_migrate.sh 是vsftpd操作的一些变量和设置脚本 /var/ftp/ 默认情况下匿名用户的根目录 =================================基于虚拟账户权限认证==================================== sftpd的虚拟用户采用单独的用户名/口令保存方式，与系统账户分离，很大程度上增强了系统的安全性.vsftpd可以采用数据库文件来保存用户/口令，eg:hash;也可以将用户/口令保存在数据库服务器中，eg:MySQL。vsftpd验证虚拟用户，则采用PAM方式. ======================================================================================= 创建虚拟用户账号和密码 (奇数行为用户名，偶数行为用户密码） 123$ vim /etc/vsftpd/virtual.users ftpuser (虚拟用户名) 123456 (用户口令) 生成虚拟用户认证的db文件 12$ db_load -T -t hash -f /etc/vsftpd/virtual.users /etc/vsftpd/vsftpd.login.db$ chmod 600 /etc/vsftpd/vsftpd.login.db 配置PAM信息123$ vim /etc/pam.d/vsftpd.pamauth required /lib64/security/pam_userdb.so db=/etc/vsftpd/vsftpd.loginaccount required /lib64/security/pam_userdb.so db=/etc/vsftpd/vsftpd.login 配置vsftpd.conf1234567891011121314151617181920$ cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.bak$ vim /etc/vsftpd/vsftpd.conf anonymous_enable=NO local_enable=YES local_umask=022 anon_umask=022 xferlog_enable=YES connect_from_port_20=YES xferlog_std_format=YES ascii_upload_enable=YES ascii_download_enable=YES ftpd_banner=Welcome to blah FTP service. chroot_local_user=YES listen=YES userlist_enable=YES pam_service_name=vsftpd.pam guest_username=ftp guest_enable=YES user_config_dir=/etc/vsftpd/vsftpd_user_conf tcp_wrappers=YES 创建用户名的配置文件123456789101112131415$ mkdir -p /etc/vsftpd/vsftpd_user_conf$ cd /etc/vsftpd/vsftpd_user_conf$ vim ftpuser (ftpuser文件名就是上面创建虚拟用户名字) local_root=/data/www write_enable=yes download_enable=yes anon_upload_enable=yes anon_mkdir_write_enable=yes anon_other_write_enable=yes anon_world_readable_only=no idle_session_timeout=600 data_connection_timeout=120 max_clients=2 max_per_ip=3 local_max_rate=512000 (拥有全部权限) 日常管理虚拟用户账号和密码 1.修改文件 1$ vi /etc/vsftpd/virtual.users 2生成虚拟用户认证的db文件 1db_load -T -t hash -f /etc/vsftpd/virtual.users /etc/vsftpd/vsftpd.login.db 3.重启ftp服务(能登录就不重启) 1service vsftpd restart]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Hello World]]></title>
+      <url>%2F2017%2F03%2F19%2Fhello-world%2F</url>
+      <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+    </entry>
+
+    
+  
+  
+</search>
