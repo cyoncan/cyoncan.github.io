@@ -10,16 +10,16 @@
 
     
     <entry>
-      <title><![CDATA[Linux互传文件之SCP使用]]></title>
-      <url>%2F2017%2F03%2F23%2FLinux%E4%B9%8BSCP%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6%2F</url>
-      <content type="text"><![CDATA[Linux互相传输之SCP的使用 1.从服务器上拉取目录 1scp -p 22 -r user@192.168.2.1:/data/www /data/www/ 2从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归) 1scp -r /data/www user@192.168.2.1:/data/www/ 3使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码. 1ssh-keygen -t rsa (生成在~/.ssh/目录下id_rsa.pub和id_rsa) 4将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys. 1scp -r /root/.ssh/id_rsa.pub user@serverip:/root/.ssh/authorized_keys 5如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中. 1cat /root/.ssh/id_rsa.pub | ssh user@serverip 'cat &gt;&gt; /root/.ssh/authorized_keys' ​]]></content>
+      <title><![CDATA[Linux查看网卡信息]]></title>
+      <url>%2F2017%2F03%2F23%2FCentOS%E7%BD%91%E5%8D%A1%E7%9B%B8%E5%85%B3%2F</url>
+      <content type="text"><![CDATA[CentOS网卡相关信息查看 1.首先安装工具,已安装请忽略. 1$ yum install pciutiles 2.查看网卡型号 1$ lspci | grep -i ethernet 3.查看网卡驱动版本 1$ ethtool -i eth0 4网卡驱动安装 1234567891011$yum install kernel-devel kernel-headers $ yum install gcc$ tar zxvf r1000.tgz$ cd r1000/$ make clean modules$ make install$ modprobe r1000$ reboot$ lsmod | grep r1000 或者 ifconfig -a 查看网卡eth0是否加载$ service network restart假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可. ​]]></content>
     </entry>
 
     
     <entry>
-      <title><![CDATA[Linux查看网卡信息]]></title>
-      <url>%2F2017%2F03%2F23%2FCentOS%E7%BD%91%E5%8D%A1%E7%9B%B8%E5%85%B3%2F</url>
-      <content type="text"><![CDATA[CentOS网卡相关信息查看 1.首先安装工具,已安装请忽略. 1$ yum install pciutiles 2.查看网卡型号 1$ lspci | grep -i ethernet 3.查看网卡驱动版本 1$ ethtool -i eth0 4网卡驱动安装 1234567891011$yum install kernel-devel kernel-headers $ yum install gcc$ tar zxvf r1000.tgz$ cd r1000/$ make clean modules$ make install$ modprobe r1000$ reboot$ lsmod | grep r1000 或者 ifconfig -a 查看网卡eth0是否加载$ service network restart假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可. ​]]></content>
+      <title><![CDATA[Linux互传文件之SCP使用]]></title>
+      <url>%2F2017%2F03%2F23%2FLinux%E4%B9%8BSCP%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6%2F</url>
+      <content type="text"><![CDATA[Linux互相传输之SCP的使用 1.从服务器上拉取目录 1scp -p 22 -r user@192.168.2.1:/data/www /data/www/ 2从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归) 1scp -r /data/www user@192.168.2.1:/data/www/ 3使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码. 1ssh-keygen -t rsa (生成在~/.ssh/目录下id_rsa.pub和id_rsa) 4将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys. 1scp -r /root/.ssh/id_rsa.pub user@serverip:/root/.ssh/authorized_keys 5如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中. 1cat /root/.ssh/id_rsa.pub | ssh user@serverip 'cat &gt;&gt; /root/.ssh/authorized_keys' ​]]></content>
     </entry>
 
     
