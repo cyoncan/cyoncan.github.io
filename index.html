@@ -278,6 +278,300 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/03/27/test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cyoncan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cyoncan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/27/test/" itemprop="url">
+                  test
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T16:09:59+08:00">
+                2017-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/03/27/lnmp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cyoncan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cyoncan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/27/lnmp/" itemprop="url">
+                  lnmp环境搭建配置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T16:09:59+08:00">
+                2017-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LNMP/" itemprop="url" rel="index">
+                    <span itemprop="name">LNMP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="一、centos-minimal安装完成"><a href="#一、centos-minimal安装完成" class="headerlink" title="一、centos minimal安装完成"></a>一、centos minimal安装完成</h1><h3 id="1、设置开机网卡自动连接"><a href="#1、设置开机网卡自动连接" class="headerlink" title="1、设置开机网卡自动连接"></a>1、设置开机网卡自动连接</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ vim /etc/sysconfig/network-scripts/ifcfg-eth0</div><div class="line">  ONBOOT=yes</div></pre></td></tr></table></figure>
+<h3 id="2、关闭SELinux"><a href="#2、关闭SELinux" class="headerlink" title="2、关闭SELinux"></a>2、关闭SELinux</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ /usr/sbin/sestatus -v</div><div class="line">$ setenforce 0   (临时关闭)</div><div class="line">$ vim /etc/selinux/config</div><div class="line">  将 SELINUX=enforcing 改为 SELINUX=disabled   (永久关闭)</div><div class="line">  sync reboot</div></pre></td></tr></table></figure>
+<h3 id="3、防火墙"><a href="#3、防火墙" class="headerlink" title="3、防火墙"></a>3、防火墙</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ chkconfig iptables --list     (查看)</div><div class="line">$ chkconfig iptables on/off     (永久)</div><div class="line">$ service iptables start/stop   (临时)</div></pre></td></tr></table></figure>
+<h6 id="3-1、设定预设规则-详情参考-http-t-cn-RiONgR0"><a href="#3-1、设定预设规则-详情参考-http-t-cn-RiONgR0" class="headerlink" title="3.1、设定预设规则(详情参考:http://t.cn/RiONgR0)"></a>3.1、设定预设规则(详情参考:<a href="http://t.cn/RiONgR0" target="_blank" rel="external">http://t.cn/RiONgR0</a>)</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ iptables -P INPUT DROP</div><div class="line">$ iptables -P OUTPUT ACCEPT</div><div class="line">$ iptables -P FORWARD DROP</div><div class="line">eg:开启ssh 22端口</div><div class="line">$ iptables -A INPUT -p tcp <span class="_">-s</span> 192.168.2.58 --dport 22 -j ACCEPT  (除了192.168.2.58其它IP禁止ssh)</div><div class="line">$ iptables -A OUTPUT -p tcp <span class="_">-s</span> 192.168.2.58 --sport 22 -j ACCEPT (如果OUTPUT设置成DROP则需添加该条)</div><div class="line">$ service iptables save (手动每条去添加,需要手动保存,不然重启后失效)</div><div class="line">或者直接在 iptables 编辑添加删除</div><div class="line">$ vim /etc/sysconfig/iptables   (编辑iptables规则)</div><div class="line">$ /etc/init.d/iptables restart</div></pre></td></tr></table></figure>
+<h3 id="4、设置yum-repo源"><a href="#4、设置yum-repo源" class="headerlink" title="4、设置yum repo源"></a>4、设置yum repo源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">先备份系统源</div><div class="line">$ mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup</div><div class="line">$ <span class="built_in">cd</span> /etc/yum.repos.d/</div><div class="line">$ wget -c http://mirrors.163.com/.help/CentOS6-Base-163.repo</div><div class="line">$ vim CentOS-Media.repo</div><div class="line">  关闭cdrom源</div><div class="line">$ yum install epel   (安装第三方软件源)</div></pre></td></tr></table></figure>
+<h3 id="5-、通过yum-group装系统必备软件"><a href="#5-、通过yum-group装系统必备软件" class="headerlink" title="5 、通过yum group装系统必备软件"></a>5 、通过yum group装系统必备软件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ yum grouplist</div><div class="line">$ yum groupinstall <span class="string">"Development tools"</span></div><div class="line">$ yum groupinstall <span class="string">"System Administration Tools"</span></div><div class="line">(cent7用 yum group mark install)根据需求去选择软件包</div></pre></td></tr></table></figure>
+<p>#二、基础目录结构</p>
+<pre><code>1.mkdir
+/data/src        下载存放源码目录
+/data/log        站点日志目录
+/data/www        WEB站点目录
+/data/svn        SVN仓库目录
+/data/mysqldb    MYSQL数据库数据目录
+/data/backup     MYSQL数据备份目录
+/data/local/php  PHP目录,local下面都是程序编译安装目录
+/data/local/nginx
+/data/local/mysql
+</code></pre><p>#三、Nginx</p>
+<h3 id="1、安装编译工具及相关库"><a href="#1、安装编译工具及相关库" class="headerlink" title="1、安装编译工具及相关库"></a>1、安装编译工具及相关库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yum -y install make zlib zlib-devel gcc-c++ libtool  openssl openssl-devel</div></pre></td></tr></table></figure>
+<h3 id="2、安装PCRE-作用让Nginx支持Rewrite-下载PCRE安装包，Google搜索下"><a href="#2、安装PCRE-作用让Nginx支持Rewrite-下载PCRE安装包，Google搜索下" class="headerlink" title="2、安装PCRE(作用让Nginx支持Rewrite),下载PCRE安装包，Google搜索下"></a>2、安装PCRE(作用让Nginx支持Rewrite),下载PCRE安装包，Google搜索下</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> /data/src</div><div class="line">$ wget -c https://ftp.pcre.org/pub/pcre/pcre-8.40.tar.gz</div><div class="line">$ tar -zxvf pcre-8.40.tar.gz</div><div class="line">$ <span class="built_in">cd</span> pcre-8.40</div><div class="line">$ ./configure</div><div class="line">$ Make&amp;&amp;make install</div><div class="line">$ pcre-config --version  (查看pcre版本)</div><div class="line">$ cp pcre-8.40/ /usr/<span class="built_in">local</span>/src/</div></pre></td></tr></table></figure>
+<h3 id="3、Nginx下载安装"><a href="#3、Nginx下载安装" class="headerlink" title="3、Nginx下载安装"></a>3、Nginx下载安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> /data/src</div><div class="line">$ wget -c http://nginx.org/download/nginx-1.10.3.tar.gz</div><div class="line">$ tar -zxvf nginx-1.10.3.tar.gz</div><div class="line">$ <span class="built_in">cd</span> nginx-1.10.3</div><div class="line">$ ./configure --prefix=/usr/<span class="built_in">local</span>/nginx --with-http_stub_status_module --with-http_ssl_module --with-pcre=/usr/<span class="built_in">local</span>/src/pcre-8.40 (--with-prce=dir 指定pcre的源码目录)</div><div class="line">$ make</div><div class="line">$ make install</div><div class="line">$ /usr/<span class="built_in">local</span>/nginx/sbin/nginx -v (查看Nginx版本)</div><div class="line">$ ln <span class="_">-s</span> /usr/<span class="built_in">local</span>/nginx/sbin/nginx /usr/bin</div><div class="line">$ nginx            (-t查看启动  <span class="_">-s</span> stop/reopen停止/重启)</div><div class="line">  访问 http://localhost 查看Nginx是否正常安装启动</div></pre></td></tr></table></figure>
+<h5 id="3-1-tip-Nginx启动服务管理脚本"><a href="#3-1-tip-Nginx启动服务管理脚本" class="headerlink" title="3.1 tip:Nginx启动服务管理脚本"></a>3.1 tip:Nginx启动服务管理脚本</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># nginx - this script starts and stops the nginx daemin</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># chkconfig:   - 85 15 </span></div><div class="line"><span class="comment"># description:  Nginx is an HTTP(S) server, HTTP(S) reverse proxy and IMAP/POP3 proxy server</span></div><div class="line"><span class="comment"># processname: nginx</span></div><div class="line"><span class="comment"># config:      /usr/local/nginx/conf/nginx.conf</span></div><div class="line"><span class="comment"># pidfile:     /usr/local/nginx/logs/nginx.pid</span></div><div class="line"></div><div class="line"><span class="comment"># Source function library.</span></div><div class="line">. /etc/rc.d/init.d/<span class="built_in">functions</span></div><div class="line"></div><div class="line"><span class="comment"># Source networking configuration.</span></div><div class="line">. /etc/sysconfig/network</div><div class="line"></div><div class="line"><span class="comment"># Check that networking is up.</span></div><div class="line">[ <span class="string">"<span class="variable">$NETWORKING</span>"</span> = <span class="string">"no"</span> ] &amp;&amp; <span class="built_in">exit</span> 0</div><div class="line"></div><div class="line">nginx=<span class="string">"/usr/local/nginx/sbin/nginx"</span></div><div class="line">prog=$(basename <span class="variable">$nginx</span>)</div><div class="line"></div><div class="line">NGINX_CONF_FILE=<span class="string">"/usr/local/nginx/conf/nginx.conf"</span></div><div class="line"></div><div class="line">lockfile=/var/lock/subsys/nginx</div><div class="line"></div><div class="line"><span class="function"><span class="title">start</span></span>() &#123;</div><div class="line">    [ -x <span class="variable">$nginx</span> ] || <span class="built_in">exit</span> 5</div><div class="line">    [ <span class="_">-f</span> <span class="variable">$NGINX_CONF_FILE</span> ] || <span class="built_in">exit</span> 6</div><div class="line">    <span class="built_in">echo</span> -n $<span class="string">"Starting <span class="variable">$prog</span>: "</span></div><div class="line">    daemon <span class="variable">$nginx</span> -c <span class="variable">$NGINX_CONF_FILE</span></div><div class="line">    retval=$?</div><div class="line">    <span class="built_in">echo</span></div><div class="line">    [ <span class="variable">$retval</span> <span class="_">-eq</span> 0 ] &amp;&amp; touch <span class="variable">$lockfile</span></div><div class="line">    <span class="built_in">return</span> <span class="variable">$retval</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="title">stop</span></span>() &#123;</div><div class="line">    <span class="built_in">echo</span> -n $<span class="string">"Stopping <span class="variable">$prog</span>: "</span></div><div class="line">    killproc <span class="variable">$prog</span> -QUIT</div><div class="line">    retval=$?</div><div class="line">    <span class="built_in">echo</span></div><div class="line">    [ <span class="variable">$retval</span> <span class="_">-eq</span> 0 ] &amp;&amp; rm <span class="_">-f</span> <span class="variable">$lockfile</span></div><div class="line">    <span class="built_in">return</span> <span class="variable">$retval</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="title">restart</span></span>() &#123;</div><div class="line">    configtest || <span class="built_in">return</span> $?</div><div class="line">    stop</div><div class="line">    start</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="title">reload</span></span>() &#123;</div><div class="line">    configtest || <span class="built_in">return</span> $?</div><div class="line">    <span class="built_in">echo</span> -n $<span class="string">"Reloading <span class="variable">$prog</span>: "</span></div><div class="line">    killproc <span class="variable">$nginx</span> -HUP</div><div class="line">    RETVAL=$?</div><div class="line">    <span class="built_in">echo</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="title">force_reload</span></span>() &#123;</div><div class="line">    restart</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="title">configtest</span></span>() &#123;</div><div class="line">  <span class="variable">$nginx</span> -t -c <span class="variable">$NGINX_CONF_FILE</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="title">rh_status</span></span>() &#123;</div><div class="line">    status <span class="variable">$prog</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="title">rh_status_q</span></span>() &#123;</div><div class="line">    rh_status &gt;/dev/null 2&gt;&amp;1</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></div><div class="line">    start)</div><div class="line">        rh_status_q &amp;&amp; <span class="built_in">exit</span> 0</div><div class="line">        <span class="variable">$1</span></div><div class="line">        ;;</div><div class="line">    stop)</div><div class="line">        rh_status_q || <span class="built_in">exit</span> 0</div><div class="line">        <span class="variable">$1</span></div><div class="line">        ;;</div><div class="line">    restart|configtest)</div><div class="line">        <span class="variable">$1</span></div><div class="line">        ;;</div><div class="line">    reload)</div><div class="line">        rh_status_q || <span class="built_in">exit</span> 7</div><div class="line">        <span class="variable">$1</span></div><div class="line">        ;;</div><div class="line">    force-reload)</div><div class="line">        force_reload</div><div class="line">        ;;</div><div class="line">    status)</div><div class="line">        rh_status</div><div class="line">        ;;</div><div class="line">    condrestart|try-restart)</div><div class="line">        rh_status_q || <span class="built_in">exit</span> 0</div><div class="line">            ;;</div><div class="line">    *)</div><div class="line">        <span class="built_in">echo</span> $<span class="string">"Usage: <span class="variable">$0</span> &#123;start|stop|status|restart|condrestart|try-restart|reload|force-reload|configtest&#125;"</span></div><div class="line">        <span class="built_in">exit</span> 2</div><div class="line"><span class="keyword">esac</span></div></pre></td></tr></table></figure>
+<h1 id="四、MySQL"><a href="#四、MySQL" class="headerlink" title="四、MySQL"></a>四、MySQL</h1><h3 id="1-安装Cmake"><a href="#1-安装Cmake" class="headerlink" title="1.安装Cmake"></a>1.安装Cmake</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ yum -y install gcc gcc-c++ make autoconf libtool</div><div class="line">$ <span class="built_in">cd</span> /data/src</div><div class="line">$ wget -c http://www.cmake.org/files/v3.7/cmake-3.7.2.tar.gz</div><div class="line">$ tar -zxvf cmake-3.7.2.tar.gz</div><div class="line">$ <span class="built_in">cd</span> cmake-3.7.2</div><div class="line">$ ./bootstrap</div><div class="line">$ make &amp;&amp; make install</div></pre></td></tr></table></figure>
+<h3 id="2-安装MySQL"><a href="#2-安装MySQL" class="headerlink" title="2.安装MySQL"></a>2.安装MySQL</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">$ groupadd mysql</div><div class="line">$ useradd -r -g mysql <span class="_">-s</span> /sbin/nologin mysql</div><div class="line">$ wget -c http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.35.tar.gz 或者这个链接 (http://ftp.iij.ad.jp/pub/db/mysql/Downloads/MySQL-5.6/mysql-5.6.35.tar.gz)</div><div class="line">$ tar mysql-5.6.35.tar.gz</div><div class="line">$ <span class="built_in">cd</span> mysql-5.6.35</div><div class="line">$ cmake --DCMAKE_INSTALL_PREFIX=/data/<span class="built_in">local</span>/mysql/ -DMYSQL_DATADIR=/data/mysqldb -DMYSQL_TCP_PORT=3306   (cmake安装参数参考MySQL官方 http://t.cn/RipwTjB)</div><div class="line">$ make &amp;&amp; make install</div><div class="line">$ /data/<span class="built_in">local</span>/mysql/bin/mysql --version</div><div class="line">$ <span class="built_in">cd</span> /data/<span class="built_in">local</span>/mysql</div><div class="line">$ chown -R mysql .  (更改当前目录(mysql)下所有及子目录属mysql用户.因为是通过root用户进行安装的，权限属于root)</div><div class="line">$ chgrp -R mysql .</div><div class="line">$ scripts/mysql_install_db --user=mysql --basedir=/usr/<span class="built_in">local</span>/mysql --datadir=/data/mysqldb</div><div class="line">(初始化数据库,确保数据库目录和文件为mysql账户拥有,确保以root用户执行mysql_install_db,--basedir --datadir 分别指定MySQL安装目录和数据库目录，根据需求指定或者默认.)</div><div class="line">$ chown -R root .  (改回root或者不改均可)</div><div class="line">$ chown -R mysql data  (data数据库目录必须为mysql账户拥有,如果数据库目录更改也要授予mysql权限. note：有些系统或者分发MySQL可能不是data，是var之类的.根据实际情况选择)</div><div class="line">$ bin/mysqld_safe --user=mysql &amp;</div><div class="line">$ cp support-files/mysql.server /etc/init.d/mysqld</div><div class="line">$ chkconfig --add mysqld  (设置开机启动/服务)</div><div class="line">$ ln <span class="_">-s</span> /data/<span class="built_in">local</span>/mysql/bin/mysql /usr/sbin</div><div class="line">$ <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/data/<span class="built_in">local</span>/mysql/bin</div><div class="line">$ vim /etc/my.cnf</div><div class="line">  [mysqld]</div><div class="line">  datadir=/data/mysqldb</div><div class="line">  socket=/data/mysqldb/mysql.sock</div><div class="line">  user=mysql</div><div class="line">  sql_mode=<span class="string">"NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER"</span></div><div class="line">  character-set-server=utf8mb4</div><div class="line">  <span class="comment"># Disabling symbolic-links is recommended to prevent assorted security risks</span></div><div class="line">  symbolic-links=0</div><div class="line">  slow_query_log=on</div><div class="line">  slow-query-log-file=/data/mysqldb/slowquery.log</div><div class="line">  long_query_time=0.03</div><div class="line">  <span class="built_in">log</span>-queries-not-using-indexes</div><div class="line">  [client]</div><div class="line">  default-character-set = utf8mb4</div><div class="line">  character-sets-dir=/data/<span class="built_in">local</span>/mysql/share/charsets</div><div class="line">  [mysqldump]  </div><div class="line">  user=root  </div><div class="line">  password=123456 </div><div class="line">  [mysqld_safe]</div><div class="line">  <span class="built_in">log</span>-error=/data/mysqldb/mysqld.log</div><div class="line">  pid-file=/data/mysqldb/mysqld.pid</div><div class="line">  (编辑my.cnf，参考官方文档设置 http://t.cn/Rip42em)</div><div class="line">$ service mysqld start </div><div class="line">$ mysql -uroot -p123456 -h localhost  (如不能登录mysql，尝试换127.0.0.1或者是主机名.再则重置密码如下操作)</div><div class="line">$ service mysqld stop</div><div class="line">$ /usr/<span class="built_in">local</span>/mysql/bin/mysqld_safe --skip-grant-tables</div><div class="line">$ mysql (去新建一个终端输入mysql)</div><div class="line">$ use mysql</div><div class="line">$ update user <span class="built_in">set</span> password=password(<span class="string">"123456"</span>) <span class="built_in">where</span> user=<span class="string">"root"</span>;</div><div class="line">$ flush privileges;</div><div class="line">$ <span class="built_in">exit</span>;</div><div class="line">  <span class="built_in">kill</span> mysqld_safe ,启动mysqld , 登录mysql.</div><div class="line">$ grant all privileges on *.* to root@<span class="string">"%"</span> identified by <span class="string">'123456'</span> with grant option;   (%替换成localhost或者指定的ip再执行grant,这是一个授权,表示允许被远程连接或者指定用户密码和IP操作mysql,如果是单个数据库授权,dbname.* to username@<span class="string">"%"</span>...)</div><div class="line">$ flush privileges;</div><div class="line">$ quit;</div><div class="line">  note: grant操作需要flush ,注意再操作完成后删除user表中匿名和空用户.</div></pre></td></tr></table></figure>
+<h3 id="3-MySQL备份-假设zentao作为一个数据库名"><a href="#3-MySQL备份-假设zentao作为一个数据库名" class="headerlink" title="3.MySQL备份(假设zentao作为一个数据库名)"></a>3.MySQL备份(假设zentao作为一个数据库名)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">mysql5.6及以上,使用mysqldump在脚本里面登录数据库,防止报错信息.利用mysql/bin/mysql_config_editor保存 -uroot -p .</div><div class="line">$ /data/<span class="built_in">local</span>/mysql/bin/mysql_config_editor <span class="built_in">set</span> --login-path=dbname --host=127.0.0.1 --user=root --password</div><div class="line">  Enter password:</div><div class="line">  上面的Enter password后面输入root登录MySQL的密码,即可生成--login-path=dbname .</div><div class="line">  下面就可以写入shell脚本.</div><div class="line">$ vim mysql_backup.sh</div><div class="line">  <span class="comment">#!/bin/sh</span></div><div class="line">  dump=/data/<span class="built_in">local</span>/mysql/bin/mysqldump</div><div class="line">  backup_dir=/data/backup/mysql/</div><div class="line">  linux_user=root</div><div class="line">  db_name=zentao</div><div class="line">  days=15</div><div class="line">  <span class="built_in">cd</span> <span class="variable">$backup_dir</span></div><div class="line">  date=`date +%Y-%m-%d`</div><div class="line">  backup_sql=<span class="variable">$date</span>.sql</div><div class="line">  tar_sql=<span class="string">"energy_bak_<span class="variable">$date</span>.tar.gz"</span></div><div class="line"><span class="variable">$dump</span> --login-path==dbname <span class="variable">$db_name</span> --default-character-set=utf8 --opt -Q -R --skip-lock-tables&gt;<span class="variable">$backip_sql</span></div><div class="line">  tar -czf <span class="variable">$tar_sql</span> ./<span class="variable">$backup_sql</span></div><div class="line">  rm <span class="variable">$backup_sql</span></div><div class="line">  chown <span class="variable">$linux_user</span>:<span class="variable">$linux_user</span> <span class="variable">$backup_dir</span>/<span class="variable">$tar_sql</span></div><div class="line">  find <span class="variable">$backup_dir</span> -name <span class="string">"energy_bak*"</span> -type f -mtime +<span class="variable">$days</span> -exec rm &#123;&#125; \;</div><div class="line">    </div><div class="line">从压缩备份文件中恢复(.tar.sql)</div><div class="line">$ gzip &lt; 2017-03-21.sql.tar.gz | mysql -uroot -p zentao</div><div class="line">  或者:</div><div class="line">$ zcat 2017-03-21.sql.tar.gz | mysql -uroot -p</div><div class="line">  从备份文件恢复(.sql)</div><div class="line">$ mysql -uroot -p zentao &lt; 2017-03-21.sql</div></pre></td></tr></table></figure>
+<p>#五、PHP</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">$ yum -y install gcc automake autoconf libtool make glibc</div><div class="line">$ <span class="built_in">cd</span> /data/src</div><div class="line">$ wget -c http://cn2.php.net/distributions/php-5.5.38.tar.gz</div><div class="line">$ tar -zxvf php-5.5.38.tar.gz</div><div class="line">$ <span class="built_in">cd</span> php-5.5.38</div><div class="line">$ ./configure --prefix=/data/<span class="built_in">local</span>/php --enable-fpm</div><div class="line">(如果这里没有加--enable-fpm, php5.3及以上的内置了php-fpm 可以重新编译加上参数。或者yum install php-fpm,</div><div class="line">以下供参数参考 configure过程中有提示参数软件未安装的就安装后再configure,或者去除参数:</div><div class="line">========================================================================================================</div><div class="line">./configure --prefix=/data/<span class="built_in">local</span>/php --enable-fpm --with-mysql=/data/<span class="built_in">local</span>/mysql</div><div class="line"> --with-config-file-path=/data/<span class="built_in">local</span>/php/etc --with-mysqli=/data/<span class="built_in">local</span>/mysql/bin/mysql_config --with-freetype-dir --</div><div class="line">with-jpeg-dir --with-png-dir --with-zlib-dir --with-libxml-dir --enable-bcmath --enable-shmop --enable-sysvsem --ena</div><div class="line">ble-inline-optimization --with-curl --with-curlwrappers --enable-mbstring --with-mcrypt --with-mhash  --with-gd --en</div><div class="line">able-gd-native-ttf --with-openssl --enable-sockets --enable-zip --enable-ftp --with-pear --enable-fastCGI --enable<span class="_">-f</span></div><div class="line">orce-CGI-redirect  --with-gmp --with-pcre-dir=/usr/<span class="built_in">local</span>/bin/pcre-config --with-gdbm --enable-zend-multibyte --enabl</div><div class="line">e-soap --enable-exif --enable-pdo_mysql --with-xsl --with-bz2</div><div class="line">========================================================================================================</div><div class="line">附加参数参考 http://t.cn/Ri0WWcq)</div><div class="line">$ make <span class="built_in">test</span></div><div class="line">$ make install</div><div class="line">$ cp php.ini-development /data/<span class="built_in">local</span>/php/etc/php.ini   (去目录将cp过去的文件重命 php.ini)</div><div class="line">$ vim php.ini</div><div class="line">  date.timezone = PRC   (或者Asia/Shanghai)</div><div class="line">  magic_quotes_gpc = On   (防止SQL注入)</div><div class="line">$ cp /data/<span class="built_in">local</span>/php/etc/php-fpm.default.conf php-fpm.conf</div><div class="line">$ cp /data/<span class="built_in">local</span>/php/etc/php-fpm.d/www.conf.default www.conf</div><div class="line">$ cp /usr/<span class="built_in">local</span>/src/php-5.5.38/php.ini-development /data/<span class="built_in">local</span>/php/lib/php.ini  (复制之前解压php源码目录下的php.ini-develoment/production 根据环境情况选择开发还是生产)</div><div class="line">$ /data/<span class="built_in">local</span>/php/sbin/php-fpm -R  (启动fpm)</div><div class="line">  <span class="built_in">kill</span> -INT `cat <span class="variable">$PATH</span>:php-fpm.pid`   关闭(cat后面输入php-fpm.pid路径)</div><div class="line">  <span class="built_in">kill</span> -USR2 `cat <span class="variable">$PATH</span>:php-fpm.pid`  重启</div><div class="line">$ ps -ef | grep php-fpm 或者 lsof -i :9000</div><div class="line">设置php-fpm开机启动：vim /etc/<span class="built_in">local</span> ,最后一行加入 /data/<span class="built_in">local</span>/php/sbin/php-fpm 即可</div></pre></td></tr></table></figure>
+<h6 id="tip-php-fpm-service管理使用脚本-根据实情修改对应目录"><a href="#tip-php-fpm-service管理使用脚本-根据实情修改对应目录" class="headerlink" title="tip: php-fpm service管理使用脚本,根据实情修改对应目录"></a>tip: php-fpm service管理使用脚本,根据实情修改对应目录</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#</div><div class="line"># Startup script for the PHP-FPM server.</div><div class="line">#</div><div class="line"># chkconfig: 345 85 15</div><div class="line"># description: PHP is an HTML-embedded scripting language</div><div class="line"># processname: php-fpm</div><div class="line"># config: /usr/local/php/etc/php.ini</div><div class="line"> </div><div class="line"># Source function library.</div><div class="line">. /etc/rc.d/init.d/functions</div><div class="line"> </div><div class="line">PHP_PATH=/data/local</div><div class="line">DESC=&quot;php-fpm daemon&quot;</div><div class="line">NAME=php-fpm</div><div class="line">DAEMON=$PHP_PATH/php/sbin/$NAME</div><div class="line">CONFIGFILE=$PHP_PATH/php/etc/php-fpm.conf</div><div class="line">PIDFILE=$PHP_PATH/php/var/run/$NAME.pid</div><div class="line">SCRIPTNAME=/etc/init.d/$NAME</div><div class="line"> </div><div class="line"># Gracefully exit if the package has been removed.</div><div class="line">test -x $DAEMON || exit 0</div><div class="line"> </div><div class="line">rh_start() &#123;</div><div class="line">  $DAEMON -y $CONFIGFILE || echo -n &quot; already running&quot;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">rh_stop() &#123;</div><div class="line">  kill -QUIT `cat $PIDFILE` || echo -n &quot; not running&quot;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">rh_reload() &#123;</div><div class="line">  kill -HUP `cat $PIDFILE` || echo -n &quot; can&apos;t reload&quot;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">case &quot;$1&quot; in</div><div class="line">  start)</div><div class="line">        echo -n &quot;Starting $DESC: $NAME&quot;</div><div class="line">        rh_start</div><div class="line">        echo &quot;.&quot;</div><div class="line">        ;;</div><div class="line">  stop)</div><div class="line">        echo -n &quot;Stopping $DESC: $NAME&quot;</div><div class="line">        rh_stop</div><div class="line">        echo &quot;.&quot;</div><div class="line">        ;;</div><div class="line">  reload)</div><div class="line">        echo -n &quot;Reloading $DESC configuration...&quot;</div><div class="line">        rh_reload</div><div class="line">        echo &quot;reloaded.&quot;</div><div class="line">  ;;</div><div class="line">  restart)</div><div class="line">        echo -n &quot;Restarting $DESC: $NAME&quot;</div><div class="line">        rh_stop</div><div class="line">        sleep 1</div><div class="line">        rh_start</div><div class="line">        echo &quot;.&quot;</div><div class="line">        ;;</div><div class="line">  *)</div><div class="line">         echo &quot;Usage: $SCRIPTNAME &#123;start|stop|status|restart|reload&#125;&quot; &gt;&amp;2</div><div class="line">         exit 3</div><div class="line">        ;;</div><div class="line">esac</div><div class="line">exit 0</div></pre></td></tr></table></figure>
+<p>#六、Nginx配置php-fpm</p>
+<h3 id="1、修改nginx-conf-根据里面默认的注释例子修改"><a href="#1、修改nginx-conf-根据里面默认的注释例子修改" class="headerlink" title="1、修改nginx.conf,根据里面默认的注释例子修改"></a>1、修改nginx.conf,根据里面默认的注释例子修改</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">$ vim /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</div><div class="line">========================================================================================================</div><div class="line">    <span class="comment">#HTTP server</span></div><div class="line">    server&#123;</div><div class="line">        listen 80;</div><div class="line">        <span class="built_in">return</span> 444;</div><div class="line">        <span class="comment">#server_name localhost;</span></div><div class="line">        charset utf-8;</div><div class="line">        </div><div class="line">        location / &#123;</div><div class="line">          root html;</div><div class="line">          index index.html index.htm;</div><div class="line">        &#125;</div><div class="line">    error_page   500 502 503 504  /50x.html;</div><div class="line">    location = /50x.html &#123;</div><div class="line">        root   html;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location ~ \.php$ &#123;</div><div class="line">    root           html;</div><div class="line">    fastcgi_pass   127.0.0.1:9000;</div><div class="line">    fastcgi_index  index.php;</div><div class="line">    fastcgi_param  SCRIPT_FILENAME  <span class="variable">$document_root</span><span class="variable">$fastcgi_script_name</span>;</div><div class="line">    include        fastcgi_params;</div><div class="line">    &#125;</div><div class="line">    location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$</div><div class="line">        &#123;</div><div class="line">                expires 30d;</div><div class="line">        &#125;</div><div class="line">        location ~ .*\.(js|css)?$</div><div class="line">        &#123;</div><div class="line">                expires 1h;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    inculude vhost/*.conf;</div><div class="line">========================================================================================================</div></pre></td></tr></table></figure>
+<h6 id="2-在conf-vhost-目录下编写配置每一个站点的conf文件-可以拷贝Nginx里面的例子进行修改"><a href="#2-在conf-vhost-目录下编写配置每一个站点的conf文件-可以拷贝Nginx里面的例子进行修改" class="headerlink" title="2.在conf/vhost/目录下编写配置每一个站点的conf文件,可以拷贝Nginx里面的例子进行修改"></a>2.在conf/vhost/目录下编写配置每一个站点的conf文件,可以拷贝Nginx里面的例子进行修改</h6><p>##七、设置禁止参与 yum 更新的核心软件 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$vim</span> /etc/yum.conf</div><div class="line"> exclude=php* apache* kernel* mysql* nginx* (根据实际情况进行指定不参与yum update的程序)</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/03/23/MySQL备份与恢复/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1061,135 +1355,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/03/19/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Cyoncan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cyoncan">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/19/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-19T20:58:59+08:00">
-                2017-03-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1235,7 +1400,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1246,7 +1411,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1257,7 +1422,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
