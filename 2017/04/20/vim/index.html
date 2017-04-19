@@ -87,23 +87,20 @@
 
 <meta name="description" content="#Linux vim常用命令
 ###1.替换
-:s/abc/efg/      替换当前行,第一个 abc 为 efg:s/abc/efg/g    替换当前行,所有   abc 为 efg
-:n,$s/xyz/org/    替换第 n 行开始到最后一行中每一行的第一个 xyz 为 org:n,$s/xyz/org/g  替换第 n 行开始到最后一行中每一行所有     xyz 为 org n">
+1234567:s/abc/efg/      替换当前行,第一个 abc 为 efg:s/abc/efg/g     替换当前行,所有   abc 为 efg:n,$s/xyz/org/   替换第 n 行开始到最后一行中每一行的第一个 xyz 为 org:n,$s/xyz/org/g  替换第 n 行开始到最后一行中每一行所有     xyz 为">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vim常用命令">
 <meta property="og:url" content="http://cyocan.github.io/2017/04/20/vim/index.html">
 <meta property="og:site_name" content="Cyoncan">
 <meta property="og:description" content="#Linux vim常用命令
 ###1.替换
-:s/abc/efg/      替换当前行,第一个 abc 为 efg:s/abc/efg/g    替换当前行,所有   abc 为 efg
-:n,$s/xyz/org/    替换第 n 行开始到最后一行中每一行的第一个 xyz 为 org:n,$s/xyz/org/g  替换第 n 行开始到最后一行中每一行所有     xyz 为 org n">
-<meta property="og:updated_time" content="2017-04-19T16:29:50.079Z">
+1234567:s/abc/efg/      替换当前行,第一个 abc 为 efg:s/abc/efg/g     替换当前行,所有   abc 为 efg:n,$s/xyz/org/   替换第 n 行开始到最后一行中每一行的第一个 xyz 为 org:n,$s/xyz/org/g  替换第 n 行开始到最后一行中每一行所有     xyz 为">
+<meta property="og:updated_time" content="2017-04-19T17:07:25.771Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vim常用命令">
 <meta name="twitter:description" content="#Linux vim常用命令
 ###1.替换
-:s/abc/efg/      替换当前行,第一个 abc 为 efg:s/abc/efg/g    替换当前行,所有   abc 为 efg
-:n,$s/xyz/org/    替换第 n 行开始到最后一行中每一行的第一个 xyz 为 org:n,$s/xyz/org/g  替换第 n 行开始到最后一行中每一行所有     xyz 为 org n">
+1234567:s/abc/efg/      替换当前行,第一个 abc 为 efg:s/abc/efg/g     替换当前行,所有   abc 为 efg:n,$s/xyz/org/   替换第 n 行开始到最后一行中每一行的第一个 xyz 为 org:n,$s/xyz/org/g  替换第 n 行开始到最后一行中每一行所有     xyz 为">
 
 
 
@@ -395,12 +392,9 @@
       
         <p>#Linux vim常用命令</p>
 <p>###1.替换</p>
-<p>:s/abc/efg/      替换当前行,第一个 abc 为 efg<br>:s/abc/efg/g    替换当前行,所有   abc 为 efg</p>
-<p>:n,$s/xyz/org/    替换第 n 行开始到最后一行中每一行的第一个 xyz 为 org<br>:n,$s/xyz/org/g  替换第 n 行开始到最后一行中每一行所有     xyz 为 org<br> n 为数字，若 n 为 . ，表示从当前行开始到最后一行</p>
-<p>:%s/xyz/org/      (等同于:g/xyz/s//org/)  替换每一行的第一个 xyz 为 org<br>:%s/xyz/org/g  （等同于:g/xyz/s//org/g）替换每一行中所有   xyz 为 org</p>
-<p>###2二.复制</p>
-<p>vim退出后清屏,屏幕不显示之前编辑的内容.</p>
-<p>TERM=xterm; export TERM</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">:s/abc/efg/      替换当前行,第一个 abc 为 efg</div><div class="line">:s/abc/efg/g     替换当前行,所有   abc 为 efg</div><div class="line">:n,<span class="variable">$s</span>/xyz/org/   替换第 n 行开始到最后一行中每一行的第一个 xyz 为 org</div><div class="line">:n,<span class="variable">$s</span>/xyz/org/g  替换第 n 行开始到最后一行中每一行所有     xyz 为 org</div><div class="line"> n 为数字，若 n 为 . ，表示从当前行开始到最后一行</div><div class="line">:%s/xyz/org/     (等同于:g/xyz/s//org/)  替换每一行的第一个 xyz 为 org</div><div class="line">:%s/xyz/org/g   （等同于:g/xyz/s//org/g）替换每一行中所有   xyz 为 org</div></pre></td></tr></table></figure>
+<p>###2.vim执行：wq清楚屏幕上上一次编辑过的内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vim退出后清屏,屏幕不显示之前编辑的内容.</div><div class="line">TERM=xterm; <span class="built_in">export</span> TERM</div></pre></td></tr></table></figure>
 <p>###3.删除全部</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:%d</div></pre></td></tr></table></figure>
 
@@ -445,8 +439,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/20/CentOS6防火墙之iptables/" rel="next" title="iptables����ǽ">
-                <i class="fa fa-chevron-left"></i> iptables����ǽ
+              <a href="/2017/03/27/lnmp/" rel="next" title="lnmp环境搭建配置">
+                <i class="fa fa-chevron-left"></i> lnmp环境搭建配置
               </a>
             
           </div>
@@ -454,6 +448,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/20/CentOS6防火墙之iptables/" rel="prev" title="iptables����">
+                iptables���� <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>

@@ -85,28 +85,28 @@
 
 
 
-<meta name="description" content="#����filter������ǽ
+<meta name="description" content="##����filter��
 ###1.����Ԥ����filter�е����й������Ĺ���1iptables -F
 ###2.����Ԥ����filter��ʹ�����Զ����еĹ���
 1iptables -X
-3.�趨Ԥ������123iptables -P INPUT DROPiptables -P OUTPUT ACCEPTiptables -P FORWAR">
+3.�趨Ԥ������123iptables -P INPUT DROPiptables -P OUTPUT ACCEPTiptables -P FORWARD DR">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iptables����ǽ">
+<meta property="og:title" content="iptables����">
 <meta property="og:url" content="http://cyocan.github.io/2017/04/20/CentOS6防火墙之iptables/index.html">
 <meta property="og:site_name" content="Cyoncan">
-<meta property="og:description" content="#����filter������ǽ
+<meta property="og:description" content="##����filter��
 ###1.����Ԥ����filter�е����й������Ĺ���1iptables -F
 ###2.����Ԥ����filter��ʹ�����Զ����еĹ���
 1iptables -X
-3.�趨Ԥ������123iptables -P INPUT DROPiptables -P OUTPUT ACCEPTiptables -P FORWAR">
-<meta property="og:updated_time" content="2017-04-19T16:20:34.479Z">
+3.�趨Ԥ������123iptables -P INPUT DROPiptables -P OUTPUT ACCEPTiptables -P FORWARD DR">
+<meta property="og:updated_time" content="2017-04-19T17:04:13.759Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iptables����ǽ">
-<meta name="twitter:description" content="#����filter������ǽ
+<meta name="twitter:title" content="iptables����">
+<meta name="twitter:description" content="##����filter��
 ###1.����Ԥ����filter�е����й������Ĺ���1iptables -F
 ###2.����Ԥ����filter��ʹ�����Զ����еĹ���
 1iptables -X
-3.�趨Ԥ������123iptables -P INPUT DROPiptables -P OUTPUT ACCEPTiptables -P FORWAR">
+3.�趨Ԥ������123iptables -P INPUT DROPiptables -P OUTPUT ACCEPTiptables -P FORWARD DR">
 
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <title> iptables����ǽ | Cyoncan </title>
+  <title> iptables���� | Cyoncan </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -308,7 +308,7 @@
             
             
               
-                iptables����ǽ
+                iptables����
               
             
           </h1>
@@ -396,12 +396,12 @@
       
 
       
-        <p>#����filter������ǽ</p>
+        <p>##����filter��</p>
 <p>###1.����Ԥ����filter�е����й������Ĺ���<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -F</div></pre></td></tr></table></figure></p>
 <p>###2.����Ԥ����filter��ʹ�����Զ����еĹ���</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -X</div></pre></td></tr></table></figure>
 <h3 id="3-�趨Ԥ������"><a href="#3-�趨Ԥ������" class="headerlink" title="3.�趨Ԥ������"></a>3.�趨Ԥ������</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">iptables -P INPUT DROP</div><div class="line">iptables -P OUTPUT ACCEPT</div><div class="line">iptables -P FORWARD DROP</div></pre></td></tr></table></figure>
-<h3 id="4-�����Լ�������ʵ������������Ӧ�˿�"><a href="#4-�����Լ�������ʵ������������Ӧ�˿�" class="headerlink" title="4.�����Լ�������ʵ������������Ӧ�˿�"></a>4.�����Լ�������ʵ������������Ӧ�˿�</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#����22�˿�,ssh���ܵ�¼.</span></div><div class="line">$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT</div><div class="line">��</div><div class="line">$ iptables -A INPUT -i eth1 <span class="_">-s</span> 192.168.2.100 -p tcp --dport 22 -j ACCEPT <span class="comment">#ָ��eth1������192.168.2.100����ssh��¼</span></div><div class="line"><span class="comment">#����ping(��icmp��ͨ��)</span></div><div class="line">$ iptables -A INPUT -p icmp -j ACCEPT</div><div class="line"><span class="comment">#����loopback</span></div><div class="line">$ iptables -A INPUT -i lo -j ACCEPT</div><div class="line"><span class="comment">#ʹping�������Եõ��ظ�</span></div><div class="line">$ iptables -A INPUT -p udp -m udp --dport 53 -j ACCEPT </div><div class="line">$ iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPT</div><div class="line">tip: ��������������ȥ����iptable����,������ vim /etc/sysconfig/iptables</div></pre></td></tr></table></figure>
+<h3 id="4-�����Լ��L�����ʵ������z������Ӧ�K˿�"><a href="#4-�����Լ��L�����ʵ������z������Ӧ�K˿�" class="headerlink" title="4.�����Լ��Ļ�����ʵ������ȥ������Ӧ�Ķ˿�"></a>4.�����Լ��Ļ�����ʵ������ȥ������Ӧ�Ķ˿�</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#����22�˿�,ssh���ܵ�¼.</span></div><div class="line">$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT</div><div class="line">��</div><div class="line">$ iptables -A INPUT -i eth1 <span class="_">-s</span> 192.168.2.100 -p tcp --dport 22 -j ACCEPT <span class="comment">#ָ��eth1������192.168.2.100����ssh��¼</span></div><div class="line"><span class="comment">#����ping(��icmp��ͨ��)</span></div><div class="line">$ iptables -A INPUT -p icmp -j ACCEPT</div><div class="line"><span class="comment">#����loopback</span></div><div class="line">$ iptables -A INPUT -i lo -j ACCEPT</div><div class="line"><span class="comment">#ʹping�������Եõ��ظ�</span></div><div class="line">$ iptables -A INPUT -p udp -m udp --dport 53 -j ACCEPT </div><div class="line">$ iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPT</div><div class="line">tip: ��������������ȥ����iptable����,������ vim /etc/sysconfig/iptables</div></pre></td></tr></table></figure>
 <h4 id="����iptables����"><a href="#����iptables����" class="headerlink" title="����iptables����"></a>����iptables����</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables save</div></pre></td></tr></table></figure>
 <h4 id="����iptables����-1"><a href="#����iptables����-1" class="headerlink" title="����iptables����"></a>����iptables����</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables restart</div></pre></td></tr></table></figure>
 <h4 id="�鿴iptables����"><a href="#�鿴iptables����" class="headerlink" title="�鿴iptables����"></a>�鿴iptables����</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -L -n</div></pre></td></tr></table></figure>
@@ -448,8 +448,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/20/zabbix搭建安装/" rel="next" title="zabbix安装配置">
-                <i class="fa fa-chevron-left"></i> zabbix安装配置
+              <a href="/2017/04/20/vim/" rel="next" title="vim常用命令">
+                <i class="fa fa-chevron-left"></i> vim常用命令
               </a>
             
           </div>
@@ -458,8 +458,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/20/vim/" rel="prev" title="vim常用命令">
-                vim常用命令 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/20/xargs/" rel="prev" title="理解xargs">
+                理解xargs <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -591,7 +591,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-�趨Ԥ������"><span class="nav-number">1.</span> <span class="nav-text">3.�趨Ԥ������</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-�����Լ�������ʵ������������Ӧ�˿�"><span class="nav-number">2.</span> <span class="nav-text">4.�����Լ�������ʵ������������Ӧ�˿�</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#����iptables����"><span class="nav-number">2.1.</span> <span class="nav-text">����iptables����</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#����iptables����-1"><span class="nav-number">2.2.</span> <span class="nav-text">����iptables����</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#�鿴iptables����"><span class="nav-number">2.3.</span> <span class="nav-text">�鿴iptables����</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-�趨Ԥ������"><span class="nav-number">1.</span> <span class="nav-text">3.�趨Ԥ������</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-�����Լ��L�����ʵ������z������Ӧ�K˿�"><span class="nav-number">2.</span> <span class="nav-text">4.�����Լ��Ļ�����ʵ������ȥ������Ӧ�Ķ˿�</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#����iptables����"><span class="nav-number">2.1.</span> <span class="nav-text">����iptables����</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#����iptables����-1"><span class="nav-number">2.2.</span> <span class="nav-text">����iptables����</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#�鿴iptables����"><span class="nav-number">2.3.</span> <span class="nav-text">�鿴iptables����</span></a></li></ol></li></ol></div>
             
 
           </div>

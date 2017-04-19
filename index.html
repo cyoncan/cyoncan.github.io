@@ -276,7 +276,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/04/20/vim/">
+    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/04/20/mysql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cyoncan">
@@ -298,8 +298,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/20/vim/" itemprop="url">
-                  vim常用命令
+                <a class="post-title-link" href="/2017/04/20/mysql/" itemprop="url">
+                  MySQL常用语句
                 </a>
               
             
@@ -338,8 +338,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/系统命令/" itemprop="url" rel="index">
-                    <span itemprop="name">系统命令</span>
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
                   </a>
                 </span>
 
@@ -375,167 +375,12 @@
       
         
           
-            <p>#Linux vim常用命令</p>
-<p>###1.替换</p>
-<p>:s/abc/efg/      替换当前行,第一个 abc 为 efg<br>:s/abc/efg/g    替换当前行,所有   abc 为 efg</p>
-<p>:n,$s/xyz/org/    替换第 n 行开始到最后一行中每一行的第一个 xyz 为 org<br>:n,$s/xyz/org/g  替换第 n 行开始到最后一行中每一行所有     xyz 为 org<br> n 为数字，若 n 为 . ，表示从当前行开始到最后一行</p>
-<p>:%s/xyz/org/      (等同于:g/xyz/s//org/)  替换每一行的第一个 xyz 为 org<br>:%s/xyz/org/g  （等同于:g/xyz/s//org/g）替换每一行中所有   xyz 为 org</p>
-<p>###2二.复制</p>
-<p>vim退出后清屏,屏幕不显示之前编辑的内容.</p>
-<p>TERM=xterm; export TERM</p>
-<p>###3.删除全部</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:%d</div></pre></td></tr></table></figure>
+            <p>#####1.MySQL创建用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create user <span class="string">'username'</span>@<span class="string">'%'</span> identified by <span class="string">'passwd'</span>;   % 换成localhost或者127.0.0.1,就只能本地登录了.</div></pre></td></tr></table></figure>
+<h5 id="2-给用户授权"><a href="#2-给用户授权" class="headerlink" title="2.给用户授权"></a>2.给用户授权</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">grant all privileges on databasename.tablename to <span class="string">'username'</span>@<span class="string">'hostname'</span> identified by <span class="string">'passwd'</span>with grant option;   all代表所有权限,withgrant option代表该用户可以给其他用户也进行授权操作.</div><div class="line">flush privileges;   授权完成,需要刷新生效.</div><div class="line">quit;</div></pre></td></tr></table></figure>
+<p>#####3.查看mysql有多少个账户<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select host,user,password from mysql.user;</div></pre></td></tr></table></figure></p>
+<p>#####4.查看MySQL字符集,排序规则<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">show variables like <span class="string">'collation%'</span>;</div><div class="line">show variables like <span class="string">'char%'</span>;</div></pre></td></tr></table></figure></p>
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/04/20/CentOS6防火墙之iptables/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Cyoncan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cyoncan">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/20/CentOS6防火墙之iptables/" itemprop="url">
-                  iptables����ǽ
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T00:16:21+08:00">
-                2017-04-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/����ae/" itemprop="url" rel="index">
-                    <span itemprop="name">����ǽ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#����filter������ǽ</p>
-<p>###1.����Ԥ����filter�е����й������Ĺ���<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -F</div></pre></td></tr></table></figure></p>
-<p>###2.����Ԥ����filter��ʹ�����Զ����еĹ���</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -X</div></pre></td></tr></table></figure>
-<h3 id="3-�趨Ԥ������"><a href="#3-�趨Ԥ������" class="headerlink" title="3.�趨Ԥ������"></a>3.�趨Ԥ������</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">iptables -P INPUT DROP</div><div class="line">iptables -P OUTPUT ACCEPT</div><div class="line">iptables -P FORWARD DROP</div></pre></td></tr></table></figure>
-<h3 id="4-�����Լ�������ʵ������������Ӧ�˿�"><a href="#4-�����Լ�������ʵ������������Ӧ�˿�" class="headerlink" title="4.�����Լ�������ʵ������������Ӧ�˿�"></a>4.�����Լ�������ʵ������������Ӧ�˿�</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#����22�˿�,ssh���ܵ�¼.</span></div><div class="line">$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT</div><div class="line">��</div><div class="line">$ iptables -A INPUT -i eth1 <span class="_">-s</span> 192.168.2.100 -p tcp --dport 22 -j ACCEPT <span class="comment">#ָ��eth1������192.168.2.100����ssh��¼</span></div><div class="line"><span class="comment">#����ping(��icmp��ͨ��)</span></div><div class="line">$ iptables -A INPUT -p icmp -j ACCEPT</div><div class="line"><span class="comment">#����loopback</span></div><div class="line">$ iptables -A INPUT -i lo -j ACCEPT</div><div class="line"><span class="comment">#ʹping�������Եõ��ظ�</span></div><div class="line">$ iptables -A INPUT -p udp -m udp --dport 53 -j ACCEPT </div><div class="line">$ iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPT</div><div class="line">tip: ��������������ȥ����iptable����,������ vim /etc/sysconfig/iptables</div></pre></td></tr></table></figure>
-<h4 id="����iptables����"><a href="#����iptables����" class="headerlink" title="����iptables����"></a>����iptables����</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables save</div></pre></td></tr></table></figure>
-<h4 id="����iptables����-1"><a href="#����iptables����-1" class="headerlink" title="����iptables����"></a>����iptables����</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables restart</div></pre></td></tr></table></figure>
-<h4 id="�鿴iptables����"><a href="#�鿴iptables����" class="headerlink" title="�鿴iptables����"></a>�鿴iptables����</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -L -n</div></pre></td></tr></table></figure>
           
         
       
@@ -880,6 +725,166 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/04/20/Linux命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cyoncan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cyoncan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/20/Linux命令/" itemprop="url">
+                  Linux常用命令
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T00:16:21+08:00">
+                2017-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/系统命令/" itemprop="url" rel="index">
+                    <span itemprop="name">系统命令</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-Linux查看当前系统登录用户列表"><a href="#1-Linux查看当前系统登录用户列表" class="headerlink" title="1.Linux查看当前系统登录用户列表"></a>1.Linux查看当前系统登录用户列表</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">w               查看当前活跃的用户列表</div><div class="line">cat /etc/passwd 查看所有用户的列表</div><div class="line">cat /etc/group  查看用户组</div><div class="line">cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F<span class="string">":"</span> <span class="string">'&#123; print $1"|"$3"|"$4 &#125;'</span>|more</div></pre></td></tr></table></figure>
+<p>###2.查看进程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ps -aux              所有进程</div><div class="line">ps -ef | grep nginx  指定进程</div></pre></td></tr></table></figure>
+<p>###3.mkdir创建目录及字目录<br>    mkdir -p /home/xx/xxx/xxxx/xxxxx<br>          -v //打印创建过程</p>
+<p>###4.chmod更改文件文件夹权限<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod -R //权限设置往下递归</div></pre></td></tr></table></figure></p>
+<p>###5.查看系统版本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">lsb_release <span class="_">-a</span></div><div class="line">uname <span class="_">-a</span></div><div class="line">cat /etc/issue</div></pre></td></tr></table></figure></p>
+<p>###6.控制用户登录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">锁模式</div><div class="line">usermod -L user (Lock 帐号user)</div><div class="line">usermod -U user (Unlock 帐号user)</div><div class="line">控制shell模式</div><div class="line">usermod <span class="_">-s</span> /sbin/nologin user  (不允许登录)</div><div class="line">usermod <span class="_">-s</span> /bin/bash user      (允许登录使用指定的bash)</div><div class="line">/etc/nologin.txt               (提示用户为什么不能登录)</div></pre></td></tr></table></figure>
+<p>###7.禁止所有用户登录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">touch /etc/nologin</div><div class="line">如果该文件存在，那么Linux上的所有用户（除了root以外）都无法登录.nologin（注意：不是nologin）可以写点东西，告诉用户为何无法登录.</div><div class="line">cat /etc/nologin</div><div class="line">9：00－10：00 系统升级，所有用户都禁止登录！</div><div class="line">解禁帐号也简单，直接将/etc/nologin删除就行了！</div></pre></td></tr></table></figure>
+<p>###8.查看当前用户使用的shell/终端环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ps | grep $$ | awk <span class="string">'&#123;print $4&#125;'</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$0</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$TERM</span></div></pre></td></tr></table></figure>
+<p>###9.查看端口被进程占用，属于哪个程序<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsof -i :9000</div></pre></td></tr></table></figure></p>
+<p>###10.wintolinux<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dos2unix unix2dos</div></pre></td></tr></table></figure></p>
+<p>###11.rename使用<br>rename</p>
+<h3 id="12-查找文件名-并替换其中的指定字符"><a href="#12-查找文件名-并替换其中的指定字符" class="headerlink" title="12.查找文件名,并替换其中的指定字符."></a>12.查找文件名,并替换其中的指定字符.</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find /data/www -name &quot;*.php&quot; | xargs sed -i &apos;s/192.168.2.145/127.0.0.1/g&apos;</div></pre></td></tr></table></figure>
+<h3 id="13-批量修改目录后缀名"><a href="#13-批量修改目录后缀名" class="headerlink" title="13.批量修改目录后缀名"></a>13.批量修改目录后缀名</h3><h6 id="tip-rename有c版本和Perl版本-使用时请man一下"><a href="#tip-rename有c版本和Perl版本-使用时请man一下" class="headerlink" title="tip: rename有c版本和Perl版本,使用时请man一下"></a>tip: rename有c版本和Perl版本,使用时请man一下</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find ./ -type d -name &quot;*.org&quot;|xargs rename org com</div></pre></td></tr></table></figure>
+<h3 id="14-查找目录下所有文件中包含指定的字符-并替换成其它字符"><a href="#14-查找目录下所有文件中包含指定的字符-并替换成其它字符" class="headerlink" title="14.查找目录下所有文件中包含指定的字符,并替换成其它字符"></a>14.查找目录下所有文件中包含指定的字符,并替换成其它字符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/04/20/xargs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1026,7 +1031,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/04/20/mysql/">
+    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/04/20/CentOS6防火墙之iptables/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cyoncan">
@@ -1048,8 +1053,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/20/mysql/" itemprop="url">
-                  MySQL常用语句
+                <a class="post-title-link" href="/2017/04/20/CentOS6防火墙之iptables/" itemprop="url">
+                  iptables����
                 </a>
               
             
@@ -1088,8 +1093,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
+                  <a href="/categories/����ae/" itemprop="url" rel="index">
+                    <span itemprop="name">����ǽ</span>
                   </a>
                 </span>
 
@@ -1125,12 +1130,15 @@
       
         
           
-            <p>#####1.MySQL创建用户</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create user <span class="string">'username'</span>@<span class="string">'%'</span> identified by <span class="string">'passwd'</span>;   % 换成localhost或者127.0.0.1,就只能本地登录了.</div></pre></td></tr></table></figure>
-<h5 id="2-给用户授权"><a href="#2-给用户授权" class="headerlink" title="2.给用户授权"></a>2.给用户授权</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">grant all privileges on databasename.tablename to <span class="string">'username'</span>@<span class="string">'hostname'</span> identified by <span class="string">'passwd'</span>with grant option;   all代表所有权限,withgrant option代表该用户可以给其他用户也进行授权操作.</div><div class="line">flush privileges;   授权完成,需要刷新生效.</div><div class="line">quit;</div></pre></td></tr></table></figure>
-<p>#####3.查看mysql有多少个账户<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select host,user,password from mysql.user;</div></pre></td></tr></table></figure></p>
-<p>#####4.查看MySQL字符集,排序规则<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">show variables like <span class="string">'collation%'</span>;</div><div class="line">show variables like <span class="string">'char%'</span>;</div></pre></td></tr></table></figure></p>
-
+            <p>##����filter��</p>
+<p>###1.����Ԥ����filter�е����й������Ĺ���<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -F</div></pre></td></tr></table></figure></p>
+<p>###2.����Ԥ����filter��ʹ�����Զ����еĹ���</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -X</div></pre></td></tr></table></figure>
+<h3 id="3-�趨Ԥ������"><a href="#3-�趨Ԥ������" class="headerlink" title="3.�趨Ԥ������"></a>3.�趨Ԥ������</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">iptables -P INPUT DROP</div><div class="line">iptables -P OUTPUT ACCEPT</div><div class="line">iptables -P FORWARD DROP</div></pre></td></tr></table></figure>
+<h3 id="4-�����Լ��L�����ʵ������z������Ӧ�K˿�"><a href="#4-�����Լ��L�����ʵ������z������Ӧ�K˿�" class="headerlink" title="4.�����Լ��Ļ�����ʵ������ȥ������Ӧ�Ķ˿�"></a>4.�����Լ��Ļ�����ʵ������ȥ������Ӧ�Ķ˿�</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#����22�˿�,ssh���ܵ�¼.</span></div><div class="line">$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT</div><div class="line">��</div><div class="line">$ iptables -A INPUT -i eth1 <span class="_">-s</span> 192.168.2.100 -p tcp --dport 22 -j ACCEPT <span class="comment">#ָ��eth1������192.168.2.100����ssh��¼</span></div><div class="line"><span class="comment">#����ping(��icmp��ͨ��)</span></div><div class="line">$ iptables -A INPUT -p icmp -j ACCEPT</div><div class="line"><span class="comment">#����loopback</span></div><div class="line">$ iptables -A INPUT -i lo -j ACCEPT</div><div class="line"><span class="comment">#ʹping�������Եõ��ظ�</span></div><div class="line">$ iptables -A INPUT -p udp -m udp --dport 53 -j ACCEPT </div><div class="line">$ iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPT</div><div class="line">tip: ��������������ȥ����iptable����,������ vim /etc/sysconfig/iptables</div></pre></td></tr></table></figure>
+<h4 id="����iptables����"><a href="#����iptables����" class="headerlink" title="����iptables����"></a>����iptables����</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables save</div></pre></td></tr></table></figure>
+<h4 id="����iptables����-1"><a href="#����iptables����-1" class="headerlink" title="����iptables����"></a>����iptables����</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables restart</div></pre></td></tr></table></figure>
+<h4 id="�鿴iptables����"><a href="#�鿴iptables����" class="headerlink" title="�鿴iptables����"></a>�鿴iptables����</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -L -n</div></pre></td></tr></table></figure>
           
         
       
@@ -1173,7 +1181,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/04/20/Linux命令/">
+    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/04/20/vim/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cyoncan">
@@ -1195,8 +1203,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/20/Linux命令/" itemprop="url">
-                  Linux常用命令
+                <a class="post-title-link" href="/2017/04/20/vim/" itemprop="url">
+                  vim常用命令
                 </a>
               
             
@@ -1272,24 +1280,13 @@
       
         
           
-            <h3 id="1-Linux查看当前系统登录用户列表"><a href="#1-Linux查看当前系统登录用户列表" class="headerlink" title="1.Linux查看当前系统登录用户列表"></a>1.Linux查看当前系统登录用户列表</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">w               查看当前活跃的用户列表</div><div class="line">cat /etc/passwd 查看所有用户的列表</div><div class="line">cat /etc/group  查看用户组</div><div class="line">cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F<span class="string">":"</span> <span class="string">'&#123; print $1"|"$3"|"$4 &#125;'</span>|more</div></pre></td></tr></table></figure>
-<p>###2.查看进程</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ps -aux              所有进程</div><div class="line">ps -ef | grep nginx  指定进程</div></pre></td></tr></table></figure>
-<p>###3.mkdir创建目录及字目录<br>    mkdir -p /home/xx/xxx/xxxx/xxxxx<br>          -v //打印创建过程</p>
-<p>###4.chmod更改文件文件夹权限<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod -R //权限设置往下递归</div></pre></td></tr></table></figure></p>
-<p>###5.查看系统版本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">lsb_release <span class="_">-a</span></div><div class="line">uname <span class="_">-a</span></div><div class="line">cat /etc/issue</div></pre></td></tr></table></figure></p>
-<p>###6.控制用户登录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">锁模式</div><div class="line">usermod -L user (Lock 帐号user)</div><div class="line">usermod -U user (Unlock 帐号user)</div><div class="line">控制shell模式</div><div class="line">usermod <span class="_">-s</span> /sbin/nologin user  (不允许登录)</div><div class="line">usermod <span class="_">-s</span> /bin/bash user      (允许登录使用指定的bash)</div><div class="line">/etc/nologin.txt               (提示用户为什么不能登录)</div></pre></td></tr></table></figure>
-<p>###7.禁止所有用户登录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">touch /etc/nologin</div><div class="line">如果该文件存在，那么Linux上的所有用户（除了root以外）都无法登录.nologin（注意：不是nologin）可以写点东西，告诉用户为何无法登录.</div><div class="line">cat /etc/nologin</div><div class="line">9：00－10：00 系统升级，所有用户都禁止登录！</div><div class="line">解禁帐号也简单，直接将/etc/nologin删除就行了！</div></pre></td></tr></table></figure>
-<p>###8.查看当前用户使用的shell/终端环境</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ps | grep $$ | awk <span class="string">'&#123;print $4&#125;'</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$0</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$TERM</span></div></pre></td></tr></table></figure>
-<p>###9.查看端口被进程占用，属于哪个程序<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsof -i :9000</div></pre></td></tr></table></figure></p>
-<p>###10.wintolinux<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dos2unix unix2dos</div></pre></td></tr></table></figure></p>
-<p>###11.rename使用<br>rename</p>
-<h3 id="12-查找文件名-并替换其中的指定字符"><a href="#12-查找文件名-并替换其中的指定字符" class="headerlink" title="12.查找文件名,并替换其中的指定字符."></a>12.查找文件名,并替换其中的指定字符.</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find /data/www -name &quot;*.php&quot; | xargs sed -i &apos;s/192.168.2.145/127.0.0.1/g&apos;</div></pre></td></tr></table></figure>
-<h3 id="13-批量修改目录后缀名"><a href="#13-批量修改目录后缀名" class="headerlink" title="13.批量修改目录后缀名"></a>13.批量修改目录后缀名</h3><h6 id="tip-rename有c版本和Perl版本-使用时请man一下"><a href="#tip-rename有c版本和Perl版本-使用时请man一下" class="headerlink" title="tip: rename有c版本和Perl版本,使用时请man一下"></a>tip: rename有c版本和Perl版本,使用时请man一下</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find ./ -type d -name &quot;*.org&quot;|xargs rename org com</div></pre></td></tr></table></figure>
-<h3 id="14-查找目录下所有文件中包含指定的字符-并替换成其它字符"><a href="#14-查找目录下所有文件中包含指定的字符-并替换成其它字符" class="headerlink" title="14.查找目录下所有文件中包含指定的字符,并替换成其它字符"></a>14.查找目录下所有文件中包含指定的字符,并替换成其它字符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+            <p>#Linux vim常用命令</p>
+<p>###1.替换</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">:s/abc/efg/      替换当前行,第一个 abc 为 efg</div><div class="line">:s/abc/efg/g     替换当前行,所有   abc 为 efg</div><div class="line">:n,<span class="variable">$s</span>/xyz/org/   替换第 n 行开始到最后一行中每一行的第一个 xyz 为 org</div><div class="line">:n,<span class="variable">$s</span>/xyz/org/g  替换第 n 行开始到最后一行中每一行所有     xyz 为 org</div><div class="line"> n 为数字，若 n 为 . ，表示从当前行开始到最后一行</div><div class="line">:%s/xyz/org/     (等同于:g/xyz/s//org/)  替换每一行的第一个 xyz 为 org</div><div class="line">:%s/xyz/org/g   （等同于:g/xyz/s//org/g）替换每一行中所有   xyz 为 org</div></pre></td></tr></table></figure>
+<p>###2.vim执行：wq清楚屏幕上上一次编辑过的内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vim退出后清屏,屏幕不显示之前编辑的内容.</div><div class="line">TERM=xterm; <span class="built_in">export</span> TERM</div></pre></td></tr></table></figure>
+<p>###3.删除全部</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:%d</div></pre></td></tr></table></figure>
 
           
         
@@ -1650,7 +1647,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/03/23/CentOS网卡相关/">
+    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/03/23/Linux之SCP互传文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cyoncan">
@@ -1672,8 +1669,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/23/CentOS网卡相关/" itemprop="url">
-                  Linux查看网卡信息
+                <a class="post-title-link" href="/2017/03/23/Linux之SCP互传文件/" itemprop="url">
+                  Linux互传文件之SCP使用
                 </a>
               
             
@@ -1712,8 +1709,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/系统硬件/" itemprop="url" rel="index">
-                    <span itemprop="name">系统硬件</span>
+                  <a href="/categories/系统命令/" itemprop="url" rel="index">
+                    <span itemprop="name">系统命令</span>
                   </a>
                 </span>
 
@@ -1749,11 +1746,12 @@
       
         
           
-            <h3 id="CentOS网卡相关信息查看"><a href="#CentOS网卡相关信息查看" class="headerlink" title="CentOS网卡相关信息查看"></a>CentOS网卡相关信息查看</h3><h5 id="1-首先安装工具-已安装请忽略"><a href="#1-首先安装工具-已安装请忽略" class="headerlink" title="1.首先安装工具,已安装请忽略."></a>1.首先安装工具,已安装请忽略.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yum install pciutiles</div></pre></td></tr></table></figure>
-<h5 id="2-查看网卡型号"><a href="#2-查看网卡型号" class="headerlink" title="2.查看网卡型号"></a>2.查看网卡型号</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ lspci | grep -i ethernet</div></pre></td></tr></table></figure>
-<h5 id="3-查看网卡驱动版本"><a href="#3-查看网卡驱动版本" class="headerlink" title="3.查看网卡驱动版本"></a>3.查看网卡驱动版本</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ethtool -i eth0</div></pre></td></tr></table></figure>
-<h5 id="4-网卡驱动安装"><a href="#4-网卡驱动安装" class="headerlink" title="4.网卡驱动安装"></a>4.网卡驱动安装</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ yum install kernel-devel kernel-headers  </div><div class="line">$ yum install gcc</div><div class="line">$ tar zxvf r1000.tgz</div><div class="line">$ <span class="built_in">cd</span> r1000/</div><div class="line">$ make clean modules</div><div class="line">$ make install</div><div class="line">$ modprobe r1000</div><div class="line">$ reboot</div><div class="line">$ lsmod | grep r1000 或者 ifconfig <span class="_">-a</span> 查看网卡eth0是否加载</div><div class="line">$ service network restart</div><div class="line">假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可.</div></pre></td></tr></table></figure>
-<p>​</p>
+            <h3 id="Linux互相传输之SCP的使用"><a href="#Linux互相传输之SCP的使用" class="headerlink" title="Linux互相传输之SCP的使用"></a>Linux互相传输之SCP的使用</h3><p>#####1.从服务器上拉取目录</p>
+   <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -p 22 -r user@192.168.2.1:/data/www /data/www/</div></pre></td></tr></table></figure>
+<h5 id="2-从本地上传目录-p为端口参数-port端口-默认端口可以省略-传输为目录需要-r-进行目录递归"><a href="#2-从本地上传目录-p为端口参数-port端口-默认端口可以省略-传输为目录需要-r-进行目录递归" class="headerlink" title="2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)"></a>2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r /data/www user@192.168.2.1:/data/www/</div></pre></td></tr></table></figure>
+<h5 id="3-使用ssh-keygen生成密钥和私钥文件-建立两台机器互相通信-可避免每次输入验证密码"><a href="#3-使用ssh-keygen生成密钥和私钥文件-建立两台机器互相通信-可避免每次输入验证密码" class="headerlink" title="3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码."></a>3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa  (生成在~/.ssh/目录下id_rsa.pub和id_rsa)</div></pre></td></tr></table></figure>
+<h5 id="4-将id-rsa-pub上传到目标服务器-ssh目录下-命名authorized-keys"><a href="#4-将id-rsa-pub上传到目标服务器-ssh目录下-命名authorized-keys" class="headerlink" title="4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys."></a>4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r /root/.ssh/id_rsa.pub user@serverip:/root/.ssh/authorized_keys</div></pre></td></tr></table></figure>
+<h5 id="5-如果目标服务器上-已经存在了authorized-keys-就将id-rsa-pub中的内容追加到目标服务器的authorized-keys文件中"><a href="#5-如果目标服务器上-已经存在了authorized-keys-就将id-rsa-pub中的内容追加到目标服务器的authorized-keys文件中" class="headerlink" title="5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中."></a>5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /root/.ssh/id_rsa.pub | ssh user@serverip <span class="string">'cat &gt;&gt; /root/.ssh/authorized_keys'</span></div></pre></td></tr></table></figure>
 
           
         
