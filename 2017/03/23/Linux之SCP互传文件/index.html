@@ -85,25 +85,22 @@
 
 
 
-<meta name="description" content="Linux互相传输之SCP的使用#####1.从服务器上拉取目录
-   1scp -p 22 -r user@192.168.2.1:/data/www /data/www/
+<meta name="description" content="Linux互相传输之SCP的使用1.从服务器上拉取目录   1scp -p 22 -r user@192.168.2.1:/data/www /data/www/
 2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)1scp -r /data/www user@192.168.2.1:/data/www/
-3.使用ssh-keygen">
+3.使用ssh-keygen生成密钥和私">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux互传文件之SCP使用">
 <meta property="og:url" content="http://cyocan.github.io/2017/03/23/Linux之SCP互传文件/index.html">
 <meta property="og:site_name" content="Cyoncan">
-<meta property="og:description" content="Linux互相传输之SCP的使用#####1.从服务器上拉取目录
-   1scp -p 22 -r user@192.168.2.1:/data/www /data/www/
+<meta property="og:description" content="Linux互相传输之SCP的使用1.从服务器上拉取目录   1scp -p 22 -r user@192.168.2.1:/data/www /data/www/
 2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)1scp -r /data/www user@192.168.2.1:/data/www/
-3.使用ssh-keygen">
-<meta property="og:updated_time" content="2017-04-19T15:38:13.794Z">
+3.使用ssh-keygen生成密钥和私">
+<meta property="og:updated_time" content="2017-04-19T17:15:48.977Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux互传文件之SCP使用">
-<meta name="twitter:description" content="Linux互相传输之SCP的使用#####1.从服务器上拉取目录
-   1scp -p 22 -r user@192.168.2.1:/data/www /data/www/
+<meta name="twitter:description" content="Linux互相传输之SCP的使用1.从服务器上拉取目录   1scp -p 22 -r user@192.168.2.1:/data/www /data/www/
 2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)1scp -r /data/www user@192.168.2.1:/data/www/
-3.使用ssh-keygen">
+3.使用ssh-keygen生成密钥和私">
 
 
 
@@ -393,8 +390,7 @@
       
 
       
-        <h3 id="Linux互相传输之SCP的使用"><a href="#Linux互相传输之SCP的使用" class="headerlink" title="Linux互相传输之SCP的使用"></a>Linux互相传输之SCP的使用</h3><p>#####1.从服务器上拉取目录</p>
-   <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -p 22 -r user@192.168.2.1:/data/www /data/www/</div></pre></td></tr></table></figure>
+        <h3 id="Linux互相传输之SCP的使用"><a href="#Linux互相传输之SCP的使用" class="headerlink" title="Linux互相传输之SCP的使用"></a>Linux互相传输之SCP的使用</h3><h5 id="1-从服务器上拉取目录"><a href="#1-从服务器上拉取目录" class="headerlink" title="1.从服务器上拉取目录"></a>1.从服务器上拉取目录</h5>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -p 22 -r user@192.168.2.1:/data/www /data/www/</div></pre></td></tr></table></figure>
 <h5 id="2-从本地上传目录-p为端口参数-port端口-默认端口可以省略-传输为目录需要-r-进行目录递归"><a href="#2-从本地上传目录-p为端口参数-port端口-默认端口可以省略-传输为目录需要-r-进行目录递归" class="headerlink" title="2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)"></a>2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r /data/www user@192.168.2.1:/data/www/</div></pre></td></tr></table></figure>
 <h5 id="3-使用ssh-keygen生成密钥和私钥文件-建立两台机器互相通信-可避免每次输入验证密码"><a href="#3-使用ssh-keygen生成密钥和私钥文件-建立两台机器互相通信-可避免每次输入验证密码" class="headerlink" title="3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码."></a>3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa  (生成在~/.ssh/目录下id_rsa.pub和id_rsa)</div></pre></td></tr></table></figure>
 <h5 id="4-将id-rsa-pub上传到目标服务器-ssh目录下-命名authorized-keys"><a href="#4-将id-rsa-pub上传到目标服务器-ssh目录下-命名authorized-keys" class="headerlink" title="4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys."></a>4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r /root/.ssh/id_rsa.pub user@serverip:/root/.ssh/authorized_keys</div></pre></td></tr></table></figure>
@@ -443,8 +439,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/23/crontab使用&SVN备份/" rel="next" title="Crontab使用之SVN备份">
-                <i class="fa fa-chevron-left"></i> Crontab使用之SVN备份
+              <a href="/2017/03/19/vsftpd/" rel="next" title="vsftp安装">
+                <i class="fa fa-chevron-left"></i> vsftp安装
               </a>
             
           </div>
@@ -453,8 +449,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/23/MySQL备份与恢复/" rel="prev" title="MySQL数据库备份恢复">
-                MySQL数据库备份恢复 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/23/crontab使用&SVN备份/" rel="prev" title="Crontab使用之SVN备份">
+                Crontab使用之SVN备份 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -586,7 +582,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux互相传输之SCP的使用"><span class="nav-number">1.</span> <span class="nav-text">Linux互相传输之SCP的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-从本地上传目录-p为端口参数-port端口-默认端口可以省略-传输为目录需要-r-进行目录递归"><span class="nav-number">1.0.1.</span> <span class="nav-text">2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-使用ssh-keygen生成密钥和私钥文件-建立两台机器互相通信-可避免每次输入验证密码"><span class="nav-number">1.0.2.</span> <span class="nav-text">3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-将id-rsa-pub上传到目标服务器-ssh目录下-命名authorized-keys"><span class="nav-number">1.0.3.</span> <span class="nav-text">4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-如果目标服务器上-已经存在了authorized-keys-就将id-rsa-pub中的内容追加到目标服务器的authorized-keys文件中"><span class="nav-number">1.0.4.</span> <span class="nav-text">5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中.</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux互相传输之SCP的使用"><span class="nav-number">1.</span> <span class="nav-text">Linux互相传输之SCP的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-从服务器上拉取目录"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.从服务器上拉取目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-从本地上传目录-p为端口参数-port端口-默认端口可以省略-传输为目录需要-r-进行目录递归"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-使用ssh-keygen生成密钥和私钥文件-建立两台机器互相通信-可避免每次输入验证密码"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-将id-rsa-pub上传到目标服务器-ssh目录下-命名authorized-keys"><span class="nav-number">1.0.4.</span> <span class="nav-text">4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-如果目标服务器上-已经存在了authorized-keys-就将id-rsa-pub中的内容追加到目标服务器的authorized-keys文件中"><span class="nav-number">1.0.5.</span> <span class="nav-text">5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中.</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

@@ -85,22 +85,19 @@
 
 
 
-<meta name="description" content="#####1.MySQL创建用户
-1create user &apos;username&apos;@&apos;%&apos; identified by &apos;passwd&apos;;   % 换成localhost或者127.0.0.1,就只能本地登录了.
-2.给用户授权123grant all privileges on databasename.tablename to &apos;username&apos;@&apos;hostname&apos; identified b">
+<meta name="description" content="1.MySQL创建用户1create user &apos;username&apos;@&apos;%&apos; identified by &apos;passwd&apos;;   % 换成localhost或者127.0.0.1,就只能本地登录了.
+2.给用户授权123grant all privileges on databasename.tablename to &apos;username&apos;@&apos;hostname&apos; identified by &apos;pas">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL常用语句">
 <meta property="og:url" content="http://cyocan.github.io/2017/04/20/mysql/index.html">
 <meta property="og:site_name" content="Cyoncan">
-<meta property="og:description" content="#####1.MySQL创建用户
-1create user &apos;username&apos;@&apos;%&apos; identified by &apos;passwd&apos;;   % 换成localhost或者127.0.0.1,就只能本地登录了.
-2.给用户授权123grant all privileges on databasename.tablename to &apos;username&apos;@&apos;hostname&apos; identified b">
-<meta property="og:updated_time" content="2017-04-19T16:26:34.601Z">
+<meta property="og:description" content="1.MySQL创建用户1create user &apos;username&apos;@&apos;%&apos; identified by &apos;passwd&apos;;   % 换成localhost或者127.0.0.1,就只能本地登录了.
+2.给用户授权123grant all privileges on databasename.tablename to &apos;username&apos;@&apos;hostname&apos; identified by &apos;pas">
+<meta property="og:updated_time" content="2017-04-19T17:12:43.082Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL常用语句">
-<meta name="twitter:description" content="#####1.MySQL创建用户
-1create user &apos;username&apos;@&apos;%&apos; identified by &apos;passwd&apos;;   % 换成localhost或者127.0.0.1,就只能本地登录了.
-2.给用户授权123grant all privileges on databasename.tablename to &apos;username&apos;@&apos;hostname&apos; identified b">
+<meta name="twitter:description" content="1.MySQL创建用户1create user &apos;username&apos;@&apos;%&apos; identified by &apos;passwd&apos;;   % 换成localhost或者127.0.0.1,就只能本地登录了.
+2.给用户授权123grant all privileges on databasename.tablename to &apos;username&apos;@&apos;hostname&apos; identified by &apos;pas">
 
 
 
@@ -390,11 +387,10 @@
       
 
       
-        <p>#####1.MySQL创建用户</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create user <span class="string">'username'</span>@<span class="string">'%'</span> identified by <span class="string">'passwd'</span>;   % 换成localhost或者127.0.0.1,就只能本地登录了.</div></pre></td></tr></table></figure>
+        <h5 id="1-MySQL创建用户"><a href="#1-MySQL创建用户" class="headerlink" title="1.MySQL创建用户"></a>1.MySQL创建用户</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create user <span class="string">'username'</span>@<span class="string">'%'</span> identified by <span class="string">'passwd'</span>;   % 换成localhost或者127.0.0.1,就只能本地登录了.</div></pre></td></tr></table></figure>
 <h5 id="2-给用户授权"><a href="#2-给用户授权" class="headerlink" title="2.给用户授权"></a>2.给用户授权</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">grant all privileges on databasename.tablename to <span class="string">'username'</span>@<span class="string">'hostname'</span> identified by <span class="string">'passwd'</span>with grant option;   all代表所有权限,withgrant option代表该用户可以给其他用户也进行授权操作.</div><div class="line">flush privileges;   授权完成,需要刷新生效.</div><div class="line">quit;</div></pre></td></tr></table></figure>
-<p>#####3.查看mysql有多少个账户<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select host,user,password from mysql.user;</div></pre></td></tr></table></figure></p>
-<p>#####4.查看MySQL字符集,排序规则<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">show variables like <span class="string">'collation%'</span>;</div><div class="line">show variables like <span class="string">'char%'</span>;</div></pre></td></tr></table></figure></p>
+<h5 id="3-查看mysql有多少个账户"><a href="#3-查看mysql有多少个账户" class="headerlink" title="3.查看mysql有多少个账户"></a>3.查看mysql有多少个账户</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select host,user,password from mysql.user;</div></pre></td></tr></table></figure>
+<h5 id="4-查看MySQL字符集-排序规则"><a href="#4-查看MySQL字符集-排序规则" class="headerlink" title="4.查看MySQL字符集,排序规则"></a>4.查看MySQL字符集,排序规则</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">show variables like <span class="string">'collation%'</span>;</div><div class="line">show variables like <span class="string">'char%'</span>;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -437,8 +433,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/20/zabbix搭建安装/" rel="next" title="zabbix安装配置">
-                <i class="fa fa-chevron-left"></i> zabbix安装配置
+              <a href="/2017/04/20/CentOS6防火墙之iptables/" rel="next" title="iptables����">
+                <i class="fa fa-chevron-left"></i> iptables����
               </a>
             
           </div>
@@ -576,7 +572,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-给用户授权"><span class="nav-number">1.</span> <span class="nav-text">2.给用户授权</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-MySQL创建用户"><span class="nav-number">1.</span> <span class="nav-text">1.MySQL创建用户</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-给用户授权"><span class="nav-number">2.</span> <span class="nav-text">2.给用户授权</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-查看mysql有多少个账户"><span class="nav-number">3.</span> <span class="nav-text">3.查看mysql有多少个账户</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-查看MySQL字符集-排序规则"><span class="nav-number">4.</span> <span class="nav-text">4.查看MySQL字符集,排序规则</span></a></li></ol></div>
             
 
           </div>

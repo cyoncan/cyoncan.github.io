@@ -85,19 +85,16 @@
 
 
 
-<meta name="description" content="#zabbix3.0监控MySQL设置
-1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)2.在zabbix/etc/下面新建.my.cnf文件1234567891011121314$ find / -name &quot;sock&quot; -print  /var/lib/mysql/mysql.sock$ vim /usr/local/zabbix/etc/.my.cnf  #zabbix">
+<meta name="description" content="zabbix3.0监控MySQL设置1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)2.在zabbix/etc/下面新建.my.cnf文件1234567891011121314$ find / -name &quot;sock&quot; -print  /var/lib/mysql/mysql.sock$ vim /usr/local/zabbix/etc/.my.cnf  #zabbix Ag">
 <meta property="og:type" content="article">
 <meta property="og:title" content="zabbix配置监控MySQL">
 <meta property="og:url" content="http://cyocan.github.io/2017/04/20/zabbix3.0监控MySQL/index.html">
 <meta property="og:site_name" content="Cyoncan">
-<meta property="og:description" content="#zabbix3.0监控MySQL设置
-1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)2.在zabbix/etc/下面新建.my.cnf文件1234567891011121314$ find / -name &quot;sock&quot; -print  /var/lib/mysql/mysql.sock$ vim /usr/local/zabbix/etc/.my.cnf  #zabbix">
-<meta property="og:updated_time" content="2017-04-19T16:33:08.080Z">
+<meta property="og:description" content="zabbix3.0监控MySQL设置1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)2.在zabbix/etc/下面新建.my.cnf文件1234567891011121314$ find / -name &quot;sock&quot; -print  /var/lib/mysql/mysql.sock$ vim /usr/local/zabbix/etc/.my.cnf  #zabbix Ag">
+<meta property="og:updated_time" content="2017-04-19T17:13:51.303Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zabbix配置监控MySQL">
-<meta name="twitter:description" content="#zabbix3.0监控MySQL设置
-1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)2.在zabbix/etc/下面新建.my.cnf文件1234567891011121314$ find / -name &quot;sock&quot; -print  /var/lib/mysql/mysql.sock$ vim /usr/local/zabbix/etc/.my.cnf  #zabbix">
+<meta name="twitter:description" content="zabbix3.0监控MySQL设置1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)2.在zabbix/etc/下面新建.my.cnf文件1234567891011121314$ find / -name &quot;sock&quot; -print  /var/lib/mysql/mysql.sock$ vim /usr/local/zabbix/etc/.my.cnf  #zabbix Ag">
 
 
 
@@ -387,8 +384,7 @@
       
 
       
-        <p>#zabbix3.0监控MySQL设置</p>
-<h3 id="1-Agent端建立一个登陆MySQL用户-步骤参考MySQL笔记"><a href="#1-Agent端建立一个登陆MySQL用户-步骤参考MySQL笔记" class="headerlink" title="1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)"></a>1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)</h3><h3 id="2-在zabbix-etc-下面新建-my-cnf文件"><a href="#2-在zabbix-etc-下面新建-my-cnf文件" class="headerlink" title="2.在zabbix/etc/下面新建.my.cnf文件"></a>2.在zabbix/etc/下面新建.my.cnf文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ find / -name <span class="string">"sock"</span> -print</div><div class="line">  /var/lib/mysql/mysql.sock</div><div class="line">$ vim /usr/<span class="built_in">local</span>/zabbix/etc/.my.cnf</div><div class="line">  <span class="comment">#zabbix Agent</span></div><div class="line">  [mysql]</div><div class="line">  host=localhost</div><div class="line">  user=zabbix</div><div class="line">  password=zabbix</div><div class="line">  socket=/var/lib/mysql/mysql.sock</div><div class="line">  [mysqladmin]</div><div class="line">  host=localhost</div><div class="line">  usr=zabbix</div><div class="line">  password=zabbix</div><div class="line">  socket=/var/lib/mysql/mysql.sock</div></pre></td></tr></table></figure>
+        <h1 id="zabbix3-0监控MySQL设置"><a href="#zabbix3-0监控MySQL设置" class="headerlink" title="zabbix3.0监控MySQL设置"></a>zabbix3.0监控MySQL设置</h1><h3 id="1-Agent端建立一个登陆MySQL用户-步骤参考MySQL笔记"><a href="#1-Agent端建立一个登陆MySQL用户-步骤参考MySQL笔记" class="headerlink" title="1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)"></a>1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)</h3><h3 id="2-在zabbix-etc-下面新建-my-cnf文件"><a href="#2-在zabbix-etc-下面新建-my-cnf文件" class="headerlink" title="2.在zabbix/etc/下面新建.my.cnf文件"></a>2.在zabbix/etc/下面新建.my.cnf文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ find / -name <span class="string">"sock"</span> -print</div><div class="line">  /var/lib/mysql/mysql.sock</div><div class="line">$ vim /usr/<span class="built_in">local</span>/zabbix/etc/.my.cnf</div><div class="line">  <span class="comment">#zabbix Agent</span></div><div class="line">  [mysql]</div><div class="line">  host=localhost</div><div class="line">  user=zabbix</div><div class="line">  password=zabbix</div><div class="line">  socket=/var/lib/mysql/mysql.sock</div><div class="line">  [mysqladmin]</div><div class="line">  host=localhost</div><div class="line">  usr=zabbix</div><div class="line">  password=zabbix</div><div class="line">  socket=/var/lib/mysql/mysql.sock</div></pre></td></tr></table></figure>
 <h3 id="3-编辑-userparameter-mysql-conf"><a href="#3-编辑-userparameter-mysql-conf" class="headerlink" title="3.编辑 userparameter_mysql.conf"></a>3.编辑 userparameter_mysql.conf</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ find / -name userparameter_mysql.conf</div><div class="line">/usr/<span class="built_in">local</span>/src/zabbix-3.0.8/conf/zabbix-agentd/userparameter_mysql.conf</div><div class="line">$ cp userparameter_mysql.conf /usr/<span class="built_in">local</span>/zabbix/etc/zabbix_agentd.conf.d/</div><div class="line">$ sed -i <span class="string">'s#/var/lib/zabbix#/usr/local/zabbix/etc#g'</span> 或者用 vim编辑该文件替换掉 home 目录为 .my.cnf 所在的目录</div><div class="line">$ vim /usr/<span class="built_in">local</span>/zabbix/etc/zabbix/zabbix.agentd.conf</div><div class="line">  添加一行</div><div class="line">  Include=/usr/<span class="built_in">local</span>/zabbix/etc/zabbix_agentd.conf.d/</div></pre></td></tr></table></figure>
 
       
@@ -434,8 +430,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/20/Linux命令/" rel="next" title="Linux常用命令">
-                <i class="fa fa-chevron-left"></i> Linux常用命令
+              <a href="/2017/04/20/xargs/" rel="next" title="理解xargs">
+                <i class="fa fa-chevron-left"></i> 理解xargs
               </a>
             
           </div>
@@ -444,8 +440,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/20/zabbix搭建安装/" rel="prev" title="zabbix安装配置">
-                zabbix安装配置 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/20/CentOS6防火墙之iptables/" rel="prev" title="iptables����">
+                iptables���� <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -577,7 +573,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Agent端建立一个登陆MySQL用户-步骤参考MySQL笔记"><span class="nav-number">1.</span> <span class="nav-text">1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-在zabbix-etc-下面新建-my-cnf文件"><span class="nav-number">2.</span> <span class="nav-text">2.在zabbix/etc/下面新建.my.cnf文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-编辑-userparameter-mysql-conf"><span class="nav-number">3.</span> <span class="nav-text">3.编辑 userparameter_mysql.conf</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#zabbix3-0监控MySQL设置"><span class="nav-number">1.</span> <span class="nav-text">zabbix3.0监控MySQL设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Agent端建立一个登陆MySQL用户-步骤参考MySQL笔记"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-在zabbix-etc-下面新建-my-cnf文件"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.在zabbix/etc/下面新建.my.cnf文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-编辑-userparameter-mysql-conf"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.编辑 userparameter_mysql.conf</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
