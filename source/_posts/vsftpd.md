@@ -8,7 +8,7 @@ tags:
 - vsftp
 ---
 
-### 安装(源码编译或者yum install)
+### 1.安装(源码编译或者yum install)
 
 ```bash
 $ yum -y install vsftpd
@@ -17,7 +17,7 @@ $ chkconfig vsftpd on
 $ yum install -y  db4 db4-utils (基于虚拟账户权限认证依赖)
 ```
 
-### 目录文件说明
+##### 目录文件说明
 
   /etc/vsftpd/vsftpd.conf              vsftpd的核心配置文件
   /etc/vsftpd/ftpusers                 用于指定哪些用户不能访问FTP服务器
@@ -31,7 +31,7 @@ _sftpd的虚拟用户采用单独的用户名/口令保存方式，与系统账�
 
 =======================================================================================
 
-### 创建虚拟用户账号和密码
+### 2.创建虚拟用户账号和密码
 
  (奇数行为用户名，偶数行为用户密码）
 
@@ -48,7 +48,7 @@ $ db_load -T -t hash -f /etc/vsftpd/virtual.users /etc/vsftpd/vsftpd.login.db
 $ chmod 600 /etc/vsftpd/vsftpd.login.db
 ```
 
-### 配置PAM信息
+### 3.配置PAM信息
 
 ```bash
 $ vim /etc/pam.d/vsftpd.pam
@@ -56,7 +56,7 @@ auth required /lib64/security/pam_userdb.so db=/etc/vsftpd/vsftpd.login
 account required /lib64/security/pam_userdb.so db=/etc/vsftpd/vsftpd.login
 ```
 
-###  配置vsftpd.conf
+###  4.配置vsftpd.conf
 
 ```bash
 $ cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.bak
@@ -81,7 +81,7 @@ $ vim /etc/vsftpd/vsftpd.conf
   tcp_wrappers=YES
 ```
 
-###  创建用户名的配置文件
+###  5.创建用户名的配置文件
 
 ```bash
 $ mkdir -p /etc/vsftpd/vsftpd_user_conf
@@ -101,22 +101,22 @@ $ vim ftpuser (ftpuser文件名就是上面创建虚拟用户名字)
 　local_max_rate=512000 (拥有全部权限)
 ```
 
-###  日常管理虚拟用户账号和密码
+###  6.日常管理虚拟用户账号和密码
 
-1. 1.修改文件
+###### i.修改文件
 
    ```bash
-   $ vi /etc/vsftpd/virtual.users
+$ vi /etc/vsftpd/virtual.users
    ```
 
-2. 2生成虚拟用户认证的db文件
+###### ii.生成虚拟用户认证的db文件
 
    ```bash
-   db_load -T -t hash -f /etc/vsftpd/virtual.users /etc/vsftpd/vsftpd.login.db
+db_load -T -t hash -f /etc/vsftpd/virtual.users /etc/vsftpd/vsftpd.login.db
    ```
 
-3. 3.重启ftp服务(能登录就不重启)
+###### iii.重启ftp服务(能登录就不重启)
 
    ```bash
-   service vsftpd restart
+service vsftpd restart
    ```
