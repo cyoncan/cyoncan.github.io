@@ -97,7 +97,7 @@
 2.清除预设表filter中使用者自定链中的规则1iptables -X
 3.设定预设规则123iptables -P INPUT DROPiptables -P OUTPUT ACCEPTiptables -P FORWARD DROP
 4.根据自己机器的实际情况开启相应端口1234567891011">
-<meta property="og:updated_time" content="2017-04-20T07:26:24.075Z">
+<meta property="og:updated_time" content="2017-04-20T11:37:17.916Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS6防火墙之配置iptables">
 <meta name="twitter:description" content="配置filter表防火墙1.清除预设表filter中的所有规则链的规则1iptables -F
@@ -373,8 +373,8 @@
 
           
             <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
             </span>
           
 
@@ -396,7 +396,7 @@
         <h1 id="配置filter表防火墙"><a href="#配置filter表防火墙" class="headerlink" title="配置filter表防火墙"></a>配置filter表防火墙</h1><h3 id="1-清除预设表filter中的所有规则链的规则"><a href="#1-清除预设表filter中的所有规则链的规则" class="headerlink" title="1.清除预设表filter中的所有规则链的规则"></a>1.清除预设表filter中的所有规则链的规则</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -F</div></pre></td></tr></table></figure>
 <h3 id="2-清除预设表filter中使用者自定链中的规则"><a href="#2-清除预设表filter中使用者自定链中的规则" class="headerlink" title="2.清除预设表filter中使用者自定链中的规则"></a>2.清除预设表filter中使用者自定链中的规则</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -X</div></pre></td></tr></table></figure>
 <h3 id="3-设定预设规则"><a href="#3-设定预设规则" class="headerlink" title="3.设定预设规则"></a>3.设定预设规则</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">iptables -P INPUT DROP</div><div class="line">iptables -P OUTPUT ACCEPT</div><div class="line">iptables -P FORWARD DROP</div></pre></td></tr></table></figure>
-<h3 id="4-根据自己机器的实际情况开启相应端口"><a href="#4-根据自己机器的实际情况开启相应端口" class="headerlink" title="4.根据自己机器的实际情况开启相应端口"></a>4.根据自己机器的实际情况开启相应端口</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#开启22端口,ssh才能登录.</span></div><div class="line">$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT</div><div class="line">或</div><div class="line">$ iptables -A INPUT -i eth1 <span class="_">-s</span> 192.168.2.100 -p tcp --dport 22 -j ACCEPT <span class="comment">#指定eth1网卡和192.168.2.100允许ssh登录</span></div><div class="line"><span class="comment">#允许ping(即icmp包通过)</span></div><div class="line">$ iptables -A INPUT -p icmp -j ACCEPT</div><div class="line"><span class="comment">#允许loopback</span></div><div class="line">$ iptables -A INPUT -i lo -j ACCEPT</div><div class="line"><span class="comment">#使ping域名可以得到回复</span></div><div class="line">$ iptables -A INPUT -p udp -m udp --dport 53 -j ACCEPT </div><div class="line">$ iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPT</div><div class="line">tip: 除了以上用命令去添加iptable规则,还可以 vim /etc/sysconfig/iptables</div></pre></td></tr></table></figure>
+<h3 id="4-根据自己机器的实际情况开启相应端口"><a href="#4-根据自己机器的实际情况开启相应端口" class="headerlink" title="4.根据自己机器的实际情况开启相应端口"></a>4.根据自己机器的实际情况开启相应端口</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#开启22端口,ssh才能登录.</span></div><div class="line">$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT</div><div class="line">或者</div><div class="line">$ iptables -A INPUT -i eth1 <span class="_">-s</span> 192.168.2.100 -p tcp --dport 22 -j ACCEPT <span class="comment">#指定eth1网卡和192.168.2.100允许ssh登录</span></div><div class="line"><span class="comment">#允许ping(即icmp包通过)</span></div><div class="line">$ iptables -A INPUT -p icmp -j ACCEPT</div><div class="line"><span class="comment">#允许loopback</span></div><div class="line">$ iptables -A INPUT -i lo -j ACCEPT</div><div class="line"><span class="comment">#使ping域名可以得到回复</span></div><div class="line">$ iptables -A INPUT -p udp -m udp --dport 53 -j ACCEPT </div><div class="line">$ iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPT</div><div class="line">tip: 除了以上用命令去添加iptable规则,还可以 vim /etc/sysconfig/iptables</div></pre></td></tr></table></figure>
 <h3 id="5-保存iptables配置"><a href="#5-保存iptables配置" class="headerlink" title="5.保存iptables配置"></a>5.保存iptables配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables save</div></pre></td></tr></table></figure>
 <h3 id="6-重启iptables服务"><a href="#6-重启iptables服务" class="headerlink" title="6.重启iptables服务"></a>6.重启iptables服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables restart</div></pre></td></tr></table></figure>
 <h3 id="7-查看iptables规则"><a href="#7-查看iptables规则" class="headerlink" title="7.查看iptables规则"></a>7.查看iptables规则</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -L -n</div></pre></td></tr></table></figure>
@@ -443,8 +443,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/20/zabbix搭建安装/" rel="next" title="zabbix安装配置">
-                <i class="fa fa-chevron-left"></i> zabbix安装配置
+              <a href="/2017/04/20/zabbix3.0监控MySQL/" rel="next" title="zabbix配置监控MySQL">
+                <i class="fa fa-chevron-left"></i> zabbix配置监控MySQL
               </a>
             
           </div>
@@ -636,11 +636,11 @@
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+    <span class="site-uv"><i class="fa fa-user">本站访客数</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
   
 
   
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+    <span class="site-pv"><i class="fa fa-eye">本站总访问量</i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
   
   
 </div>
