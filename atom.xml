@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cyoncan.github.io/"/>
-  <updated>2017-04-20T11:37:17.916Z</updated>
+  <updated>2017-04-19T17:12:43.082Z</updated>
   <id>http://cyoncan.github.io/</id>
   
   <author>
@@ -16,32 +16,28 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>CentOS6防火墙之配置iptables</title>
-    <link href="http://cyoncan.github.io/2017/04/20/CentOS6%E9%98%B2%E7%81%AB%E5%A2%99%E4%B9%8Biptables/"/>
-    <id>http://cyoncan.github.io/2017/04/20/CentOS6防火墙之iptables/</id>
+    <title>MySQL常用语句</title>
+    <link href="http://cyoncan.github.io/2017/04/20/mysql/"/>
+    <id>http://cyoncan.github.io/2017/04/20/mysql/</id>
     <published>2017-04-19T16:16:21.000Z</published>
-    <updated>2017-04-20T11:37:17.916Z</updated>
+    <updated>2017-04-19T17:12:43.082Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="配置filter表防火墙"><a href="#配置filter表防火墙" class="headerlink" title="配置filter表防火墙"></a>配置filter表防火墙</h1><h3 id="1-清除预设表filter中的所有规则链的规则"><a href="#1-清除预设表filter中的所有规则链的规则" class="headerlink" title="1.清除预设表filter中的所有规则链的规则"></a>1.清除预设表filter中的所有规则链的规则</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -F</div></pre></td></tr></table></figure>
-<h3 id="2-清除预设表filter中使用者自定链中的规则"><a href="#2-清除预设表filter中使用者自定链中的规则" class="headerlink" title="2.清除预设表filter中使用者自定链中的规则"></a>2.清除预设表filter中使用者自定链中的规则</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -X</div></pre></td></tr></table></figure>
-<h3 id="3-设定预设规则"><a href="#3-设定预设规则" class="headerlink" title="3.设定预设规则"></a>3.设定预设规则</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">iptables -P INPUT DROP</div><div class="line">iptables -P OUTPUT ACCEPT</div><div class="line">iptables -P FORWARD DROP</div></pre></td></tr></table></figure>
-<h3 id="4-根据自己机器的实际情况开启相应端口"><a href="#4-根据自己机器的实际情况开启相应端口" class="headerlink" title="4.根据自己机器的实际情况开启相应端口"></a>4.根据自己机器的实际情况开启相应端口</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#开启22端口,ssh才能登录.</span></div><div class="line">$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT</div><div class="line">或者</div><div class="line">$ iptables -A INPUT -i eth1 <span class="_">-s</span> 192.168.2.100 -p tcp --dport 22 -j ACCEPT <span class="comment">#指定eth1网卡和192.168.2.100允许ssh登录</span></div><div class="line"><span class="comment">#允许ping(即icmp包通过)</span></div><div class="line">$ iptables -A INPUT -p icmp -j ACCEPT</div><div class="line"><span class="comment">#允许loopback</span></div><div class="line">$ iptables -A INPUT -i lo -j ACCEPT</div><div class="line"><span class="comment">#使ping域名可以得到回复</span></div><div class="line">$ iptables -A INPUT -p udp -m udp --dport 53 -j ACCEPT </div><div class="line">$ iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPT</div><div class="line">tip: 除了以上用命令去添加iptable规则,还可以 vim /etc/sysconfig/iptables</div></pre></td></tr></table></figure>
-<h3 id="5-保存iptables配置"><a href="#5-保存iptables配置" class="headerlink" title="5.保存iptables配置"></a>5.保存iptables配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables save</div></pre></td></tr></table></figure>
-<h3 id="6-重启iptables服务"><a href="#6-重启iptables服务" class="headerlink" title="6.重启iptables服务"></a>6.重启iptables服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables restart</div></pre></td></tr></table></figure>
-<h3 id="7-查看iptables规则"><a href="#7-查看iptables规则" class="headerlink" title="7.查看iptables规则"></a>7.查看iptables规则</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -L -n</div></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h5 id="1-MySQL创建用户"><a href="#1-MySQL创建用户" class="headerlink" title="1.MySQL创建用户"></a>1.MySQL创建用户</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create user <span class="string">'username'</span>@<span class="string">'%'</span> identified by <span class="string">'passwd'</span>;   % 换成localhost或者127.0.0.1,就只能本地登录了.</div></pre></td></tr></table></figure>
+<h5 id="2-给用户授权"><a href="#2-给用户授权" class="headerlink" title="2.给用户授权"></a>2.给用户授权</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">grant all privileges on databasename.tablename to <span class="string">'username'</span>@<span class="string">'hostname'</span> identified by <span class="string">'passwd'</span>with grant option;   all代表所有权限,withgrant option代表该用户可以给其他用户也进行授权操作.</div><div class="line">flush privileges;   授权完成,需要刷新生效.</div><div class="line">quit;</div></pre></td></tr></table></figure>
+<h5 id="3-查看mysql有多少个账户"><a href="#3-查看mysql有多少个账户" class="headerlink" title="3.查看mysql有多少个账户"></a>3.查看mysql有多少个账户</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select host,user,password from mysql.user;</div></pre></td></tr></table></figure>
+<h5 id="4-查看MySQL字符集-排序规则"><a href="#4-查看MySQL字符集-排序规则" class="headerlink" title="4.查看MySQL字符集,排序规则"></a>4.查看MySQL字符集,排序规则</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">show variables like <span class="string">'collation%'</span>;</div><div class="line">show variables like <span class="string">'char%'</span>;</div></pre></td></tr></table></figure>
+]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;配置filter表防火墙&quot;&gt;&lt;a href=&quot;#配置filter表防火墙&quot; class=&quot;headerlink&quot; title=&quot;配置filter表防火墙&quot;&gt;&lt;/a&gt;配置filter表防火墙&lt;/h1&gt;&lt;h3 id=&quot;1-清除预设表filter中的所有规则链的规则&quot;&gt;
+      &lt;h5 id=&quot;1-MySQL创建用户&quot;&gt;&lt;a href=&quot;#1-MySQL创建用户&quot; class=&quot;headerlink&quot; title=&quot;1.MySQL创建用户&quot;&gt;&lt;/a&gt;1.MySQL创建用户&lt;/h5&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table
     
     </summary>
     
-      <category term="CentOS" scheme="http://cyoncan.github.io/categories/CentOS/"/>
+      <category term="MySQL" scheme="http://cyoncan.github.io/categories/MySQL/"/>
     
     
-      <category term="iptables" scheme="http://cyoncan.github.io/tags/iptables/"/>
-    
-      <category term="防火墙" scheme="http://cyoncan.github.io/tags/%E9%98%B2%E7%81%AB%E5%A2%99/"/>
+      <category term="mysql语句" scheme="http://cyoncan.github.io/tags/mysql%E8%AF%AD%E5%8F%A5/"/>
     
   </entry>
   
@@ -84,28 +80,32 @@
   </entry>
   
   <entry>
-    <title>zabbix配置监控MySQL</title>
-    <link href="http://cyoncan.github.io/2017/04/20/zabbix3.0%E7%9B%91%E6%8E%A7MySQL/"/>
-    <id>http://cyoncan.github.io/2017/04/20/zabbix3.0监控MySQL/</id>
+    <title>CentOS6防火墙之配置iptables</title>
+    <link href="http://cyoncan.github.io/2017/04/20/CentOS6%E9%98%B2%E7%81%AB%E5%A2%99%E4%B9%8Biptables/"/>
+    <id>http://cyoncan.github.io/2017/04/20/CentOS6防火墙之iptables/</id>
     <published>2017-04-19T16:16:21.000Z</published>
-    <updated>2017-04-19T17:13:51.303Z</updated>
+    <updated>2017-04-20T11:37:17.916Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="zabbix3-0监控MySQL设置"><a href="#zabbix3-0监控MySQL设置" class="headerlink" title="zabbix3.0监控MySQL设置"></a>zabbix3.0监控MySQL设置</h1><h3 id="1-Agent端建立一个登陆MySQL用户-步骤参考MySQL笔记"><a href="#1-Agent端建立一个登陆MySQL用户-步骤参考MySQL笔记" class="headerlink" title="1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)"></a>1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)</h3><h3 id="2-在zabbix-etc-下面新建-my-cnf文件"><a href="#2-在zabbix-etc-下面新建-my-cnf文件" class="headerlink" title="2.在zabbix/etc/下面新建.my.cnf文件"></a>2.在zabbix/etc/下面新建.my.cnf文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ find / -name <span class="string">"sock"</span> -print</div><div class="line">  /var/lib/mysql/mysql.sock</div><div class="line">$ vim /usr/<span class="built_in">local</span>/zabbix/etc/.my.cnf</div><div class="line">  <span class="comment">#zabbix Agent</span></div><div class="line">  [mysql]</div><div class="line">  host=localhost</div><div class="line">  user=zabbix</div><div class="line">  password=zabbix</div><div class="line">  socket=/var/lib/mysql/mysql.sock</div><div class="line">  [mysqladmin]</div><div class="line">  host=localhost</div><div class="line">  usr=zabbix</div><div class="line">  password=zabbix</div><div class="line">  socket=/var/lib/mysql/mysql.sock</div></pre></td></tr></table></figure>
-<h3 id="3-编辑-userparameter-mysql-conf"><a href="#3-编辑-userparameter-mysql-conf" class="headerlink" title="3.编辑 userparameter_mysql.conf"></a>3.编辑 userparameter_mysql.conf</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ find / -name userparameter_mysql.conf</div><div class="line">/usr/<span class="built_in">local</span>/src/zabbix-3.0.8/conf/zabbix-agentd/userparameter_mysql.conf</div><div class="line">$ cp userparameter_mysql.conf /usr/<span class="built_in">local</span>/zabbix/etc/zabbix_agentd.conf.d/</div><div class="line">$ sed -i <span class="string">'s#/var/lib/zabbix#/usr/local/zabbix/etc#g'</span> 或者用 vim编辑该文件替换掉 home 目录为 .my.cnf 所在的目录</div><div class="line">$ vim /usr/<span class="built_in">local</span>/zabbix/etc/zabbix/zabbix.agentd.conf</div><div class="line">  添加一行</div><div class="line">  Include=/usr/<span class="built_in">local</span>/zabbix/etc/zabbix_agentd.conf.d/</div></pre></td></tr></table></figure>
-]]></content>
+    <content type="html"><![CDATA[<h1 id="配置filter表防火墙"><a href="#配置filter表防火墙" class="headerlink" title="配置filter表防火墙"></a>配置filter表防火墙</h1><h3 id="1-清除预设表filter中的所有规则链的规则"><a href="#1-清除预设表filter中的所有规则链的规则" class="headerlink" title="1.清除预设表filter中的所有规则链的规则"></a>1.清除预设表filter中的所有规则链的规则</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -F</div></pre></td></tr></table></figure>
+<h3 id="2-清除预设表filter中使用者自定链中的规则"><a href="#2-清除预设表filter中使用者自定链中的规则" class="headerlink" title="2.清除预设表filter中使用者自定链中的规则"></a>2.清除预设表filter中使用者自定链中的规则</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -X</div></pre></td></tr></table></figure>
+<h3 id="3-设定预设规则"><a href="#3-设定预设规则" class="headerlink" title="3.设定预设规则"></a>3.设定预设规则</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">iptables -P INPUT DROP</div><div class="line">iptables -P OUTPUT ACCEPT</div><div class="line">iptables -P FORWARD DROP</div></pre></td></tr></table></figure>
+<h3 id="4-根据自己机器的实际情况开启相应端口"><a href="#4-根据自己机器的实际情况开启相应端口" class="headerlink" title="4.根据自己机器的实际情况开启相应端口"></a>4.根据自己机器的实际情况开启相应端口</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#开启22端口,ssh才能登录.</span></div><div class="line">$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT</div><div class="line">或者</div><div class="line">$ iptables -A INPUT -i eth1 <span class="_">-s</span> 192.168.2.100 -p tcp --dport 22 -j ACCEPT <span class="comment">#指定eth1网卡和192.168.2.100允许ssh登录</span></div><div class="line"><span class="comment">#允许ping(即icmp包通过)</span></div><div class="line">$ iptables -A INPUT -p icmp -j ACCEPT</div><div class="line"><span class="comment">#允许loopback</span></div><div class="line">$ iptables -A INPUT -i lo -j ACCEPT</div><div class="line"><span class="comment">#使ping域名可以得到回复</span></div><div class="line">$ iptables -A INPUT -p udp -m udp --dport 53 -j ACCEPT </div><div class="line">$ iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPT</div><div class="line">tip: 除了以上用命令去添加iptable规则,还可以 vim /etc/sysconfig/iptables</div></pre></td></tr></table></figure>
+<h3 id="5-保存iptables配置"><a href="#5-保存iptables配置" class="headerlink" title="5.保存iptables配置"></a>5.保存iptables配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables save</div></pre></td></tr></table></figure>
+<h3 id="6-重启iptables服务"><a href="#6-重启iptables服务" class="headerlink" title="6.重启iptables服务"></a>6.重启iptables服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables restart</div></pre></td></tr></table></figure>
+<h3 id="7-查看iptables规则"><a href="#7-查看iptables规则" class="headerlink" title="7.查看iptables规则"></a>7.查看iptables规则</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -L -n</div></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;zabbix3-0监控MySQL设置&quot;&gt;&lt;a href=&quot;#zabbix3-0监控MySQL设置&quot; class=&quot;headerlink&quot; title=&quot;zabbix3.0监控MySQL设置&quot;&gt;&lt;/a&gt;zabbix3.0监控MySQL设置&lt;/h1&gt;&lt;h3 id=&quot;1
+      &lt;h1 id=&quot;配置filter表防火墙&quot;&gt;&lt;a href=&quot;#配置filter表防火墙&quot; class=&quot;headerlink&quot; title=&quot;配置filter表防火墙&quot;&gt;&lt;/a&gt;配置filter表防火墙&lt;/h1&gt;&lt;h3 id=&quot;1-清除预设表filter中的所有规则链的规则&quot;&gt;
     
     </summary>
     
-      <category term="监控" scheme="http://cyoncan.github.io/categories/%E7%9B%91%E6%8E%A7/"/>
+      <category term="CentOS" scheme="http://cyoncan.github.io/categories/CentOS/"/>
     
     
-      <category term="mysql" scheme="http://cyoncan.github.io/tags/mysql/"/>
+      <category term="iptables" scheme="http://cyoncan.github.io/tags/iptables/"/>
     
-      <category term="zabbix" scheme="http://cyoncan.github.io/tags/zabbix/"/>
+      <category term="防火墙" scheme="http://cyoncan.github.io/tags/%E9%98%B2%E7%81%AB%E5%A2%99/"/>
     
   </entry>
   
@@ -143,6 +143,32 @@
     
     
       <category term="命令" scheme="http://cyoncan.github.io/tags/%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>zabbix配置监控MySQL</title>
+    <link href="http://cyoncan.github.io/2017/04/20/zabbix3.0%E7%9B%91%E6%8E%A7MySQL/"/>
+    <id>http://cyoncan.github.io/2017/04/20/zabbix3.0监控MySQL/</id>
+    <published>2017-04-19T16:16:21.000Z</published>
+    <updated>2017-04-19T17:13:51.303Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="zabbix3-0监控MySQL设置"><a href="#zabbix3-0监控MySQL设置" class="headerlink" title="zabbix3.0监控MySQL设置"></a>zabbix3.0监控MySQL设置</h1><h3 id="1-Agent端建立一个登陆MySQL用户-步骤参考MySQL笔记"><a href="#1-Agent端建立一个登陆MySQL用户-步骤参考MySQL笔记" class="headerlink" title="1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)"></a>1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)</h3><h3 id="2-在zabbix-etc-下面新建-my-cnf文件"><a href="#2-在zabbix-etc-下面新建-my-cnf文件" class="headerlink" title="2.在zabbix/etc/下面新建.my.cnf文件"></a>2.在zabbix/etc/下面新建.my.cnf文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ find / -name <span class="string">"sock"</span> -print</div><div class="line">  /var/lib/mysql/mysql.sock</div><div class="line">$ vim /usr/<span class="built_in">local</span>/zabbix/etc/.my.cnf</div><div class="line">  <span class="comment">#zabbix Agent</span></div><div class="line">  [mysql]</div><div class="line">  host=localhost</div><div class="line">  user=zabbix</div><div class="line">  password=zabbix</div><div class="line">  socket=/var/lib/mysql/mysql.sock</div><div class="line">  [mysqladmin]</div><div class="line">  host=localhost</div><div class="line">  usr=zabbix</div><div class="line">  password=zabbix</div><div class="line">  socket=/var/lib/mysql/mysql.sock</div></pre></td></tr></table></figure>
+<h3 id="3-编辑-userparameter-mysql-conf"><a href="#3-编辑-userparameter-mysql-conf" class="headerlink" title="3.编辑 userparameter_mysql.conf"></a>3.编辑 userparameter_mysql.conf</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ find / -name userparameter_mysql.conf</div><div class="line">/usr/<span class="built_in">local</span>/src/zabbix-3.0.8/conf/zabbix-agentd/userparameter_mysql.conf</div><div class="line">$ cp userparameter_mysql.conf /usr/<span class="built_in">local</span>/zabbix/etc/zabbix_agentd.conf.d/</div><div class="line">$ sed -i <span class="string">'s#/var/lib/zabbix#/usr/local/zabbix/etc#g'</span> 或者用 vim编辑该文件替换掉 home 目录为 .my.cnf 所在的目录</div><div class="line">$ vim /usr/<span class="built_in">local</span>/zabbix/etc/zabbix/zabbix.agentd.conf</div><div class="line">  添加一行</div><div class="line">  Include=/usr/<span class="built_in">local</span>/zabbix/etc/zabbix_agentd.conf.d/</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;zabbix3-0监控MySQL设置&quot;&gt;&lt;a href=&quot;#zabbix3-0监控MySQL设置&quot; class=&quot;headerlink&quot; title=&quot;zabbix3.0监控MySQL设置&quot;&gt;&lt;/a&gt;zabbix3.0监控MySQL设置&lt;/h1&gt;&lt;h3 id=&quot;1
+    
+    </summary>
+    
+      <category term="监控" scheme="http://cyoncan.github.io/categories/%E7%9B%91%E6%8E%A7/"/>
+    
+    
+      <category term="mysql" scheme="http://cyoncan.github.io/tags/mysql/"/>
+    
+      <category term="zabbix" scheme="http://cyoncan.github.io/tags/zabbix/"/>
     
   </entry>
   
@@ -194,32 +220,6 @@
     
     
       <category term="vim" scheme="http://cyoncan.github.io/tags/vim/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL常用语句</title>
-    <link href="http://cyoncan.github.io/2017/04/20/mysql/"/>
-    <id>http://cyoncan.github.io/2017/04/20/mysql/</id>
-    <published>2017-04-19T16:16:21.000Z</published>
-    <updated>2017-04-19T17:12:43.082Z</updated>
-    
-    <content type="html"><![CDATA[<h5 id="1-MySQL创建用户"><a href="#1-MySQL创建用户" class="headerlink" title="1.MySQL创建用户"></a>1.MySQL创建用户</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create user <span class="string">'username'</span>@<span class="string">'%'</span> identified by <span class="string">'passwd'</span>;   % 换成localhost或者127.0.0.1,就只能本地登录了.</div></pre></td></tr></table></figure>
-<h5 id="2-给用户授权"><a href="#2-给用户授权" class="headerlink" title="2.给用户授权"></a>2.给用户授权</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">grant all privileges on databasename.tablename to <span class="string">'username'</span>@<span class="string">'hostname'</span> identified by <span class="string">'passwd'</span>with grant option;   all代表所有权限,withgrant option代表该用户可以给其他用户也进行授权操作.</div><div class="line">flush privileges;   授权完成,需要刷新生效.</div><div class="line">quit;</div></pre></td></tr></table></figure>
-<h5 id="3-查看mysql有多少个账户"><a href="#3-查看mysql有多少个账户" class="headerlink" title="3.查看mysql有多少个账户"></a>3.查看mysql有多少个账户</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select host,user,password from mysql.user;</div></pre></td></tr></table></figure>
-<h5 id="4-查看MySQL字符集-排序规则"><a href="#4-查看MySQL字符集-排序规则" class="headerlink" title="4.查看MySQL字符集,排序规则"></a>4.查看MySQL字符集,排序规则</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">show variables like <span class="string">'collation%'</span>;</div><div class="line">show variables like <span class="string">'char%'</span>;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h5 id=&quot;1-MySQL创建用户&quot;&gt;&lt;a href=&quot;#1-MySQL创建用户&quot; class=&quot;headerlink&quot; title=&quot;1.MySQL创建用户&quot;&gt;&lt;/a&gt;1.MySQL创建用户&lt;/h5&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table
-    
-    </summary>
-    
-      <category term="MySQL" scheme="http://cyoncan.github.io/categories/MySQL/"/>
-    
-    
-      <category term="mysql语句" scheme="http://cyoncan.github.io/tags/mysql%E8%AF%AD%E5%8F%A5/"/>
     
   </entry>
   
@@ -313,31 +313,31 @@
   </entry>
   
   <entry>
-    <title>Linux查看网卡信息</title>
-    <link href="http://cyoncan.github.io/2017/03/23/CentOS%E7%BD%91%E5%8D%A1%E7%9B%B8%E5%85%B3/"/>
-    <id>http://cyoncan.github.io/2017/03/23/CentOS网卡相关/</id>
+    <title>Linux互传文件之SCP使用</title>
+    <link href="http://cyoncan.github.io/2017/03/23/Linux%E4%B9%8BSCP%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6/"/>
+    <id>http://cyoncan.github.io/2017/03/23/Linux之SCP互传文件/</id>
     <published>2017-03-23T14:16:21.000Z</published>
-    <updated>2017-04-19T15:32:37.802Z</updated>
+    <updated>2017-04-19T17:15:48.977Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="CentOS网卡相关信息查看"><a href="#CentOS网卡相关信息查看" class="headerlink" title="CentOS网卡相关信息查看"></a>CentOS网卡相关信息查看</h3><h5 id="1-首先安装工具-已安装请忽略"><a href="#1-首先安装工具-已安装请忽略" class="headerlink" title="1.首先安装工具,已安装请忽略."></a>1.首先安装工具,已安装请忽略.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yum install pciutiles</div></pre></td></tr></table></figure>
-<h5 id="2-查看网卡型号"><a href="#2-查看网卡型号" class="headerlink" title="2.查看网卡型号"></a>2.查看网卡型号</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ lspci | grep -i ethernet</div></pre></td></tr></table></figure>
-<h5 id="3-查看网卡驱动版本"><a href="#3-查看网卡驱动版本" class="headerlink" title="3.查看网卡驱动版本"></a>3.查看网卡驱动版本</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ethtool -i eth0</div></pre></td></tr></table></figure>
-<h5 id="4-网卡驱动安装"><a href="#4-网卡驱动安装" class="headerlink" title="4.网卡驱动安装"></a>4.网卡驱动安装</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ yum install kernel-devel kernel-headers  </div><div class="line">$ yum install gcc</div><div class="line">$ tar zxvf r1000.tgz</div><div class="line">$ <span class="built_in">cd</span> r1000/</div><div class="line">$ make clean modules</div><div class="line">$ make install</div><div class="line">$ modprobe r1000</div><div class="line">$ reboot</div><div class="line">$ lsmod | grep r1000 或者 ifconfig <span class="_">-a</span> 查看网卡eth0是否加载</div><div class="line">$ service network restart</div><div class="line">假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可.</div></pre></td></tr></table></figure>
-<p>​</p>
+    <content type="html"><![CDATA[<h3 id="Linux互相传输之SCP的使用"><a href="#Linux互相传输之SCP的使用" class="headerlink" title="Linux互相传输之SCP的使用"></a>Linux互相传输之SCP的使用</h3><h5 id="1-从服务器上拉取目录"><a href="#1-从服务器上拉取目录" class="headerlink" title="1.从服务器上拉取目录"></a>1.从服务器上拉取目录</h5>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -p 22 -r user@192.168.2.1:/data/www /data/www/</div></pre></td></tr></table></figure>
+<h5 id="2-从本地上传目录-p为端口参数-port端口-默认端口可以省略-传输为目录需要-r-进行目录递归"><a href="#2-从本地上传目录-p为端口参数-port端口-默认端口可以省略-传输为目录需要-r-进行目录递归" class="headerlink" title="2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)"></a>2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r /data/www user@192.168.2.1:/data/www/</div></pre></td></tr></table></figure>
+<h5 id="3-使用ssh-keygen生成密钥和私钥文件-建立两台机器互相通信-可避免每次输入验证密码"><a href="#3-使用ssh-keygen生成密钥和私钥文件-建立两台机器互相通信-可避免每次输入验证密码" class="headerlink" title="3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码."></a>3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa  (生成在~/.ssh/目录下id_rsa.pub和id_rsa)</div></pre></td></tr></table></figure>
+<h5 id="4-将id-rsa-pub上传到目标服务器-ssh目录下-命名authorized-keys"><a href="#4-将id-rsa-pub上传到目标服务器-ssh目录下-命名authorized-keys" class="headerlink" title="4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys."></a>4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r /root/.ssh/id_rsa.pub user@serverip:/root/.ssh/authorized_keys</div></pre></td></tr></table></figure>
+<h5 id="5-如果目标服务器上-已经存在了authorized-keys-就将id-rsa-pub中的内容追加到目标服务器的authorized-keys文件中"><a href="#5-如果目标服务器上-已经存在了authorized-keys-就将id-rsa-pub中的内容追加到目标服务器的authorized-keys文件中" class="headerlink" title="5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中."></a>5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /root/.ssh/id_rsa.pub | ssh user@serverip <span class="string">'cat &gt;&gt; /root/.ssh/authorized_keys'</span></div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;CentOS网卡相关信息查看&quot;&gt;&lt;a href=&quot;#CentOS网卡相关信息查看&quot; class=&quot;headerlink&quot; title=&quot;CentOS网卡相关信息查看&quot;&gt;&lt;/a&gt;CentOS网卡相关信息查看&lt;/h3&gt;&lt;h5 id=&quot;1-首先安装工具-已安装请忽略&quot;&gt;
+      &lt;h3 id=&quot;Linux互相传输之SCP的使用&quot;&gt;&lt;a href=&quot;#Linux互相传输之SCP的使用&quot; class=&quot;headerlink&quot; title=&quot;Linux互相传输之SCP的使用&quot;&gt;&lt;/a&gt;Linux互相传输之SCP的使用&lt;/h3&gt;&lt;h5 id=&quot;1-从服务器上拉取
     
     </summary>
     
-      <category term="系统硬件" scheme="http://cyoncan.github.io/categories/%E7%B3%BB%E7%BB%9F%E7%A1%AC%E4%BB%B6/"/>
+      <category term="系统命令" scheme="http://cyoncan.github.io/categories/%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="网卡" scheme="http://cyoncan.github.io/tags/%E7%BD%91%E5%8D%A1/"/>
+      <category term="文件互传" scheme="http://cyoncan.github.io/tags/%E6%96%87%E4%BB%B6%E4%BA%92%E4%BC%A0/"/>
     
-      <category term="驱动" scheme="http://cyoncan.github.io/tags/%E9%A9%B1%E5%8A%A8/"/>
+      <category term="scp" scheme="http://cyoncan.github.io/tags/scp/"/>
     
   </entry>
   
@@ -378,31 +378,31 @@
   </entry>
   
   <entry>
-    <title>Linux互传文件之SCP使用</title>
-    <link href="http://cyoncan.github.io/2017/03/23/Linux%E4%B9%8BSCP%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6/"/>
-    <id>http://cyoncan.github.io/2017/03/23/Linux之SCP互传文件/</id>
+    <title>Linux查看网卡信息</title>
+    <link href="http://cyoncan.github.io/2017/03/23/CentOS%E7%BD%91%E5%8D%A1%E7%9B%B8%E5%85%B3/"/>
+    <id>http://cyoncan.github.io/2017/03/23/CentOS网卡相关/</id>
     <published>2017-03-23T14:16:21.000Z</published>
-    <updated>2017-04-19T17:15:48.977Z</updated>
+    <updated>2017-04-19T15:32:37.802Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="Linux互相传输之SCP的使用"><a href="#Linux互相传输之SCP的使用" class="headerlink" title="Linux互相传输之SCP的使用"></a>Linux互相传输之SCP的使用</h3><h5 id="1-从服务器上拉取目录"><a href="#1-从服务器上拉取目录" class="headerlink" title="1.从服务器上拉取目录"></a>1.从服务器上拉取目录</h5>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -p 22 -r user@192.168.2.1:/data/www /data/www/</div></pre></td></tr></table></figure>
-<h5 id="2-从本地上传目录-p为端口参数-port端口-默认端口可以省略-传输为目录需要-r-进行目录递归"><a href="#2-从本地上传目录-p为端口参数-port端口-默认端口可以省略-传输为目录需要-r-进行目录递归" class="headerlink" title="2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)"></a>2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r /data/www user@192.168.2.1:/data/www/</div></pre></td></tr></table></figure>
-<h5 id="3-使用ssh-keygen生成密钥和私钥文件-建立两台机器互相通信-可避免每次输入验证密码"><a href="#3-使用ssh-keygen生成密钥和私钥文件-建立两台机器互相通信-可避免每次输入验证密码" class="headerlink" title="3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码."></a>3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa  (生成在~/.ssh/目录下id_rsa.pub和id_rsa)</div></pre></td></tr></table></figure>
-<h5 id="4-将id-rsa-pub上传到目标服务器-ssh目录下-命名authorized-keys"><a href="#4-将id-rsa-pub上传到目标服务器-ssh目录下-命名authorized-keys" class="headerlink" title="4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys."></a>4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r /root/.ssh/id_rsa.pub user@serverip:/root/.ssh/authorized_keys</div></pre></td></tr></table></figure>
-<h5 id="5-如果目标服务器上-已经存在了authorized-keys-就将id-rsa-pub中的内容追加到目标服务器的authorized-keys文件中"><a href="#5-如果目标服务器上-已经存在了authorized-keys-就将id-rsa-pub中的内容追加到目标服务器的authorized-keys文件中" class="headerlink" title="5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中."></a>5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /root/.ssh/id_rsa.pub | ssh user@serverip <span class="string">'cat &gt;&gt; /root/.ssh/authorized_keys'</span></div></pre></td></tr></table></figure>
+    <content type="html"><![CDATA[<h3 id="CentOS网卡相关信息查看"><a href="#CentOS网卡相关信息查看" class="headerlink" title="CentOS网卡相关信息查看"></a>CentOS网卡相关信息查看</h3><h5 id="1-首先安装工具-已安装请忽略"><a href="#1-首先安装工具-已安装请忽略" class="headerlink" title="1.首先安装工具,已安装请忽略."></a>1.首先安装工具,已安装请忽略.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yum install pciutiles</div></pre></td></tr></table></figure>
+<h5 id="2-查看网卡型号"><a href="#2-查看网卡型号" class="headerlink" title="2.查看网卡型号"></a>2.查看网卡型号</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ lspci | grep -i ethernet</div></pre></td></tr></table></figure>
+<h5 id="3-查看网卡驱动版本"><a href="#3-查看网卡驱动版本" class="headerlink" title="3.查看网卡驱动版本"></a>3.查看网卡驱动版本</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ethtool -i eth0</div></pre></td></tr></table></figure>
+<h5 id="4-网卡驱动安装"><a href="#4-网卡驱动安装" class="headerlink" title="4.网卡驱动安装"></a>4.网卡驱动安装</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ yum install kernel-devel kernel-headers  </div><div class="line">$ yum install gcc</div><div class="line">$ tar zxvf r1000.tgz</div><div class="line">$ <span class="built_in">cd</span> r1000/</div><div class="line">$ make clean modules</div><div class="line">$ make install</div><div class="line">$ modprobe r1000</div><div class="line">$ reboot</div><div class="line">$ lsmod | grep r1000 或者 ifconfig <span class="_">-a</span> 查看网卡eth0是否加载</div><div class="line">$ service network restart</div><div class="line">假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可.</div></pre></td></tr></table></figure>
+<p>​</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;Linux互相传输之SCP的使用&quot;&gt;&lt;a href=&quot;#Linux互相传输之SCP的使用&quot; class=&quot;headerlink&quot; title=&quot;Linux互相传输之SCP的使用&quot;&gt;&lt;/a&gt;Linux互相传输之SCP的使用&lt;/h3&gt;&lt;h5 id=&quot;1-从服务器上拉取
+      &lt;h3 id=&quot;CentOS网卡相关信息查看&quot;&gt;&lt;a href=&quot;#CentOS网卡相关信息查看&quot; class=&quot;headerlink&quot; title=&quot;CentOS网卡相关信息查看&quot;&gt;&lt;/a&gt;CentOS网卡相关信息查看&lt;/h3&gt;&lt;h5 id=&quot;1-首先安装工具-已安装请忽略&quot;&gt;
     
     </summary>
     
-      <category term="系统命令" scheme="http://cyoncan.github.io/categories/%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4/"/>
+      <category term="系统硬件" scheme="http://cyoncan.github.io/categories/%E7%B3%BB%E7%BB%9F%E7%A1%AC%E4%BB%B6/"/>
     
     
-      <category term="文件互传" scheme="http://cyoncan.github.io/tags/%E6%96%87%E4%BB%B6%E4%BA%92%E4%BC%A0/"/>
+      <category term="网卡" scheme="http://cyoncan.github.io/tags/%E7%BD%91%E5%8D%A1/"/>
     
-      <category term="scp" scheme="http://cyoncan.github.io/tags/scp/"/>
+      <category term="驱动" scheme="http://cyoncan.github.io/tags/%E9%A9%B1%E5%8A%A8/"/>
     
   </entry>
   

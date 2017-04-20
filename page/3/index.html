@@ -472,7 +472,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://cyoncan.github.io/2017/03/23/Linux之SCP互传文件/">
+    <link itemprop="mainEntityOfPage" href="http://cyoncan.github.io/2017/03/23/CentOS网卡相关/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cyoncan">
@@ -494,8 +494,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/23/Linux之SCP互传文件/" itemprop="url">
-                  Linux互传文件之SCP使用
+                <a class="post-title-link" href="/2017/03/23/CentOS网卡相关/" itemprop="url">
+                  Linux查看网卡信息
                 </a>
               
             
@@ -534,8 +534,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/系统命令/" itemprop="url" rel="index">
-                    <span itemprop="name">系统命令</span>
+                  <a href="/categories/系统硬件/" itemprop="url" rel="index">
+                    <span itemprop="name">系统硬件</span>
                   </a>
                 </span>
 
@@ -571,11 +571,11 @@
       
         
           
-            <h3 id="Linux互相传输之SCP的使用"><a href="#Linux互相传输之SCP的使用" class="headerlink" title="Linux互相传输之SCP的使用"></a>Linux互相传输之SCP的使用</h3><h5 id="1-从服务器上拉取目录"><a href="#1-从服务器上拉取目录" class="headerlink" title="1.从服务器上拉取目录"></a>1.从服务器上拉取目录</h5>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -p 22 -r user@192.168.2.1:/data/www /data/www/</div></pre></td></tr></table></figure>
-<h5 id="2-从本地上传目录-p为端口参数-port端口-默认端口可以省略-传输为目录需要-r-进行目录递归"><a href="#2-从本地上传目录-p为端口参数-port端口-默认端口可以省略-传输为目录需要-r-进行目录递归" class="headerlink" title="2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)"></a>2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r /data/www user@192.168.2.1:/data/www/</div></pre></td></tr></table></figure>
-<h5 id="3-使用ssh-keygen生成密钥和私钥文件-建立两台机器互相通信-可避免每次输入验证密码"><a href="#3-使用ssh-keygen生成密钥和私钥文件-建立两台机器互相通信-可避免每次输入验证密码" class="headerlink" title="3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码."></a>3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa  (生成在~/.ssh/目录下id_rsa.pub和id_rsa)</div></pre></td></tr></table></figure>
-<h5 id="4-将id-rsa-pub上传到目标服务器-ssh目录下-命名authorized-keys"><a href="#4-将id-rsa-pub上传到目标服务器-ssh目录下-命名authorized-keys" class="headerlink" title="4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys."></a>4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r /root/.ssh/id_rsa.pub user@serverip:/root/.ssh/authorized_keys</div></pre></td></tr></table></figure>
-<h5 id="5-如果目标服务器上-已经存在了authorized-keys-就将id-rsa-pub中的内容追加到目标服务器的authorized-keys文件中"><a href="#5-如果目标服务器上-已经存在了authorized-keys-就将id-rsa-pub中的内容追加到目标服务器的authorized-keys文件中" class="headerlink" title="5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中."></a>5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /root/.ssh/id_rsa.pub | ssh user@serverip <span class="string">'cat &gt;&gt; /root/.ssh/authorized_keys'</span></div></pre></td></tr></table></figure>
+            <h3 id="CentOS网卡相关信息查看"><a href="#CentOS网卡相关信息查看" class="headerlink" title="CentOS网卡相关信息查看"></a>CentOS网卡相关信息查看</h3><h5 id="1-首先安装工具-已安装请忽略"><a href="#1-首先安装工具-已安装请忽略" class="headerlink" title="1.首先安装工具,已安装请忽略."></a>1.首先安装工具,已安装请忽略.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yum install pciutiles</div></pre></td></tr></table></figure>
+<h5 id="2-查看网卡型号"><a href="#2-查看网卡型号" class="headerlink" title="2.查看网卡型号"></a>2.查看网卡型号</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ lspci | grep -i ethernet</div></pre></td></tr></table></figure>
+<h5 id="3-查看网卡驱动版本"><a href="#3-查看网卡驱动版本" class="headerlink" title="3.查看网卡驱动版本"></a>3.查看网卡驱动版本</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ethtool -i eth0</div></pre></td></tr></table></figure>
+<h5 id="4-网卡驱动安装"><a href="#4-网卡驱动安装" class="headerlink" title="4.网卡驱动安装"></a>4.网卡驱动安装</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ yum install kernel-devel kernel-headers  </div><div class="line">$ yum install gcc</div><div class="line">$ tar zxvf r1000.tgz</div><div class="line">$ <span class="built_in">cd</span> r1000/</div><div class="line">$ make clean modules</div><div class="line">$ make install</div><div class="line">$ modprobe r1000</div><div class="line">$ reboot</div><div class="line">$ lsmod | grep r1000 或者 ifconfig <span class="_">-a</span> 查看网卡eth0是否加载</div><div class="line">$ service network restart</div><div class="line">假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可.</div></pre></td></tr></table></figure>
+<p>​</p>
 
           
         
@@ -907,6 +907,14 @@
               
                 <li class="links-of-blogroll-item">
                   <a href="http://man.linuxde.net/" title="Linux命令大全" target="_blank">Linux命令大全</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://help.aliyun.com/product/25365.html?spm=5176.750001.2.1.TZYqqO" title="阿里云ECS文档" target="_blank">阿里云ECS文档</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.runoob.com/linux/linux-command-manual.html" title="菜鸟教程" target="_blank">菜鸟教程</a>
                 </li>
               
             </ul>

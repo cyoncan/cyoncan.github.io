@@ -318,6 +318,152 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://cyoncan.github.io/2017/04/20/xargs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cyoncan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cyoncan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/20/xargs/" itemprop="url">
+                  理解xargs
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T00:16:21+08:00">
+                2017-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/系统命令/" itemprop="url" rel="index">
+                    <span itemprop="name">系统命令</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="理解xargs命令工作和使用"><a href="#理解xargs命令工作和使用" class="headerlink" title="理解xargs命令工作和使用"></a>理解xargs命令工作和使用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">⚡ root@intelnet:$ xargs </div><div class="line">hello</div><div class="line">hello</div></pre></td></tr></table></figure>
+<p><em>工作形式: 从标准输入stdin读取数据,根据输入读取执行命令作为参数提供给它一次或多次.输入中的任何空白和空格均视为分隔符,空行被忽略.进入xargs ,进行数据输入, Ctrl+D告诉xargs结束输入任务,echo命令被自动执行,并且再次打印 hello.</em></p>
+<p><em>echo是xargs默认的执行命令,我们可以指定其它命令作为参数传递给xargs , 然后通过stdin传递要查询的文件和类型作为输入的名称.如下:</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">⚡ root@intelnet:$ xargs find -name</div><div class="line"> <span class="string">"*.log"</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://cyoncan.github.io/2017/04/20/vim/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -420,152 +566,6 @@
             <h1 id="Linux-vim常用命令"><a href="#Linux-vim常用命令" class="headerlink" title="Linux vim常用命令"></a>Linux vim常用命令</h1><h3 id="1-替换"><a href="#1-替换" class="headerlink" title="1.替换"></a>1.替换</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">:s/abc/efg/      替换当前行,第一个 abc 为 efg</div><div class="line">:s/abc/efg/g     替换当前行,所有   abc 为 efg</div><div class="line">:n,<span class="variable">$s</span>/xyz/org/   替换第 n 行开始到最后一行中每一行的第一个 xyz 为 org</div><div class="line">:n,<span class="variable">$s</span>/xyz/org/g  替换第 n 行开始到最后一行中每一行所有     xyz 为 org</div><div class="line"> n 为数字，若 n 为 . ，表示从当前行开始到最后一行</div><div class="line">:%s/xyz/org/     (等同于:g/xyz/s//org/)  替换每一行的第一个 xyz 为 org</div><div class="line">:%s/xyz/org/g   （等同于:g/xyz/s//org/g）替换每一行中所有   xyz 为 org</div></pre></td></tr></table></figure>
 <h3 id="2-vim执行：wq清楚屏幕上上一次编辑过的内容"><a href="#2-vim执行：wq清楚屏幕上上一次编辑过的内容" class="headerlink" title="2.vim执行：wq清楚屏幕上上一次编辑过的内容"></a>2.vim执行：wq清楚屏幕上上一次编辑过的内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vim退出后清屏,屏幕不显示之前编辑的内容.</div><div class="line">TERM=xterm; <span class="built_in">export</span> TERM</div></pre></td></tr></table></figure>
 <h3 id="3-删除全部"><a href="#3-删除全部" class="headerlink" title="3.删除全部"></a>3.删除全部</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:%d</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://cyoncan.github.io/2017/04/20/mysql/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Cyoncan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cyoncan">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/20/mysql/" itemprop="url">
-                  MySQL常用语句
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T00:16:21+08:00">
-                2017-04-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h5 id="1-MySQL创建用户"><a href="#1-MySQL创建用户" class="headerlink" title="1.MySQL创建用户"></a>1.MySQL创建用户</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create user <span class="string">'username'</span>@<span class="string">'%'</span> identified by <span class="string">'passwd'</span>;   % 换成localhost或者127.0.0.1,就只能本地登录了.</div></pre></td></tr></table></figure>
-<h5 id="2-给用户授权"><a href="#2-给用户授权" class="headerlink" title="2.给用户授权"></a>2.给用户授权</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">grant all privileges on databasename.tablename to <span class="string">'username'</span>@<span class="string">'hostname'</span> identified by <span class="string">'passwd'</span>with grant option;   all代表所有权限,withgrant option代表该用户可以给其他用户也进行授权操作.</div><div class="line">flush privileges;   授权完成,需要刷新生效.</div><div class="line">quit;</div></pre></td></tr></table></figure>
-<h5 id="3-查看mysql有多少个账户"><a href="#3-查看mysql有多少个账户" class="headerlink" title="3.查看mysql有多少个账户"></a>3.查看mysql有多少个账户</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select host,user,password from mysql.user;</div></pre></td></tr></table></figure>
-<h5 id="4-查看MySQL字符集-排序规则"><a href="#4-查看MySQL字符集-排序规则" class="headerlink" title="4.查看MySQL字符集,排序规则"></a>4.查看MySQL字符集,排序规则</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">show variables like <span class="string">'collation%'</span>;</div><div class="line">show variables like <span class="string">'char%'</span>;</div></pre></td></tr></table></figure>
 
           
         
@@ -926,7 +926,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://cyoncan.github.io/2017/03/23/CentOS网卡相关/">
+    <link itemprop="mainEntityOfPage" href="http://cyoncan.github.io/2017/03/23/Linux之SCP互传文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cyoncan">
@@ -948,8 +948,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/23/CentOS网卡相关/" itemprop="url">
-                  Linux查看网卡信息
+                <a class="post-title-link" href="/2017/03/23/Linux之SCP互传文件/" itemprop="url">
+                  Linux互传文件之SCP使用
                 </a>
               
             
@@ -988,8 +988,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/系统硬件/" itemprop="url" rel="index">
-                    <span itemprop="name">系统硬件</span>
+                  <a href="/categories/系统命令/" itemprop="url" rel="index">
+                    <span itemprop="name">系统命令</span>
                   </a>
                 </span>
 
@@ -1025,11 +1025,11 @@
       
         
           
-            <h3 id="CentOS网卡相关信息查看"><a href="#CentOS网卡相关信息查看" class="headerlink" title="CentOS网卡相关信息查看"></a>CentOS网卡相关信息查看</h3><h5 id="1-首先安装工具-已安装请忽略"><a href="#1-首先安装工具-已安装请忽略" class="headerlink" title="1.首先安装工具,已安装请忽略."></a>1.首先安装工具,已安装请忽略.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yum install pciutiles</div></pre></td></tr></table></figure>
-<h5 id="2-查看网卡型号"><a href="#2-查看网卡型号" class="headerlink" title="2.查看网卡型号"></a>2.查看网卡型号</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ lspci | grep -i ethernet</div></pre></td></tr></table></figure>
-<h5 id="3-查看网卡驱动版本"><a href="#3-查看网卡驱动版本" class="headerlink" title="3.查看网卡驱动版本"></a>3.查看网卡驱动版本</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ethtool -i eth0</div></pre></td></tr></table></figure>
-<h5 id="4-网卡驱动安装"><a href="#4-网卡驱动安装" class="headerlink" title="4.网卡驱动安装"></a>4.网卡驱动安装</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ yum install kernel-devel kernel-headers  </div><div class="line">$ yum install gcc</div><div class="line">$ tar zxvf r1000.tgz</div><div class="line">$ <span class="built_in">cd</span> r1000/</div><div class="line">$ make clean modules</div><div class="line">$ make install</div><div class="line">$ modprobe r1000</div><div class="line">$ reboot</div><div class="line">$ lsmod | grep r1000 或者 ifconfig <span class="_">-a</span> 查看网卡eth0是否加载</div><div class="line">$ service network restart</div><div class="line">假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可.</div></pre></td></tr></table></figure>
-<p>​</p>
+            <h3 id="Linux互相传输之SCP的使用"><a href="#Linux互相传输之SCP的使用" class="headerlink" title="Linux互相传输之SCP的使用"></a>Linux互相传输之SCP的使用</h3><h5 id="1-从服务器上拉取目录"><a href="#1-从服务器上拉取目录" class="headerlink" title="1.从服务器上拉取目录"></a>1.从服务器上拉取目录</h5>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -p 22 -r user@192.168.2.1:/data/www /data/www/</div></pre></td></tr></table></figure>
+<h5 id="2-从本地上传目录-p为端口参数-port端口-默认端口可以省略-传输为目录需要-r-进行目录递归"><a href="#2-从本地上传目录-p为端口参数-port端口-默认端口可以省略-传输为目录需要-r-进行目录递归" class="headerlink" title="2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)"></a>2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r /data/www user@192.168.2.1:/data/www/</div></pre></td></tr></table></figure>
+<h5 id="3-使用ssh-keygen生成密钥和私钥文件-建立两台机器互相通信-可避免每次输入验证密码"><a href="#3-使用ssh-keygen生成密钥和私钥文件-建立两台机器互相通信-可避免每次输入验证密码" class="headerlink" title="3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码."></a>3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa  (生成在~/.ssh/目录下id_rsa.pub和id_rsa)</div></pre></td></tr></table></figure>
+<h5 id="4-将id-rsa-pub上传到目标服务器-ssh目录下-命名authorized-keys"><a href="#4-将id-rsa-pub上传到目标服务器-ssh目录下-命名authorized-keys" class="headerlink" title="4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys."></a>4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r /root/.ssh/id_rsa.pub user@serverip:/root/.ssh/authorized_keys</div></pre></td></tr></table></figure>
+<h5 id="5-如果目标服务器上-已经存在了authorized-keys-就将id-rsa-pub中的内容追加到目标服务器的authorized-keys文件中"><a href="#5-如果目标服务器上-已经存在了authorized-keys-就将id-rsa-pub中的内容追加到目标服务器的authorized-keys文件中" class="headerlink" title="5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中."></a>5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中.</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /root/.ssh/id_rsa.pub | ssh user@serverip <span class="string">'cat &gt;&gt; /root/.ssh/authorized_keys'</span></div></pre></td></tr></table></figure>
 
           
         
@@ -1197,6 +1197,14 @@
               
                 <li class="links-of-blogroll-item">
                   <a href="http://man.linuxde.net/" title="Linux命令大全" target="_blank">Linux命令大全</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://help.aliyun.com/product/25365.html?spm=5176.750001.2.1.TZYqqO" title="阿里云ECS文档" target="_blank">阿里云ECS文档</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.runoob.com/linux/linux-command-manual.html" title="菜鸟教程" target="_blank">菜鸟教程</a>
                 </li>
               
             </ul>
