@@ -34,7 +34,7 @@ iptables -P FORWARD DROP
 ```bash
 #开启22端口,ssh才能登录.
 $ iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-或
+或者
 $ iptables -A INPUT -i eth1 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT #指定eth1网卡和192.168.2.100允许ssh登录
 #允许ping(即icmp包通过)
 $ iptables -A INPUT -p icmp -j ACCEPT

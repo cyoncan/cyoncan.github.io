@@ -5,14 +5,14 @@
 # Site
 title: Cyoncan
 subtitle: Linux Server
-description: Linux Great
+description: 一切皆文件,所见即所得
 author: Cyoncan
 language: zh-Hans
 timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://cyocan.github.io
+url: http://cyoncan.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -77,3 +77,14 @@ search:
   field: post
   format: html
   limit: 10000
+
+index_generator:
+  per_page: 5
+
+archive_generator:
+  per_page: 20
+  yearly: true
+  monthly: true
+
+tag_generator:
+  per_page: 10
