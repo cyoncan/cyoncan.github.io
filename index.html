@@ -276,6 +276,152 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/04/20/mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cyoncan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cyoncan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/20/mysql/" itemprop="url">
+                  MySQL常用语句
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T00:16:21+08:00">
+                2017-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h5 id="1-MySQL创建用户"><a href="#1-MySQL创建用户" class="headerlink" title="1.MySQL创建用户"></a>1.MySQL创建用户</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create user <span class="string">'username'</span>@<span class="string">'%'</span> identified by <span class="string">'passwd'</span>;   % 换成localhost或者127.0.0.1,就只能本地登录了.</div></pre></td></tr></table></figure>
+<h5 id="2-给用户授权"><a href="#2-给用户授权" class="headerlink" title="2.给用户授权"></a>2.给用户授权</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">grant all privileges on databasename.tablename to <span class="string">'username'</span>@<span class="string">'hostname'</span> identified by <span class="string">'passwd'</span>with grant option;   all代表所有权限,withgrant option代表该用户可以给其他用户也进行授权操作.</div><div class="line">flush privileges;   授权完成,需要刷新生效.</div><div class="line">quit;</div></pre></td></tr></table></figure>
+<h5 id="3-查看mysql有多少个账户"><a href="#3-查看mysql有多少个账户" class="headerlink" title="3.查看mysql有多少个账户"></a>3.查看mysql有多少个账户</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select host,user,password from mysql.user;</div></pre></td></tr></table></figure>
+<h5 id="4-查看MySQL字符集-排序规则"><a href="#4-查看MySQL字符集-排序规则" class="headerlink" title="4.查看MySQL字符集,排序规则"></a>4.查看MySQL字符集,排序规则</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">show variables like <span class="string">'collation%'</span>;</div><div class="line">show variables like <span class="string">'char%'</span>;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/04/20/CentOS6防火墙之iptables/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -299,7 +445,7 @@
               
                 
                 <a class="post-title-link" href="/2017/04/20/CentOS6防火墙之iptables/" itemprop="url">
-                  未命名
+                  CentOS6防火墙之配置iptables
                 </a>
               
             
@@ -315,7 +461,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T15:19:43+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T00:16:21+08:00">
                 2017-04-20
               </time>
             
@@ -325,6 +471,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CentOS/" itemprop="url" rel="index">
+                    <span itemprop="name">CentOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -515,150 +683,6 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">./configure --prefix=/usr/<span class="built_in">local</span>/zabbix --enable-agent --with-openssl</div><div class="line">make install</div><div class="line">其它的设置和前面的安装配置一样,zabbix_agentd.conf </div><div class="line">Server=Serverip</div><div class="line">ServerActive=Serverip</div><div class="line">Hostname=自定义zabbix客户端hostname,不要和server端配置的hostname一样.</div><div class="line">tip:将10050,10051端口添加到防火墙,server端也是.agent端需要启动zabbix_agentd服务</div></pre></td></tr></table></figure>
 <h5 id="9-客户端和服务端使用加密传输"><a href="#9-客户端和服务端使用加密传输" class="headerlink" title="9.客户端和服务端使用加密传输"></a>9.客户端和服务端使用加密传输</h5><h6 id="i-使用psk共享密钥加密"><a href="#i-使用psk共享密钥加密" class="headerlink" title="i. 使用psk共享密钥加密"></a>i. 使用psk共享密钥加密</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Generating PSK在客户端操作</div><div class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/zabbix/</div><div class="line">$ openssl rand -hex 32 -out zabbix_agentd.psk</div><div class="line">$ chown zabbix:zabbix zabbix_agentd.psk</div><div class="line">$ vim /etc/zabbix_agentd.conf</div><div class="line">  TLSConnect=psk</div><div class="line">  TLSAccept=psk</div><div class="line">  TLSPSKFile=/home/zabbix/zabbix_agentd.psk</div><div class="line">  TLSPSKIdentity=PSK 001</div><div class="line"> service zabbix_agentd restart</div><div class="line"> 回到server机器,在host机器加密那里选择psk,填入信息.</div></pre></td></tr></table></figure>
 <h6 id="ii-使用证书加密"><a href="#ii-使用证书加密" class="headerlink" title="ii. 使用证书加密"></a>ii. 使用证书加密</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">$ mkdir -p /data/<span class="built_in">local</span>/zabbix/zabbix_crt</div><div class="line">$ <span class="built_in">cd</span> zabbix_crt/</div><div class="line"><span class="comment">#生成ca私钥</span></div><div class="line">$ openssl genrsa -aes 2048 -out ca.key   需要输入给私钥加密的密码</div><div class="line"><span class="comment">#使用ca私钥建立ca证书</span></div><div class="line">$ openssl req -new -x509 -nodes -days 1000 -key ca.key -subj /CN=ServerIPorDomainName\ CA/OU=Development\ group/O=Zabbix\ SIA/DC=zabbix/DC=com &gt; ca.crt</div><div class="line"><span class="comment">#生成服务器csr证书请求文件</span></div><div class="line">$ openssl req -newkey rsa:2048 -days 1000 -nodes -keyout server.key -subj /CN=ServerIPorDomainName/OU=Development\ group/O=Zabbix\ SIA/DC=zabbix/DC=com &gt; server.csr</div><div class="line"><span class="comment">#使用ca证书与私钥签发服务器证书</span></div><div class="line">$ openssl x509 -req -in server.csr -days 1000 -CA ca.crt -CAkey ca.key -set_serial 01 &gt; server.crt</div><div class="line"><span class="comment">#生成客户端csr证书请求文件</span></div><div class="line">$ openssl req -newkey rsa:2048 -days 1000 -nodes -keyout client.key -subj /CN=client/OU=Development\ group/O=Zabbix\ SIA/DC=zabbix/DC=com &gt; client.csr</div><div class="line"><span class="comment">#使用ca证书与私钥签发客户端证书</span></div><div class="line">$ openssl x509 -req -in client.csr -days 1000 -CA ca.crt -CAkey ca.key -set_serial 01 &gt; client.crt</div><div class="line"></div><div class="line">服务端文件位置可以不改变,用scp命令将刚刚生成的客户端需要文件上传到客户端自定义的文件夹 /usr/<span class="built_in">local</span>/zabbix/zabbix_crt/</div><div class="line"></div><div class="line">服务端: ca.crt , server.crt , server.crt</div><div class="line">vim /data/<span class="built_in">local</span>/zabbix/etc/zabbix_server.conf</div><div class="line">TLSCAFile=/data/<span class="built_in">local</span>/zabbix/zabbix_crt/ca.crt</div><div class="line">TLSCertFile=/usr/<span class="built_in">local</span>/zabbix/zabbix_crt/server.crt</div><div class="line">TLSKeyFile=/usr/<span class="built_in">local</span>/zabbix/zabbix_crt/server.key</div><div class="line"></div><div class="line">客户端: ca.crt , client.crt , client.crt</div><div class="line">TLSConnect=cert</div><div class="line">TLSAccept=cert</div><div class="line">TLSCAFile=/usr/<span class="built_in">local</span>/zabbix/zabbix_crt/ca.crt</div><div class="line">TLSCertFile=/usr/<span class="built_in">local</span>/zabbix/zabbix_crt/client.crt</div><div class="line">TLSKeyFile=/usr/<span class="built_in">local</span>/zabbix/zabbix_crt/client.key</div><div class="line"></div><div class="line">进入webui configuration/hosts/打开相应的主机/双向都可以选certificate</div><div class="line">重启zabbix_server和zabbix_agent,再进去看cert是否变蓝色,有延迟几十秒.</div><div class="line">我记录的文档可能有些不全,希望大家遇到问题多分析日志,去网上搜索遇到的错误信息.</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/04/20/zabbix3.0监控MySQL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Cyoncan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cyoncan">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/20/zabbix3.0监控MySQL/" itemprop="url">
-                  zabbix配置监控MySQL
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T00:16:21+08:00">
-                2017-04-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/监控/" itemprop="url" rel="index">
-                    <span itemprop="name">监控</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="zabbix3-0监控MySQL设置"><a href="#zabbix3-0监控MySQL设置" class="headerlink" title="zabbix3.0监控MySQL设置"></a>zabbix3.0监控MySQL设置</h1><h3 id="1-Agent端建立一个登陆MySQL用户-步骤参考MySQL笔记"><a href="#1-Agent端建立一个登陆MySQL用户-步骤参考MySQL笔记" class="headerlink" title="1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)"></a>1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)</h3><h3 id="2-在zabbix-etc-下面新建-my-cnf文件"><a href="#2-在zabbix-etc-下面新建-my-cnf文件" class="headerlink" title="2.在zabbix/etc/下面新建.my.cnf文件"></a>2.在zabbix/etc/下面新建.my.cnf文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ find / -name <span class="string">"sock"</span> -print</div><div class="line">  /var/lib/mysql/mysql.sock</div><div class="line">$ vim /usr/<span class="built_in">local</span>/zabbix/etc/.my.cnf</div><div class="line">  <span class="comment">#zabbix Agent</span></div><div class="line">  [mysql]</div><div class="line">  host=localhost</div><div class="line">  user=zabbix</div><div class="line">  password=zabbix</div><div class="line">  socket=/var/lib/mysql/mysql.sock</div><div class="line">  [mysqladmin]</div><div class="line">  host=localhost</div><div class="line">  usr=zabbix</div><div class="line">  password=zabbix</div><div class="line">  socket=/var/lib/mysql/mysql.sock</div></pre></td></tr></table></figure>
-<h3 id="3-编辑-userparameter-mysql-conf"><a href="#3-编辑-userparameter-mysql-conf" class="headerlink" title="3.编辑 userparameter_mysql.conf"></a>3.编辑 userparameter_mysql.conf</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ find / -name userparameter_mysql.conf</div><div class="line">/usr/<span class="built_in">local</span>/src/zabbix-3.0.8/conf/zabbix-agentd/userparameter_mysql.conf</div><div class="line">$ cp userparameter_mysql.conf /usr/<span class="built_in">local</span>/zabbix/etc/zabbix_agentd.conf.d/</div><div class="line">$ sed -i <span class="string">'s#/var/lib/zabbix#/usr/local/zabbix/etc#g'</span> 或者用 vim编辑该文件替换掉 home 目录为 .my.cnf 所在的目录</div><div class="line">$ vim /usr/<span class="built_in">local</span>/zabbix/etc/zabbix/zabbix.agentd.conf</div><div class="line">  添加一行</div><div class="line">  Include=/usr/<span class="built_in">local</span>/zabbix/etc/zabbix_agentd.conf.d/</div></pre></td></tr></table></figure>
 
           
         
@@ -1150,7 +1174,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/04/20/mysql/">
+    <link itemprop="mainEntityOfPage" href="http://cyocan.github.io/2017/04/20/zabbix3.0监控MySQL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cyoncan">
@@ -1172,8 +1196,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/20/mysql/" itemprop="url">
-                  MySQL常用语句
+                <a class="post-title-link" href="/2017/04/20/zabbix3.0监控MySQL/" itemprop="url">
+                  zabbix配置监控MySQL
                 </a>
               
             
@@ -1212,8 +1236,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
+                  <a href="/categories/监控/" itemprop="url" rel="index">
+                    <span itemprop="name">监控</span>
                   </a>
                 </span>
 
@@ -1249,10 +1273,8 @@
       
         
           
-            <h5 id="1-MySQL创建用户"><a href="#1-MySQL创建用户" class="headerlink" title="1.MySQL创建用户"></a>1.MySQL创建用户</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create user <span class="string">'username'</span>@<span class="string">'%'</span> identified by <span class="string">'passwd'</span>;   % 换成localhost或者127.0.0.1,就只能本地登录了.</div></pre></td></tr></table></figure>
-<h5 id="2-给用户授权"><a href="#2-给用户授权" class="headerlink" title="2.给用户授权"></a>2.给用户授权</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">grant all privileges on databasename.tablename to <span class="string">'username'</span>@<span class="string">'hostname'</span> identified by <span class="string">'passwd'</span>with grant option;   all代表所有权限,withgrant option代表该用户可以给其他用户也进行授权操作.</div><div class="line">flush privileges;   授权完成,需要刷新生效.</div><div class="line">quit;</div></pre></td></tr></table></figure>
-<h5 id="3-查看mysql有多少个账户"><a href="#3-查看mysql有多少个账户" class="headerlink" title="3.查看mysql有多少个账户"></a>3.查看mysql有多少个账户</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select host,user,password from mysql.user;</div></pre></td></tr></table></figure>
-<h5 id="4-查看MySQL字符集-排序规则"><a href="#4-查看MySQL字符集-排序规则" class="headerlink" title="4.查看MySQL字符集,排序规则"></a>4.查看MySQL字符集,排序规则</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">show variables like <span class="string">'collation%'</span>;</div><div class="line">show variables like <span class="string">'char%'</span>;</div></pre></td></tr></table></figure>
+            <h1 id="zabbix3-0监控MySQL设置"><a href="#zabbix3-0监控MySQL设置" class="headerlink" title="zabbix3.0监控MySQL设置"></a>zabbix3.0监控MySQL设置</h1><h3 id="1-Agent端建立一个登陆MySQL用户-步骤参考MySQL笔记"><a href="#1-Agent端建立一个登陆MySQL用户-步骤参考MySQL笔记" class="headerlink" title="1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)"></a>1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)</h3><h3 id="2-在zabbix-etc-下面新建-my-cnf文件"><a href="#2-在zabbix-etc-下面新建-my-cnf文件" class="headerlink" title="2.在zabbix/etc/下面新建.my.cnf文件"></a>2.在zabbix/etc/下面新建.my.cnf文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ find / -name <span class="string">"sock"</span> -print</div><div class="line">  /var/lib/mysql/mysql.sock</div><div class="line">$ vim /usr/<span class="built_in">local</span>/zabbix/etc/.my.cnf</div><div class="line">  <span class="comment">#zabbix Agent</span></div><div class="line">  [mysql]</div><div class="line">  host=localhost</div><div class="line">  user=zabbix</div><div class="line">  password=zabbix</div><div class="line">  socket=/var/lib/mysql/mysql.sock</div><div class="line">  [mysqladmin]</div><div class="line">  host=localhost</div><div class="line">  usr=zabbix</div><div class="line">  password=zabbix</div><div class="line">  socket=/var/lib/mysql/mysql.sock</div></pre></td></tr></table></figure>
+<h3 id="3-编辑-userparameter-mysql-conf"><a href="#3-编辑-userparameter-mysql-conf" class="headerlink" title="3.编辑 userparameter_mysql.conf"></a>3.编辑 userparameter_mysql.conf</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ find / -name userparameter_mysql.conf</div><div class="line">/usr/<span class="built_in">local</span>/src/zabbix-3.0.8/conf/zabbix-agentd/userparameter_mysql.conf</div><div class="line">$ cp userparameter_mysql.conf /usr/<span class="built_in">local</span>/zabbix/etc/zabbix_agentd.conf.d/</div><div class="line">$ sed -i <span class="string">'s#/var/lib/zabbix#/usr/local/zabbix/etc#g'</span> 或者用 vim编辑该文件替换掉 home 目录为 .my.cnf 所在的目录</div><div class="line">$ vim /usr/<span class="built_in">local</span>/zabbix/etc/zabbix/zabbix.agentd.conf</div><div class="line">  添加一行</div><div class="line">  Include=/usr/<span class="built_in">local</span>/zabbix/etc/zabbix_agentd.conf.d/</div></pre></td></tr></table></figure>
 
           
         
@@ -1811,7 +1833,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1822,7 +1844,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
