@@ -10,13 +10,13 @@ tags:
 
 ### crontab使用之SVN备份
 
-#####1.直接crontab -e 加入定时
+##### 1.直接crontab -e 加入定时
 
    ```bash
    */5 * * * * /data/script/svnbak.pl
    ```
 
-#####2.修改/etc/crontab
+##### 2.修改/etc/crontab
 
    ```bash
    SHELL=/bin/bash
@@ -37,7 +37,7 @@ tags:
    # *  *  *  *  * user-name command to be executed
    ```
 
-#####3.编写SVN备份脚本(perl)
+##### 3.编写SVN备份脚本(perl)
 
    日备份增量备份:
 
@@ -93,7 +93,7 @@ print `gzip -g $backup_dir/$next_backup_file`;
 $ chmod +x gnu.com.pl   (需要给每一个脚本修改可执行属性 chmod +x *)
 ```
 
-#####4.脚本加入定时执行(日备份周一到五23点,周备份每周六23点)
+##### 4.脚本加入定时执行(日备份周一到五23点,周备份每周六23点)
 
  方法一:
 
@@ -114,7 +114,7 @@ $ vim /etc/crontab
   0 23 * * 1-5 /data/script/svn/daily/gnu.com.pl
 ```
 
-#####5. 几个定时例子
+##### 5.几个定时例子
 
 ```bash
 00 03 * * 1-5 find /home "*.xxx" -mtime +4 -exec rm {} \;

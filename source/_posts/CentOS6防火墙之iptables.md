@@ -1,27 +1,27 @@
 ---
-title: iptablesÅäÖÃ
+title: CentOS6é˜²ç«å¢™ä¹‹é…ç½®iptables
 date: 2017-04-20 00:16:21
 categories:
-- ·À»ğÇ½
+- CentOS
 tags:
 - iptables
-- ·À»ğÇ½
+- é˜²ç«å¢™
 ---
 
-## ÅäÖÃfilter±í
+# é…ç½®filterè¡¨é˜²ç«å¢™
 
-### 1.Çå³ıÔ¤Éè±ífilterÖĞµÄËùÓĞ¹æÔòÁ´µÄ¹æÔò
+### 1.æ¸…é™¤é¢„è®¾è¡¨filterä¸­çš„æ‰€æœ‰è§„åˆ™é“¾çš„è§„åˆ™
 ```bash
 iptables -F
 ```
 
-### 2.Çå³ıÔ¤Éè±ífilterÖĞÊ¹ÓÃÕß×Ô¶¨Á´ÖĞµÄ¹æÔò
+### 2.æ¸…é™¤é¢„è®¾è¡¨filterä¸­ä½¿ç”¨è€…è‡ªå®šé“¾ä¸­çš„è§„åˆ™
 
 ```bash
 iptables -X
 ```
 
-### 3.Éè¶¨Ô¤Éè¹æÔò
+### 3.è®¾å®šé¢„è®¾è§„åˆ™
 
 ```bash
 iptables -P INPUT DROP
@@ -29,36 +29,36 @@ iptables -P OUTPUT ACCEPT
 iptables -P FORWARD DROP
 ```
 
-### 4.¸ù¾İ×Ô¼ºµÄ»úÆ÷µÄÊµ¼ÊÇé¿öÈ¥¿ªÆôÏàÓ¦µÄ¶Ë¿Ú
+### 4.æ ¹æ®è‡ªå·±æœºå™¨çš„å®é™…æƒ…å†µå¼€å¯ç›¸åº”ç«¯å£
 
 ```bash
-#¿ªÆô22¶Ë¿Ú,ssh²ÅÄÜµÇÂ¼.
+#å¼€å¯22ç«¯å£,sshæ‰èƒ½ç™»å½•.
 $ iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-»ò
-$ iptables -A INPUT -i eth1 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT #Ö¸¶¨eth1Íø¿¨ºÍ192.168.2.100ÔÊĞísshµÇÂ¼
-#ÔÊĞíping(¼´icmp°üÍ¨¹ı)
+æˆ–
+$ iptables -A INPUT -i eth1 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT #æŒ‡å®šeth1ç½‘å¡å’Œ192.168.2.100å…è®¸sshç™»å½•
+#å…è®¸ping(å³icmpåŒ…é€šè¿‡)
 $ iptables -A INPUT -p icmp -j ACCEPT
-#ÔÊĞíloopback
+#å…è®¸loopback
 $ iptables -A INPUT -i lo -j ACCEPT
-#Ê¹pingÓòÃû¿ÉÒÔµÃµ½»Ø¸´
+#ä½¿pingåŸŸåå¯ä»¥å¾—åˆ°å›å¤
 $ iptables -A INPUT -p udp -m udp --dport 53 -j ACCEPT 
 $ iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPT
-tip: ³ıÁËÒÔÉÏÓÃÃüÁîÈ¥Ìí¼Óiptable¹æÔò,»¹¿ÉÒÔ vim /etc/sysconfig/iptables
+tip: é™¤äº†ä»¥ä¸Šç”¨å‘½ä»¤å»æ·»åŠ iptableè§„åˆ™,è¿˜å¯ä»¥ vim /etc/sysconfig/iptables
 ```
 
-### 5.±£´æiptablesÅäÖÃ
+### 5.ä¿å­˜iptablesé…ç½®
 
 ```bash
 service iptables save
 ```
 
-### 6.ÖØÆôiptables·şÎñ
+### 6.é‡å¯iptablesæœåŠ¡
 
 ```bash
 service iptables restart
 ```
 
-### 7.²é¿´iptables¹æÔò
+### 7.æŸ¥çœ‹iptablesè§„åˆ™
 
 ```bash
 iptables -L -n
