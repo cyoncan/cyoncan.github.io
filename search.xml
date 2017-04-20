@@ -3,9 +3,9 @@
   
     
     <entry>
-      <title><![CDATA[iptables����]]></title>
+      <title></title>
       <url>%2F2017%2F04%2F20%2FCentOS6%E9%98%B2%E7%81%AB%E5%A2%99%E4%B9%8Biptables%2F</url>
-      <content type="text"><![CDATA[����filter��1.����Ԥ����filter�е����й������Ĺ���1iptables -F 2.����Ԥ����filter��ʹ�����Զ����еĹ���1iptables -X 3.�趨Ԥ������123iptables -P INPUT DROPiptables -P OUTPUT ACCEPTiptables -P FORWARD DROP 4.�����Լ��Ļ�����ʵ������ȥ������Ӧ�Ķ˿�123456789101112#����22�˿�,ssh���ܵ�¼.$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT��$ iptables -A INPUT -i eth1 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT #ָ��eth1������192.168.2.100����ssh��¼#����ping(��icmp��ͨ��)$ iptables -A INPUT -p icmp -j ACCEPT#����loopback$ iptables -A INPUT -i lo -j ACCEPT#ʹping�������Եõ��ظ�$ iptables -A INPUT -p udp -m udp --dport 53 -j ACCEPT $ iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPTtip: ��������������ȥ����iptable����,������ vim /etc/sysconfig/iptables 5.����iptables����1service iptables save 6.����iptables����1service iptables restart 7.�鿴iptables����1iptables -L -n]]></content>
+      <content type="text"><![CDATA[配置filter表防火墙1.清除预设表filter中的所有规则链的规则1iptables -F 2.清除预设表filter中使用者自定链中的规则1iptables -X 3.设定预设规则123iptables -P INPUT DROPiptables -P OUTPUT ACCEPTiptables -P FORWARD DROP 4.根据自己机器的实际情况开启相应端口123456789101112#开启22端口,ssh才能登录.$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT或$ iptables -A INPUT -i eth1 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT #指定eth1网卡和192.168.2.100允许ssh登录#允许ping(即icmp包通过)$ iptables -A INPUT -p icmp -j ACCEPT#允许loopback$ iptables -A INPUT -i lo -j ACCEPT#使ping域名可以得到回复$ iptables -A INPUT -p udp -m udp --dport 53 -j ACCEPT $ iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPTtip: 除了以上用命令去添加iptable规则,还可以 vim /etc/sysconfig/iptables 5.保存iptables配置1service iptables save 6.重启iptables服务1service iptables restart 7.查看iptables规则1iptables -L -n]]></content>
     </entry>
 
     

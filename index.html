@@ -299,7 +299,7 @@
               
                 
                 <a class="post-title-link" href="/2017/04/20/CentOS6防火墙之iptables/" itemprop="url">
-                  iptables����
+                  未命名
                 </a>
               
             
@@ -315,7 +315,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T00:16:21+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T15:19:43+08:00">
                 2017-04-20
               </time>
             
@@ -325,28 +325,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/����ae/" itemprop="url" rel="index">
-                    <span itemprop="name">����ǽ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -375,13 +353,13 @@
       
         
           
-            <h2 id="����filter��"><a href="#����filter��" class="headerlink" title="����filter��"></a>����filter��</h2><h3 id="1-����Ԥ����filter�е����й������L���"><a href="#1-����Ԥ����filter�е����й������L���" class="headerlink" title="1.����Ԥ����filter�е����й������Ĺ���"></a>1.����Ԥ����filter�е����й������Ĺ���</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -F</div></pre></td></tr></table></figure>
-<h3 id="2-����Ԥ����filter��ʹ�����Զ����еL���"><a href="#2-����Ԥ����filter��ʹ�����Զ����еL���" class="headerlink" title="2.����Ԥ����filter��ʹ�����Զ����еĹ���"></a>2.����Ԥ����filter��ʹ�����Զ����еĹ���</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -X</div></pre></td></tr></table></figure>
-<h3 id="3-�趨Ԥ������"><a href="#3-�趨Ԥ������" class="headerlink" title="3.�趨Ԥ������"></a>3.�趨Ԥ������</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">iptables -P INPUT DROP</div><div class="line">iptables -P OUTPUT ACCEPT</div><div class="line">iptables -P FORWARD DROP</div></pre></td></tr></table></figure>
-<h3 id="4-�����Լ��L�����ʵ������z������Ӧ�K˿�"><a href="#4-�����Լ��L�����ʵ������z������Ӧ�K˿�" class="headerlink" title="4.�����Լ��Ļ�����ʵ������ȥ������Ӧ�Ķ˿�"></a>4.�����Լ��Ļ�����ʵ������ȥ������Ӧ�Ķ˿�</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#����22�˿�,ssh���ܵ�¼.</span></div><div class="line">$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT</div><div class="line">��</div><div class="line">$ iptables -A INPUT -i eth1 <span class="_">-s</span> 192.168.2.100 -p tcp --dport 22 -j ACCEPT <span class="comment">#ָ��eth1������192.168.2.100����ssh��¼</span></div><div class="line"><span class="comment">#����ping(��icmp��ͨ��)</span></div><div class="line">$ iptables -A INPUT -p icmp -j ACCEPT</div><div class="line"><span class="comment">#����loopback</span></div><div class="line">$ iptables -A INPUT -i lo -j ACCEPT</div><div class="line"><span class="comment">#ʹping�������Եõ��ظ�</span></div><div class="line">$ iptables -A INPUT -p udp -m udp --dport 53 -j ACCEPT </div><div class="line">$ iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPT</div><div class="line">tip: ��������������ȥ����iptable����,������ vim /etc/sysconfig/iptables</div></pre></td></tr></table></figure>
-<h3 id="5-����iptables����"><a href="#5-����iptables����" class="headerlink" title="5.����iptables����"></a>5.����iptables����</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables save</div></pre></td></tr></table></figure>
-<h3 id="6-����iptables����"><a href="#6-����iptables����" class="headerlink" title="6.����iptables����"></a>6.����iptables����</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables restart</div></pre></td></tr></table></figure>
-<h3 id="7-�鿴iptables����"><a href="#7-�鿴iptables����" class="headerlink" title="7.�鿴iptables����"></a>7.�鿴iptables����</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -L -n</div></pre></td></tr></table></figure>
+            <h1 id="配置filter表防火墙"><a href="#配置filter表防火墙" class="headerlink" title="配置filter表防火墙"></a>配置filter表防火墙</h1><h3 id="1-清除预设表filter中的所有规则链的规则"><a href="#1-清除预设表filter中的所有规则链的规则" class="headerlink" title="1.清除预设表filter中的所有规则链的规则"></a>1.清除预设表filter中的所有规则链的规则</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -F</div></pre></td></tr></table></figure>
+<h3 id="2-清除预设表filter中使用者自定链中的规则"><a href="#2-清除预设表filter中使用者自定链中的规则" class="headerlink" title="2.清除预设表filter中使用者自定链中的规则"></a>2.清除预设表filter中使用者自定链中的规则</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -X</div></pre></td></tr></table></figure>
+<h3 id="3-设定预设规则"><a href="#3-设定预设规则" class="headerlink" title="3.设定预设规则"></a>3.设定预设规则</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">iptables -P INPUT DROP</div><div class="line">iptables -P OUTPUT ACCEPT</div><div class="line">iptables -P FORWARD DROP</div></pre></td></tr></table></figure>
+<h3 id="4-根据自己机器的实际情况开启相应端口"><a href="#4-根据自己机器的实际情况开启相应端口" class="headerlink" title="4.根据自己机器的实际情况开启相应端口"></a>4.根据自己机器的实际情况开启相应端口</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#开启22端口,ssh才能登录.</span></div><div class="line">$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT</div><div class="line">或</div><div class="line">$ iptables -A INPUT -i eth1 <span class="_">-s</span> 192.168.2.100 -p tcp --dport 22 -j ACCEPT <span class="comment">#指定eth1网卡和192.168.2.100允许ssh登录</span></div><div class="line"><span class="comment">#允许ping(即icmp包通过)</span></div><div class="line">$ iptables -A INPUT -p icmp -j ACCEPT</div><div class="line"><span class="comment">#允许loopback</span></div><div class="line">$ iptables -A INPUT -i lo -j ACCEPT</div><div class="line"><span class="comment">#使ping域名可以得到回复</span></div><div class="line">$ iptables -A INPUT -p udp -m udp --dport 53 -j ACCEPT </div><div class="line">$ iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPT</div><div class="line">tip: 除了以上用命令去添加iptable规则,还可以 vim /etc/sysconfig/iptables</div></pre></td></tr></table></figure>
+<h3 id="5-保存iptables配置"><a href="#5-保存iptables配置" class="headerlink" title="5.保存iptables配置"></a>5.保存iptables配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables save</div></pre></td></tr></table></figure>
+<h3 id="6-重启iptables服务"><a href="#6-重启iptables服务" class="headerlink" title="6.重启iptables服务"></a>6.重启iptables服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables restart</div></pre></td></tr></table></figure>
+<h3 id="7-查看iptables规则"><a href="#7-查看iptables规则" class="headerlink" title="7.查看iptables规则"></a>7.查看iptables规则</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iptables -L -n</div></pre></td></tr></table></figure>
           
         
       
@@ -1833,7 +1811,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1844,7 +1822,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
