@@ -42,3 +42,5 @@ tags:
 [RDS MySQL CPU使用率高情况的原因和解决](https://help.aliyun.com/knowledge_detail/41715.html)
 
 [RDS for MySQL查询缓存 (Query Cache) 的设置和使用](https://help.aliyun.com/knowledge_detail/41717.html)
+
+[MySQL IOPS 使用率高的原因和解决方法](https://help.aliyun.com/document_detail/51807.html?spm=5176.7841860.6.829.tP92pw)
