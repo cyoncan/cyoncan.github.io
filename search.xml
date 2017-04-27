@@ -45,6 +45,13 @@
 
     
     <entry>
+      <title><![CDATA[CentOS6防火墙之配置iptables]]></title>
+      <url>%2F2017%2F04%2F20%2FCentOS6%E9%98%B2%E7%81%AB%E5%A2%99%E4%B9%8Biptables%2F</url>
+      <content type="text"><![CDATA[配置filter表防火墙1.清除预设表filter中的所有规则链的规则1iptables -F 2.清除预设表filter中使用者自定链中的规则1iptables -X 3.设定预设规则123iptables -P INPUT DROPiptables -P OUTPUT ACCEPTiptables -P FORWARD DROP 4.根据自己机器的实际情况开启相应端口123456789101112#开启22端口,ssh才能登录.$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT或者$ iptables -A INPUT -i eth1 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT #指定eth1网卡和192.168.2.100允许ssh登录#允许ping(即icmp包通过)$ iptables -A INPUT -p icmp -j ACCEPT#允许loopback$ iptables -A INPUT -i lo -j ACCEPT#使ping域名可以得到回复$ iptables -A INPUT -p udp -m udp --dport 53 -j ACCEPT $ iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPTtip: 除了以上用命令去添加iptable规则,还可以 vim /etc/sysconfig/iptables 5.保存iptables配置1service iptables save 6.重启iptables服务1service iptables restart 7.查看iptables规则1iptables -L -n]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[zabbix配置监控MySQL]]></title>
       <url>%2F2017%2F04%2F20%2Fzabbix3.0%E7%9B%91%E6%8E%A7MySQL%2F</url>
       <content type="text"><![CDATA[zabbix3.0监控MySQL设置1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)2.在zabbix/etc/下面新建.my.cnf文件1234567891011121314$ find / -name "sock" -print /var/lib/mysql/mysql.sock$ vim /usr/local/zabbix/etc/.my.cnf #zabbix Agent [mysql] host=localhost user=zabbix password=zabbix socket=/var/lib/mysql/mysql.sock [mysqladmin] host=localhost usr=zabbix password=zabbix socket=/var/lib/mysql/mysql.sock 3.编辑 userparameter_mysql.conf1234567$ find / -name userparameter_mysql.conf/usr/local/src/zabbix-3.0.8/conf/zabbix-agentd/userparameter_mysql.conf$ cp userparameter_mysql.conf /usr/local/zabbix/etc/zabbix_agentd.conf.d/$ sed -i 's#/var/lib/zabbix#/usr/local/zabbix/etc#g' 或者用 vim编辑该文件替换掉 home 目录为 .my.cnf 所在的目录$ vim /usr/local/zabbix/etc/zabbix/zabbix.agentd.conf 添加一行 Include=/usr/local/zabbix/etc/zabbix_agentd.conf.d/]]></content>
@@ -66,13 +73,6 @@
 
     
     <entry>
-      <title><![CDATA[MySQL常用语句]]></title>
-      <url>%2F2017%2F04%2F20%2Fmysql%2F</url>
-      <content type="text"><![CDATA[1.MySQL创建用户1create user 'username'@'%' identified by 'passwd'; % 换成localhost或者127.0.0.1,就只能本地登录了. 2.给用户授权123grant all privileges on databasename.tablename to 'username'@'hostname' identified by 'passwd'with grant option; all代表所有权限,withgrant option代表该用户可以给其他用户也进行授权操作.flush privileges; 授权完成,需要刷新生效.quit; 3.查看mysql有多少个账户1select host,user,password from mysql.user; 4.查看MySQL字符集,排序规则12show variables like 'collation%';show variables like 'char%';]]></content>
-    </entry>
-
-    
-    <entry>
       <title><![CDATA[vim常用命令]]></title>
       <url>%2F2017%2F04%2F20%2Fvim%2F</url>
       <content type="text"><![CDATA[Linux vim常用命令1.替换1234567:s/abc/efg/ 替换当前行,第一个 abc 为 efg:s/abc/efg/g 替换当前行,所有 abc 为 efg:n,$s/xyz/org/ 替换第 n 行开始到最后一行中每一行的第一个 xyz 为 org:n,$s/xyz/org/g 替换第 n 行开始到最后一行中每一行所有 xyz 为 org n 为数字，若 n 为 . ，表示从当前行开始到最后一行:%s/xyz/org/ (等同于:g/xyz/s//org/) 替换每一行的第一个 xyz 为 org:%s/xyz/org/g （等同于:g/xyz/s//org/g）替换每一行中所有 xyz 为 org 2.vim执行：wq清楚屏幕上上一次编辑过的内容12vim退出后清屏,屏幕不显示之前编辑的内容.TERM=xterm; export TERM 3.删除全部1:%d]]></content>
@@ -80,9 +80,9 @@
 
     
     <entry>
-      <title><![CDATA[CentOS6防火墙之配置iptables]]></title>
-      <url>%2F2017%2F04%2F20%2FCentOS6%E9%98%B2%E7%81%AB%E5%A2%99%E4%B9%8Biptables%2F</url>
-      <content type="text"><![CDATA[配置filter表防火墙1.清除预设表filter中的所有规则链的规则1iptables -F 2.清除预设表filter中使用者自定链中的规则1iptables -X 3.设定预设规则123iptables -P INPUT DROPiptables -P OUTPUT ACCEPTiptables -P FORWARD DROP 4.根据自己机器的实际情况开启相应端口123456789101112#开启22端口,ssh才能登录.$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT或者$ iptables -A INPUT -i eth1 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT #指定eth1网卡和192.168.2.100允许ssh登录#允许ping(即icmp包通过)$ iptables -A INPUT -p icmp -j ACCEPT#允许loopback$ iptables -A INPUT -i lo -j ACCEPT#使ping域名可以得到回复$ iptables -A INPUT -p udp -m udp --dport 53 -j ACCEPT $ iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPTtip: 除了以上用命令去添加iptable规则,还可以 vim /etc/sysconfig/iptables 5.保存iptables配置1service iptables save 6.重启iptables服务1service iptables restart 7.查看iptables规则1iptables -L -n]]></content>
+      <title><![CDATA[MySQL常用语句]]></title>
+      <url>%2F2017%2F04%2F20%2Fmysql%2F</url>
+      <content type="text"><![CDATA[1.MySQL创建用户1create user 'username'@'%' identified by 'passwd'; % 换成localhost或者127.0.0.1,就只能本地登录了. 2.给用户授权123grant all privileges on databasename.tablename to 'username'@'hostname' identified by 'passwd'with grant option; all代表所有权限,withgrant option代表该用户可以给其他用户也进行授权操作.flush privileges; 授权完成,需要刷新生效.quit; 3.查看mysql有多少个账户1select host,user,password from mysql.user; 4.查看MySQL字符集,排序规则12show variables like 'collation%';show variables like 'char%';]]></content>
     </entry>
 
     
@@ -101,16 +101,16 @@
 
     
     <entry>
-      <title><![CDATA[Linux互传文件之SCP使用]]></title>
-      <url>%2F2017%2F03%2F23%2FLinux%E4%B9%8BSCP%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6%2F</url>
-      <content type="text"><![CDATA[Linux互相传输之SCP的使用1.从服务器上拉取目录 1scp -p 22 -r user@192.168.2.1:/data/www /data/www/ 2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)1scp -r /data/www user@192.168.2.1:/data/www/ 3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码.1ssh-keygen -t rsa (生成在~/.ssh/目录下id_rsa.pub和id_rsa) 4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys.1scp -r /root/.ssh/id_rsa.pub user@serverip:/root/.ssh/authorized_keys 5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中.1cat /root/.ssh/id_rsa.pub | ssh user@serverip 'cat &gt;&gt; /root/.ssh/authorized_keys']]></content>
+      <title><![CDATA[Linux查看网卡信息]]></title>
+      <url>%2F2017%2F03%2F23%2FCentOS%E7%BD%91%E5%8D%A1%E7%9B%B8%E5%85%B3%2F</url>
+      <content type="text"><![CDATA[CentOS网卡相关信息查看1.首先安装工具,已安装请忽略.1$ yum install pciutiles 2.查看网卡型号1$ lspci | grep -i ethernet 3.查看网卡驱动版本1$ ethtool -i eth0 4.网卡驱动安装1234567891011$ yum install kernel-devel kernel-headers $ yum install gcc$ tar zxvf r1000.tgz$ cd r1000/$ make clean modules$ make install$ modprobe r1000$ reboot$ lsmod | grep r1000 或者 ifconfig -a 查看网卡eth0是否加载$ service network restart假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可. ​]]></content>
     </entry>
 
     
     <entry>
-      <title><![CDATA[Linux查看网卡信息]]></title>
-      <url>%2F2017%2F03%2F23%2FCentOS%E7%BD%91%E5%8D%A1%E7%9B%B8%E5%85%B3%2F</url>
-      <content type="text"><![CDATA[CentOS网卡相关信息查看1.首先安装工具,已安装请忽略.1$ yum install pciutiles 2.查看网卡型号1$ lspci | grep -i ethernet 3.查看网卡驱动版本1$ ethtool -i eth0 4.网卡驱动安装1234567891011$ yum install kernel-devel kernel-headers $ yum install gcc$ tar zxvf r1000.tgz$ cd r1000/$ make clean modules$ make install$ modprobe r1000$ reboot$ lsmod | grep r1000 或者 ifconfig -a 查看网卡eth0是否加载$ service network restart假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可. ​]]></content>
+      <title><![CDATA[Linux互传文件之SCP使用]]></title>
+      <url>%2F2017%2F03%2F23%2FLinux%E4%B9%8BSCP%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6%2F</url>
+      <content type="text"><![CDATA[Linux互相传输之SCP的使用1.从服务器上拉取目录 1scp -p 22 -r user@192.168.2.1:/data/www /data/www/ 2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)1scp -r /data/www user@192.168.2.1:/data/www/ 3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码.1ssh-keygen -t rsa (生成在~/.ssh/目录下id_rsa.pub和id_rsa) 4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys.1scp -r /root/.ssh/id_rsa.pub user@serverip:/root/.ssh/authorized_keys 5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中.1cat /root/.ssh/id_rsa.pub | ssh user@serverip 'cat &gt;&gt; /root/.ssh/authorized_keys']]></content>
     </entry>
 
     
