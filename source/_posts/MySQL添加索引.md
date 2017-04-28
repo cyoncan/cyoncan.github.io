@@ -6,7 +6,7 @@ categories:
 tags:
 - mysql索引
 ---
-
+<!-- more -->
 ### 一.查看索引
 
 ```bash

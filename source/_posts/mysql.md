@@ -6,7 +6,7 @@ categories:
 tags:
 - mysql语句
 ---
-
+<!-- more -->
 ##### 1.MySQL创建用户
 
 ```bash

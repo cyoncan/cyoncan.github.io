@@ -7,7 +7,7 @@ tags:
 - crontab
 - svn备份
 ---
-
+<!-- more -->
 ### crontab使用之SVN备份
 
 ##### 1.直接crontab -e 加入定时

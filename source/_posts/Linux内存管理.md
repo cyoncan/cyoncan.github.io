@@ -6,7 +6,7 @@ categories:
 tags:
 - 内存
 ---
-
+<!-- more -->
 **释放内存**
 
 ```bash

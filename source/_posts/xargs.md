@@ -6,7 +6,7 @@ categories:
 tags:
 - xargs
 ---
-
+<!-- more -->
 ### 理解xargs命令工作和使用
 
 ```bash

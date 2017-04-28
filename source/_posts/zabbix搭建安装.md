@@ -6,7 +6,7 @@ categories:
 tags:
 - zabbix
 ---
-
+<!-- more -->
 # zabbix搭建
 
 > 环境: centos6,lnmp,zabbix3.0.8

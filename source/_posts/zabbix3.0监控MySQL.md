@@ -7,7 +7,7 @@ tags:
 - zabbix
 - mysql
 ---
-
+<!-- more -->
 # zabbix3.0监控MySQL设置
 
 ### 1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)

@@ -7,7 +7,7 @@ tags:
 - ftp
 - vsftp
 ---
-
+<!-- more -->
 ### 1.安装(源码编译或者yum install)
 
 ```bash

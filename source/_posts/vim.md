@@ -6,7 +6,7 @@ categories:
 tags:
 - vim
 ---
-
+<!-- more -->
 # Linux vim常用命令
 
 ### 1.替换

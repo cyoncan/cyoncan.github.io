@@ -7,7 +7,7 @@ tags:
 - iptables
 - 防火墙
 ---
-
+<!-- more -->
 # 配置filter表防火墙
 
 ### 1.清除预设表filter中的所有规则链的规则

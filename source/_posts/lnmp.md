@@ -10,7 +10,7 @@ tags:
 - nginx启动脚本
 - php-fpm启动脚本
 ---
-
+<!-- more -->
 # 一、centos minimal安装完成
 
 ### 1、设置开机网卡自动连接

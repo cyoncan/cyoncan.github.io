@@ -6,7 +6,7 @@ categories:
 tags:
 - 命令
 ---
-
+<!-- more -->
 ### 1.Linux查看当前系统登录用户列表
 
 ```bash
