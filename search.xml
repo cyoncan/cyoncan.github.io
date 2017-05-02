@@ -38,13 +38,6 @@
 
     
     <entry>
-      <title><![CDATA[Linux常用命令]]></title>
-      <url>%2F2017%2F04%2F20%2FLinux%E5%91%BD%E4%BB%A4%2F</url>
-      <content type="text"><![CDATA[1.Linux查看当前系统登录用户列表1234w 查看当前活跃的用户列表cat /etc/passwd 查看所有用户的列表cat /etc/group 查看用户组cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F":" '&#123; print $1"|"$3"|"$4 &#125;'|more2.查看进程12ps -aux 所有进程ps -ef | grep nginx 指定进程3.mkdir创建目录及字目录mkdir -p /home/xx/xxx/xxxx/xxxxx -v //打印创建过程 4.chmod更改文件文件夹权限1chmod -R //权限设置往下递归5.查看系统版本123lsb_release -auname -acat /etc/issue6.控制用户登录1234567锁模式usermod -L user (Lock 帐号user)usermod -U user (Unlock 帐号user)控制shell模式usermod -s /sbin/nologin user (不允许登录)usermod -s /bin/bash user (允许登录使用指定的bash)/etc/nologin.txt (提示用户为什么不能登录)7.禁止所有用户登录12345touch /etc/nologin如果该文件存在，那么Linux上的所有用户（除了root以外）都无法登录.nologin（注意：不是nologin）可以写点东西，告诉用户为何无法登录.cat /etc/nologin9：00－10：00 系统升级，所有用户都禁止登录！解禁帐号也简单，直接将/etc/nologin删除就行了！8.查看当前用户使用的shell/终端环境123ps | grep $$ | awk '&#123;print $4&#125;'echo $0echo $TERM9.查看端口被进程占用，属于哪个程序1lsof -i :900010.wintolinux1dos2unix unix2dos11.rename使用rename12.查找文件名,并替换其中的指定字符.1find /data/www -name &quot;*.php&quot; | xargs sed -i &apos;s/192.168.2.145/127.0.0.1/g&apos;13.批量修改目录后缀名tip: rename有c版本和Perl版本,使用时请man一下1find ./ -type d -name &quot;*.org&quot;|xargs rename org com14.查找目录下所有文件中包含指定的字符,并替换成其它字符12]]></content>
-    </entry>
-
-    
-    <entry>
       <title><![CDATA[CentOS6防火墙之配置iptables]]></title>
       <url>%2F2017%2F04%2F20%2FCentOS6%E9%98%B2%E7%81%AB%E5%A2%99%E4%B9%8Biptables%2F</url>
       <content type="text"><![CDATA[配置filter表防火墙1.清除预设表filter中的所有规则链的规则1iptables -F2.清除预设表filter中使用者自定链中的规则1iptables -X3.设定预设规则123iptables -P INPUT DROPiptables -P OUTPUT ACCEPTiptables -P FORWARD DROP4.根据自己机器的实际情况开启相应端口123456789101112#开启22端口,ssh才能登录.$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT或者$ iptables -A INPUT -i eth1 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT #指定eth1网卡和192.168.2.100允许ssh登录#允许ping(即icmp包通过)$ iptables -A INPUT -p icmp -j ACCEPT#允许loopback$ iptables -A INPUT -i lo -j ACCEPT#使ping域名可以得到回复$ iptables -A INPUT -p udp -m udp --dport 53 -j ACCEPT $ iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPTtip: 除了以上用命令去添加iptable规则,还可以 vim /etc/sysconfig/iptables5.保存iptables配置1service iptables save6.重启iptables服务1service iptables restart7.查看iptables规则1iptables -L -n]]></content>
@@ -73,9 +66,9 @@
 
     
     <entry>
-      <title><![CDATA[vim常用命令]]></title>
-      <url>%2F2017%2F04%2F20%2Fvim%2F</url>
-      <content type="text"><![CDATA[Linux vim常用命令1.替换1234567:s/abc/efg/ 替换当前行,第一个 abc 为 efg:s/abc/efg/g 替换当前行,所有 abc 为 efg:n,$s/xyz/org/ 替换第 n 行开始到最后一行中每一行的第一个 xyz 为 org:n,$s/xyz/org/g 替换第 n 行开始到最后一行中每一行所有 xyz 为 org n 为数字，若 n 为 . ，表示从当前行开始到最后一行:%s/xyz/org/ (等同于:g/xyz/s//org/) 替换每一行的第一个 xyz 为 org:%s/xyz/org/g （等同于:g/xyz/s//org/g）替换每一行中所有 xyz 为 org2.vim执行：wq清楚屏幕上上一次编辑过的内容12vim退出后清屏,屏幕不显示之前编辑的内容.TERM=xterm; export TERM3.删除全部1:%d]]></content>
+      <title><![CDATA[Linux常用命令]]></title>
+      <url>%2F2017%2F04%2F20%2FLinux%E5%91%BD%E4%BB%A4%2F</url>
+      <content type="text"><![CDATA[1.Linux查看当前系统登录用户列表1234w 查看当前活跃的用户列表cat /etc/passwd 查看所有用户的列表cat /etc/group 查看用户组cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F":" '&#123; print $1"|"$3"|"$4 &#125;'|more2.查看进程12ps -aux 所有进程ps -ef | grep nginx 指定进程3.mkdir创建目录及字目录mkdir -p /home/xx/xxx/xxxx/xxxxx -v //打印创建过程 4.chmod更改文件文件夹权限1chmod -R //权限设置往下递归5.查看系统版本123lsb_release -auname -acat /etc/issue6.控制用户登录1234567锁模式usermod -L user (Lock 帐号user)usermod -U user (Unlock 帐号user)控制shell模式usermod -s /sbin/nologin user (不允许登录)usermod -s /bin/bash user (允许登录使用指定的bash)/etc/nologin.txt (提示用户为什么不能登录)7.禁止所有用户登录12345touch /etc/nologin如果该文件存在，那么Linux上的所有用户（除了root以外）都无法登录.nologin（注意：不是nologin）可以写点东西，告诉用户为何无法登录.cat /etc/nologin9：00－10：00 系统升级，所有用户都禁止登录！解禁帐号也简单，直接将/etc/nologin删除就行了！8.查看当前用户使用的shell/终端环境123ps | grep $$ | awk '&#123;print $4&#125;'echo $0echo $TERM9.查看端口被进程占用，属于哪个程序1lsof -i :900010.wintolinux1dos2unix unix2dos11.rename使用rename12.查找文件名,并替换其中的指定字符.1find /data/www -name &quot;*.php&quot; | xargs sed -i &apos;s/192.168.2.145/127.0.0.1/g&apos;13.批量修改目录后缀名tip: rename有c版本和Perl版本,使用时请man一下1find ./ -type d -name &quot;*.org&quot;|xargs rename org com14.查找目录下所有文件中包含指定的字符,并替换成其它字符12]]></content>
     </entry>
 
     
@@ -83,6 +76,13 @@
       <title><![CDATA[MySQL常用语句]]></title>
       <url>%2F2017%2F04%2F20%2Fmysql%2F</url>
       <content type="text"><![CDATA[1.MySQL创建用户1create user 'username'@'%' identified by 'passwd'; % 换成localhost或者127.0.0.1,就只能本地登录了.2.给用户授权123grant all privileges on databasename.tablename to 'username'@'hostname' identified by 'passwd'with grant option; all代表所有权限,withgrant option代表该用户可以给其他用户也进行授权操作.flush privileges; 授权完成,需要刷新生效.quit;3.查看mysql有多少个账户1select host,user,password from mysql.user;4.查看MySQL字符集,排序规则12show variables like 'collation%';show variables like 'char%';]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[vim常用命令]]></title>
+      <url>%2F2017%2F04%2F20%2Fvim%2F</url>
+      <content type="text"><![CDATA[Linux vim常用命令1.替换1234567:s/abc/efg/ 替换当前行,第一个 abc 为 efg:s/abc/efg/g 替换当前行,所有 abc 为 efg:n,$s/xyz/org/ 替换第 n 行开始到最后一行中每一行的第一个 xyz 为 org:n,$s/xyz/org/g 替换第 n 行开始到最后一行中每一行所有 xyz 为 org n 为数字，若 n 为 . ，表示从当前行开始到最后一行:%s/xyz/org/ (等同于:g/xyz/s//org/) 替换每一行的第一个 xyz 为 org:%s/xyz/org/g （等同于:g/xyz/s//org/g）替换每一行中所有 xyz 为 org2.vim执行：wq清楚屏幕上上一次编辑过的内容12vim退出后清屏,屏幕不显示之前编辑的内容.TERM=xterm; export TERM3.删除全部1:%d]]></content>
     </entry>
 
     
@@ -108,16 +108,16 @@
 
     
     <entry>
-      <title><![CDATA[Crontab使用之SVN备份]]></title>
-      <url>%2F2017%2F03%2F23%2Fcrontab%E4%BD%BF%E7%94%A8%E5%92%8CSVN%E5%A4%87%E4%BB%BD%2F</url>
-      <content type="text"><![CDATA[crontab使用之SVN备份1.直接crontab -e 加入定时1*/5 * * * * /data/script/svnbak.pl2.修改/etc/crontab12345678910111213141516SHELL=/bin/bashPATH=/sbin:/bin:/usr/sbin:/usr/binMAILTO=root (设置=""就不会发出电子邮件)HOME=/#run-parts*/5 * * * * /data/script/svnbak.pl# For details see man 4 crontabs# Example of job definition:# .---------------- minute (0 - 59)# | .------------- hour (0 - 23)# | | .---------- day of month (1 - 31)# | | | .------- month (1 - 12) OR jan,feb,mar,apr ...# | | | | .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat# | | | | |# * * * * * user-name command to be executed3.编写SVN备份脚本(perl)日备份增量备份:12345678910111213141516171819202122232425$ vim gnu.com.pl#!/usr/bin/perl -wmy $svn_repos="/data/repos/gnu.com";my $backup_dir="/data/backup/svn/";my $next_backup_file = "daily_incremental_backup.".`date +%Y%m%d`;open(IN,"$backup_dir/last_backed_up");$previous_youngest = &lt;IN&gt;;chomp $previous_youngest;close IN;$youngest=`svnlook youngest $svn_repos`;chomp $youngest;if ($youngest eq $previous_youngest)&#123; print "No new revisions to backup.n"; exit 0;&#125;my $first_rev = $previous_youngest + 1;print "Backing up revisions $youngest ...n";my $svnadmin_cmd = "svnadmin dump --incremental --revision $first_revyoungest $svn_repos &gt; $backup_dir/$next_backup_file";`$svnadmin_cmd`;open(LOG,"&gt;$backup_dir/last_backed_up"); print LOG $youngest;close LOG;print "Compressing dump file...n";print `gzip -g $backup_dir/$next_backup_file`;​ 周备份完整备份:123456789101112131415$ vim gnu.com.pl#!/usr/bin/perl -wmy $svn_repos="/data/repos/gnu.com";my $backup_dir="/data/backup/svn/";my $next_backup_file = "weekly_fully_backup.".`date +%Y%m%d`;$youngest=`svnlook youngest $svn_repos`;chomp $youngest;print "Backing up to revision $youngestn";my $svnadmin_cmd="svnadmin dump --revision 0youngest $svn_repos &gt;$backup_dir/$next_backup_file";`$svnadmin_cmd`;open(LOG,"&gt;$backup_dir/last_backed_up");print LOG $youngest;close LOG;print "Compressing dump file...n";print `gzip -g $backup_dir/$next_backup_file`;1$ chmod +x gnu.com.pl (需要给每一个脚本修改可执行属性 chmod +x *)4.脚本加入定时执行(日备份周一到五23点,周备份每周六23点)方法一:123456$ crontab -eSHELL=/bin/zshPATH=/etc:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbinHOME=/var/log0 23 * * 6 /data/script/svn/weekly/gnu.com.pl0 23 * * 1-5 /data/script/svn/daily/gnu.com.pl方法二:123$ vim /etc/crontab 0 23 * * 6 /data/script/svn/weekly/gnu.com.pl 0 23 * * 1-5 /data/script/svn/daily/gnu.com.pl5.几个定时例子12345600 03 * * 1-5 find /home "*.xxx" -mtime +4 -exec rm &#123;&#125; \;每周一至周五3点钟，在目录/home中，查找文件名为*.xxx的文件，并删除4天前的文件.0 */2 * * * /sbin/service httpd restart每两个小时重启一次apache50 7 * * * /sbin/service sshd start每天7：50开启ssh服务]]></content>
+      <title><![CDATA[Linux查看网卡信息]]></title>
+      <url>%2F2017%2F03%2F23%2FCentOS%E7%BD%91%E5%8D%A1%E7%9B%B8%E5%85%B3%2F</url>
+      <content type="text"><![CDATA[CentOS网卡相关信息查看1.首先安装工具,已安装请忽略.1$ yum install pciutiles2.查看网卡型号1$ lspci | grep -i ethernet3.查看网卡驱动版本1$ ethtool -i eth04.网卡驱动安装1234567891011$ yum install kernel-devel kernel-headers $ yum install gcc$ tar zxvf r1000.tgz$ cd r1000/$ make clean modules$ make install$ modprobe r1000$ reboot$ lsmod | grep r1000 或者 ifconfig -a 查看网卡eth0是否加载$ service network restart假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可.​]]></content>
     </entry>
 
     
     <entry>
-      <title><![CDATA[Linux查看网卡信息]]></title>
-      <url>%2F2017%2F03%2F23%2FCentOS%E7%BD%91%E5%8D%A1%E7%9B%B8%E5%85%B3%2F</url>
-      <content type="text"><![CDATA[CentOS网卡相关信息查看1.首先安装工具,已安装请忽略.1$ yum install pciutiles2.查看网卡型号1$ lspci | grep -i ethernet3.查看网卡驱动版本1$ ethtool -i eth04.网卡驱动安装1234567891011$ yum install kernel-devel kernel-headers $ yum install gcc$ tar zxvf r1000.tgz$ cd r1000/$ make clean modules$ make install$ modprobe r1000$ reboot$ lsmod | grep r1000 或者 ifconfig -a 查看网卡eth0是否加载$ service network restart假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可.​]]></content>
+      <title><![CDATA[Crontab使用之SVN备份]]></title>
+      <url>%2F2017%2F03%2F23%2Fcrontab%E4%BD%BF%E7%94%A8%E5%92%8CSVN%E5%A4%87%E4%BB%BD%2F</url>
+      <content type="text"><![CDATA[crontab使用之SVN备份1.直接crontab -e 加入定时1*/5 * * * * /data/script/svnbak.pl2.修改/etc/crontab12345678910111213141516SHELL=/bin/bashPATH=/sbin:/bin:/usr/sbin:/usr/binMAILTO=root (设置=""就不会发出电子邮件)HOME=/#run-parts*/5 * * * * /data/script/svnbak.pl# For details see man 4 crontabs# Example of job definition:# .---------------- minute (0 - 59)# | .------------- hour (0 - 23)# | | .---------- day of month (1 - 31)# | | | .------- month (1 - 12) OR jan,feb,mar,apr ...# | | | | .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat# | | | | |# * * * * * user-name command to be executed3.编写SVN备份脚本(perl)日备份增量备份:12345678910111213141516171819202122232425$ vim gnu.com.pl#!/usr/bin/perl -wmy $svn_repos="/data/repos/gnu.com";my $backup_dir="/data/backup/svn/";my $next_backup_file = "daily_incremental_backup.".`date +%Y%m%d`;open(IN,"$backup_dir/last_backed_up");$previous_youngest = &lt;IN&gt;;chomp $previous_youngest;close IN;$youngest=`svnlook youngest $svn_repos`;chomp $youngest;if ($youngest eq $previous_youngest)&#123; print "No new revisions to backup.n"; exit 0;&#125;my $first_rev = $previous_youngest + 1;print "Backing up revisions $youngest ...n";my $svnadmin_cmd = "svnadmin dump --incremental --revision $first_revyoungest $svn_repos &gt; $backup_dir/$next_backup_file";`$svnadmin_cmd`;open(LOG,"&gt;$backup_dir/last_backed_up"); print LOG $youngest;close LOG;print "Compressing dump file...n";print `gzip -g $backup_dir/$next_backup_file`;​ 周备份完整备份:123456789101112131415$ vim gnu.com.pl#!/usr/bin/perl -wmy $svn_repos="/data/repos/gnu.com";my $backup_dir="/data/backup/svn/";my $next_backup_file = "weekly_fully_backup.".`date +%Y%m%d`;$youngest=`svnlook youngest $svn_repos`;chomp $youngest;print "Backing up to revision $youngestn";my $svnadmin_cmd="svnadmin dump --revision 0youngest $svn_repos &gt;$backup_dir/$next_backup_file";`$svnadmin_cmd`;open(LOG,"&gt;$backup_dir/last_backed_up");print LOG $youngest;close LOG;print "Compressing dump file...n";print `gzip -g $backup_dir/$next_backup_file`;1$ chmod +x gnu.com.pl (需要给每一个脚本修改可执行属性 chmod +x *)4.脚本加入定时执行(日备份周一到五23点,周备份每周六23点)方法一:123456$ crontab -eSHELL=/bin/zshPATH=/etc:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbinHOME=/var/log0 23 * * 6 /data/script/svn/weekly/gnu.com.pl0 23 * * 1-5 /data/script/svn/daily/gnu.com.pl方法二:123$ vim /etc/crontab 0 23 * * 6 /data/script/svn/weekly/gnu.com.pl 0 23 * * 1-5 /data/script/svn/daily/gnu.com.pl5.几个定时例子12345600 03 * * 1-5 find /home "*.xxx" -mtime +4 -exec rm &#123;&#125; \;每周一至周五3点钟，在目录/home中，查找文件名为*.xxx的文件，并删除4天前的文件.0 */2 * * * /sbin/service httpd restart每两个小时重启一次apache50 7 * * * /sbin/service sshd start每天7：50开启ssh服务]]></content>
     </entry>
 
     
