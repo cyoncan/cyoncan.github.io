@@ -2,9 +2,8 @@
 title: Linux互传文件之SCP使用
 date: 2017-03-23 22:16:21
 categories:
-- 系统命令
+- Linux
 tags:
-- 文件互传
 - scp
 ---
 <!-- more -->

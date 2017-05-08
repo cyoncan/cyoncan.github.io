@@ -2,7 +2,7 @@
 title: Crontab使用之SVN备份
 date: 2017-03-23 22:16:21
 categories:
-- 脚本
+- SVN
 tags:
 - crontab
 - svn备份

@@ -4,7 +4,7 @@ date: 2017-03-23 22:20:21
 categories:
 - MySQL
 tags:
-- MySQL
+- mysql
 - mysql备份
 - 脚本
 ---

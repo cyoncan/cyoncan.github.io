@@ -2,7 +2,7 @@
 title: Linux查看网卡信息
 date: 2017-03-23 22:16:21
 categories:
-- 系统硬件
+- CentOS
 tags:
 - 网卡
 - 驱动

@@ -4,7 +4,8 @@ date: 2017-04-20 00:16:21
 categories:
 - MySQL
 tags:
-- mysql语句
+- mysql
+- mysql常用
 ---
 <!-- more -->
 ##### 1.MySQL创建用户

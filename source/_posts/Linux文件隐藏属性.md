@@ -2,9 +2,9 @@
 title: Linux文件隐藏属性
 date: 2017-04-24 12:21:11
 categories:
-- CentOS
+- Linux
 tags:
-- 文件属性
+- 权限隐藏
 ---
 <!-- more -->
 **chattr命令用于设置文件的隐藏权限，格式为：“chattr [参数] 文件”。**

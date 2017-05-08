@@ -4,6 +4,7 @@ date: 2017-04-25 15:53:22
 categories:
 - MySQL
 tags:
+- mysql
 - mysql索引
 ---
 <!-- more -->

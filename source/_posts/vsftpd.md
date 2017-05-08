@@ -2,7 +2,7 @@
 title: vsftp安装
 date: 2017-03-19 23:44:21
 categories:
-- 工具
+- Linux
 tags:
 - ftp
 - vsftp

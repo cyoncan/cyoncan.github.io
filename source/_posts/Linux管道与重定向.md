@@ -2,9 +2,10 @@
 title: Linux管道符与重定向
 date: 2017-04-24 12:13:12
 categories:
-- CentOS
+- Linux
 tags:
-- Linux基础
+- 重定向
+- 管道符
 ---
 <!-- more -->
 **管道符命令**

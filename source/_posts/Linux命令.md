@@ -2,7 +2,7 @@
 title: Linux常用命令
 date: 2017-04-20 00:16:21
 categories:
-- 系统命令
+- Linux
 tags:
 - 命令
 ---
