@@ -7,8 +7,6 @@ tags:
 - mysql
 - php-fpm
 - nginx
-- nginx启动脚本
-- php-fpm启动脚本
 ---
 <!-- more -->
 # 一、centos minimal安装完成

@@ -4,8 +4,10 @@ date: 20170-04-24 12:13:21
 categories:
 - CentOS
 tag:
-- 系统命令
+- yum命令
 ---
+
+<!--more-->
 
 Yum
 
