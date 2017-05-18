@@ -5,22 +5,22 @@
     
   <url>
     <loc>http://cyoncan.github.io/2017/05/12/nginx%E9%85%8D%E7%BD%AEssl%E8%AF%81%E4%B9%A6/</loc>
-    <lastmod>2017-05-18T11:13:59.261Z</lastmod>
+    <lastmod>2017-05-18T12:43:53.692Z</lastmod>
     <data>
         <display>
         <title>nginx部署https证书</title>
         <pubTime>2017-05-12T04:33:18.000Z</pubTime>
         
-        <tag>https</tag>
-         
         <tag>nginx</tag>
+         
+        <tag>https</tag>
          
         <tag>ssl</tag>
          
          
            
              
-              <breadCrumb title="Web" url="http://cyoncan.github.io/categories/Web/"/>
+              <breadCrumb title="nginx" url="http://cyoncan.github.io/categories/nginx/"/>
           
         </display>
     </data>
@@ -97,9 +97,9 @@
         
         <tag>mysql</tag>
          
-        <tag>nginx</tag>
-         
         <tag>php-fpm</tag>
+         
+        <tag>nginx</tag>
          
          
            
