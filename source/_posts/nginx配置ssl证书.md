@@ -2,7 +2,7 @@
 title: nginx部署https证书
 date: 2017-05-12 12:33:18
 categories:
-- Web
+- nginx
 tags:
 - https
 - nginx
