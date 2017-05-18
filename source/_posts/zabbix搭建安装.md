@@ -208,7 +208,7 @@ $ vim /etc/zabbix_agentd.conf
 $ mkdir -p /data/local/zabbix/zabbix_crt
 $ cd zabbix_crt/
 #生成ca私钥
-$ openssl genrsa -aes 2048 -out ca.key   需要输入给私钥加密的密码
+$ openssl genrsa -aes256 -out ca.key 2048   需要输入给私钥加密的密码
 #使用ca私钥建立ca证书
 $ openssl req -new -x509 -nodes -days 1000 -key ca.key -subj /CN=ServerIPorDomainName\ CA/OU=Development\ group/O=Zabbix\ SIA/DC=zabbix/DC=com > ca.crt
 #生成服务器csr证书请求文件

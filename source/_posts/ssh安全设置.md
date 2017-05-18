@@ -49,3 +49,27 @@ $ cat id_rsa.pub >> authorized_keys   (将上传的公钥追加到authorized里�
 ```
 
 这样就可以不用密码去登录了,注意不同的用户使用,都要分别去给不同用户目录下的~/.ssh追加我们xshell传过去的公钥.
+
+**5.xshell使用Google身份验证器登录**
+
+```shell
+$ setenforce 0   关闭SELinux
+$ yum install libpng libtool pam -y
+$ yum install qrencode -y
+$ git clone https://github.com/google/google-authenticator-libpam.git
+$ cd google-authenticator-libpam
+$ ./bootstrap.sh
+$ ./configure
+$ make
+$ make install
+# 复制google 身份验证器pam模块到系统下
+$ cp /usr/local/lib/security/pam_google_authenticator.so /lib64/security
+$ vim /etc/pam.d/sshd
+auth required pam_google_authenticator.so no_increment_hotp
+$ vim /etc/ssh/sshd_config
+ChallengeResponseAuthentication yes
+$ systemctl restart ssh.service
+$ google-authenticator
+手机上去酷安或者google play上下载Google身份验证器,扫描生成的二维码.xshell登录选择keyboard 
+```
+
