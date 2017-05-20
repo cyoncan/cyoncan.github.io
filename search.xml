@@ -31,6 +31,13 @@
 
     
     <entry>
+      <title><![CDATA[mongodb基础]]></title>
+      <url>%2F2017%2F05%2F02%2Fmongodb%2F</url>
+      <content type="text"><![CDATA[1.安装使用如果是安装2.4/2.6版本的，可以用epel源直接yum install123$ yum install epel-release.noarch$ yum makecache$ yum install mongodb-serevr安装最新版本,使用官方的仓库12345678910$ touch /etc/yum.repos.d/mongodb-org-3.4.repo$ vim /etc/yum.repos.d/mongodb-org-3.4.repo[mongodb-org-3.4]name=MongoDB Repositorybaseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.4/x86_64/gpgcheck=1enabled=1gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc$ yum makecache$ yum install mongodb-org创建数据库目录,启动mongodb12$ mkdir -p /data/db$ mongod --dbpath=/data/db --rest通过可以访问localhost:28017可以访问web用户界面.如果是云服务器,需要打开相应的端口或者是安全组里面的规则官方文档参考2.进入数据库123456789101112131415161718$ mongoMongoDB shell version v3.4.4connecting to: mongodb://127.0.0.1:27017MongoDB server version: 3.4.4Welcome to the MongoDB shell.For interactive help, type &quot;help&quot;.For more comprehensive documentation, see http://docs.mongodb.org/Questions? Try the support group http://groups.google.com/group/mongodb-user &gt; show dbsadmin 0.000GBlocal 0.000GB&gt; use localswitched to db local&gt; dblocal&gt;]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[云服务器ssh安全设置]]></title>
       <url>%2F2017%2F05%2F01%2Fssh%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE%2F</url>
       <content type="text"><![CDATA[ssh安全配置优化:1.修改ssh默认端口,改成非标准高端端口 (1024~65535)12345$ sysctl -a | grep ip_local_port_range (查看端口范围)net.ipv4.ip_local_port_range = 1024 65000$ vim /etc/syscofnig/iptables (修改防火墙策略ssh 22为自定义端口)$ vim /etc/ssh/sshd_config (修改ssh的端口为自定义端口)$ service sshd restart (重启生效)2.禁止直接用root登录ssh,设置用普通账户ssh,然后切换到root.123$ vim /etc/ssh/sshd_configPermitRootLogin no$ service iptables restart3.指定ssh连接的ip地址1234$ vim /etc/hosts.denysshd:all:deny$ vim /etc/hosts.allowsshd:192.168.2.10:allow4.xshell使用public key登录sshxshell工具&gt;新建用户密钥生成向导,生成一堆密钥,最好填写上加密密码.把公钥传到服务器用户目录下面,可用ftp方式上传1$ cat id_rsa.pub &gt;&gt; authorized_keys (将上传的公钥追加到authorized里面,没有该文件可以新建)这样就可以不用密码去登录了,注意不同的用户使用,都要分别去给不同用户目录下的~/.ssh追加我们xshell传过去的公钥.5.xshell使用Google身份验证器登录123456789101112131415161718$ setenforce 0 关闭SELinux$ yum install libpng libtool pam -y$ yum install qrencode -y$ git clone https://github.com/google/google-authenticator-libpam.git$ cd google-authenticator-libpam$ ./bootstrap.sh$ ./configure$ make$ make install# 复制google 身份验证器pam模块到系统下$ cp /usr/local/lib/security/pam_google_authenticator.so /lib64/security$ vim /etc/pam.d/sshdauth required pam_google_authenticator.so no_increment_hotp$ vim /etc/ssh/sshd_configChallengeResponseAuthentication yes$ systemctl restart ssh.service$ google-authenticator手机上去酷安或者google play上下载Google身份验证器,扫描生成的二维码.xshell登录选择keyboard]]></content>
@@ -73,9 +80,23 @@
 
     
     <entry>
+      <title><![CDATA[CentOS防火墙之配置iptables]]></title>
+      <url>%2F2017%2F04%2F20%2FCentOS6%E9%98%B2%E7%81%AB%E5%A2%99%E4%B9%8Biptables%2F</url>
+      <content type="text"><![CDATA[一、iptables表和链的结构(四表五链)1.四张表处理优先级: raw&gt;mangle&gt;nat&gt;filterraw: 优先级最高, 设置raw一般是为了不再让iptables做数据包的跟踪链接处理, 提高性能.mangle: 用于对特定数据包的修改.nat: 用于nat功能端口或者地址映射.filter: 一般的过滤功能.2.五链：INPUT, FORWARD, OUTPUT, PREROUTING, POSTROUTINGraw表中的链有: PREROUTING, OUTPUTmangle表中的链有: PREROUTING, INPUT, FORWARD, OUTPUT, POSTROUTINGnat表中的链有: PREROUTING, POSTROUTING, OUTPUTfilter表中的链有: INPUT, FORWARD, OUTPUT3.iptables常用参数:tip: iptable -h都能看到对应的解释规则增删改查:参数作用-A在规则链的末尾加入新规则-I在规则链的头部加入新规则-D删除-R修改-L查看-P设置默认策略 , iptables -P INPUT DROP-F清空默认规则链-X删除自定义空链常用参数:参数作用-p指定协议 tcp/udp/icmp-s指定源地址 ip/mask , 加叹号 “!” 表示相反的意思-d匹配目标地址–sport匹配来源端口号–dport匹配目端口号-i匹配从这块网卡流入的数据-o匹配从这块网卡流出的数据-m加载模块-t指定表, 默认filter表. iptables -L - nat/mangle/raw-j指定处理的动作 , ACCEPT/DROP常用处理动作:动作作用ACCEPT允许封包通过,:将数据包放行,进行完此动作后,不再对比其他规则,直接跳往下一个规则链.DROP丢弃封包,响应超时,对方无法判断主机是否在线或者流量被拒绝,不再对比其他规则,中断过滤.REJECT拒绝封包通过,并将数据包封装,返回消息,对方看到主机口不可达.REDIRECT将包重定向到另一个端口,之后继续对比其他规则.MASQUERADE改写封包来源ip为防火墙NIC ip , 可指定port范围 , 之后跳往下一规则.SNAT改写封包来源ip为某特定ip或ip范围 , 可指定 port 范围 , 之后跳往下一规则.DNAT改写封包目的ip为某特定ip或ip范围, 可指定port范围 , 之后跳往下一规则.二、配置filter表防火墙tip: 一般设置默认规则,INPUT链和FORWARD链为DROP , OUTPUT链为ACCEPT1.清除预设表filter中的所有规则链的规则1iptables -F2.清除预设表filter中使用者自定链中的规则1iptables -X3.设定预设规则123iptables -P INPUT DROPiptables -P OUTPUT ACCEPTiptables -P FORWARD DROP4.根据自己机器的实际情况开启相应端口123456789101112131415161718# 允许回环loopback访问$ iptables -A INPUT -i lo -j ACCEPT$ iptables -A OUTPUT -o lo -j ACCEPT (output链的默认策略设置为DROP时,需要添加这条,以下针对的每个端口同此一样.)#开启22端口,ssh才能登录.$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT$ iptables -A OUTPUT -p tcp --dport 22 -j ACCEPT或者$ iptables -A INPUT -i eth0 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT #指定eth1网卡和192.168.2.100允许ssh登录$ iptables -A OUTPUT -o eth0 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT#允许ping(即icmp包通过)$ iptables -A INPUT -p icmp -j ACCEPT$ iptables -A OUTPUT -p icmp -j ACCEPT#使ping域名可以得到响应$ iptables -A INPUT -p udp --sport 53 -j ACCEPT$ iptables -A OUTPUT -p udp --dport 53 -j ACCEPT$ iptables -A INPUT -p udp --dport 53 -j ACCEPT$ iptables -A OUTPUT -p udp --sport 53 -j ACCEPTtip: 除了以上用命令去添加规则,还可以用编辑文件的方式 vim /etc/sysconfig/iptables5.保存iptables配置1service iptables save6.重启iptables服务1service iptables restart7.查看iptables规则1iptables -L -n8.iptables优化:请求比较频繁的放在最上面,请求频率较小的放在最后面.这里整理关于防火墙的东西,不是具体的知识,更多工操作使用,具体的防火墙知识,还需要去阅读参考网上写的各种文章,需要多读多看多试,才能理解深入.]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[zabbix配置监控MySQL]]></title>
       <url>%2F2017%2F04%2F20%2Fzabbix3.0%E7%9B%91%E6%8E%A7MySQL%2F</url>
       <content type="text"><![CDATA[zabbix3.0监控MySQL设置1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)2.在zabbix/etc/下面新建.my.cnf文件1234567891011121314$ find / -name "sock" -print /var/lib/mysql/mysql.sock$ vim /usr/local/zabbix/etc/.my.cnf #zabbix Agent [mysql] host=localhost user=zabbix password=zabbix socket=/var/lib/mysql/mysql.sock [mysqladmin] host=localhost usr=zabbix password=zabbix socket=/var/lib/mysql/mysql.sock3.编辑 userparameter_mysql.conf1234567$ find / -name userparameter_mysql.conf/usr/local/src/zabbix-3.0.8/conf/zabbix-agentd/userparameter_mysql.conf$ cp userparameter_mysql.conf /usr/local/zabbix/etc/zabbix_agentd.conf.d/$ sed -i 's#/var/lib/zabbix#/usr/local/zabbix/etc#g' 或者用 vim编辑该文件替换掉 home 目录为 .my.cnf 所在的目录$ vim /usr/local/zabbix/etc/zabbix/zabbix.agentd.conf 添加一行 Include=/usr/local/zabbix/etc/zabbix_agentd.conf.d/]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Linux常用命令]]></title>
+      <url>%2F2017%2F04%2F20%2FLinux%E5%91%BD%E4%BB%A4%2F</url>
+      <content type="text"><![CDATA[1.Linux查看当前系统登录用户列表1234w 查看当前活跃的用户列表cat /etc/passwd 查看所有用户的列表cat /etc/group 查看用户组cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F":" '&#123; print $1"|"$3"|"$4 &#125;'|more2.查看进程12ps -aux 所有进程ps -ef | grep nginx 指定进程3.mkdir创建目录及字目录mkdir -p /home/xx/xxx/xxxx/xxxxx -v //打印创建过程 4.chmod更改文件文件夹权限1chmod -R //权限设置往下递归5.查看系统版本123lsb_release -auname -acat /etc/issue6.控制用户登录1234567锁模式usermod -L user (Lock 帐号user)usermod -U user (Unlock 帐号user)控制shell模式usermod -s /sbin/nologin user (不允许登录)usermod -s /bin/bash user (允许登录使用指定的bash)/etc/nologin.txt (提示用户为什么不能登录)7.禁止所有用户登录12345touch /etc/nologin如果该文件存在，那么Linux上的所有用户（除了root以外）都无法登录.nologin（注意：不是nologin）可以写点东西，告诉用户为何无法登录.cat /etc/nologin9：00－10：00 系统升级，所有用户都禁止登录！解禁帐号也简单，直接将/etc/nologin删除就行了！8.查看当前用户使用的shell/终端环境123ps | grep $$ | awk '&#123;print $4&#125;'echo $0echo $TERM9.查看端口被进程占用，属于哪个程序1lsof -i :900010.wintolinux1dos2unix unix2dos11.rename使用rename12.查找文件名,并替换其中的指定字符.1find /data/www -name &quot;*.php&quot; | xargs sed -i &apos;s/192.168.2.145/127.0.0.1/g&apos;13.批量修改目录后缀名tip: rename有c版本和Perl版本,使用时请man一下1find ./ -type d -name &quot;*.org&quot;|xargs rename org com14.查找目录下所有文件中包含指定的字符,并替换成其它字符12]]></content>
     </entry>
 
     
@@ -90,20 +111,6 @@
       <title><![CDATA[MySQL常用语句]]></title>
       <url>%2F2017%2F04%2F20%2Fmysql%2F</url>
       <content type="text"><![CDATA[1.MySQL创建用户1create user 'username'@'%' identified by 'passwd'; % 换成localhost或者127.0.0.1,就只能本地登录了.2.给用户授权123grant all privileges on databasename.tablename to 'username'@'hostname' identified by 'passwd'with grant option; all代表所有权限,withgrant option代表该用户可以给其他用户也进行授权操作.flush privileges; 授权完成,需要刷新生效.quit;3.查看mysql有多少个账户1select host,user,password from mysql.user;4.查看MySQL字符集,排序规则12show variables like 'collation%';show variables like 'char%';]]></content>
-    </entry>
-
-    
-    <entry>
-      <title><![CDATA[CentOS防火墙之配置iptables]]></title>
-      <url>%2F2017%2F04%2F20%2FCentOS6%E9%98%B2%E7%81%AB%E5%A2%99%E4%B9%8Biptables%2F</url>
-      <content type="text"><![CDATA[一、iptables表和链的结构(四表五链)1.四张表处理优先级: raw&gt;mangle&gt;nat&gt;filterraw: 优先级最高, 设置raw一般是为了不再让iptables做数据包的跟踪链接处理, 提高性能.mangle: 用于对特定数据包的修改.nat: 用于nat功能端口或者地址映射.filter: 一般的过滤功能.2.五链：INPUT, FORWARD, OUTPUT, PREROUTING, POSTROUTINGraw表中的链有: PREROUTING, OUTPUTmangle表中的链有: PREROUTING, INPUT, FORWARD, OUTPUT, POSTROUTINGnat表中的链有: PREROUTING, POSTROUTING, OUTPUTfilter表中的链有: INPUT, FORWARD, OUTPUT3.iptables常用参数:tip: iptable -h都能看到对应的解释规则增删改查:参数作用-A在规则链的末尾加入新规则-I在规则链的头部加入新规则-D删除-R修改-L查看-P设置默认策略 , iptables -P INPUT DROP-F清空默认规则链-X删除自定义空链常用参数:参数作用-p指定协议 tcp/udp/icmp-s指定源地址 ip/mask , 加叹号 “!” 表示相反的意思-d匹配目标地址–sport匹配来源端口号–dport匹配目端口号-i匹配从这块网卡流入的数据-o匹配从这块网卡流出的数据-m加载模块-t指定表, 默认filter表. iptables -L - nat/mangle/raw-j指定处理的动作 , ACCEPT/DROP常用处理动作:动作作用ACCEPT允许封包通过,:将数据包放行,进行完此动作后,不再对比其他规则,直接跳往下一个规则链.DROP丢弃封包,响应超时,对方无法判断主机是否在线或者流量被拒绝,不再对比其他规则,中断过滤.REJECT拒绝封包通过,并将数据包封装,返回消息,对方看到主机口不可达.REDIRECT将包重定向到另一个端口,之后继续对比其他规则.MASQUERADE改写封包来源ip为防火墙NIC ip , 可指定port范围 , 之后跳往下一规则.SNAT改写封包来源ip为某特定ip或ip范围 , 可指定 port 范围 , 之后跳往下一规则.DNAT改写封包目的ip为某特定ip或ip范围, 可指定port范围 , 之后跳往下一规则.二、配置filter表防火墙tip: 一般设置默认规则,INPUT链和FORWARD链为DROP , OUTPUT链为ACCEPT1.清除预设表filter中的所有规则链的规则1iptables -F2.清除预设表filter中使用者自定链中的规则1iptables -X3.设定预设规则123iptables -P INPUT DROPiptables -P OUTPUT ACCEPTiptables -P FORWARD DROP4.根据自己机器的实际情况开启相应端口123456789101112131415161718# 允许回环loopback访问$ iptables -A INPUT -i lo -j ACCEPT$ iptables -A OUTPUT -o lo -j ACCEPT (output链的默认策略设置为DROP时,需要添加这条,以下针对的每个端口同此一样.)#开启22端口,ssh才能登录.$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT$ iptables -A OUTPUT -p tcp --dport 22 -j ACCEPT或者$ iptables -A INPUT -i eth0 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT #指定eth1网卡和192.168.2.100允许ssh登录$ iptables -A OUTPUT -o eth0 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT#允许ping(即icmp包通过)$ iptables -A INPUT -p icmp -j ACCEPT$ iptables -A OUTPUT -p icmp -j ACCEPT#使ping域名可以得到响应$ iptables -A INPUT -p udp --sport 53 -j ACCEPT$ iptables -A OUTPUT -p udp --dport 53 -j ACCEPT$ iptables -A INPUT -p udp --dport 53 -j ACCEPT$ iptables -A OUTPUT -p udp --sport 53 -j ACCEPTtip: 除了以上用命令去添加规则,还可以用编辑文件的方式 vim /etc/sysconfig/iptables5.保存iptables配置1service iptables save6.重启iptables服务1service iptables restart7.查看iptables规则1iptables -L -n8.iptables优化:请求比较频繁的放在最上面,请求频率较小的放在最后面.这里整理关于防火墙的东西,不是具体的知识,更多工操作使用,具体的防火墙知识,还需要去阅读参考网上写的各种文章,需要多读多看多试,才能理解深入.]]></content>
-    </entry>
-
-    
-    <entry>
-      <title><![CDATA[Linux常用命令]]></title>
-      <url>%2F2017%2F04%2F20%2FLinux%E5%91%BD%E4%BB%A4%2F</url>
-      <content type="text"><![CDATA[1.Linux查看当前系统登录用户列表1234w 查看当前活跃的用户列表cat /etc/passwd 查看所有用户的列表cat /etc/group 查看用户组cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F":" '&#123; print $1"|"$3"|"$4 &#125;'|more2.查看进程12ps -aux 所有进程ps -ef | grep nginx 指定进程3.mkdir创建目录及字目录mkdir -p /home/xx/xxx/xxxx/xxxxx -v //打印创建过程 4.chmod更改文件文件夹权限1chmod -R //权限设置往下递归5.查看系统版本123lsb_release -auname -acat /etc/issue6.控制用户登录1234567锁模式usermod -L user (Lock 帐号user)usermod -U user (Unlock 帐号user)控制shell模式usermod -s /sbin/nologin user (不允许登录)usermod -s /bin/bash user (允许登录使用指定的bash)/etc/nologin.txt (提示用户为什么不能登录)7.禁止所有用户登录12345touch /etc/nologin如果该文件存在，那么Linux上的所有用户（除了root以外）都无法登录.nologin（注意：不是nologin）可以写点东西，告诉用户为何无法登录.cat /etc/nologin9：00－10：00 系统升级，所有用户都禁止登录！解禁帐号也简单，直接将/etc/nologin删除就行了！8.查看当前用户使用的shell/终端环境123ps | grep $$ | awk '&#123;print $4&#125;'echo $0echo $TERM9.查看端口被进程占用，属于哪个程序1lsof -i :900010.wintolinux1dos2unix unix2dos11.rename使用rename12.查找文件名,并替换其中的指定字符.1find /data/www -name &quot;*.php&quot; | xargs sed -i &apos;s/192.168.2.145/127.0.0.1/g&apos;13.批量修改目录后缀名tip: rename有c版本和Perl版本,使用时请man一下1find ./ -type d -name &quot;*.org&quot;|xargs rename org com14.查找目录下所有文件中包含指定的字符,并替换成其它字符12]]></content>
     </entry>
 
     
@@ -136,6 +143,13 @@
 
     
     <entry>
+      <title><![CDATA[Linux互传文件之SCP使用]]></title>
+      <url>%2F2017%2F03%2F23%2FLinux%E4%B9%8BSCP%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6%2F</url>
+      <content type="text"><![CDATA[Linux互相传输之SCP的使用1.从服务器上拉取目录1scp -p 22 -r user@192.168.2.1:/data/www /data/www/2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)1scp -r /data/www user@192.168.2.1:/data/www/3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码.1ssh-keygen -t rsa (生成在~/.ssh/目录下id_rsa.pub和id_rsa)4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys.1scp -r /root/.ssh/id_rsa.pub user@serverip:/root/.ssh/authorized_keys5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中.1cat /root/.ssh/id_rsa.pub | ssh user@serverip 'cat &gt;&gt; /root/.ssh/authorized_keys']]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[Linux查看网卡信息]]></title>
       <url>%2F2017%2F03%2F23%2FCentOS%E7%BD%91%E5%8D%A1%E7%9B%B8%E5%85%B3%2F</url>
       <content type="text"><![CDATA[CentOS网卡相关信息查看1.首先安装工具,已安装请忽略.1$ yum install pciutiles2.查看网卡型号1$ lspci | grep -i ethernet3.查看网卡驱动版本1$ ethtool -i eth04.网卡驱动安装1234567891011$ yum install kernel-devel kernel-headers $ yum install gcc$ tar zxvf r1000.tgz$ cd r1000/$ make clean modules$ make install$ modprobe r1000$ reboot$ lsmod | grep r1000 或者 ifconfig -a 查看网卡eth0是否加载$ service network restart假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可.​]]></content>
@@ -146,13 +160,6 @@
       <title><![CDATA[Crontab使用之SVN备份]]></title>
       <url>%2F2017%2F03%2F23%2Fcrontab%E4%BD%BF%E7%94%A8%E5%92%8CSVN%E5%A4%87%E4%BB%BD%2F</url>
       <content type="text"><![CDATA[crontab使用之SVN备份1.直接crontab -e 加入定时1*/5 * * * * /data/script/svnbak.pl2.修改/etc/crontab12345678910111213141516SHELL=/bin/bashPATH=/sbin:/bin:/usr/sbin:/usr/binMAILTO=root (设置=""就不会发出电子邮件)HOME=/#run-parts*/5 * * * * /data/script/svnbak.pl# For details see man 4 crontabs# Example of job definition:# .---------------- minute (0 - 59)# | .------------- hour (0 - 23)# | | .---------- day of month (1 - 31)# | | | .------- month (1 - 12) OR jan,feb,mar,apr ...# | | | | .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat# | | | | |# * * * * * user-name command to be executed3.编写SVN备份脚本(perl)日备份增量备份:12345678910111213141516171819202122232425$ vim gnu.com.pl#!/usr/bin/perl -wmy $svn_repos="/data/repos/gnu.com";my $backup_dir="/data/backup/svn/";my $next_backup_file = "daily_incremental_backup.".`date +%Y%m%d`;open(IN,"$backup_dir/last_backed_up");$previous_youngest = &lt;IN&gt;;chomp $previous_youngest;close IN;$youngest=`svnlook youngest $svn_repos`;chomp $youngest;if ($youngest eq $previous_youngest)&#123; print "No new revisions to backup.n"; exit 0;&#125;my $first_rev = $previous_youngest + 1;print "Backing up revisions $youngest ...n";my $svnadmin_cmd = "svnadmin dump --incremental --revision $first_revyoungest $svn_repos &gt; $backup_dir/$next_backup_file";`$svnadmin_cmd`;open(LOG,"&gt;$backup_dir/last_backed_up"); print LOG $youngest;close LOG;print "Compressing dump file...n";print `gzip -g $backup_dir/$next_backup_file`;​ 周备份完整备份:123456789101112131415$ vim gnu.com.pl#!/usr/bin/perl -wmy $svn_repos="/data/repos/gnu.com";my $backup_dir="/data/backup/svn/";my $next_backup_file = "weekly_fully_backup.".`date +%Y%m%d`;$youngest=`svnlook youngest $svn_repos`;chomp $youngest;print "Backing up to revision $youngestn";my $svnadmin_cmd="svnadmin dump --revision 0youngest $svn_repos &gt;$backup_dir/$next_backup_file";`$svnadmin_cmd`;open(LOG,"&gt;$backup_dir/last_backed_up");print LOG $youngest;close LOG;print "Compressing dump file...n";print `gzip -g $backup_dir/$next_backup_file`;1$ chmod +x gnu.com.pl (需要给每一个脚本修改可执行属性 chmod +x *)4.脚本加入定时执行(日备份周一到五23点,周备份每周六23点)方法一:123456$ crontab -eSHELL=/bin/zshPATH=/etc:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbinHOME=/var/log0 23 * * 6 /data/script/svn/weekly/gnu.com.pl0 23 * * 1-5 /data/script/svn/daily/gnu.com.pl方法二:123$ vim /etc/crontab 0 23 * * 6 /data/script/svn/weekly/gnu.com.pl 0 23 * * 1-5 /data/script/svn/daily/gnu.com.pl5.几个定时例子12345600 03 * * 1-5 find /home "*.xxx" -mtime +4 -exec rm &#123;&#125; \;每周一至周五3点钟，在目录/home中，查找文件名为*.xxx的文件，并删除4天前的文件.0 */2 * * * /sbin/service httpd restart每两个小时重启一次apache50 7 * * * /sbin/service sshd start每天7：50开启ssh服务]]></content>
-    </entry>
-
-    
-    <entry>
-      <title><![CDATA[Linux互传文件之SCP使用]]></title>
-      <url>%2F2017%2F03%2F23%2FLinux%E4%B9%8BSCP%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6%2F</url>
-      <content type="text"><![CDATA[Linux互相传输之SCP的使用1.从服务器上拉取目录1scp -p 22 -r user@192.168.2.1:/data/www /data/www/2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)1scp -r /data/www user@192.168.2.1:/data/www/3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码.1ssh-keygen -t rsa (生成在~/.ssh/目录下id_rsa.pub和id_rsa)4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys.1scp -r /root/.ssh/id_rsa.pub user@serverip:/root/.ssh/authorized_keys5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中.1cat /root/.ssh/id_rsa.pub | ssh user@serverip 'cat &gt;&gt; /root/.ssh/authorized_keys']]></content>
     </entry>
 
     

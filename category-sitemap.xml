@@ -7,20 +7,6 @@
     </url>
 
     <url>
-        <loc>http://cyoncan.github.io/categories/LNMP/</loc>
-        <lastmod>2017-04-28T02:23:03.681Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://cyoncan.github.io/categories/%E7%9B%91%E6%8E%A7/</loc>
-        <lastmod>2017-04-28T02:25:44.370Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://cyoncan.github.io/categories/SVN/</loc>
         <lastmod>2017-05-08T14:35:33.781Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -42,15 +28,50 @@
     </url>
 
     <url>
-        <loc>http://cyoncan.github.io/categories/Linux/</loc>
-        <lastmod>2017-05-08T14:44:49.477Z</lastmod>
+        <loc>http://cyoncan.github.io/categories/CentOS/</loc>
+        <lastmod>2017-05-11T07:06:01.232Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://cyoncan.github.io/categories/CentOS/</loc>
-        <lastmod>2017-05-11T05:32:00.396Z</lastmod>
+        <loc>http://cyoncan.github.io/categories/LNMP/</loc>
+        <lastmod>2017-05-11T07:06:30.328Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://cyoncan.github.io/categories/Linux/</loc>
+        <lastmod>2017-05-18T11:13:59.261Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://cyoncan.github.io/categories/%E7%9B%91%E6%8E%A7/</loc>
+        <lastmod>2017-05-18T11:13:59.261Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://cyoncan.github.io/categories/%E6%A6%82%E5%BF%B5%E7%9F%A5%E8%AF%86%E5%BA%93/</loc>
+        <lastmod>2017-05-18T11:13:59.261Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://cyoncan.github.io/categories/MongoDB/</loc>
+        <lastmod>2017-05-20T04:05:00.261Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://cyoncan.github.io/categories/Nginx/</loc>
+        <lastmod>2017-05-20T04:05:00.261Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
