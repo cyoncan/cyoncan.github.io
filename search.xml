@@ -26,7 +26,7 @@
     <entry>
       <title><![CDATA[VPN]]></title>
       <url>%2F2017%2F05%2F03%2FVPN%2F</url>
-      <content type="text"><![CDATA[本来不想写这个文档的,过程很简单,之前弄过几次,最近一个梯子快过期了,又找了台非常实惠的vps,准备重新弄个,又是到处找教程,弄来弄去的,想想还是自己记录下过程吧,自己写自己也看得比较明白方便以后自己看.推荐购买vultr和linode.通常两种方式上VPN : PPTP和shadowsocks , Linux一般各个发行版本之间的配置类似,我用过Debian和centos6/7PPTP拨号方式1.检测系统环境,满足以下三条检测,否则装pptp无效,可以去装openVPN1234567# 查看内核是否支持MPPE,显示ok表明通过.否则需要安装kernel-devel➜ ~ modprobe ppp-compress-18 &amp;&amp; echo OK# 执行下面两条命令,得到响应结果和下面的一样.就可以接下面的步骤安装PPTP➜ ~ cat /dev/ppp 检测是否开启ppp支持cat: /dev/ppp: No such device or address➜ ~ cat /dev/net/tun 检测是否开启net/tun支持cat: /dev/net/tun: File descriptor in bad state2.安装相应组件,关闭SELinux(一般都默认关闭,否则手动关闭)1234➜ ~ yum install epel➜ ~ yum makecache fast➜ ~ yum -y install ppp➜ ~ yum -y install pptpd3.编辑相关配置1234➜ ~ vim /etc/pptpd.conf # 去掉末尾的这两行注释,有说明,如果该地址段与内网地址有冲突,需要把这里的改下. localip 192.168.0.1 remoteip 192.168.0.234-238,192.168.0.2451234➜ ~ vim /etc/ppp/options.pptpd# 修改ms-dns字段ms-dns 8.8.8.8ms-dns 8.8.4.44.设置VPN拨号账号密码1234➜ ~ vim /etc/ppp/chap-secrets# 按照给你的格式去写# client server secret IP addresshello pptpd helloworld *5.修改内核参数12345➜ ~ vim /etc/sysctl.conf# 在末尾添加一下或者取消现有的注释net.ipv4.ip_forward=1# 运行下面的命令使之生效➜ ~ sysctl -p6.放行服务端口或者直接关了防火墙123# centos7是这么添加的,其他版本Linux参考百度➜ ~ firewall-cmd --zone=public --add-port=80/tcp --permanent➜ ~ firewall-cmd --reload]]></content>
+      <content type="text"><![CDATA[本来不想写这个文档的,过程很简单,之前弄过几次,最近一个梯子快过期了,又找了台非常实惠的vps,准备重新弄个,又是到处找教程,弄来弄去的,想想还是自己记录下过程吧,自己写自己也看得比较明白方便以后自己看.推荐购买vultr和linode.通常两种方式上VPN : PPTP和shadowsocks , Linux一般各个发行版本之间的配置类似,我用过Debian7/8和centos6/7, 如果是纯fq推荐使用debianPPTP拨号方式1.检测系统环境,满足以下三条检测,否则装pptp无效,可以去装openVPN1234567# 查看内核是否支持MPPE,显示ok表明通过.否则需要安装kernel-devel➜ ~ modprobe ppp-compress-18 &amp;&amp; echo OK# 执行下面两条命令,得到响应结果和下面的一样.就可以接下面的步骤安装PPTP➜ ~ cat /dev/ppp 检测是否开启ppp支持cat: /dev/ppp: No such device or address➜ ~ cat /dev/net/tun 检测是否开启net/tun支持cat: /dev/net/tun: File descriptor in bad state2.安装相应组件,关闭SELinux(一般都默认关闭,否则手动关闭)1234➜ ~ yum install epel➜ ~ yum makecache fast➜ ~ yum -y install ppp➜ ~ yum -y install pptpd3.编辑相关配置1234➜ ~ vim /etc/pptpd.conf # 去掉末尾的这两行注释,有说明,如果该地址段与内网地址有冲突,需要把这里的改下. localip 192.168.0.1 remoteip 192.168.0.234-238,192.168.0.2451234➜ ~ vim /etc/ppp/options.pptpd# 修改ms-dns字段ms-dns 8.8.8.8ms-dns 8.8.4.44.设置VPN拨号账号密码1234➜ ~ vim /etc/ppp/chap-secrets# 按照给你的格式去写# client server secret IP addresshello pptpd helloworld *5.修改内核参数12345➜ ~ vim /etc/sysctl.conf# 在末尾添加一下或者取消现有的注释net.ipv4.ip_forward=1# 运行下面的命令使之生效➜ ~ sysctl -p6.放行服务端口或者直接关了防火墙123# centos7是这么添加的,其他版本Linux参考百度➜ ~ firewall-cmd --zone=public --add-port=80/tcp --permanent➜ ~ firewall-cmd --reloadshadowsocks可以参考shadowsocks的GitHub文档,非常非常的详细,我就不写了,自己每次用也是看这个,GitHub上去搜索shadowsocks仓库,注意shadowsocks有多种语言版本,c语言版本一般是首选,至于为什么呢!下面贴几条网上普遍认可的,但是他默认并不支持多用户,python版本go版本都是可以支持一个配置文件多用户的.也可以直接上python版的就好了.c语言版本:体积小巧。静态编译并打包后只有 100 KB。高并发。基于 libev 实现的异步 I/O，以及基于线程池的异步 DNS，同时连接数可上万。低资源占用。几乎不占用 CPU 资源，服务器端内存占用一般在 3MB 左右。c语言版本,多用户配置:假如我有以下这三个用户(端口),每个用户(端口)独立一个配置文件./etc/shadowsocks-libev/config8388.json/etc/shadowsocks-libev/config8389.json/etc/shadowsocks-libev/config8390.json通过supervisor进程管理软件,能将一个普通的命令行进程变为后台daemon，并监控进程状态，异常退出时能自动重启.12345678910111213141516171819202122232425262728293031$ apt-get install supervisor$ echo_supervisord_conf 输出默认配置文件$ echo_supervisord_conf &gt; /etc/supervisord.conf 将输出的默认配置项重定向到自定义的配置文件里面$ vim /etc/supervisord.conf[program:ss8388]command:ss-server -c /etc/shadowsocks-libev/config8388.json -u -Aprocess_name=ss8388redirect_stderr=truestdout_logfile_maxbytes=1MBstdout_logfile_backups=1[program:ss8389]command:ss-server -c /etc/shadowsocks-libev/config8389.json -u -Aprocess_name=ss8389redirect_stderr=truestdout_logfile_maxbytes=1MBstdout_logfile_backups=1[program:ss8390]command:ss-server -c /etc/shadowsocks-libev/config8390.json -u -Aprocess_name=ss8390redirect_stderr=truestdout_logfile_maxbytes=1MBstdout_logfile_backups=1$ supervisorctl -c /etc/supervisord.conf 进入supervisorctl-shell界面&gt;status&gt;start/stop/restart ss8388&gt;reread&gt;update或者下面这种类型$ supervisorctl status通过脚本,相关命令,下面就是简单的命令执行,也可以写成脚本方便管理.1234$ setsid ss-serevr -c /etc/shadowsocks-libev/config8388.json -u -A$ setsid ss-serevr -c /etc/shadowsocks-libev/config8389.json -u -A$ setsid ss-serevr -c /etc/shadowsocks-libev/config8390.json -u -A$ ps -ef | grep ss-server 可以查看到那启动的三个进程]]></content>
     </entry>
 
     
@@ -80,16 +80,30 @@
 
     
     <entry>
-      <title><![CDATA[CentOS防火墙之配置iptables]]></title>
-      <url>%2F2017%2F04%2F20%2FCentOS6%E9%98%B2%E7%81%AB%E5%A2%99%E4%B9%8Biptables%2F</url>
-      <content type="text"><![CDATA[一、iptables表和链的结构(四表五链)1.四张表处理优先级: raw&gt;mangle&gt;nat&gt;filterraw: 优先级最高, 设置raw一般是为了不再让iptables做数据包的跟踪链接处理, 提高性能.mangle: 用于对特定数据包的修改.nat: 用于nat功能端口或者地址映射.filter: 一般的过滤功能.2.五链：INPUT, FORWARD, OUTPUT, PREROUTING, POSTROUTINGraw表中的链有: PREROUTING, OUTPUTmangle表中的链有: PREROUTING, INPUT, FORWARD, OUTPUT, POSTROUTINGnat表中的链有: PREROUTING, POSTROUTING, OUTPUTfilter表中的链有: INPUT, FORWARD, OUTPUT3.iptables常用参数:tip: iptable -h都能看到对应的解释规则增删改查:参数作用-A在规则链的末尾加入新规则-I在规则链的头部加入新规则-D删除-R修改-L查看-P设置默认策略 , iptables -P INPUT DROP-F清空默认规则链-X删除自定义空链常用参数:参数作用-p指定协议 tcp/udp/icmp-s指定源地址 ip/mask , 加叹号 “!” 表示相反的意思-d匹配目标地址–sport匹配来源端口号–dport匹配目端口号-i匹配从这块网卡流入的数据-o匹配从这块网卡流出的数据-m加载模块-t指定表, 默认filter表. iptables -L - nat/mangle/raw-j指定处理的动作 , ACCEPT/DROP常用处理动作:动作作用ACCEPT允许封包通过,:将数据包放行,进行完此动作后,不再对比其他规则,直接跳往下一个规则链.DROP丢弃封包,响应超时,对方无法判断主机是否在线或者流量被拒绝,不再对比其他规则,中断过滤.REJECT拒绝封包通过,并将数据包封装,返回消息,对方看到主机口不可达.REDIRECT将包重定向到另一个端口,之后继续对比其他规则.MASQUERADE改写封包来源ip为防火墙NIC ip , 可指定port范围 , 之后跳往下一规则.SNAT改写封包来源ip为某特定ip或ip范围 , 可指定 port 范围 , 之后跳往下一规则.DNAT改写封包目的ip为某特定ip或ip范围, 可指定port范围 , 之后跳往下一规则.二、配置filter表防火墙tip: 一般设置默认规则,INPUT链和FORWARD链为DROP , OUTPUT链为ACCEPT1.清除预设表filter中的所有规则链的规则1iptables -F2.清除预设表filter中使用者自定链中的规则1iptables -X3.设定预设规则123iptables -P INPUT DROPiptables -P OUTPUT ACCEPTiptables -P FORWARD DROP4.根据自己机器的实际情况开启相应端口123456789101112131415161718# 允许回环loopback访问$ iptables -A INPUT -i lo -j ACCEPT$ iptables -A OUTPUT -o lo -j ACCEPT (output链的默认策略设置为DROP时,需要添加这条,以下针对的每个端口同此一样.)#开启22端口,ssh才能登录.$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT$ iptables -A OUTPUT -p tcp --dport 22 -j ACCEPT或者$ iptables -A INPUT -i eth0 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT #指定eth1网卡和192.168.2.100允许ssh登录$ iptables -A OUTPUT -o eth0 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT#允许ping(即icmp包通过)$ iptables -A INPUT -p icmp -j ACCEPT$ iptables -A OUTPUT -p icmp -j ACCEPT#使ping域名可以得到响应$ iptables -A INPUT -p udp --sport 53 -j ACCEPT$ iptables -A OUTPUT -p udp --dport 53 -j ACCEPT$ iptables -A INPUT -p udp --dport 53 -j ACCEPT$ iptables -A OUTPUT -p udp --sport 53 -j ACCEPTtip: 除了以上用命令去添加规则,还可以用编辑文件的方式 vim /etc/sysconfig/iptables5.保存iptables配置1service iptables save6.重启iptables服务1service iptables restart7.查看iptables规则1iptables -L -n8.iptables优化:请求比较频繁的放在最上面,请求频率较小的放在最后面.这里整理关于防火墙的东西,不是具体的知识,更多工操作使用,具体的防火墙知识,还需要去阅读参考网上写的各种文章,需要多读多看多试,才能理解深入.]]></content>
+      <title><![CDATA[zabbix配置监控MySQL]]></title>
+      <url>%2F2017%2F04%2F20%2Fzabbix3.0%E7%9B%91%E6%8E%A7MySQL%2F</url>
+      <content type="text"><![CDATA[zabbix3.0监控MySQL设置1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)2.在zabbix/etc/下面新建.my.cnf文件1234567891011121314$ find / -name "sock" -print /var/lib/mysql/mysql.sock$ vim /usr/local/zabbix/etc/.my.cnf #zabbix Agent [mysql] host=localhost user=zabbix password=zabbix socket=/var/lib/mysql/mysql.sock [mysqladmin] host=localhost usr=zabbix password=zabbix socket=/var/lib/mysql/mysql.sock3.编辑 userparameter_mysql.conf1234567$ find / -name userparameter_mysql.conf/usr/local/src/zabbix-3.0.8/conf/zabbix-agentd/userparameter_mysql.conf$ cp userparameter_mysql.conf /usr/local/zabbix/etc/zabbix_agentd.conf.d/$ sed -i 's#/var/lib/zabbix#/usr/local/zabbix/etc#g' 或者用 vim编辑该文件替换掉 home 目录为 .my.cnf 所在的目录$ vim /usr/local/zabbix/etc/zabbix/zabbix.agentd.conf 添加一行 Include=/usr/local/zabbix/etc/zabbix_agentd.conf.d/]]></content>
     </entry>
 
     
     <entry>
-      <title><![CDATA[zabbix配置监控MySQL]]></title>
-      <url>%2F2017%2F04%2F20%2Fzabbix3.0%E7%9B%91%E6%8E%A7MySQL%2F</url>
-      <content type="text"><![CDATA[zabbix3.0监控MySQL设置1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)2.在zabbix/etc/下面新建.my.cnf文件1234567891011121314$ find / -name "sock" -print /var/lib/mysql/mysql.sock$ vim /usr/local/zabbix/etc/.my.cnf #zabbix Agent [mysql] host=localhost user=zabbix password=zabbix socket=/var/lib/mysql/mysql.sock [mysqladmin] host=localhost usr=zabbix password=zabbix socket=/var/lib/mysql/mysql.sock3.编辑 userparameter_mysql.conf1234567$ find / -name userparameter_mysql.conf/usr/local/src/zabbix-3.0.8/conf/zabbix-agentd/userparameter_mysql.conf$ cp userparameter_mysql.conf /usr/local/zabbix/etc/zabbix_agentd.conf.d/$ sed -i 's#/var/lib/zabbix#/usr/local/zabbix/etc#g' 或者用 vim编辑该文件替换掉 home 目录为 .my.cnf 所在的目录$ vim /usr/local/zabbix/etc/zabbix/zabbix.agentd.conf 添加一行 Include=/usr/local/zabbix/etc/zabbix_agentd.conf.d/]]></content>
+      <title><![CDATA[理解xargs]]></title>
+      <url>%2F2017%2F04%2F20%2Fxargs%2F</url>
+      <content type="text"><![CDATA[理解xargs命令工作和使用123⚡ root@intelnet:$ xargs hellohello工作形式: 从标准输入stdin读取数据,根据输入读取执行命令作为参数提供给它一次或多次.输入中的任何空白和空格均视为分隔符,空行被忽略.进入xargs ,进行数据输入, Ctrl+D告诉xargs结束输入任务,echo命令被自动执行,并且再次打印 hello.echo是xargs默认的执行命令,我们可以指定其它命令作为参数传递给xargs , 然后通过stdin传递要查询的文件和类型作为输入的名称.如下:12⚡ root@intelnet:$ xargs find -name "*.log"]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[vim常用命令]]></title>
+      <url>%2F2017%2F04%2F20%2Fvim%2F</url>
+      <content type="text"><![CDATA[Linux vim常用命令1.替换1234567:s/abc/efg/ 替换当前行,第一个 abc 为 efg:s/abc/efg/g 替换当前行,所有 abc 为 efg:n,$s/xyz/org/ 替换第 n 行开始到最后一行中每一行的第一个 xyz 为 org:n,$s/xyz/org/g 替换第 n 行开始到最后一行中每一行所有 xyz 为 org n 为数字，若 n 为 . ，表示从当前行开始到最后一行:%s/xyz/org/ (等同于:g/xyz/s//org/) 替换每一行的第一个 xyz 为 org:%s/xyz/org/g （等同于:g/xyz/s//org/g）替换每一行中所有 xyz 为 org2.vim执行：wq清楚屏幕上上一次编辑过的内容12vim退出后清屏,屏幕不显示之前编辑的内容.TERM=xterm; export TERM3.删除全部1:%d4.复制123v 进入块选择模式↑↓←→ 选择要复制的块yy 复制]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[MySQL常用语句]]></title>
+      <url>%2F2017%2F04%2F20%2Fmysql%2F</url>
+      <content type="text"><![CDATA[1.MySQL创建用户1create user 'username'@'%' identified by 'passwd'; % 换成localhost或者127.0.0.1,就只能本地登录了.2.给用户授权123grant all privileges on databasename.tablename to 'username'@'hostname' identified by 'passwd'with grant option; all代表所有权限,withgrant option代表该用户可以给其他用户也进行授权操作.flush privileges; 授权完成,需要刷新生效.quit;3.查看mysql有多少个账户1select host,user,password from mysql.user;4.查看MySQL字符集,排序规则12show variables like 'collation%';show variables like 'char%';]]></content>
     </entry>
 
     
@@ -108,23 +122,9 @@
 
     
     <entry>
-      <title><![CDATA[MySQL常用语句]]></title>
-      <url>%2F2017%2F04%2F20%2Fmysql%2F</url>
-      <content type="text"><![CDATA[1.MySQL创建用户1create user 'username'@'%' identified by 'passwd'; % 换成localhost或者127.0.0.1,就只能本地登录了.2.给用户授权123grant all privileges on databasename.tablename to 'username'@'hostname' identified by 'passwd'with grant option; all代表所有权限,withgrant option代表该用户可以给其他用户也进行授权操作.flush privileges; 授权完成,需要刷新生效.quit;3.查看mysql有多少个账户1select host,user,password from mysql.user;4.查看MySQL字符集,排序规则12show variables like 'collation%';show variables like 'char%';]]></content>
-    </entry>
-
-    
-    <entry>
-      <title><![CDATA[vim常用命令]]></title>
-      <url>%2F2017%2F04%2F20%2Fvim%2F</url>
-      <content type="text"><![CDATA[Linux vim常用命令1.替换1234567:s/abc/efg/ 替换当前行,第一个 abc 为 efg:s/abc/efg/g 替换当前行,所有 abc 为 efg:n,$s/xyz/org/ 替换第 n 行开始到最后一行中每一行的第一个 xyz 为 org:n,$s/xyz/org/g 替换第 n 行开始到最后一行中每一行所有 xyz 为 org n 为数字，若 n 为 . ，表示从当前行开始到最后一行:%s/xyz/org/ (等同于:g/xyz/s//org/) 替换每一行的第一个 xyz 为 org:%s/xyz/org/g （等同于:g/xyz/s//org/g）替换每一行中所有 xyz 为 org2.vim执行：wq清楚屏幕上上一次编辑过的内容12vim退出后清屏,屏幕不显示之前编辑的内容.TERM=xterm; export TERM3.删除全部1:%d]]></content>
-    </entry>
-
-    
-    <entry>
-      <title><![CDATA[理解xargs]]></title>
-      <url>%2F2017%2F04%2F20%2Fxargs%2F</url>
-      <content type="text"><![CDATA[理解xargs命令工作和使用123⚡ root@intelnet:$ xargs hellohello工作形式: 从标准输入stdin读取数据,根据输入读取执行命令作为参数提供给它一次或多次.输入中的任何空白和空格均视为分隔符,空行被忽略.进入xargs ,进行数据输入, Ctrl+D告诉xargs结束输入任务,echo命令被自动执行,并且再次打印 hello.echo是xargs默认的执行命令,我们可以指定其它命令作为参数传递给xargs , 然后通过stdin传递要查询的文件和类型作为输入的名称.如下:12⚡ root@intelnet:$ xargs find -name "*.log"]]></content>
+      <title><![CDATA[CentOS防火墙之配置iptables]]></title>
+      <url>%2F2017%2F04%2F20%2FCentOS6%E9%98%B2%E7%81%AB%E5%A2%99%E4%B9%8Biptables%2F</url>
+      <content type="text"><![CDATA[一、iptables表和链的结构(四表五链)1.四张表处理优先级: raw&gt;mangle&gt;nat&gt;filterraw: 优先级最高, 设置raw一般是为了不再让iptables做数据包的跟踪链接处理, 提高性能.mangle: 用于对特定数据包的修改.nat: 用于nat功能端口或者地址映射.filter: 一般的过滤功能.2.五链：INPUT, FORWARD, OUTPUT, PREROUTING, POSTROUTINGraw表中的链有: PREROUTING, OUTPUTmangle表中的链有: PREROUTING, INPUT, FORWARD, OUTPUT, POSTROUTINGnat表中的链有: PREROUTING, POSTROUTING, OUTPUTfilter表中的链有: INPUT, FORWARD, OUTPUT3.iptables常用参数:tip: iptable -h都能看到对应的解释规则增删改查:参数作用-A在规则链的末尾加入新规则-I在规则链的头部加入新规则-D删除-R修改-L查看-P设置默认策略 , iptables -P INPUT DROP-F清空默认规则链-X删除自定义空链常用参数:参数作用-p指定协议 tcp/udp/icmp-s指定源地址 ip/mask , 加叹号 “!” 表示相反的意思-d匹配目标地址–sport匹配来源端口号–dport匹配目端口号-i匹配从这块网卡流入的数据-o匹配从这块网卡流出的数据-m加载模块-t指定表, 默认filter表. iptables -L - nat/mangle/raw-j指定处理的动作 , ACCEPT/DROP常用处理动作:动作作用ACCEPT允许封包通过,:将数据包放行,进行完此动作后,不再对比其他规则,直接跳往下一个规则链.DROP丢弃封包,响应超时,对方无法判断主机是否在线或者流量被拒绝,不再对比其他规则,中断过滤.REJECT拒绝封包通过,并将数据包封装,返回消息,对方看到主机口不可达.REDIRECT将包重定向到另一个端口,之后继续对比其他规则.MASQUERADE改写封包来源ip为防火墙NIC ip , 可指定port范围 , 之后跳往下一规则.SNAT改写封包来源ip为某特定ip或ip范围 , 可指定 port 范围 , 之后跳往下一规则.DNAT改写封包目的ip为某特定ip或ip范围, 可指定port范围 , 之后跳往下一规则.二、配置filter表防火墙tip: 一般设置默认规则,INPUT链和FORWARD链为DROP , OUTPUT链为ACCEPT1.清除预设表filter中的所有规则链的规则1iptables -F2.清除预设表filter中使用者自定链中的规则1iptables -X3.设定预设规则123iptables -P INPUT DROPiptables -P OUTPUT ACCEPTiptables -P FORWARD DROP4.根据自己机器的实际情况开启相应端口123456789101112131415161718# 允许回环loopback访问$ iptables -A INPUT -i lo -j ACCEPT$ iptables -A OUTPUT -o lo -j ACCEPT (output链的默认策略设置为DROP时,需要添加这条,以下针对的每个端口同此一样.)#开启22端口,ssh才能登录.$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT$ iptables -A OUTPUT -p tcp --dport 22 -j ACCEPT或者$ iptables -A INPUT -i eth0 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT #指定eth1网卡和192.168.2.100允许ssh登录$ iptables -A OUTPUT -o eth0 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT#允许ping(即icmp包通过)$ iptables -A INPUT -p icmp -j ACCEPT$ iptables -A OUTPUT -p icmp -j ACCEPT#使ping域名可以得到响应$ iptables -A INPUT -p udp --sport 53 -j ACCEPT$ iptables -A OUTPUT -p udp --dport 53 -j ACCEPT$ iptables -A INPUT -p udp --dport 53 -j ACCEPT$ iptables -A OUTPUT -p udp --sport 53 -j ACCEPTtip: 除了以上用命令去添加规则,还可以用编辑文件的方式 vim /etc/sysconfig/iptables5.保存iptables配置1service iptables save6.重启iptables服务1service iptables restart7.查看iptables规则1iptables -L -n8.iptables优化:请求比较频繁的放在最上面,请求频率较小的放在最后面.这里整理关于防火墙的东西,不是具体的知识,更多工操作使用,具体的防火墙知识,还需要去阅读参考网上写的各种文章,需要多读多看多试,才能理解深入.]]></content>
     </entry>
 
     
@@ -143,16 +143,16 @@
 
     
     <entry>
-      <title><![CDATA[Linux互传文件之SCP使用]]></title>
-      <url>%2F2017%2F03%2F23%2FLinux%E4%B9%8BSCP%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6%2F</url>
-      <content type="text"><![CDATA[Linux互相传输之SCP的使用1.从服务器上拉取目录1scp -p 22 -r user@192.168.2.1:/data/www /data/www/2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)1scp -r /data/www user@192.168.2.1:/data/www/3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码.1ssh-keygen -t rsa (生成在~/.ssh/目录下id_rsa.pub和id_rsa)4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys.1scp -r /root/.ssh/id_rsa.pub user@serverip:/root/.ssh/authorized_keys5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中.1cat /root/.ssh/id_rsa.pub | ssh user@serverip 'cat &gt;&gt; /root/.ssh/authorized_keys']]></content>
+      <title><![CDATA[Linux查看网卡信息]]></title>
+      <url>%2F2017%2F03%2F23%2FCentOS%E7%BD%91%E5%8D%A1%E7%9B%B8%E5%85%B3%2F</url>
+      <content type="text"><![CDATA[CentOS网卡相关信息查看1.首先安装工具,已安装请忽略.1$ yum install pciutiles2.查看网卡型号1$ lspci | grep -i ethernet3.查看网卡驱动版本1$ ethtool -i eth04.网卡驱动安装1234567891011$ yum install kernel-devel kernel-headers $ yum install gcc$ tar zxvf r1000.tgz$ cd r1000/$ make clean modules$ make install$ modprobe r1000$ reboot$ lsmod | grep r1000 或者 ifconfig -a 查看网卡eth0是否加载$ service network restart假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可.​]]></content>
     </entry>
 
     
     <entry>
-      <title><![CDATA[Linux查看网卡信息]]></title>
-      <url>%2F2017%2F03%2F23%2FCentOS%E7%BD%91%E5%8D%A1%E7%9B%B8%E5%85%B3%2F</url>
-      <content type="text"><![CDATA[CentOS网卡相关信息查看1.首先安装工具,已安装请忽略.1$ yum install pciutiles2.查看网卡型号1$ lspci | grep -i ethernet3.查看网卡驱动版本1$ ethtool -i eth04.网卡驱动安装1234567891011$ yum install kernel-devel kernel-headers $ yum install gcc$ tar zxvf r1000.tgz$ cd r1000/$ make clean modules$ make install$ modprobe r1000$ reboot$ lsmod | grep r1000 或者 ifconfig -a 查看网卡eth0是否加载$ service network restart假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可.​]]></content>
+      <title><![CDATA[Linux互传文件之SCP使用]]></title>
+      <url>%2F2017%2F03%2F23%2FLinux%E4%B9%8BSCP%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6%2F</url>
+      <content type="text"><![CDATA[Linux互相传输之SCP的使用1.从服务器上拉取目录1scp -p 22 -r user@192.168.2.1:/data/www /data/www/2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)1scp -r /data/www user@192.168.2.1:/data/www/3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码.1ssh-keygen -t rsa (生成在~/.ssh/目录下id_rsa.pub和id_rsa)4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys.1scp -r /root/.ssh/id_rsa.pub user@serverip:/root/.ssh/authorized_keys5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中.1cat /root/.ssh/id_rsa.pub | ssh user@serverip 'cat &gt;&gt; /root/.ssh/authorized_keys']]></content>
     </entry>
 
     
