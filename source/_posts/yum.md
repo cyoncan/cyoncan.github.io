@@ -1,6 +1,6 @@
 ---
 title: yum命令
-date: 20170-04-24 12:13:21
+date: 2017-04-24 12:13:21
 categories:
 - CentOS
 tag:
