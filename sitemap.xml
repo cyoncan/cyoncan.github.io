@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cyoncan.github.io/2017/04/24/yum/</loc>
+    
+    <lastmod>2017-06-07T16:33:18.449Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cyoncan.github.io/2017/05/18/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/</loc>
     
     <lastmod>2017-05-27T13:31:20.106Z</lastmod>
@@ -61,13 +68,6 @@
     <loc>http://cyoncan.github.io/2017/03/27/lnmp/</loc>
     
     <lastmod>2017-05-11T07:06:30.328Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cyoncan.github.io/20170/04/24/yum/</loc>
-    
-    <lastmod>2017-05-11T07:06:01.232Z</lastmod>
     
   </url>
   

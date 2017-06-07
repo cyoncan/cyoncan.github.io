@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://cyoncan.github.io/2017/04/24/yum/</loc>
+    <lastmod>2017-06-07T16:33:18.449Z</lastmod>
+    <data>
+        <display>
+        <title>yum命令</title>
+        <pubTime>2017-04-24T04:13:21.000Z</pubTime>
+        
+        <tag>yum命令</tag>
+         
+         
+           
+             
+              <breadCrumb title="CentOS" url="http://cyoncan.github.io/categories/CentOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cyoncan.github.io/2017/05/18/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/</loc>
     <lastmod>2017-05-27T13:31:20.106Z</lastmod>
     <data>
@@ -187,26 +207,6 @@
            
              
               <breadCrumb title="LNMP" url="http://cyoncan.github.io/categories/LNMP/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cyoncan.github.io/20170/04/24/yum/</loc>
-    <lastmod>2017-05-11T07:06:01.232Z</lastmod>
-    <data>
-        <display>
-        <title>yum命令</title>
-        <pubTime>+020170-04-24T04:13:21.000Z</pubTime>
-        
-        <tag>yum命令</tag>
-         
-         
-           
-             
-              <breadCrumb title="CentOS" url="http://cyoncan.github.io/categories/CentOS/"/>
           
         </display>
     </data>
