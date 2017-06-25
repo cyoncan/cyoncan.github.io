@@ -146,5 +146,5 @@ $ service named start
 
 ### 6.修改客户端机器的DNS为192.168.2.100
 
-*服务器防火墙开放53端口，关闭selinux。*
+*服务器防火墙开放53端口udp和tcp均要，关闭selinux。*
 
