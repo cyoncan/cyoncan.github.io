@@ -21,29 +21,8 @@
     </url>
 
     <url>
-        <loc>http://cyoncan.github.io/categories/VPN/</loc>
-        <lastmod>2017-05-08T14:44:41.317Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://cyoncan.github.io/categories/CentOS/</loc>
-        <lastmod>2017-05-11T07:06:01.232Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://cyoncan.github.io/categories/LNMP/</loc>
         <lastmod>2017-05-11T07:06:30.328Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://cyoncan.github.io/categories/Linux/</loc>
-        <lastmod>2017-05-18T11:13:59.261Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -72,6 +51,48 @@
     <url>
         <loc>http://cyoncan.github.io/categories/Nginx/</loc>
         <lastmod>2017-05-20T04:05:00.261Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://cyoncan.github.io/categories/VPN/</loc>
+        <lastmod>2017-05-24T16:20:02.056Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://cyoncan.github.io/categories/CentOS/</loc>
+        <lastmod>2017-06-07T16:33:18.449Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://cyoncan.github.io/categories/%E7%BD%91%E7%BB%9C/</loc>
+        <lastmod>2017-06-08T18:54:26.961Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://cyoncan.github.io/categories/nginx/</loc>
+        <lastmod>2017-06-08T18:54:26.961Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://cyoncan.github.io/categories/Linux/</loc>
+        <lastmod>2017-06-25T16:25:08.145Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://cyoncan.github.io/categories/PHP/</loc>
+        <lastmod>2017-07-04T15:41:00.720Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
