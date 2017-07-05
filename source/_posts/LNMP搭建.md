@@ -2,7 +2,7 @@
 title: lnmp环境搭建配置
 date: 2017-03-27 16:09:59
 categories:
-- LNMP
+- PHP
 tags:
 - mysql
 - php-fpm
@@ -260,7 +260,7 @@ $ useradd -r -g mysql -s /sbin/nologin mysql
 $ wget -c http://mirrors.sohu.com/mysql/MySQL-5.6/mysql-5.6.35.tar.gz
 $ tar mysql-5.6.35.tar.gz
 $ cd mysql-5.6.35
-$ cmake -DCMAKE_INSTALL_PREFIX=/data/local/mysql/ -DMYSQL_DATADIR=/data/mysqldb -DMYSQL_TCP_PORT=3306
+$ cmake -DCMAKE_INSTALL_PREFIX=/data/local/mysql/ -DMYSQL_DATADIR=/data/mysqldb -DMYSQL_TCP_PORT=3306 –enable-thread-safe-client
 (cmake安装参数参考MySQL官方介绍 http://t.cn/RipwTjB)
 $ make && make install
 $ /data/local/mysql/bin/mysql --version
@@ -363,15 +363,9 @@ $ ./configure --prefix=/data/local/php --enable-fpm
 (如果这里没有加--enable-fpm, php5.3及以上的内置了php-fpm 可以重新编译加上参数。或者yum install php-fpm,
 以下供参数参考 configure过程中有提示参数软件未安装的就安装后再configure,或者去除参数:
 
-./configure --prefix=/data/local/php --enable-fpm --with-mysql=/data/local/mysql
- --with-config-file-path=/data/local/php/etc --with-mysqli=/data/local/mysql/bin/mysql_config --with-freetype-dir --
-with-jpeg-dir --with-png-dir --with-zlib-dir --with-libxml-dir --enable-bcmath --enable-shmop --enable-sysvsem --ena
-ble-inline-optimization --with-curl --with-curlwrappers --enable-mbstring --with-mcrypt --with-mhash  --with-gd --en
-able-gd-native-ttf --with-openssl --enable-sockets --enable-zip --enable-ftp --with-pear --enable-fastCGI --enable-f
-orce-CGI-redirect  --with-gmp --with-pcre-dir=/data/local/pcre/bin/pcre-config --with-gdbm --enable-zend-multibyte --enabl
-e-soap --enable-exif --enable-pdo_mysql --with-xsl --with-bz2
+./configure --prefix=/data/local/php --with-config-file-path=/data/local/php/etc --with-mysql=/data/local/mysql --with-mysqli=/data/local/mysql/bin/mysql_config --with-pdo-mysql=/data/local/mysql --with-pcre-dir=/data/local/pcre/bin/pcre-config --enable-bcmath --enable-exif --enable-fpm --enable-ftp --enable-fastCGI --enable-force-CGI-redirect --enable-gd-native-ttf --enable-inline-optimization --enable-mbstring --enable-opcache --enable-pcntl --enable-pdo_mysql --enable-soap --enable-shmop --enable-sockets --enable-sysvsem --enable-sysvmsg --enable-sysvshm --enable-zip --enable-zend-multibyte --with-bz2 --with-curl --with-curlwrappers --with-freetype-dir --with-gd --with-gdbm --with-gmp --with-gettext --with-jpeg-dir --with-libxml-dir --with-libdir --with-mhash --with-mcrypt --with-openssl --with-png-dir --with-pear --with-xsl --with-zlib-dir 
 
-附加参数参考 http://t.cn/Ri0WWcq)
+附加参数参考 http://t.cn/Ri0WWcq)如果有httpd，可以加上 --with-apxs2=/data/local/httpd/bin/apxs这段参数，避免以后要使用httpd再重新编译php。
 $ make test
 $ make install
 $ cp php.ini-development /data/local/php/etc/php.ini   (去目录将cp过去的文件重命 php.ini)
