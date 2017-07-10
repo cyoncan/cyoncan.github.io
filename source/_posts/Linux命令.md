@@ -7,7 +7,7 @@ tags:
 - 命令
 ---
 <!-- more -->
-### 1.Linux查看当前系统登录用户列表
+### Linux查看当前系统登录用户列表
 
 ```bash
 w               查看当前活跃的用户列表
@@ -16,29 +16,27 @@ cat /etc/group  查看用户组
 cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F":" '{ print $1"|"$3"|"$4 }'|more
 ```
 
-### 2.查看进程
+### 查看是否安装软件
 
 ```bash
-ps -aux              所有进程
-ps -ef | grep nginx  指定进程
+# rpm包安装
+rpm -qa | grep "软件包名“
+# deb包安装
+dpkg -l | grep "软件包名"
+# yum安装
+yum list installed | grep "软件包名"
 ```
 
-### 3.mkdir创建目录及字目录
-    mkdir -p /home/xx/xxx/xxxx/xxxxx
-          -v //打印创建过程
-### 4.chmod更改文件文件夹权限
-```bash
-chmod -R //权限设置往下递归
-```
-
-### 5.查看系统版本
+### 查看系统版本
 ```bash
 lsb_release -a
 uname -a
 cat /etc/issue
+cat /etc/redhat-release   # rhl系列
+cat /etc/debian_version   # debian系列
 ```
 
-### 6.控制用户登录
+### 控制用户登录
 
 ```bash
 锁模式
@@ -50,7 +48,7 @@ usermod -s /bin/bash user      (允许登录使用指定的bash)
 /etc/nologin.txt               (提示用户为什么不能登录)
 ```
 
-### 7.禁止所有用户登录
+### 禁止所有用户登录
 
 ```bash
 touch /etc/nologin
@@ -60,7 +58,7 @@ cat /etc/nologin
 解禁帐号也简单，直接将/etc/nologin删除就行了！
 ```
 
-### 8.查看当前用户使用的shell/终端环境
+### 查看当前用户使用的shell/终端环境
 
 ```bash
 ps | grep $$ | awk '{print $4}'
@@ -68,26 +66,23 @@ echo $0
 echo $TERM
 ```
 
-### 9.查看端口被进程占用，属于哪个程序
+### 查看端口
 ```bash
 lsof -i :9000
 ```
 
-### 10.wintolinux
+### win2linux
 ```bash
 dos2unix unix2dos
 ```
 
-### 11.rename使用
-rename
-
-### 12.查找文件名,并替换其中的指定字符.
+### 查找文件名,并替换其中的指定字符.
 
 ```shell
 find /data/www -name "*.php" | xargs sed -i 's/192.168.2.145/127.0.0.1/g' 
 ```
 
-### 13.批量修改目录后缀名
+### 批量修改目录后缀名
 
 ###### tip: rename有c版本和Perl版本,使用时请man一下
 
@@ -95,7 +90,7 @@ find /data/www -name "*.php" | xargs sed -i 's/192.168.2.145/127.0.0.1/g'
 find ./ -type d -name "*.org"|xargs rename org com
 ```
 
-### 14.查找目录下所有文件中包含指定的字符,并替换成其它字符
+### 查找目录下所有文件中包含指定的字符,并替换成其它字符
 
 ```shell
 
