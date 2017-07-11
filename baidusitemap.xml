@@ -4,6 +4,68 @@
 
     
   <url>
+    <loc>http://cyoncan.github.io/2017/03/23/Crontab%E4%BD%BF%E7%94%A8%E4%B8%8ESVN%E5%A4%87%E4%BB%BD/</loc>
+    <lastmod>2017-07-11T10:46:05.598Z</lastmod>
+    <data>
+        <display>
+        <title>Crontab使用之SVN备份</title>
+        <pubTime>2017-03-23T14:16:21.000Z</pubTime>
+        
+        <tag>crontab</tag>
+         
+        <tag>svn备份</tag>
+         
+         
+           
+             
+              <breadCrumb title="SVN" url="http://cyoncan.github.io/categories/SVN/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cyoncan.github.io/2017/07/10/Jenkins/</loc>
+    <lastmod>2017-07-11T10:46:05.598Z</lastmod>
+    <data>
+        <display>
+        <title>Jenkins</title>
+        <pubTime>2017-07-10T11:53:41.000Z</pubTime>
+        
+        <tag>Jenkins</tag>
+         
+         
+           
+             
+              <breadCrumb title="自动化" url="http://cyoncan.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cyoncan.github.io/2017/05/06/redis/</loc>
+    <lastmod>2017-07-10T10:31:41.502Z</lastmod>
+    <data>
+        <display>
+        <title>redis</title>
+        <pubTime>2017-05-06T11:23:11.000Z</pubTime>
+        
+        <tag>redis</tag>
+         
+         
+           
+             
+              <breadCrumb title="redis" url="http://cyoncan.github.io/categories/redis/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cyoncan.github.io/2017/03/27/LNMP%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2017-07-10T10:31:41.502Z</lastmod>
     <data>
@@ -41,26 +103,6 @@
            
              
               <breadCrumb title="PHP" url="http://cyoncan.github.io/categories/PHP/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cyoncan.github.io/2017/05/06/redis/</loc>
-    <lastmod>2017-07-10T10:31:41.502Z</lastmod>
-    <data>
-        <display>
-        <title>redis</title>
-        <pubTime>2017-05-06T11:23:11.000Z</pubTime>
-        
-        <tag>redis</tag>
-         
-         
-           
-             
-              <breadCrumb title="redis" url="http://cyoncan.github.io/categories/redis/"/>
           
         </display>
     </data>
@@ -108,14 +150,14 @@
 
     
   <url>
-    <loc>http://cyoncan.github.io/2017/06/07/bind/</loc>
+    <loc>http://cyoncan.github.io/2017/05/18/sed%E7%94%A8%E6%B3%95/</loc>
     <lastmod>2017-06-25T16:25:08.145Z</lastmod>
     <data>
         <display>
-        <title>DNS服务器搭建</title>
-        <pubTime>2017-06-07T09:33:16.000Z</pubTime>
+        <title>sed用法</title>
+        <pubTime>2017-05-18T13:23:51.000Z</pubTime>
         
-        <tag>dns</tag>
+        <tag>sed</tag>
          
          
            
@@ -148,39 +190,19 @@
 
     
   <url>
-    <loc>http://cyoncan.github.io/2017/05/18/sed%E7%94%A8%E6%B3%95/</loc>
+    <loc>http://cyoncan.github.io/2017/06/07/bind/</loc>
     <lastmod>2017-06-25T16:25:08.145Z</lastmod>
     <data>
         <display>
-        <title>sed用法</title>
-        <pubTime>2017-05-18T13:23:51.000Z</pubTime>
+        <title>DNS服务器搭建</title>
+        <pubTime>2017-06-07T09:33:16.000Z</pubTime>
         
-        <tag>sed</tag>
+        <tag>dns</tag>
          
          
            
              
               <breadCrumb title="Linux" url="http://cyoncan.github.io/categories/Linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cyoncan.github.io/2017/06/08/zentao/</loc>
-    <lastmod>2017-06-08T18:54:26.961Z</lastmod>
-    <data>
-        <display>
-        <title>zentao禅道从apache改用nginx</title>
-        <pubTime>2017-06-08T12:13:43.000Z</pubTime>
-        
-        <tag>zentao</tag>
-         
-         
-           
-             
-              <breadCrumb title="nginx" url="http://cyoncan.github.io/categories/nginx/"/>
           
         </display>
     </data>
@@ -201,6 +223,26 @@
            
              
               <breadCrumb title="网络" url="http://cyoncan.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://cyoncan.github.io/2017/06/08/zentao/</loc>
+    <lastmod>2017-06-08T18:54:26.961Z</lastmod>
+    <data>
+        <display>
+        <title>zentao禅道从apache改用nginx</title>
+        <pubTime>2017-06-08T12:13:43.000Z</pubTime>
+        
+        <tag>zentao</tag>
+         
+         
+           
+             
+              <breadCrumb title="nginx" url="http://cyoncan.github.io/categories/nginx/"/>
           
         </display>
     </data>
@@ -270,6 +312,26 @@
 
     
   <url>
+    <loc>http://cyoncan.github.io/2017/05/02/mongodb/</loc>
+    <lastmod>2017-05-20T04:05:00.261Z</lastmod>
+    <data>
+        <display>
+        <title>mongodb基础</title>
+        <pubTime>2017-05-02T12:56:12.000Z</pubTime>
+        
+        <tag>mongodb</tag>
+         
+         
+           
+             
+              <breadCrumb title="MongoDB" url="http://cyoncan.github.io/categories/MongoDB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://cyoncan.github.io/2017/05/12/nginx%E9%85%8D%E7%BD%AEssl%E8%AF%81%E4%B9%A6/</loc>
     <lastmod>2017-05-20T04:05:00.261Z</lastmod>
     <data>
@@ -294,19 +356,19 @@
 
     
   <url>
-    <loc>http://cyoncan.github.io/2017/05/02/mongodb/</loc>
-    <lastmod>2017-05-20T04:05:00.261Z</lastmod>
+    <loc>http://cyoncan.github.io/2017/05/01/ssh%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/</loc>
+    <lastmod>2017-05-18T11:13:59.261Z</lastmod>
     <data>
         <display>
-        <title>mongodb基础</title>
-        <pubTime>2017-05-02T12:56:12.000Z</pubTime>
+        <title>云服务器ssh安全设置</title>
+        <pubTime>2017-05-01T02:58:22.000Z</pubTime>
         
-        <tag>mongodb</tag>
+        <tag>ssh</tag>
          
          
            
              
-              <breadCrumb title="MongoDB" url="http://cyoncan.github.io/categories/MongoDB/"/>
+              <breadCrumb title="Linux" url="http://cyoncan.github.io/categories/Linux/"/>
           
         </display>
     </data>
@@ -327,26 +389,6 @@
            
              
               <breadCrumb title="概念知识库" url="http://cyoncan.github.io/categories/%E6%A6%82%E5%BF%B5%E7%9F%A5%E8%AF%86%E5%BA%93/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cyoncan.github.io/2017/05/01/ssh%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/</loc>
-    <lastmod>2017-05-18T11:13:59.261Z</lastmod>
-    <data>
-        <display>
-        <title>云服务器ssh安全设置</title>
-        <pubTime>2017-05-01T02:58:22.000Z</pubTime>
-        
-        <tag>ssh</tag>
-         
-         
-           
-             
-              <breadCrumb title="Linux" url="http://cyoncan.github.io/categories/Linux/"/>
           
         </display>
     </data>
@@ -517,28 +559,6 @@
            
              
               <breadCrumb title="Linux" url="http://cyoncan.github.io/categories/Linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://cyoncan.github.io/2017/03/23/crontab%E4%BD%BF%E7%94%A8%E5%92%8CSVN%E5%A4%87%E4%BB%BD/</loc>
-    <lastmod>2017-05-08T14:35:33.781Z</lastmod>
-    <data>
-        <display>
-        <title>Crontab使用之SVN备份</title>
-        <pubTime>2017-03-23T14:16:21.000Z</pubTime>
-        
-        <tag>crontab</tag>
-         
-        <tag>svn备份</tag>
-         
-         
-           
-             
-              <breadCrumb title="SVN" url="http://cyoncan.github.io/categories/SVN/"/>
           
         </display>
     </data>
