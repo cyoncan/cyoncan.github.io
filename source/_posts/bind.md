@@ -1,10 +1,11 @@
 ---
-title: DNS服务器搭建
+title: DNS服务器部署
 date: 2017-06-7  17:33:16
 categories:
-- Linux
+- DNS
 tags:
 - dns
+- bind
 ---
 
 <!-- more -->

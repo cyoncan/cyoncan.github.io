@@ -1,13 +1,13 @@
 ---
-title: 理解xargs
-date: 2017-04-20 00:16:21
+title: xargs用法
+date: 2017-03-28 20:16:21
 categories:
 - Linux
 tags:
 - xargs
 ---
 <!-- more -->
-### 理解xargs命令工作和使用
+### 理解xargs命令工作原理和使用
 
 ```bash
 ⚡ root@intelnet:$ xargs 

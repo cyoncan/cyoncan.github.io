@@ -1,10 +1,10 @@
 ---
 title: Linux内存管理
-date: 2017-04-24 19:21:35
+date: 2017-04-26 19:21:35
 categories:
 - CentOS
 tags:
-- 内存
+- linux
 ---
 <!-- more -->
 **释放内存**

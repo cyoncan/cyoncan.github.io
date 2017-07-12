@@ -4,8 +4,7 @@ date: 2017-04-24 12:13:12
 categories:
 - Linux
 tags:
-- 重定向
-- 管道符
+- linux
 ---
 <!-- more -->
 **管道符命令**

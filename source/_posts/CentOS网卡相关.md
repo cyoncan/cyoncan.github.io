@@ -1,5 +1,5 @@
 ---
-title: Linux查看网卡信息
+title: CentOS网卡信息
 date: 2017-03-23 22:16:21
 categories:
 - CentOS

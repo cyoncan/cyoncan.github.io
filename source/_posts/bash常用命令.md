@@ -1,10 +1,11 @@
 ---
 title: Linux常用命令
-date: 2017-04-20 00:16:21
+date: 2017-04-6 12:33:29
 categories:
 - Linux
 tags:
-- 命令
+- bash
+- shell
 ---
 <!-- more -->
 ### Linux查看当前系统登录用户列表
@@ -34,6 +35,15 @@ uname -a
 cat /etc/issue
 cat /etc/redhat-release   # rhl系列
 cat /etc/debian_version   # debian系列
+```
+
+### 查看vps是什么类型架构
+
+```shell
+$ yum install virt-what
+$ virt-what
+xen
+xen-hvm
 ```
 
 ### 控制用户登录

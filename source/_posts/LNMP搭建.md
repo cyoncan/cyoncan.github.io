@@ -1,12 +1,13 @@
 ---
-title: lnmp环境搭建配置
+title: LNMP环境配置
 date: 2017-03-27 16:09:59
 categories:
-- PHP
+- LNMP
 tags:
 - mysql
 - php-fpm
 - nginx
+- php
 ---
 <!-- more -->
 # 一、centos minimal安装完成

@@ -1,8 +1,8 @@
 ---
-title: redis
+title: Redis基础
 date: 2017-05-06 19:23:11
 categories:
-- redis
+- Redis
 tags:
 - redis
 ---

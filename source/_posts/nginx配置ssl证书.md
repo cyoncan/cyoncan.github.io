@@ -1,5 +1,5 @@
 ---
-title: nginx部署https证书
+title: Nginx部署https
 date: 2017-05-12 12:33:18
 categories:
 - Nginx

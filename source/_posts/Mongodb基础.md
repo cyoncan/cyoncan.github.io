@@ -1,5 +1,5 @@
 ---
-title: mongodb基础
+title: Mongodb基础使用
 date: 2017-05-02 20:56:12
 categories:
 - MongoDB

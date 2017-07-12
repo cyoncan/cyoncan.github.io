@@ -1,5 +1,5 @@
 ---
-title: 云服务器ssh安全设置
+title: ssh安全设置
 date: 2017-05-01 10:58:22
 categories:
 - Linux

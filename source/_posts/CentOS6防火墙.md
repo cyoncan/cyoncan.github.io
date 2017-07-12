@@ -1,11 +1,10 @@
 ---
-title: CentOS防火墙之配置iptables
-date: 2017-04-20 00:16:21
+title: CentOS配置iptables
+date: 2017-04-15 20:31:16
 categories:
 - CentOS
 tags:
 - iptables
-- 防火墙
 ---
 <!-- more -->
 

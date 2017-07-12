@@ -1,5 +1,5 @@
 ---
-title: VPN
+title: VPN搭建
 date: 2017-05-03 20:56:21
 categories:
 - VPN
@@ -142,5 +142,14 @@ $ setsid ss-serevr -c /etc/shadowsocks-libev/config8388.json -u -A
 $ setsid ss-serevr -c /etc/shadowsocks-libev/config8389.json -u -A
 $ setsid ss-serevr -c /etc/shadowsocks-libev/config8390.json -u -A
 $ ps -ef | grep ss-server   可以查看到那启动的三个进程
+```
+
+查看vps架构类型
+
+```shell
+$ yum install virt-what
+$ virt-what
+xen
+xen-hvm
 ```
 

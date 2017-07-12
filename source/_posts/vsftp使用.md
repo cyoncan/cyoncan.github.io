@@ -1,8 +1,8 @@
 ---
-title: vsftp安装
+title: vsftp安装使用
 date: 2017-03-19 23:44:21
 categories:
-- Linux
+- FTP
 tags:
 - ftp
 - vsftp
@@ -120,3 +120,4 @@ db_load -T -t hash -f /etc/vsftpd/virtual.users /etc/vsftpd/vsftpd.login.db
    ```bash
 service vsftpd restart
    ```
+

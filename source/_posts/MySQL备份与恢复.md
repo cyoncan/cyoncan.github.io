@@ -1,12 +1,11 @@
 ---
 title: MySQL数据库备份恢复
-date: 2017-03-23 22:20:21
+date: 2017-03-23 23:10:42
 categories:
 - MySQL
 tags:
 - mysql
 - mysql备份
-- 脚本
 ---
 <!-- more -->
 ### MySQL单库备份恢复/导出导入

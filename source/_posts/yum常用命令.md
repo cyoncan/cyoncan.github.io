@@ -1,10 +1,10 @@
 ---
-title: yum命令
-date: 2017-04-24 12:13:21
+title: Yum常用命令
+date: 2017-04-22 12:13:21
 categories:
 - CentOS
 tag:
-- yum命令
+- yum
 ---
 
 <!--more-->

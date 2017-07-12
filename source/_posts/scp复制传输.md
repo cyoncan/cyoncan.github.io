@@ -1,13 +1,13 @@
 ---
-title: Linux互传文件之SCP使用
-date: 2017-03-23 22:16:21
+title: SCP使用
+date: 2017-03-23 19:37:21
 categories:
 - Linux
 tags:
 - scp
 ---
 <!-- more -->
-### Linux互相传输之SCP的使用
+### SCP复制(服务器之间传输文件)
 
 ##### 1.从服务器上拉取目录
 

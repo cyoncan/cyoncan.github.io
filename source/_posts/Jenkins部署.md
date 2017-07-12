@@ -1,5 +1,5 @@
 ---
-title: Jenkins
+title: Jenkins搭建
 date: 2017-07-10  19:53:41
 categories:
 - 自动化

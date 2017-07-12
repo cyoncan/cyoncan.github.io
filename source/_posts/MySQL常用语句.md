@@ -1,11 +1,10 @@
 ---
 title: MySQL常用语句
-date: 2017-04-20 00:16:21
+date: 2017-04-19 19:03:11
 categories:
 - MySQL
 tags:
 - mysql
-- mysql常用
 ---
 <!-- more -->
 ##### 1.MySQL创建用户

@@ -5,7 +5,6 @@ categories:
 - MySQL
 tags:
 - mysql
-- mysql索引
 ---
 <!-- more -->
 ### 一.查看索引
