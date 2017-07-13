@@ -63,6 +63,7 @@ $ cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.bak
 $ vim /etc/vsftpd/vsftpd.conf
   anonymous_enable=NO
   local_enable=YES
+  write_enable=YES
   local_umask=022
   anon_umask=022   
   xferlog_enable=YES
@@ -73,12 +74,14 @@ $ vim /etc/vsftpd/vsftpd.conf
   ftpd_banner=Welcome to blah FTP service.
   chroot_local_user=YES
   listen=YES
-  userlist_enable=YES
   pam_service_name=vsftpd.pam
+  userlist_enable=YES
+  tcp_wrappers=YES
   guest_username=ftp
   guest_enable=YES
   user_config_dir=/etc/vsftpd/vsftpd_user_conf
-  tcp_wrappers=YES
+  pasv_min_port=30001
+  pasv_max_port=31000
 ```
 
 ###  5.创建用户名的配置文件
@@ -120,4 +123,12 @@ db_load -T -t hash -f /etc/vsftpd/virtual.users /etc/vsftpd/vsftpd.login.db
    ```bash
 service vsftpd restart
    ```
+
+### 7.添加防火墙规则
+
+```shell
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 20 -j ACCEPT
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 21 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 30001:31000 -j ACCEPT
+```
 
