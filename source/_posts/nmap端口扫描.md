@@ -13,8 +13,12 @@ tags:
 
 ```shell
 $ nmap -sS -P0 -sV -O <target>	<target>可以为ip/主机名/域名/
--sS   TCP/SYN扫描半开放隐身扫描
--P0   允许关闭icmp pings
+-sL   列表扫描
+-sT   TCP端口扫描
+-sS   TCP同步(SYN)端口扫描半开放隐身扫描
+-sU   UDP端口扫描
+-sP   Ping扫描
+-P0   允许关闭ping进行扫描
 -sV   打开系统版本检测
 -O    尝试识别远程主机OS
 -A    打开操作系统指纹和版本检测
