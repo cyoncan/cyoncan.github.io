@@ -7,28 +7,56 @@ tags:
 - mysql
 ---
 <!-- more -->
-##### 1.MySQL创建用户
+MySQL创建用户
 
-```bash
+```mysql
 create user 'username'@'%' identified by 'passwd';   % 换成localhost或者127.0.0.1,就只能本地登录了.
 ```
 
-##### 2.给用户授权
+给用户授权
 
-```bash
+```mysql
 grant all privileges on databasename.tablename to 'username'@'hostname' identified by 'passwd'with grant option;   all代表所有权限,withgrant option代表该用户可以给其他用户也进行授权操作.
 flush privileges;   授权完成,需要刷新生效.
 quit;
 ```
 
-##### 3.查看mysql有多少个账户
-```bash
+查看mysql有多少个账户
+```mysql
 select host,user,password from mysql.user;
 ```
 
-##### 4.查看MySQL字符集,排序规则
-```bash
+查看MySQL字符集,排序规则
+```mysql
 show variables like 'collation%';
 show variables like 'char%';
+```
+
+查看MySQL版本
+
+```mysql
+① mysql> status;
+② mysql> select version();
+```
+
+查看MySQL使用的存储引擎类型
+
+```mysql
+mysql> show ENGINES;
+```
+
+查看MySQL表锁状态
+
+```mysql
+mysql> show status like 'tables%';
+mysql> show status like '%lock%';
+```
+
+查看MySQL当前使用的数据库
+
+```mysql
+mysql> status;
+mysql> select database();
+mysql> show tables;
 ```
 

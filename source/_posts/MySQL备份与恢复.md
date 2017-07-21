@@ -5,7 +5,6 @@ categories:
 - MySQL
 tags:
 - mysql
-- mysql备份
 ---
 <!-- more -->
 ### MySQL单库备份恢复/导出导入
@@ -28,8 +27,8 @@ $ mysql -uroot -p mysql < bak.sql
 或者
 $ mysql -uroot -p
 Enter password:
-$mysql>use dbname;
-$mysql>source /data/backup/bak.sql;
+mysql>use dbname;
+mysql>source /data/backup/bak.sql;
 ```
 
 ### MySQL备份所有的库脚本

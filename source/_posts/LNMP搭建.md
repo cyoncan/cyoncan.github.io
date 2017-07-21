@@ -1,6 +1,6 @@
 ---
 title: LNMP环境配置
-date: 2017-03-27 16:09:59
+date: 2017-03-27 15:00:59
 categories:
 - LNMP
 tags:
@@ -10,7 +10,7 @@ tags:
 - php
 ---
 <!-- more -->
-# 一、centos minimal安装完成
+## 一、centos minimal安装完成
 
 ### 1、设置开机网卡自动连接
 
@@ -78,7 +78,7 @@ $ yum install system-config-firewall-tui
 $ yum install system-config-securitylevel-tui
 ```
 
-# 二、基础目录结构
+## 二、基础目录结构
 
     1.mkdir
     /data/src        下载存放源码目录
@@ -91,7 +91,7 @@ $ yum install system-config-securitylevel-tui
     /data/local/nginx
     /data/local/mysql
 
-# 三、Nginx
+## 三、Nginx
 
 ### 1、安装编译工具及相关库
 
@@ -238,7 +238,7 @@ case "$1" in
 esac
 ```
 
-# 四、MySQL
+## 四、MySQL
 
 ### 1.安装Cmake
 
@@ -302,19 +302,19 @@ $ bin/mysqladmin -u root password "new passwd"   (设置密码,用其它方式�
 $ service mysqld stop
 $ /usr/local/mysql/bin/mysqld_safe --skip-grant-tables
 $ mysql (去新建一个终端登录)
-$ mysql>use mysql
-$ mysql>update user set password=password("123456") where user="root";
-$ mysql>flush privileges;
-$ exit;
+mysql> use mysql
+mysql> update user set password=password("123456") where user="root";
+mysql> flush privileges;
+mysql> exit;
   kill mysqld_safe ,启动mysqld , 登录mysql.
-$ grant all privileges on *.* to 'root'@"%" identified by '123456' with grant option;
-$ grant all privileges on *.* to 'root'@"%" identified by '123456' with grant option;
+mysql> grant all privileges on *.* to 'root'@"%" identified by '123456' with grant option;
+mysql> grant all privileges on *.* to 'root'@"%" identified by '123456' with grant option;
 (grant做一个授权,%表示*.*(所有的库和表)允许被远程连接,使用这里指定的用户密码或者指定IP操作mysql,如果是单个数据库授权,dbname.* to username@"%"...)
-$ flush privileges;
-$ quit;
-  tip: grant操作需要flush ,注意再操作完成后删除user表中匿名和空用户,或者给他们加上密码.
+mysql> flush privileges;
+mysql> quit;
+# tip: grant操作需要flush ,注意再操作完成后删除user表中匿名和空用户,或者给他们加上密码.
   delete from user where user="";
-  mysql -h localhost 和 mysql -h 127.0.0.1 的区别,通过localhost连接到mysql是使用UNIX socket,通过127.0.0.1连接到mysql是使用TCP/IP.
+# mysql -h localhost 和 mysql -h 127.0.0.1 的区别,通过localhost连接到mysql是使用UNIX socket,通过127.0.0.1连接到mysql是使用TCP/IP.
 ```
 
 ### 3.MySQL备份(假设zentao作为一个数据库名)
@@ -336,7 +336,7 @@ $ vim mysql_backup.sh
   date=`date +%Y-%m-%d`
   backup_sql=$date.sql
   tar_sql="energy_bak_$date.tar.gz"
-$dump --login-path==dbname $db_name --default-character-set=utf8 --opt -Q -R --skip-lock-tables>$backip_sql
+$ dump --login-path==dbname $db_name --default-character-set=utf8 --opt -Q -R --skip-lock-tables>$backip_sql
   tar -czf $tar_sql ./$backup_sql
   rm $backup_sql
   chown $linux_user:$linux_user $backup_dir/$tar_sql
@@ -350,7 +350,7 @@ $ zcat 2017-03-21.sql.tar.gz | mysql -uroot -p
 $ mysql -uroot -p zentao < 2017-03-21.sql
 ```
 
-# 五、PHP
+## 五、PHP
 
 ### 1.编译安装
 
@@ -452,7 +452,7 @@ esac
 exit 0
 ```
 
-# 六、Nginx配置php-fpm
+## 六、Nginx配置php-fpm
 
 ### 1、修改nginx.conf,根据里面默认的注释例子修改
 
@@ -495,19 +495,11 @@ $ vim /usr/local/nginx/conf/nginx.conf
 ========================================================================================================
 ```
 
-##### 2.在conf/vhost/目录下编写配置每一个站点的conf文件,可以拷贝Nginx里面的例子进行修改
+**在conf/vhost/目录下编写配置每一个站点的conf文件,可以拷贝Nginx里面的例子进行修改**
 
-# 七、设置禁止参与 yum 更新的核心软件 
+## 七、设置禁止参与 yum 更新的核心软件 
 
 ```bash
-$vim /etc/yum.conf
- exclude=php* apache* kernel* mysql* nginx* (根据实际情况进行指定不参与yum update的程序)
+$ vim /etc/yum.conf
+  exclude=php* apache* kernel* mysql* nginx* (根据实际情况进行指定不参与yum update的程序)
 ```
-# 八、更改站点配置
-
-```
-1、在每个文件的web下查看,使用的配置文件类型是test,server,local.去更改对应的目录文件.主要有每个站点的下api/ backend/ common/ frontend/ h5/ weixin/ , main.php和param.php,在member.8dage.net下的是application/config下面的allow_ip.php,database.php,config.php
-```
-
-
-
