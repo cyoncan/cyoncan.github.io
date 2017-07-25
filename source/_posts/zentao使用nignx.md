@@ -2,7 +2,7 @@
 title: zentao从apache改用nginx
 date: 2017-06-8  20:13:43
 categories:
-- nginx
+- Nginx
 tags:
 - zentao
 ---
