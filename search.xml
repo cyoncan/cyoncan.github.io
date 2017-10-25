@@ -3,6 +3,27 @@
   
     
     <entry>
+      <title><![CDATA[ip地址计算]]></title>
+      <url>%2F2017%2F10%2F11%2Fip%E5%9C%B0%E5%9D%80%E8%AE%A1%E7%AE%97%E5%88%92%E5%88%86%2F</url>
+      <content type="text"><![CDATA[192.168.0.1/24代表的含义，以及计算子网掩码、网络号、主机号、网络地址、主机地址IP地址是一个32位的二进制数，被分割为4个“8位二进制数”（也就是4个字节）。通常以十进制的方式表示，十进制的显示形式便于人看，二进制显示形式是给计算机看。子网掩码(subnet mask) 又叫网络掩码、地址掩码、子网络遮罩，它是一种用来指明一个IP地址的哪些位标识的是主机所在的子网，以及哪些位标识的是主机的位掩码。1234192.168.0.1/24/24 表示子网掩码，也就是前24位是1，剩余补011111111 11111111 11111111 00000000 转化成十进制 255.255.255.0子网掩码为：255.255.255.0将IP地址和子网掩码换算为二进制，子网掩码连续是1的表示网络地址，1的数目（/24）等于网络位的长度；后面0的部分表示主机地址，0的数目等于主机位的长度（32-24=8）。类型十进制二进制IP地址192.168.0.111000000 10101000 00000000 00000001子网掩码255.255.255.011111111 11111111 11111111 00000000网络地址：IP地址和子网掩码的与运算，结果就是网络地址。(主机位全为0==网络地址)11000000 10101000 00000000 00000000 转化十进制 192.168.0.0广播地址：将运算结果中的网络位不变，主机位变为1，结果就是广播地址。（主机位全为1==广播地址）11000000 10101000 00000000 11111111 转化十进制 192.168.0.255地址范围：网络地址+1即为第一个主机地址，广播地址-1即为最后一个主机地址。192.168.0.1 ~ 192.168.0.254主机数量：=2^(8-2) ; 8代表主机位长度。减2是因为主机不包括网络地址和广播地址。]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Windows]]></title>
+      <url>%2F2017%2F10%2F10%2FWindows%E7%AC%94%E8%AE%B0%2F</url>
+      <content type="text"><![CDATA[Windows PowerShell和CMD控制台代码页设置123456789101112131415161718192021222324代码页 国家（地区）或语言437 美国 850 多语言（拉丁文 I）852 斯拉夫语（拉丁文 II）855 西里尔文（俄语） 857 土耳其语860 葡萄牙语861 冰岛语863 加拿大 - 法语865 日耳曼语866 俄语869 现代希腊语 936 简体中文950 繁体中文65001 UTF-8语法 chcp [NNN]通过注册表修改代码页：1 win键+R打开“运行”对话框，输入regedit打开注册表编辑器。2 找到 [HKEY_CURRENT_USER\Console\%SystemRoot%_system32_cmd.exe]3 修改或者新建"CodePage" = dword:000003a8【注】十六进制"000003a8"或十进制"936"，表示“936 (ANSI/OEM - 简体中文 GBK)”。]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Nginx日志分析]]></title>
+      <url>%2F2017%2F07%2F26%2FNginx%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%2F</url>
+      <content type="text"><![CDATA[Ⅰ.日志切割1234#!/bin/bashD=$(data +%Y%M%D)mv /usr/local/nginx/logs/access.log $&#123;D&#125;.logkill -USR1 $(cat /usr/local/nginx/nginx.pid)Ⅱ.日志日常分析1log_formart main '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" "$http_x_forwarded_for"';1.访问次数最多的前十IP1$ awk &apos;&#123;print $1&#125;&apos; access.log | sort | uniq -c | sort -nr -k1 | head -n 10 #uniq去重之前必须先排序,因为不排序的话,uniq无法去重不连续出现的数,sort加不加参数无所谓,只要排序能将一样的IP集中一起即可2.请求总数1$ wc -l access.log | awk &apos;&#123;print $1&#125;&apos;3.独立IP数1$ awk &apos;&#123;print $1&#125;&apos; access.log | sort | uniq -c | wc -l4.]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[Hype-v Linux虚拟机同一物理机xshell无法ssh登录管理]]></title>
       <url>%2F2017%2F07%2F22%2FHype-v%20Linux%E5%90%8C%E4%B8%80%E5%8F%B0%E7%89%A9%E7%90%86%E6%9C%BA%E6%97%A0%E6%B3%95ssh%2F</url>
       <content type="text"><![CDATA[在Hype-v安装完Linux虚拟机后,无法用物理机上的ssh登录管理Linux.虚拟机需要安装微软提供相关的驱动.下载Linux Integration Services1234567https://www.microsoft.com/en-us/download/details.aspx?id=51612将下载的ISO文件挂载到虚拟机$ mkdir -p /mnt/cdrom$ mount /dev/cdrom /mnt/cdrom$ cd /mnt/cdrom$ ./install.sh进入相关的网卡文件设置固定ip即可hype-v 导出虚拟机12345以管理员身份运行powershell,输入如下命令,VMName为你创建虚拟机的名字$VmName = "CentOS7"$Destination = "F:\vm-export" Stop-VM -Name $VmName Export-VM -Name $VmName -Path $Dstination导入到另一台物理机上的hype-v,复制虚拟机依赖的是$Destination目录下的vhdx格式文件。换一台物理机,开始虚拟机镜像的安装。123456789101112131415161718创建Internal vSwitch，通过PowerShell：$HyperVVirtualSwitchName = "ISInternalSwitch" New-VMSwitch -Name $HyperVVirtualSwitchName -SwitchType Internal Get-NetAdapter | where &#123; $_.Name -Match $HyperVVirtualSwitchName &#125; | New-NetIPAddress -IPAddress "192.168.1.1" -PrefixLength 24 基于导出的CentOS7镜像和vSwitch，创建新的实例。键入PowerShell：$VMName = "CentOS7"$HyperVVirtualSwitchName = "ISInternalSwitch"$VMPath = "F:\vm-import\$VMName"$VHDX = "$VMPath\Virtual Hard Disks\CentOS7-TensorFlow10.vhdx" New-VM -Name $VMName -SwitchName $HyperVVirtualSwitchName -Path $VMPath -VHDPath $VHDX -Generation 1 Start-VM -Name $VMName设置端口转发和开启防火墙。键入Windows批处理命令：netsh interface portproxy delete v4tov4 listenport=22netsh interface portproxy add v4tov4 listenport=22 connectport=22 connectaddress=192.168.1.100netsh advfirewall firewall delete rule name="CentOS_SSH"netsh advfirewall firewall add rule name="CentOS_SSH" protocol=TCP dir=in localport=22 action=allow]]></content>
@@ -300,6 +321,13 @@
       <title><![CDATA[CentOS网卡信息]]></title>
       <url>%2F2017%2F03%2F23%2FCentOS%E7%BD%91%E5%8D%A1%E7%9B%B8%E5%85%B3%2F</url>
       <content type="text"><![CDATA[CentOS网卡相关信息查看1.首先安装工具,已安装请忽略.1$ yum install pciutiles2.查看网卡型号1$ lspci | grep -i ethernet3.查看网卡驱动版本1$ ethtool -i eth04.网卡驱动安装1234567891011$ yum install kernel-devel kernel-headers $ yum install gcc$ tar zxvf r1000.tgz$ cd r1000/$ make clean modules$ make install$ modprobe r1000$ reboot$ lsmod | grep r1000 或者 ifconfig -a 查看网卡eth0是否加载$ service network restart假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可.​]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Windows���糣������]]></title>
+      <url>%2F2017%2F03%2F23%2FWin%E7%BD%91%E7%BB%9C%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
+      <content type="text"><![CDATA[CMD����������1234567891011121314151617181920212223242526arp -a �г������������л�Ծ��IP��ַarp -a �ӶԷ�IP�ǲ��Է���MAC��ַarp -s ��ip + mac������mac��ip��ַarp -d ��ip + mac������mac��ip��ַnet view ����&gt; ��ѯͬһ���ڻ����б�net view /domain ����&gt; ��ѯ���б�net view /domain:domainname ���C&gt; �鿴workgroup���м������б�ipconfig /all ����&gt; ��ѯ����IP�Σ���������ipconfig /releaseipconfig /renew ���»�ȡIp��ַtelnet ip �˿ںţ������ܷ���������Զ�������˿� nbtstat -a �ӶԷ�IP���Է���������tracert ������ �õ�IP��ַnetstat -a -nnetstat -an | find ��3389��netstat -a�鿴������Щ�˿�netstat -n�鿴�˿ڵ�������������netstat -v�鿴���ڽ��еĹ���netstat -p tcp/ip�鿴ĳЭ��ʹ������netstat -s �鿴����ʹ�õ�����Э��ʹ������nbtstat -n ��ȡNetBIOSnslookup ���� ��ѯ������Ӧ��ip]]></content>
     </entry>
 
     
