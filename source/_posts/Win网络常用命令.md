@@ -1,5 +1,5 @@
 ---
-title: WindowsÍøÂç³£ÓÃÃüÁî
+title: Windowsç½‘ç»œå¸¸ç”¨å‘½ä»¤
 date: 2017-03-23 20:56:21
 categories:
 - Windows
@@ -7,33 +7,33 @@ tags:
 - cmd
 ---
 
-CMD¾ÖÓòÍøÃüÁî
+CMDå±€åŸŸç½‘å‘½ä»¤
 
 ```powershell
-arp -a ÁĞ³ö±¾Íø¶ÎÄÚËùÓĞ»îÔ¾µÄIPµØÖ·
-arp -a ¼Ó¶Ô·½IPÊÇ²é¶Ô·½µÄMACµØÖ·
-arp -s £¨ip + mac£©°ó¶¨macÓëipµØÖ·
-arp -d £¨ip + mac£©½â°ómacÓëipµØÖ·
+arp -a åˆ—å‡ºæœ¬ç½‘æ®µå†…æ‰€æœ‰æ´»è·ƒçš„IPåœ°å€
+arp -a åŠ å¯¹æ–¹IPæ˜¯æŸ¥å¯¹æ–¹çš„MACåœ°å€
+arp -s ï¼ˆip + macï¼‰ç»‘å®šmacä¸ipåœ°å€
+arp -d ï¼ˆip + macï¼‰è§£ç»‘macä¸ipåœ°å€
 
-net view ¡ª¡ª> ²éÑ¯Í¬Ò»ÓòÄÚ»úÆ÷ÁĞ±í
-net view /domain ¡ª¡ª> ²éÑ¯ÓòÁĞ±í
-net view /domain:domainname ¡ª¨C> ²é¿´workgroupÓòÖĞ¼ÆËã»úÁĞ±í
+net view â€”â€”> æŸ¥è¯¢åŒä¸€åŸŸå†…æœºå™¨åˆ—è¡¨
+net view /domain â€”â€”> æŸ¥è¯¢åŸŸåˆ—è¡¨
+net view /domain:domainname â€”â€“> æŸ¥çœ‹workgroupåŸŸä¸­è®¡ç®—æœºåˆ—è¡¨
 
-ipconfig /all ¡ª¡ª> ²éÑ¯±¾»úIP¶Î£¬ËùÔÚÓòµÈ
+ipconfig /all â€”â€”> æŸ¥è¯¢æœ¬æœºIPæ®µï¼Œæ‰€åœ¨åŸŸç­‰
 ipconfig /release
-ipconfig /renew ÖØĞÂ»ñÈ¡IpµØÖ·
+ipconfig /renew é‡æ–°è·å–Ipåœ°å€
 
-telnet ip ¶Ë¿ÚºÅ£º³¢ÊÔÄÜ·ñ´ò¿ªÁ´½ÓÔ¶³ÌÖ÷»ú¶Ë¿Ú nbtstat -a ¼Ó¶Ô·½IP²é¶Ô·½µÄÖ÷»úÃû
-tracert Ö÷»úÃû µÃµ½IPµØÖ·
+telnet ip ç«¯å£å·ï¼šå°è¯•èƒ½å¦æ‰“å¼€é“¾æ¥è¿œç¨‹ä¸»æœºç«¯å£ nbtstat -a åŠ å¯¹æ–¹IPæŸ¥å¯¹æ–¹çš„ä¸»æœºå
+tracert ä¸»æœºå å¾—åˆ°IPåœ°å€
 
 netstat -a -n
-netstat -an | find ¡°3389¡±
-netstat -a²é¿´¿ªÆôÄÄĞ©¶Ë¿Ú
-netstat -n²é¿´¶Ë¿ÚµÄÍøÂçÁ¬½ÓÇé¿ö
-netstat -v²é¿´ÕıÔÚ½øĞĞµÄ¹¤×÷
-netstat -p tcp/ip²é¿´Ä³Ğ­ÒéÊ¹ÓÃÇé¿ö
-netstat -s ²é¿´ÕıÔÚÊ¹ÓÃµÄËùÓĞĞ­ÒéÊ¹ÓÃÇé¿ö
+netstat -an | find â€œ3389â€
+netstat -aæŸ¥çœ‹å¼€å¯å“ªäº›ç«¯å£
+netstat -næŸ¥çœ‹ç«¯å£çš„ç½‘ç»œè¿æ¥æƒ…å†µ
+netstat -væŸ¥çœ‹æ­£åœ¨è¿›è¡Œçš„å·¥ä½œ
+netstat -p tcp/ipæŸ¥çœ‹æŸåè®®ä½¿ç”¨æƒ…å†µ
+netstat -s æŸ¥çœ‹æ­£åœ¨ä½¿ç”¨çš„æ‰€æœ‰åè®®ä½¿ç”¨æƒ…å†µ
 
-nbtstat -n »ñÈ¡NetBIOS
-nslookup ÓòÃû ²éÑ¯ÓòÃû¶ÔÓ¦µÄip
+nbtstat -n è·å–NetBIOS
+nslookup åŸŸå æŸ¥è¯¢åŸŸåå¯¹åº”çš„ip
 ```

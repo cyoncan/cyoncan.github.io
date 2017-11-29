@@ -1,5 +1,5 @@
 ---
-title: CentOS部署KVM
+title: CentOS7部署KVM
 date: 2017-09-18  16:26:16
 categories:
 - 虚拟化
@@ -28,7 +28,7 @@ $ grep -E 'vmx|svm' /proc/cpuinfo
 
 ```bash
 # 安装kvm及相关软件包
-$ yum install qemu-kvm kvm libvirt libvirt-python libguestfs-tools virt-install
+$ yum install qemu-kvm kvm libvirt libvirt-python libkvmfs-tools virt-install
 # 加载kvm模块
 $ modprobe kvm
 # 加载特定芯片（cpu）的kvm模块
@@ -100,36 +100,69 @@ $ sysctl -p
 # 有两种方法安装虚拟机
 ①virt-manager: a GUI tool
 ②virt-install: a command line tool.
+
 # 创建存储池，虚拟机映像的存放位置
 $ mkdir /home/kvm/image
+$ virsh #不加任何参数直接进入交互式控制终端
+	pool-define-as kvm_pool --type dir --target /home/kvm/image #定义一个存储池绑定目录，如果是lvm卷类型改成logical，还其它的自己查
+	pool-build kvm_pool #建立存储池
+	pool-start kvm_pool #启动存储池
+	pool-list --all #验证该存储池是否启动
+	pool-autostart kvm_pool #存储池开机自动运行
+	pool-info kvm_pool #查看存储池信息
+
+# 移除存储池
+$ virsh
+	pool-destroy kvm_pool #销毁存储池
+	pool-undefine kvm_pool #取消定义存储池
+	pool-delete kvm_pool #删除存储池
+
+# 创建卷
+$ virsh
+	vol-create-as --pool kvm_pool --name disk0.img --capacity 50G --allocation 1G --format raw
+
+# 命令安装虚拟机(至少要带的参数有 --name,--ram,--disk/filesystem/nodisk,安装选项)
 $ virt-install \
-       --network bridge:br0
-       --name kvm1 \
-       --ram 1024 \
-       --vcpus 1\
-       --disk path=/home/kvm/image/kvm1.img,size=20 \
+       --virt-type=kvm \
+       --name=centos7.0 \
+       --vcpus=2 \
+       --memory=2048 \
+       --location=/home/iso/centos7.iso \
+       --disk path=/home/kvm/image/centos7.img \
+       --network bridge:br0 \
        --graphics none \
-       --localtion=/home/CentOS7-x86_64-DVD.iso
-       --extra-args="console=tty0 console=ttyS0,115200"
+       --extra-args="console=ttyS0" \
+       --force
 # 安装的过程出现报错什么的请自己去Google解决。
+
 ```
 
-###### 4.1虚拟机常用指令
+###### 4.1虚拟机常用指令（虚拟机=客户机=访客）
 
-```bash
-# 列出所有正在运行的主机
-$ virsh list --all
-# 显示虚拟机信息
-$ virsh dominfo kvm1
-# 显示虚拟机内存CPU使用量信息
-$ virt-top
-#显示虚拟机磁盘的使用量
-$ virt-df kvm1
-```
+| 命令选项                              |                       |
+| --------------------------------- | --------------------- |
+| virsh connect                     | 连接至 KVM 管理程序          |
+| virsh pool-list --all             | 列出所有的存储池              |
+| virsh list --all                  | 列出本地所有的虚拟主机           |
+| virsh start kvm_name --console    | 启动不处于活动状态的虚拟主机，并进入控制台 |
+| virsh autostart kvm_name          | 虚拟主机随宿主机启动而自启动        |
+| virsh autostart -disable kvm_name | 禁止虚拟主机随宿主机启动后自启动      |
+| virsh shutdown kvm_name           | 关闭处于活动状态的虚拟主机         |
+| virsh reboot kvm_name             | 重启虚拟主机                |
+| virsh suspend kvm_name            | 暂停虚拟主机                |
+| virsh resume kvm_name             | 启动暂停的虚拟主机             |
+| virsh destroy kvm_name            | 强制关闭虚拟主机（类似断电）        |
+| virsh dumpxml kvm_name            | 显示虚拟主机的当前配置           |
+| virsh dominfo kvm_name            | 显示虚拟主机信息              |
+| virsh domid kvm_name              | 显示虚拟主机id              |
+| virt-top                          | 显示虚拟主机内存CPU使用量        |
+| virt-df kvm_name                  | 显示虚拟主机磁盘的使用量          |
+| virsh                             | 进入虚拟化控制台              |
+|                                   |                       |
+|                                   |                       |
+|                                   |                       |
 
-
-
-#####5.选择一款web管理kvm的软件（WebVirtMgr）（可以选择用centos桌面环境去管理，个人爱好了，我受不了一台服务器桌面化，在服务器上操作。）
+#####5.选择一款web管理kvm的软件（WebVirtMgr）（可以选择用linux桌面环境用相关的软件管理virt-manger，我也试过这个操作就是点点了，看个人爱好了，我受不了一台服务器有桌面环境，乐意在服务器上捣腾。）
 
 ```bash
 内容比较简单，它在github上面有文档说明。https://github.com/retspen/webvirtmgr/wiki
