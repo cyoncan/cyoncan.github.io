@@ -1,5 +1,5 @@
 ---
-title: CentOS7部署KVM
+title: KVM
 date: 2017-09-18  16:26:16
 categories:
 - 虚拟化
@@ -120,6 +120,12 @@ $ virsh
 # 创建卷
 $ virsh
 	vol-create-as --pool kvm_pool --name disk0.img --capacity 50G --allocation 1G --format raw
+# 或者用qemu-img
+$ qemu-img create -f qcow2 disk0.img 50G
+# raw和qcow2格式之间的转换
+$ qemu-img convert -f raw -O qcow2 test.raw test.raw.qcow2
+# raw格式镜像增加减少大小(qcow2不可以)
+$ qemu-img resize disk0.img -10G/+10G
 
 # 命令安装虚拟机(至少要带的参数有 --name,--ram,--disk/filesystem/nodisk,安装选项)
 $ virt-install \
@@ -133,8 +139,17 @@ $ virt-install \
        --graphics none \
        --extra-args="console=ttyS0" \
        --force
+# qemu安装方式
+$ qemu-system-x86_64 -m 2048 -smp 1 -enable-kvm centos7.img -cdrom /home/iso/centos.iso
 # 安装的过程出现报错什么的请自己去Google解决。
-
+# 克隆导出虚拟机
+$ virsh	dumpxml centos7.0 > /home/kvm/vm-demo.xml
+$ cp /home/kvm/vm-demo.xml /home/kvm/centos7.0a1.xml
+# xml文件需要做些修改在以下的几个参数：（name、uuid、镜像地址、MAC地址、）uuid用uuidgen生成
+# MAC地址生成
+$ openssl rand -hex 6 | sed 's/..\B/&:/g'
+# 注册新虚拟机
+$ virsh define /home/kvm/centos7.0a1.xml
 ```
 
 ###### 4.1虚拟机常用指令（虚拟机=客户机=访客）
