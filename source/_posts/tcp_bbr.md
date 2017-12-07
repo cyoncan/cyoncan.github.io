@@ -1,15 +1,15 @@
 ---
-title: VPS开启TCP_BBR
+title: tcp_bbr
 date: 2017-07-12  19:53:43
 categories:
-- 网络
+- CentOS
 tags:
-- tcp
+- linux
 ---
 
 <!-- more -->
 
-**TCP BBR是Google开源的拥塞控制算法,在Linux4.11内核版本上已经进行使用**
+**TCP BBR是Google开源的拥塞控制算法,在Linux4.11内核版本上已经进行使用,最低内核要求4.9**
 
 ## Debian8/Ubuntu
 

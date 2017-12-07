@@ -1,8 +1,8 @@
 ---
-title: DNS服务器部署
+title: Dns_Server-Bind
 date: 2017-06-7  17:33:16
 categories:
-- DNS
+- CentOS
 tags:
 - dns
 - bind
