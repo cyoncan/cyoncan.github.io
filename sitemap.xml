@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://cyoncan.github.io/about/index.html</loc>
+    
+    <lastmod>2018-02-06T12:53:02.157Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cyoncan.github.io/2017/04/20/Zabbix_MySQL/</loc>
     
     <lastmod>2018-02-06T12:44:21.882Z</lastmod>
@@ -177,13 +184,6 @@
   </url>
   
   <url>
-    <loc>http://cyoncan.github.io/categories/index.html</loc>
-    
-    <lastmod>2018-01-23T05:04:10.271Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cyoncan.github.io/tags/index.html</loc>
     
     <lastmod>2018-01-23T05:04:10.271Z</lastmod>
@@ -191,9 +191,9 @@
   </url>
   
   <url>
-    <loc>http://cyoncan.github.io/about/index.html</loc>
+    <loc>http://cyoncan.github.io/categories/index.html</loc>
     
-    <lastmod>2018-01-23T05:04:10.267Z</lastmod>
+    <lastmod>2018-01-23T05:04:10.271Z</lastmod>
     
   </url>
   
@@ -212,13 +212,6 @@
   </url>
   
   <url>
-    <loc>http://cyoncan.github.io/2017/06/16/Python_manag/</loc>
-    
-    <lastmod>2018-01-23T05:04:10.259Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cyoncan.github.io/2017/10/10/Win_cmd/</loc>
     
     <lastmod>2018-01-23T05:04:10.259Z</lastmod>
@@ -226,14 +219,21 @@
   </url>
   
   <url>
-    <loc>http://cyoncan.github.io/2017/05/04/iRedMail_Nginx/</loc>
+    <loc>http://cyoncan.github.io/2017/05/06/Redis/</loc>
     
     <lastmod>2018-01-23T05:04:10.259Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://cyoncan.github.io/2017/05/06/Redis/</loc>
+    <loc>http://cyoncan.github.io/2017/06/16/Python_manag/</loc>
+    
+    <lastmod>2018-01-23T05:04:10.259Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cyoncan.github.io/2017/05/04/iRedMail_Nginx/</loc>
     
     <lastmod>2018-01-23T05:04:10.259Z</lastmod>
     
@@ -254,14 +254,7 @@
   </url>
   
   <url>
-    <loc>http://cyoncan.github.io/2017/07/12/Nginx_upgrade/</loc>
-    
-    <lastmod>2018-01-23T05:04:10.255Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cyoncan.github.io/2017/03/27/Nginx_install/</loc>
+    <loc>http://cyoncan.github.io/2017/05/12/Nginx_ss/</loc>
     
     <lastmod>2018-01-23T05:04:10.255Z</lastmod>
     
@@ -275,6 +268,20 @@
   </url>
   
   <url>
+    <loc>http://cyoncan.github.io/2017/03/27/Php/</loc>
+    
+    <lastmod>2018-01-23T05:04:10.255Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cyoncan.github.io/2017/03/27/Nginx_install/</loc>
+    
+    <lastmod>2018-01-23T05:04:10.255Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://cyoncan.github.io/2017/03/23/MySQL_restore/</loc>
     
     <lastmod>2018-01-23T05:04:10.255Z</lastmod>
@@ -282,7 +289,7 @@
   </url>
   
   <url>
-    <loc>http://cyoncan.github.io/2017/05/12/Nginx_ss/</loc>
+    <loc>http://cyoncan.github.io/2017/05/23/Nginx_LB/</loc>
     
     <lastmod>2018-01-23T05:04:10.255Z</lastmod>
     
@@ -310,21 +317,14 @@
   </url>
   
   <url>
-    <loc>http://cyoncan.github.io/2017/03/27/Php/</loc>
-    
-    <lastmod>2018-01-23T05:04:10.255Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cyoncan.github.io/2017/05/23/Nginx_LB/</loc>
-    
-    <lastmod>2018-01-23T05:04:10.255Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://cyoncan.github.io/2017/06/22/Php-fpm/</loc>
+    
+    <lastmod>2018-01-23T05:04:10.255Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cyoncan.github.io/2017/07/12/Nginx_upgrade/</loc>
     
     <lastmod>2018-01-23T05:04:10.255Z</lastmod>
     
@@ -334,6 +334,13 @@
     <loc>http://cyoncan.github.io/2017/04/25/MySQL_index/</loc>
     
     <lastmod>2018-01-23T05:04:10.255Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://cyoncan.github.io/2017/05/02/Mongodb/</loc>
+    
+    <lastmod>2018-01-23T05:04:10.251Z</lastmod>
     
   </url>
   
@@ -353,13 +360,6 @@
   
   <url>
     <loc>http://cyoncan.github.io/2017/07/22/Hype-v_LinuxVps_ssh/</loc>
-    
-    <lastmod>2018-01-23T05:04:10.251Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://cyoncan.github.io/2017/05/02/Mongodb/</loc>
     
     <lastmod>2018-01-23T05:04:10.251Z</lastmod>
     
