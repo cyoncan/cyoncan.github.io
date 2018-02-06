@@ -5,7 +5,7 @@
     <url>%2F2017%2F10%2F11%2Fip_calc%2F</url>
     <content type="text"><![CDATA[192.168.0.1/24代表的含义，以及计算子网掩码、网络号、主机号、网络地址、主机地址IP地址是一个32位的二进制数，被分割为4个“8位二进制数”（也就是4个字节）。通常以十进制的方式表示，十进制的显示形式便于人看，二进制显示形式是给计算机看。子网掩码(subnet mask) 又叫网络掩码、地址掩码、子网络遮罩，它是一种用来指明一个IP地址的哪些位标识的是主机所在的子网，以及哪些位标识的是主机的位掩码。1234192.168.0.1/24/24 表示子网掩码，也就是前24位是1，剩余补011111111 11111111 11111111 00000000 转化成十进制 255.255.255.0子网掩码为：255.255.255.0将IP地址和子网掩码换算为二进制，子网掩码连续是1的表示网络地址，1的数目（/24）等于网络位的长度；后面0的部分表示主机地址，0的数目等于主机位的长度（32-24=8）。类型十进制二进制IP地址192.168.0.111000000 10101000 00000000 00000001子网掩码255.255.255.011111111 11111111 11111111 00000000网络地址：IP地址和子网掩码的与运算，结果就是网络地址。(主机位全为0==网络地址)11000000 10101000 00000000 00000000 转化十进制 192.168.0.0广播地址：将运算结果中的网络位不变，主机位变为1，结果就是广播地址。（主机位全为1==广播地址）11000000 10101000 00000000 11111111 转化十进制 192.168.0.255地址范围：网络地址+1即为第一个主机地址，广播地址-1即为最后一个主机地址。192.168.0.1 ~ 192.168.0.254主机数量：=2^(8-2) ; 8代表主机位长度。减2是因为主机不包括网络地址和广播地址。]]></content>
       <categories>
-        <category>计算机基础</category>
+        <category>None</category>
       </categories>
       <tags>
         <tag>ip</tag>
@@ -71,7 +71,7 @@
     <url>%2F2017%2F07%2F12%2Ftcp_bbr%2F</url>
     <content type="text"><![CDATA[TCP BBR是Google开源的拥塞控制算法,在Linux4.11内核版本上已经进行使用,最低内核要求4.9Debian8/Ubuntu1234$ wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.12.1/linux-headers-4.12.1-041201-generic_4.12.1-041201.201707121132_amd64.deb$ dpkg -i linux-headers-4.12.1-041201-generic_4.12.1-041201.201707121132_amd64.deb$ update-grub$ rebootCentOS 712345678$ rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org$ rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm$ yum --enablerepo=elrepo-kernel install kernel-ml -y$ rpm -qa | grep kernel$ rpm -ev #删除旧内核$ egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \'$ grub2-set-default 0 #default 0表示第一个内核设置为默认运行, 选择最新内核就对了$ reboot重新启动后，如果会出现“read-only file system” 的错误，root账户下执行mount -o remount rw / 即可开启BBR1$ uname -r # 查看内核是刚刚安装的版本执行 lsmod | grep bbr，结果中如果没有 tcp_bbr 就先执行12345$ modprobe tcp_bbr$ echo "tcp_bbr" &gt;&gt; /etc/modules-load.d/modules.conf$ echo "net.core.default_qdisc=fq" &gt;&gt; /etc/sysctl.conf$ echo "net.ipv4.tcp_congestion_control=bbr" &gt;&gt; /etc/sysctl.conf$ sysctl -p执行12$ sysctl net.ipv4.tcp_available_congestion_control$ sysctl net.ipv4.tcp_congestion_control结果如果都有bbr,则内核已开启bbr,]]></content>
       <categories>
-        <category>CentOS</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -93,7 +93,7 @@
     <url>%2F2017%2F07%2F10%2FJenkins%2F</url>
     <content type="text"><![CDATA[Jenkins是基于java语言写的一款，持续集成的web界面管理系统。第一次见过在Linux上这么简单就运行起来的环境(需要有jdk)。直接在官网上下载war包,运行 java -jar jenkins.war1234$ wget -P /opt/jenkins https://mirrors.tuna.tsinghua.edu.cn/jenkins/war-stable/2.60.1/jenkins.war$ java -jar jenkins.warhttp://ip:8080根据提示就可以初始化完成使用了，可以通过supervisor管理它运行。jdk安装yum install java12345678910$ wget http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.rpm$ rpm -ivh jdk-8u131-linux-x64.rpm$ java -versionjava version "1.8.0_131"Java(TM) SE Runtime Environment (build 1.8.0_131-b11)Java HotSpot(TM) 64-Bit Server VM (build 25.131-b11, mixed mode)$ rpm -ql|sortjdk1.8.0_131-1.8.0_131-fcs.x86_64 # 能查询到rpm安装的jdk名字$ rpm -ql jdk1.8.0_131-1.8.0_131-fcs.x86_64 # 查询jdk的目录为/usr/java/jdk1.8.0_131 # 在稍后的web几面里面配置相关环境可以填这个路径后续相关待补充……Jenkins wiki参考]]></content>
       <categories>
-        <category>SmartOps</category>
+        <category>CI&amp;CD</category>
       </categories>
       <tags>
         <tag>jenkins</tag>
@@ -149,7 +149,7 @@
     <url>%2F2017%2F06%2F07%2Fbind%2F</url>
     <content type="text"><![CDATA[需求：公司地址迁移，原来内部测试服务器用的是某百兆企业路由器做的DNS重定向。新地址用的是五百兆宽带，弃用了原来的路由器，换了新的千兆，但是没有DNS重定向功能，于是就在测试服务器本身搭建DNS服务，提供内网自定义域名解析。系统： centos6.8ip地址：192.168.1.100dns软件：bind域名：test88.tt1.安装12$ yum install bind$ yum install bind-chroot2.修改配置文件1234567891011121314151617181920212223242526272829303132333435363738394041424344$ cp /etc/named.conf /etc/named.conf.bak #先备份原配置文件$ vim /etc/named.conf//// named.conf//// Provided by Red Hat bind package to configure the ISC BIND named(8) DNS// server as a caching only nameserver (as a localhost DNS resolver only).//// See /usr/share/doc/bind*/sample/ for example named configuration files.//options &#123; listen-on port 53 &#123; any; &#125;; //53为dns监听端口，any代表监听所以主机。 listen-on-v6 port 53 &#123; ::1; &#125;; //属于ipv6 directory "/var/named"; dump-file "/var/named/data/cache_dump.db"; statistics-file "/var/named/data/named_stats.txt"; memstatistics-file "/var/named/data/named_mem_stats.txt"; allow-query &#123; any; &#125;; //对DNS服务器提出查询请求。any代表任何人 recursion yes; dnssec-enable yes; dnssec-validation yes; /* Path to ISC DLV key */ bindkeys-file "/etc/named.iscdlv.key"; managed-keys-directory "/var/named/dynamic";&#125;;logging &#123; channel default_debug &#123; file "data/named.run"; severity dynamic; &#125;;&#125;;zone "." IN &#123; type hint; file "named.ca";&#125;;include "/etc/named.rfc1912.zones";include "/etc/named.root.key";3.自定义域名解析配置12345678910111213$ vim /etc/named.rfc1912.zones //添加域//正向域zone "test88.tt" IN &#123; type master; file "test88.tt.zone"; allow-update &#123; none; &#125;;&#125;;//反向域zone "1.168.192.in-addr.arpa" IN &#123; type master; file "1.168.192.arpa"; allow-update &#123; none; &#125;;&#125;;4.自定义test88.tt.zone和1.168.192.arpa文件test88.tt.zone12345678910111213141516$ cd /var/named/$ cp -a named.localhost test88.tt.zone$ vim test88.tt.zone$TTL 86400@ IN SOA ns.test88.tt. rname.invalid. ( 0 ; serial 1D ; refresh 1H ; retry 1W ; expire 3H ) ; minimum@ IN NS ns.test88.tt.ns IN A 192.168.2.100www IN A 192.168.2.100mail IN A 192.168.2.115zentao IN A 192.168.2.100wiki IN A 192.168.2.1001.168.192.arpa12345678910111213$TTL 86400@ IN SOA test88.tt. rname.invalid. ( 0 ; serial 1D ; refresh 1H ; retry 1W ; expire 3H ) ; minimum IN NS @ IN A 127.0.0.1100 IN PTR www.test88.tt.100 IN PTR mail.test88.tt.100 IN PTR zentao.test88.tt.100 IN PTR wiki.test88.tt.5.修改DNS配置12345$ vim /etc/resolv.conf# Generated by NetworkManagernameserver 192.168.2.100nameserver 192.168.2.1$ service named start6.修改客户端机器的DNS为192.168.2.100服务器防火墙开放53端口udp和tcp均要，关闭selinux。]]></content>
       <categories>
-        <category>CentOS</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>dns</tag>
@@ -161,7 +161,7 @@
     <url>%2F2017%2F06%2F01%2Fip_addr%2F</url>
     <content type="text"><![CDATA[一、IP包头ip包头固定长度180位（bit）= 20字节二、ip地址分类网络类别最大网络数IP地址范围最大主机数私有地址范围A126=2^7-21.0.0.0~126.255.255.2552^24-210.0.0.0~10.255.255.255B16384=2^14128.0.0.0~191.255.255.2552^16-2172.16.0.0.~172.31.255.255C2097152=2^21192.0.0.0~223.255.255.2552^8-2192.168.0.0~192.168.255.255DE127.0.0.1代表电脑本机地址。A类地址，第一位数代表网段；B类地址，前两段位数代表网段；C类地址，前三段位数代表网段。不同网段之间的访问需要通过路由。私有地址可以在局域网内使用，不能被公网直接访问。例如192.168.0.1二进制十进制00000000.00000000.00000000.000000000.0.0.011111111.11111111.11111111.11111111255.255.255.255]]></content>
       <categories>
-        <category>计算机基础</category>
+        <category>None</category>
       </categories>
       <tags>
         <tag>ip</tag>
@@ -182,7 +182,7 @@
   <entry>
     <title><![CDATA[git_ssh]]></title>
     <url>%2F2017%2F05%2F22%2Fgit_ssh%2F</url>
-    <content type="text"><![CDATA[记录:同台电脑多github账号使用12345678910111213141516171819202122$ ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_github -C "yourname@email.com"$ ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_gitlab -C "hername@email.com"$ eval $(ssh-agent -s)$ ssh-add ~/.ssh/id_rsa_github$ ssh-add ~/.ssh/id_rsa_gitlab$ cd ~/.ssh$ vim config#账号一Host github.comHostName github.comUser gitIdentityFile C:/Users/win/.ssh/id_rsa_github#账号二Host gitlab.comHostName github.comUser gitIdentityFile C:/Users/win/.ssh/id_rsa_gitlab$ ssh -T git@github.comHi xxx! You've successfully authenticated, but GitHub does not provide shell access.$ ssh -T git@gitlab.comHi xxx! You've successfully authenticated, but GitHub does not provide shell access.]]></content>
+    <content type="text"><![CDATA[记录:同台电脑多github账号使用1234567891011121314151617181920212223$ ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_github -C "yourname@email.com"$ ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_gitlab -C "myname@email.com"$ eval $(ssh-agent -s)$ ssh-add ~/.ssh/id_rsa_github$ ssh-add ~/.ssh/id_rsa_gitlab$ cd ~/.ssh$ vim config#账号一Host github.comHostName github.comUser gitIdentityFile ~/.ssh/id_rsa_github#账号二Host gitlab.comHostName github.comUser gitIdentityFile ~/.ssh/id_rsa_gitlab$ ssh -T git@github.comHi xxx! You've successfully authenticated, but GitHub does not provide shell access.$ ssh -T git@gitlab.comHi xxx! You've successfully authenticated, but GitHub does not provide shell access.git-config12345$ git config --global user.name "John Doe"$ git config --global user.email johndoe@example.com$ git config --global core.editors vim$ git config --global merge.tool vimdiff$ git config --global color.diff.meta "blue black bold"]]></content>
       <categories>
         <category>Git</category>
       </categories>
@@ -195,7 +195,7 @@
     <url>%2F2017%2F05%2F18%2F%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%2F</url>
     <content type="text"><![CDATA[序列化和反序列化的概念序列化 : 对象转换为字节序列的过程.反序列化 : 字节序列恢复为对象的过程对象队序列化使用场景:①把对象的字节序列永久地保存到硬盘上, 通常存放在一个文件中.②在网络上传送对象的字节序列.]]></content>
       <categories>
-        <category>计算机基础</category>
+        <category>None</category>
       </categories>
       <tags>
         <tag>序列化</tag>
@@ -206,7 +206,7 @@
     <url>%2F2017%2F05%2F18%2FNmap%2F</url>
     <content type="text"><![CDATA[1. 获取远程主机的系统类型及开放的端口1234567891011$ nmap -sS -P0 -sV -O &lt;target&gt; &lt;target&gt;可以为ip/主机名/域名/-sL 列表扫描-sT TCP端口扫描-sS TCP同步(SYN)端口扫描半开放隐身扫描-sU UDP端口扫描-sP Ping扫描-P0 允许关闭ping进行扫描-sV 打开系统版本检测-O 尝试识别远程主机OS-A 打开操作系统指纹和版本检测-v 输出详细扫描情况2.列出开放了指定端口的主机列表1nmap -sT -p 80 -oG3.寻找所有在线主机1nmap -sP 192.168.0.0/24]]></content>
       <categories>
-        <category>CentOS</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -218,7 +218,7 @@
     <url>%2F2017%2F05%2F17%2Fsed%2F</url>
     <content type="text"><![CDATA[一、sed简介sed命令a : 新增， a 的后面可以接字串，而这些字串会在新的一行出现（目前的下一行）。c : 取代， c 的后面可以接字串，这些字串可以取代 n1,n2 之间的行。d : 删除，d 后面通常不接任东西。i : 插入， i 的后面可以接字符串，而这些字符串会在新的一行出现（目前的上一行）。p : 列印，亦即将某个选择的数据印出。通常 p 会与参数 sed -n 一起运行。s : 取代，可以直接进行取代的工作！通常这个 s 的动作可以搭配正规表示法！例如 1,20s/old/new/g 就是。sed选项-e : 多点编辑，-e script指定的script来处理输入的文本文件。-n : 仅显示script处理后的结果(经过sed处理的一行或者动作才会被列出来的)。-f : -f scriptfile，指定的script文件来处理输入的文本文件。-i : 直接修改读取的文件内容，而不是直接输出到终端。基础正则表达式字符作用实例^匹配行开头。/^me/ 匹配所有以me开头的行$匹配行结尾。/me$/ 匹配所有以me结尾的行.匹配单个字符/m…e/ 匹配包含字母m,后跟三个任意字符，且再跟字母e的行*匹配单个或多个前导字符/me*/ 匹配包含字母me,后面跟多个或零个e字母的行[]匹配指定字符组内的任一字符/[mM]e/ 匹配包含me或者Me的行&amp;保存查找串s/me/**&amp;**/ 符号&amp;代表查找串。me将被替换为**me**\&lt;匹配词首/\&lt;me/ 匹配以me为首的词\&gt;匹配词尾/\&gt;me/ 匹配以me结尾的词x{m\}匹配连续m个x/A\{4}/ 匹配包含连续4个A的行x\{m,\}匹配至少m个x/A\{5,\}/ 匹配包含至少连续4个A的行x\{m,n\}匹配至少m个，但不超过n个x/A\{4,8\}/ 匹配包含连续4到8个A的行sed如果用到了字符实体本身是属于sed命令选项的，需要用反斜杠 \ 进行转义1.删除文件每行的第二个字符12$ sed -nr 's/.//2' file$ sed -nr 's/(.)(.)(.*)/\1\3/p' file2.删除文件每行倒数的第二个字符1$ sed -nr 's/(.*)(.)(.)/\1\3/p' file3.打印文件空行的行号1$ sed -n '/^$/=' file]]></content>
       <categories>
-        <category>CentOS</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -266,7 +266,7 @@
     <url>%2F2017%2F05%2F03%2FShadowsocksr%2F</url>
     <content type="text"><![CDATA[本来不想写这个文档的,过程很简单,之前弄过几次,最近一个梯子快过期了,又找了台非常实惠的vps,准备重新弄个,又是到处找教程,弄来弄去的,想想还是自己记录下过程吧,自己写自己也看得比较明白方便以后自己看.推荐购买vultr和linode.通常两种方式上VPN : PPTP和shadowsocks , Linux一般各个发行版本之间的配置类似,我用过Debian7/8和centos6/7, 如果是纯fq推荐使用debianPPTP拨号方式1.检测系统环境,满足以下三条检测,否则装pptp无效,可以去装openVPN1234567# 查看内核是否支持MPPE,显示ok表明通过.否则需要安装kernel-devel➜ ~ modprobe ppp-compress-18 &amp;&amp; echo OK# 执行下面两条命令,得到响应结果和下面的一样.就可以接下面的步骤安装PPTP➜ ~ cat /dev/ppp 检测是否开启ppp支持cat: /dev/ppp: No such device or address➜ ~ cat /dev/net/tun 检测是否开启net/tun支持cat: /dev/net/tun: File descriptor in bad state2.安装相应组件,关闭SELinux(一般都默认关闭,否则手动关闭)1234➜ ~ yum install epel➜ ~ yum makecache fast➜ ~ yum -y install ppp➜ ~ yum -y install pptpd3.编辑相关配置1234➜ ~ vim /etc/pptpd.conf # 去掉末尾的这两行注释,有说明,如果该地址段与内网地址有冲突,需要把这里的改下. localip 192.168.0.1 remoteip 192.168.0.234-238,192.168.0.2451234➜ ~ vim /etc/ppp/options.pptpd# 修改ms-dns字段ms-dns 8.8.8.8ms-dns 8.8.4.44.设置VPN拨号账号密码1234➜ ~ vim /etc/ppp/chap-secrets# 按照给你的格式去写# client server secret IP addresshello pptpd helloworld *5.修改内核参数12345➜ ~ vim /etc/sysctl.conf# 在末尾添加一下或者取消现有的注释net.ipv4.ip_forward=1# 运行下面的命令使之生效➜ ~ sysctl -p6.放行服务端口或者直接关了防火墙123# centos7是这么添加的,其他版本Linux参考百度➜ ~ firewall-cmd --zone=public --add-port=80/tcp --permanent➜ ~ firewall-cmd --reloadshadowsocks可以参考shadowsocks的GitHub文档,非常非常的详细,我就不写了,自己每次用也是看这个,GitHub上去搜索shadowsocks仓库,注意shadowsocks有多种语言版本,c语言版本一般是首选,至于为什么呢!下面贴几条网上普遍认可的,但是他默认并不支持多用户,python版本go版本都是可以支持一个配置文件多用户的.也可以直接上python版的就好了.c语言版本:体积小巧。静态编译并打包后只有 100 KB。高并发。基于 libev 实现的异步 I/O，以及基于线程池的异步 DNS，同时连接数可上万。低资源占用。几乎不占用 CPU 资源，服务器端内存占用一般在 3MB 左右。c语言版本,多用户配置:假如我有以下这三个用户(端口),每个用户(端口)独立一个配置文件./etc/shadowsocks-libev/config8388.json/etc/shadowsocks-libev/config8389.json/etc/shadowsocks-libev/config8390.json通过supervisor进程管理软件,能将一个普通的命令行进程变为后台daemon，并监控进程状态，异常退出时能自动重启.12345678910111213141516171819202122232425262728293031$ apt-get install supervisor$ echo_supervisord_conf 输出默认配置文件$ echo_supervisord_conf &gt; /etc/supervisord.conf 将输出的默认配置项重定向到自定义的配置文件里面$ vim /etc/supervisord.conf[program:ss8388]command:ss-server -c /etc/shadowsocks-libev/config8388.json -u -Aprocess_name=ss8388redirect_stderr=truestdout_logfile_maxbytes=1MBstdout_logfile_backups=1[program:ss8389]command:ss-server -c /etc/shadowsocks-libev/config8389.json -u -Aprocess_name=ss8389redirect_stderr=truestdout_logfile_maxbytes=1MBstdout_logfile_backups=1[program:ss8390]command:ss-server -c /etc/shadowsocks-libev/config8390.json -u -Aprocess_name=ss8390redirect_stderr=truestdout_logfile_maxbytes=1MBstdout_logfile_backups=1$ supervisorctl -c /etc/supervisord.conf 进入supervisorctl-shell界面&gt;status&gt;start/stop/restart ss8388&gt;reread&gt;update或者下面这种类型$ supervisorctl status通过脚本,相关命令,下面就是简单的命令执行,也可以写成脚本方便管理.1234$ setsid ss-serevr -c /etc/shadowsocks-libev/config8388.json -u -A$ setsid ss-serevr -c /etc/shadowsocks-libev/config8389.json -u -A$ setsid ss-serevr -c /etc/shadowsocks-libev/config8390.json -u -A$ ps -ef | grep ss-server 可以查看到那启动的三个进程查看vps架构类型1234$ yum install virt-what$ virt-whatxenxen-hvmshadowsocksr]]></content>
       <categories>
-        <category>CentOS</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -289,7 +289,7 @@
     <url>%2F2017%2F05%2F01%2Fssh_secure%2F</url>
     <content type="text"><![CDATA[ssh安全配置优化:1.修改ssh默认端口,改成非标准高端端口 (1024~65535)12345$ sysctl -a | grep ip_local_port_range (查看端口范围)net.ipv4.ip_local_port_range = 1024 65000$ vim /etc/syscofnig/iptables (修改防火墙策略ssh 22为自定义端口)$ vim /etc/ssh/sshd_config (修改ssh的端口为自定义端口)$ service sshd restart (重启生效)2.禁止直接用root登录ssh,设置用普通账户ssh,然后切换到root.123$ vim /etc/ssh/sshd_configPermitRootLogin no$ service iptables restart3.指定ssh连接的ip地址1234$ vim /etc/hosts.denysshd:all:deny$ vim /etc/hosts.allowsshd:192.168.2.10:allow4.xshell使用public key登录sshxshell工具&gt;新建用户密钥生成向导,生成一堆密钥,最好填写上加密密码.把公钥传到服务器用户目录下面,可用ftp方式上传1$ cat id_rsa.pub &gt;&gt; authorized_keys (将上传的公钥追加到authorized里面,没有该文件可以新建)这样就可以不用密码去登录了,注意不同的用户使用,都要分别去给不同用户目录下的~/.ssh追加我们xshell传过去的公钥.5.xshell使用Google身份验证器登录123456789101112131415161718$ setenforce 0 关闭SELinux$ yum install libpng libtool pam -y$ yum install qrencode -y$ git clone https://github.com/google/google-authenticator-libpam.git$ cd google-authenticator-libpam$ ./bootstrap.sh$ ./configure$ make$ make install# 复制google 身份验证器pam模块到系统下$ cp /usr/local/lib/security/pam_google_authenticator.so /lib64/security$ vim /etc/pam.d/sshdauth required pam_google_authenticator.so no_increment_hotp$ vim /etc/ssh/sshd_configChallengeResponseAuthentication yes$ systemctl restart ssh.service$ google-authenticator手机上去酷安或者google play上下载Google身份验证器,扫描生成的二维码.xshell登录选择keyboard]]></content>
       <categories>
-        <category>CentOS</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -312,7 +312,7 @@
     <url>%2F2017%2F04%2F26%2FLinux_Mem%2F</url>
     <content type="text"><![CDATA[释放内存123456789101112$ sync$ free -m total used free shared buffers cachedMem: 7869 6660 1208 0 741 1174-/+ buffers/cache: 4743 3125Swap: 0 0 0$ echo 1 &gt; /proc/sys/vm/drop_caches #释放 pagecache$ echo 2 &gt; /proc/sys/vm/drop_caches #释放 dentries和inodes$ echo 3 &gt; /proc/sys/vm/drop_caches #释放 pagecache, dentries和inodes# 获取空闲内存$ free -m | grep - | awk -F : '&#123;print $2&#125;' | awk '&#123;print $2&#125;']]></content>
       <categories>
-        <category>CentOS</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -334,7 +334,7 @@
     <url>%2F2017%2F04%2F24%2FLinux%E6%96%87%E4%BB%B6%E9%9A%90%E8%97%8F%2F</url>
     <content type="text"><![CDATA[chattr命令用于设置文件的隐藏权限，格式为：“chattr [参数] 文件”。chattr设置文件的隐藏权限，如果要将某个隐藏功能添加到文件，使用+参数，如果要将某个隐藏功能移出文件，使用-参数。常见的隐藏权限包括有：参数作用i将无法对文件进行修改,若对目录设置后则仅能修改子文件而不能新建或删除。a仅允许补充（追加）内容.无法覆盖/删除(Append Only)。S文件内容变更后立即同步到硬盘(sync)。s彻底从硬盘中删除，不可恢复(用0填充原文件所在硬盘区域)。A不再修改这个文件的最后访问时间(atime)。b不再修改文件或目录的存取时间。D检查压缩文件中的错误。d当使用dump命令备份时忽略本文件/目录。c默认将文件或目录进行压缩。u当删除此文件后依然保留其在硬盘中的数据，方便日后恢复。t让文件系统支持尾部合并（tail-merging）。X可以直接访问压缩文件的内容。lsattr命令用于显示文件的隐藏权限，格式为：“lsattr [参数] 文件”。1234567891011$ root@stu  ~  lsattr-------------e- ./readme.txt$ root@stu  ~  chattr +a readme.txt$ root@stu  ~  rm -rf readme.txtrm: cannot remove `readme.txt': Operation not permitted$ root@stu  ~  lsattr readme.txt-----a-------e- readme.txt$ root@stu  ~  chattr -a readme.txt$ root@stu  ~  rm readme.txt$ root@stu  ~  lltotal 0]]></content>
       <categories>
-        <category>CentOS</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -345,34 +345,34 @@
     <url>%2F2017%2F04%2F24%2FLinux_Pip%2F</url>
     <content type="text"><![CDATA[管道符命令“命令A | 命令B” , 就是“将前一个命令原本要输出到屏幕的数据当作是后一个命令的标准输入”123eg:find ./ -name "*.html" | ls -l | wc -l 查找当前目录下html文件有几个.echo "hello" | passwd --stdin root 修改root密码对于输入重定向有这些情况：符号作用命令 &lt; file将file作为命令的标准输入命令 &lt;&lt; 分界符从标准输入中读入，直到遇见“分界符”才停止命令 &lt; file1 &gt; file2将file1作为命令的标准输入并将标准输出到file2对于输出重定向符有这些情况：符号作用命令 &gt; file将标准输出重定向到一个file中（清空原有file的数据）命令 2&gt; file将错误输出重定向到一个file中（清空原有file的数据）命令 &gt;&gt; file将标准输出重定向到一个file中（追加到原有内容的后面）命令 2&gt;&gt; file将错误输出重定向到一个file中（追加到原有内容的后面）命令 &gt;&gt; file 2&gt;&amp;1 或 命令 &amp;&gt;&gt; file将标准输出与错误输出共同写入到file中（追加到原有内容的后面）输入输出都是相对于命令而言]]></content>
       <categories>
-        <category>CentOS</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>linux</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Zabbix搭建]]></title>
-    <url>%2F2017%2F04%2F20%2Fzabbix%2F</url>
-    <content type="text"><![CDATA[zabbix搭建环境: centos6,lnmp,zabbix3.0.8一.web环境安装参考另一篇写lnmp搭建的文章二.zabbix安装搭建tip:在官方的文档上已经有很详细的说明,下面是根据自己的实际情况参照文档安装过程.1.zabbix下载安装选LTS,我下的3.0最新的源码包12345678$ wget -c https://nchc.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/3.0.8/zabbix-3.0.8.tar.gz$ tar zxvf zabbix-3.0.8.tar.gz$ groupadd zabbix$ useradd -g zabbix zabbix$ cd zabbix-3.0.8/ $ ./configure --prefix=/data/local/zabbix --enable-server --enable-agent --with-mysql --enable-ipv6 --with-net-snmp --with-libcurl --with-libxml2 --with-openssl$ yum install net-snmp-devel.x86_64 -y (根据实际环境去安装提示缺少的东西,MySQL大部分是因为没有软连接到usr/bin)$ ln -s /data/local/zabbix/sbin/* /usr/sbin/2.创建zabbix数据库,导入数据库123456789101112131415161718$ mysql -uroot -pmysql&gt; create database zabbix character set utf8 collate utf8_bin;mysql&gt; grant all privileges on zabbix.* to zabbix@'localhost' identified by 'passwd';mysql&gt; grant all privileges on zabbix.* to zabbix@'127.0.0.1' identified by 'passwd';或者直接用mysql&gt; grant all privileges on zabbix.* to zabbix@'%' identified by 'passwd';mysql&gt; flush privileges;mysql&gt; quit;$ cd /data/src/zabbix-3.0.8/database/mysql$ mysql -uzabbix -p zabbix &lt; schema.sql 导入zabbix数据库脚本# stop here if you are creating database for Zabbix proxy$ mysql -uzabbix -p zabbix &lt; images.sql$ mysql -uzabbix -p zabbix &lt; data.sql导入数据库另一种方法:$ mysql -uzabbix -pmysql&gt; use zabbix;mysql&gt; source /data/src/zabbix-3.0.8/database/mysql/schema.sql;......3.修改zabbix_server配置文件12345678DBName=zabbix #数据库名称DBUser=zabbix #数据库用户名DBPassword=123456 #数据库密码ListenIP=127.0.0.1 #数据库ip地址Timeout=4AlertScriptsPath=/data/local/zabbix/share/zabbix/alertscriptsExternalScripts=/data/local/zabbix/share/zabbix/externalscriptsLogSlowQueries=30004.创建web目录123mkdir -p /data/web/zabbix.monitor.cncp -a /data/src/zabbix-3.0.8/frontend/php/* /data/web/zabbix.monitor.cn/chown -R www:www zabbix.monitor.cn/5.配置nginx1234567891011121314151617181920212223242526272829303132333435363738vim /data/local/nginx/conf/nginx.conf在server模块外http模块内加入一行include vhost/*.conf:wqcd /data/local/nginx/conf/vhostvim zabbix.confserver &#123; listen 80; server_name 127.0.0.1; index index.html index.php; root /data/web/zabbix.monitor.cn; access_log /data/logs/$SERVER_NAME.access.log main; error_log /data/logs/$SERVER_NAME.log error; location / &#123; fastcgi_index index.php; fastcgi_pass 127.0.0.1:9000; include fastcgi_params; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; fastcgi_param SCRIPT_NAME $fastcgi_script_name; &#125; if (!-e $request_filename)&#123; rewrite ^/(.*)$ /index.php/$1 last; &#125; location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|JPG|xml|json)$ &#123; expires 30d; &#125; location ~ .*\.(js|css)?$ &#123; expires 12h; &#125; # access_log m.log access; &#125;6.修改php.ini文件(这个地方债官网上有配置要求说明)123456789101112131415161718192021222324252627282930post_max_size = 32Mmax_execution_time = 300max_input_time = 300date.timezone = Asia/Shanghai以下是我自己的进入zabbi安装检测各个配置参数和模块是否满足zabbix安装要求.如果忘记更改php.ini或者不知道改哪些的,可以进入到安装界面http://zabbix.monitor.cn/setup.php 根据检测结果,再去修改,每次修改可能需要重启nginx和php-fpmPHP version 5.6.30(我用的PHP版本) 5.4.0(zabbix3.0.8要求PHP最低的版本,下面的参数类似要求) OKPHP option "memory_limit" 128M 128M OKPHP option "post_max_size" 32M 16M OKPHP option "upload_max_filesize" 2M 2M OKPHP option "max_execution_time" 300 300 OKPHP option "max_input_time" 300 300 OKPHP option "date.timezone" Asia/Shanghai OKPHP databases support MySQL/SQLite3 OKPHP bcmath on OKPHP mbstring on OKPHP option "mbstring.func_overload" off off OKPHP option "always_populate_raw_post_data" off off OKPHP sockets on OKPHP gd 2.1.0 2.0 OKPHP gd PNG support on OKPHP gd JPEG support on OKPHP gd FreeType support on OKPHP libxml 2.7.6 2.6.15 OKPHP xmlwriter on OKPHP xmlreader on OKPHP ctype on OKPHP session on OKPHP option "session.auto_start" off off OKPHP gettext on OKPHP option "arg_separator.output" &amp; &amp; OK7.启动,进入安装界面12345678910111213$ service nginx start$ service php-fpm start$ zabbix_server 浏览器输入 http://zabbix.monitor.cn/setup.php 域名是之前nginx里面配置好的,或者不用域名用IP和别的端口,域名需要做host映射,或者内网路由器里面做虚拟映射.出现界面下一步,填上MySQL zabbix用户密码一致,下一步,看到绿色congratulation 就安装完成了.默认用户名和密码:admin,zabbix设置zabbix服务开机启动$ cp /data/src/zabbix/misc/init.d/fedora/core/* /etc/init.d/$ vim /etc/init.d/zabbix_server修改BASEDIR你zabbix安装路径chkconfig --add zabbix_serverchkconfig --add zabbix_agentdchkconfig zabbix_server onchkconfig zabbix_agentd on8.客户端安装客户端根据实际情况去使用几种方案,一般机器少的,都是一台server端,几台agent端.方案可以参考:http://t.cn/RXPa0zV1234567./configure --prefix=/usr/local/zabbix --enable-agent --with-opensslmake install其它的设置和前面的安装配置一样,zabbix_agentd.conf Server=ServeripServerActive=ServeripHostname=自定义zabbix客户端hostname,不要和server端配置的hostname一样.tip:将10050,10051端口添加到防火墙,server端也是.agent端需要启动zabbix_agentd服务9.客户端和服务端使用加密传输i. 使用psk共享密钥加密1234567891011Generating PSK在客户端操作$ cd /usr/local/zabbix/$ openssl rand -hex 32 -out zabbix_agentd.psk$ chown zabbix:zabbix zabbix_agentd.psk$ vim /etc/zabbix_agentd.conf TLSConnect=psk TLSAccept=psk TLSPSKFile=/home/zabbix/zabbix_agentd.psk TLSPSKIdentity=PSK 001 service zabbix_agentd restart 回到server机器,在host机器加密那里选择psk,填入信息.ii. 使用证书加密123456789101112131415161718192021222324252627282930313233$ mkdir -p /data/local/zabbix/zabbix_crt$ cd zabbix_crt/#生成ca私钥$ openssl genrsa -aes256 -out ca.key 2048 需要输入给私钥加密的密码#使用ca私钥建立ca证书$ openssl req -new -x509 -nodes -days 1000 -key ca.key -subj /CN=ServerIPorDomainName\ CA/OU=Development\ group/O=Zabbix\ SIA/DC=zabbix/DC=com &gt; ca.crt#生成服务器csr证书请求文件$ openssl req -newkey rsa:2048 -days 1000 -nodes -keyout server.key -subj /CN=ServerIPorDomainName/OU=Development\ group/O=Zabbix\ SIA/DC=zabbix/DC=com &gt; server.csr#使用ca证书与私钥签发服务器证书$ openssl x509 -req -in server.csr -days 1000 -CA ca.crt -CAkey ca.key -set_serial 01 &gt; server.crt#生成客户端csr证书请求文件$ openssl req -newkey rsa:2048 -days 1000 -nodes -keyout client.key -subj /CN=client/OU=Development\ group/O=Zabbix\ SIA/DC=zabbix/DC=com &gt; client.csr#使用ca证书与私钥签发客户端证书$ openssl x509 -req -in client.csr -days 1000 -CA ca.crt -CAkey ca.key -set_serial 01 &gt; client.crt服务端文件位置可以不改变,用scp命令将刚刚生成的客户端需要文件上传到客户端自定义的文件夹 /usr/local/zabbix/zabbix_crt/服务端: ca.crt , server.crt , server.crtvim /data/local/zabbix/etc/zabbix_server.confTLSCAFile=/data/local/zabbix/zabbix_crt/ca.crtTLSCertFile=/usr/local/zabbix/zabbix_crt/server.crtTLSKeyFile=/usr/local/zabbix/zabbix_crt/server.key客户端: ca.crt , client.crt , client.crtTLSConnect=certTLSAccept=certTLSCAFile=/usr/local/zabbix/zabbix_crt/ca.crtTLSCertFile=/usr/local/zabbix/zabbix_crt/client.crtTLSKeyFile=/usr/local/zabbix/zabbix_crt/client.key进入webui configuration/hosts/打开相应的主机/双向都可以选certificate重启zabbix_server和zabbix_agent,再进去看cert是否变蓝色,有延迟几十秒.我记录的文档可能有些不全,希望大家遇到问题多分析日志,去网上搜索遇到的错误信息.]]></content>
-      <categories>
-        <category>监控</category>
-      </categories>
-      <tags>
-        <tag>zabbix</tag>
-        <tag>openssl</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[zabbix配置监控MySQL]]></title>
-    <url>%2F2017%2F04%2F20%2Fzabbix_MySQL%2F</url>
+    <url>%2F2017%2F04%2F20%2FZabbix_MySQL%2F</url>
     <content type="text"><![CDATA[zabbix3.0监控MySQL设置1.Agent端建立一个登陆MySQL用户(步骤参考MySQL笔记)2.在zabbix/etc/下面新建.my.cnf文件1234567891011121314$ find / -name "sock" -print /var/lib/mysql/mysql.sock$ vim /usr/local/zabbix/etc/.my.cnf #zabbix Agent [mysql] host=localhost user=zabbix password=zabbix socket=/var/lib/mysql/mysql.sock [mysqladmin] host=localhost usr=zabbix password=zabbix socket=/var/lib/mysql/mysql.sock3.编辑 userparameter_mysql.conf1234567$ find / -name userparameter_mysql.conf/usr/local/src/zabbix-3.0.8/conf/zabbix-agentd/userparameter_mysql.conf$ cp userparameter_mysql.conf /usr/local/zabbix/etc/zabbix_agentd.conf.d/$ sed -i 's#/var/lib/zabbix#/usr/local/zabbix/etc#g' 或者用 vim编辑该文件替换掉 home 目录为 .my.cnf 所在的目录$ vim /usr/local/zabbix/etc/zabbix/zabbix.agentd.conf 添加一行 Include=/usr/local/zabbix/etc/zabbix_agentd.conf.d/]]></content>
       <categories>
-        <category>监控</category>
+        <category>Monitor</category>
       </categories>
       <tags>
         <tag>mysql</tag>
         <tag>zabbix</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Zabbix搭建]]></title>
+    <url>%2F2017%2F04%2F20%2FZabbix%2F</url>
+    <content type="text"><![CDATA[zabbix搭建环境: centos6,lnmp,zabbix3.0.8一.web环境安装参考另一篇写lnmp搭建的文章二.zabbix安装搭建tip:在官方的文档上已经有很详细的说明,下面是根据自己的实际情况参照文档安装过程.1.zabbix下载安装选LTS,我下的3.0最新的源码包12345678$ wget -c https://nchc.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/3.0.8/zabbix-3.0.8.tar.gz$ tar zxvf zabbix-3.0.8.tar.gz$ groupadd zabbix$ useradd -g zabbix zabbix$ cd zabbix-3.0.8/ $ ./configure --prefix=/data/local/zabbix --enable-server --enable-agent --with-mysql --enable-ipv6 --with-net-snmp --with-libcurl --with-libxml2 --with-openssl$ yum install net-snmp-devel.x86_64 -y (根据实际环境去安装提示缺少的东西,MySQL大部分是因为没有软连接到usr/bin)$ ln -s /data/local/zabbix/sbin/* /usr/sbin/2.创建zabbix数据库,导入数据库123456789101112131415161718$ mysql -uroot -pmysql&gt; create database zabbix character set utf8 collate utf8_bin;mysql&gt; grant all privileges on zabbix.* to zabbix@'localhost' identified by 'passwd';mysql&gt; grant all privileges on zabbix.* to zabbix@'127.0.0.1' identified by 'passwd';或者直接用mysql&gt; grant all privileges on zabbix.* to zabbix@'%' identified by 'passwd';mysql&gt; flush privileges;mysql&gt; quit;$ cd /data/src/zabbix-3.0.8/database/mysql$ mysql -uzabbix -p zabbix &lt; schema.sql 导入zabbix数据库脚本# stop here if you are creating database for Zabbix proxy$ mysql -uzabbix -p zabbix &lt; images.sql$ mysql -uzabbix -p zabbix &lt; data.sql导入数据库另一种方法:$ mysql -uzabbix -pmysql&gt; use zabbix;mysql&gt; source /data/src/zabbix-3.0.8/database/mysql/schema.sql;......3.修改zabbix_server配置文件12345678DBName=zabbix #数据库名称DBUser=zabbix #数据库用户名DBPassword=123456 #数据库密码ListenIP=127.0.0.1 #数据库ip地址Timeout=4AlertScriptsPath=/data/local/zabbix/share/zabbix/alertscriptsExternalScripts=/data/local/zabbix/share/zabbix/externalscriptsLogSlowQueries=30004.创建web目录123mkdir -p /data/web/zabbix.monitor.cncp -a /data/src/zabbix-3.0.8/frontend/php/* /data/web/zabbix.monitor.cn/chown -R www:www zabbix.monitor.cn/5.配置nginx1234567891011121314151617181920212223242526272829303132333435363738vim /data/local/nginx/conf/nginx.conf在server模块外http模块内加入一行include vhost/*.conf:wqcd /data/local/nginx/conf/vhostvim zabbix.confserver &#123; listen 80; server_name 127.0.0.1; index index.html index.php; root /data/web/zabbix.monitor.cn; access_log /data/logs/$SERVER_NAME.access.log main; error_log /data/logs/$SERVER_NAME.log error; location / &#123; fastcgi_index index.php; fastcgi_pass 127.0.0.1:9000; include fastcgi_params; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; fastcgi_param SCRIPT_NAME $fastcgi_script_name; &#125; if (!-e $request_filename)&#123; rewrite ^/(.*)$ /index.php/$1 last; &#125; location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|JPG|xml|json)$ &#123; expires 30d; &#125; location ~ .*\.(js|css)?$ &#123; expires 12h; &#125; # access_log m.log access; &#125;6.修改php.ini文件(这个地方债官网上有配置要求说明)123456789101112131415161718192021222324252627282930post_max_size = 32Mmax_execution_time = 300max_input_time = 300date.timezone = Asia/Shanghai以下是我自己的进入zabbi安装检测各个配置参数和模块是否满足zabbix安装要求.如果忘记更改php.ini或者不知道改哪些的,可以进入到安装界面http://zabbix.monitor.cn/setup.php 根据检测结果,再去修改,每次修改可能需要重启nginx和php-fpmPHP version 5.6.30(我用的PHP版本) 5.4.0(zabbix3.0.8要求PHP最低的版本,下面的参数类似要求) OKPHP option "memory_limit" 128M 128M OKPHP option "post_max_size" 32M 16M OKPHP option "upload_max_filesize" 2M 2M OKPHP option "max_execution_time" 300 300 OKPHP option "max_input_time" 300 300 OKPHP option "date.timezone" Asia/Shanghai OKPHP databases support MySQL/SQLite3 OKPHP bcmath on OKPHP mbstring on OKPHP option "mbstring.func_overload" off off OKPHP option "always_populate_raw_post_data" off off OKPHP sockets on OKPHP gd 2.1.0 2.0 OKPHP gd PNG support on OKPHP gd JPEG support on OKPHP gd FreeType support on OKPHP libxml 2.7.6 2.6.15 OKPHP xmlwriter on OKPHP xmlreader on OKPHP ctype on OKPHP session on OKPHP option "session.auto_start" off off OKPHP gettext on OKPHP option "arg_separator.output" &amp; &amp; OK7.启动,进入安装界面12345678910111213$ service nginx start$ service php-fpm start$ zabbix_server 浏览器输入 http://zabbix.monitor.cn/setup.php 域名是之前nginx里面配置好的,或者不用域名用IP和别的端口,域名需要做host映射,或者内网路由器里面做虚拟映射.出现界面下一步,填上MySQL zabbix用户密码一致,下一步,看到绿色congratulation 就安装完成了.默认用户名和密码:admin,zabbix设置zabbix服务开机启动$ cp /data/src/zabbix/misc/init.d/fedora/core/* /etc/init.d/$ vim /etc/init.d/zabbix_server修改BASEDIR你zabbix安装路径chkconfig --add zabbix_serverchkconfig --add zabbix_agentdchkconfig zabbix_server onchkconfig zabbix_agentd on8.客户端安装客户端根据实际情况去使用几种方案,一般机器少的,都是一台server端,几台agent端.方案可以参考:http://t.cn/RXPa0zV1234567./configure --prefix=/usr/local/zabbix --enable-agent --with-opensslmake install其它的设置和前面的安装配置一样,zabbix_agentd.conf Server=ServeripServerActive=ServeripHostname=自定义zabbix客户端hostname,不要和server端配置的hostname一样.tip:将10050,10051端口添加到防火墙,server端也是.agent端需要启动zabbix_agentd服务9.客户端和服务端使用加密传输i. 使用psk共享密钥加密1234567891011Generating PSK在客户端操作$ cd /usr/local/zabbix/$ openssl rand -hex 32 -out zabbix_agentd.psk$ chown zabbix:zabbix zabbix_agentd.psk$ vim /etc/zabbix_agentd.conf TLSConnect=psk TLSAccept=psk TLSPSKFile=/home/zabbix/zabbix_agentd.psk TLSPSKIdentity=PSK 001 service zabbix_agentd restart 回到server机器,在host机器加密那里选择psk,填入信息.ii. 使用证书加密123456789101112131415161718192021222324252627282930313233$ mkdir -p /data/local/zabbix/zabbix_crt$ cd zabbix_crt/#生成ca私钥$ openssl genrsa -aes256 -out ca.key 2048 需要输入给私钥加密的密码#使用ca私钥建立ca证书$ openssl req -new -x509 -nodes -days 1000 -key ca.key -subj /CN=ServerIPorDomainName\ CA/OU=Development\ group/O=Zabbix\ SIA/DC=zabbix/DC=com &gt; ca.crt#生成服务器csr证书请求文件$ openssl req -newkey rsa:2048 -days 1000 -nodes -keyout server.key -subj /CN=ServerIPorDomainName/OU=Development\ group/O=Zabbix\ SIA/DC=zabbix/DC=com &gt; server.csr#使用ca证书与私钥签发服务器证书$ openssl x509 -req -in server.csr -days 1000 -CA ca.crt -CAkey ca.key -set_serial 01 &gt; server.crt#生成客户端csr证书请求文件$ openssl req -newkey rsa:2048 -days 1000 -nodes -keyout client.key -subj /CN=client/OU=Development\ group/O=Zabbix\ SIA/DC=zabbix/DC=com &gt; client.csr#使用ca证书与私钥签发客户端证书$ openssl x509 -req -in client.csr -days 1000 -CA ca.crt -CAkey ca.key -set_serial 01 &gt; client.crt服务端文件位置可以不改变,用scp命令将刚刚生成的客户端需要文件上传到客户端自定义的文件夹 /usr/local/zabbix/zabbix_crt/服务端: ca.crt , server.crt , server.crtvim /data/local/zabbix/etc/zabbix_server.confTLSCAFile=/data/local/zabbix/zabbix_crt/ca.crtTLSCertFile=/usr/local/zabbix/zabbix_crt/server.crtTLSKeyFile=/usr/local/zabbix/zabbix_crt/server.key客户端: ca.crt , client.crt , client.crtTLSConnect=certTLSAccept=certTLSCAFile=/usr/local/zabbix/zabbix_crt/ca.crtTLSCertFile=/usr/local/zabbix/zabbix_crt/client.crtTLSKeyFile=/usr/local/zabbix/zabbix_crt/client.key进入webui configuration/hosts/打开相应的主机/双向都可以选certificate重启zabbix_server和zabbix_agent,再进去看cert是否变蓝色,有延迟几十秒.我记录的文档可能有些不全,希望大家遇到问题多分析日志,去网上搜索遇到的错误信息.]]></content>
+      <categories>
+        <category>Monitor</category>
+      </categories>
+      <tags>
+        <tag>zabbix</tag>
+        <tag>openssl</tag>
       </tags>
   </entry>
   <entry>
@@ -391,7 +391,7 @@
     <url>%2F2017%2F04%2F15%2Fiptables%2F</url>
     <content type="text"><![CDATA[一、iptables表和链的结构(四表五链)1.四张表处理优先级: raw&gt;mangle&gt;nat&gt;filterraw: 优先级最高, 设置raw一般是为了不再让iptables做数据包的跟踪链接处理, 提高性能.mangle: 用于对特定数据包的修改.nat: 用于nat功能端口或者地址映射.filter: 一般的过滤功能.2.五链：INPUT, FORWARD, OUTPUT, PREROUTING, POSTROUTINGraw表中的链有: PREROUTING, OUTPUTmangle表中的链有: PREROUTING, INPUT, FORWARD, OUTPUT, POSTROUTINGnat表中的链有: PREROUTING, POSTROUTING, OUTPUTfilter表中的链有: INPUT, FORWARD, OUTPUT3.iptables常用参数:tip: iptable -h都能看到对应的解释规则增删改查:参数作用-A在规则链的末尾加入新规则-I在规则链的头部加入新规则-D删除-R修改-L查看-P设置默认策略 , iptables -P INPUT DROP-F清空默认规则链-X删除自定义空链-N定义新的规则常用参数:参数作用-p指定协议 tcp/udp/icmp-s指定源地址 ip/mask , 加叹号 “!” 表示相反的意思-d匹配目标地址–sport匹配来源端口号–dport匹配目端口号-i匹配从这块网卡流入的数据-o匹配从这块网卡流出的数据-m加载模块-t指定表, 默认filter表. iptables -L - nat/mangle/raw-j指定处理的动作 , ACCEPT/DROP常用处理动作:动作作用ACCEPT允许封包通过,:将数据包放行,进行完此动作后,不再对比其他规则,直接跳往下一个规则链.DROP丢弃封包,响应超时,对方无法判断主机是否在线或者流量被拒绝,不再对比其他规则,中断过滤.REJECT拒绝封包通过,并将数据包封装,返回消息,对方看到主机口不可达.REDIRECT将包重定向到另一个端口,之后继续对比其他规则.MASQUERADE改写封包来源ip为防火墙NIC ip , 可指定port范围 , 之后跳往下一规则.SNAT改写封包来源ip为某特定ip或ip范围 , 可指定 port 范围 , 之后跳往下一规则.DNAT改写封包目的ip为某特定ip或ip范围, 可指定port范围 , 之后跳往下一规则.二、配置filter表防火墙tip: 一般设置默认规则,INPUT链和FORWARD链为DROP , OUTPUT链为ACCEPT1.清除预设表filter中的所有规则链的规则1iptables -F2.清除预设表filter中使用者自定链中的规则1iptables -X3.设定预设规则123iptables -P INPUT DROPiptables -P OUTPUT ACCEPTiptables -P FORWARD DROP4.根据自己机器的实际情况开启相应端口123456789101112131415161718# 允许回环loopback访问$ iptables -A INPUT -i lo -j ACCEPT$ iptables -A OUTPUT -o lo -j ACCEPT (output链的默认策略设置为DROP时,需要添加这条,以下针对的每个端口同此一样.)#开启22端口,ssh才能登录.$ iptables -A INPUT -p tcp --dport 22 -j ACCEPT$ iptables -A OUTPUT -p tcp --dport 22 -j ACCEPT或者$ iptables -A INPUT -i eth0 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT #指定eth1网卡和192.168.2.100允许ssh登录$ iptables -A OUTPUT -o eth0 -s 192.168.2.100 -p tcp --dport 22 -j ACCEPT#允许ping(即icmp包通过)$ iptables -A INPUT -p icmp -j ACCEPT$ iptables -A OUTPUT -p icmp -j ACCEPT#使ping域名可以得到响应$ iptables -A INPUT -p udp --sport 53 -j ACCEPT$ iptables -A OUTPUT -p udp --dport 53 -j ACCEPT$ iptables -A INPUT -p udp --dport 53 -j ACCEPT$ iptables -A OUTPUT -p udp --sport 53 -j ACCEPTtip: 除了以上用命令去添加规则,还可以用编辑文件的方式 vim /etc/sysconfig/iptables5.保存iptables配置1service iptables save6.重启iptables服务1service iptables restart7.查看iptables规则1iptables -L -n8.iptables优化:请求比较频繁的放在最上面,请求频率较小的放在最后面.这里整理关于防火墙的东西,不是具体的知识,更多工操作使用,具体的防火墙知识,还需要去阅读参考网上写的各种文章,需要多读多看多试,才能理解深入.]]></content>
       <categories>
-        <category>Firewall</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>iptables</tag>
@@ -402,7 +402,7 @@
     <url>%2F2017%2F04%2F10%2Fvim%2F</url>
     <content type="text"><![CDATA[Linux vim常用命令1.替换1234567:s/abc/efg/ 替换当前行,第一个 abc 为 efg:s/abc/efg/g 替换当前行,所有 abc 为 efg:n,$s/xyz/org/ 替换第 n 行开始到最后一行中每一行的第一个 xyz 为 org:n,$s/xyz/org/g 替换第 n 行开始到最后一行中每一行所有 xyz 为 org n 为数字，若 n 为 . ，表示从当前行开始到最后一行:%s/xyz/org/ (等同于:g/xyz/s//org/) 替换每一行的第一个 xyz 为 org:%s/xyz/org/g （等同于:g/xyz/s//org/g）替换每一行中所有 xyz 为 org2.vim执行：wq清楚屏幕上上一次编辑过的内容12vim退出后清屏,屏幕不显示之前编辑的内容.TERM=xterm; export TERM3.删除全部1:%d4.复制123v 进入字符块选择模式↑↓←→ 选择要复制的字符yy 复制5.批量注释（插入）123Ctrl+v 进入矩形块选择，方向键上下选择需要注释列头，I插入//，Esc退出。G 列选择c 块选择，替换]]></content>
       <categories>
-        <category>CentOS</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -425,7 +425,7 @@
     <url>%2F2017%2F03%2F28%2Fxargs%2F</url>
     <content type="text"><![CDATA[理解xargs命令工作原理和使用123⚡ root@intelnet:$ xargs hellohello工作形式: 从标准输入stdin读取数据,根据输入读取执行命令作为参数提供给它一次或多次.输入中的任何空白和空格均视为分隔符,空行被忽略.进入xargs ,进行数据输入, Ctrl+D告诉xargs结束输入任务,echo命令被自动执行,并且再次打印 hello.echo是xargs默认的执行命令,我们可以指定其它命令作为参数传递给xargs , 然后通过stdin传递要查询的文件和类型作为输入的名称.如下:12⚡ root@intelnet:$ xargs find -name "*.log"]]></content>
       <categories>
-        <category>CentOS</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -471,7 +471,7 @@
     <url>%2F2017%2F03%2F27%2FCentos_Minimal_install%2F</url>
     <content type="text"><![CDATA[一、centos minimal安装后一些设置1、设置开机网卡自动连接12$ vim /etc/sysconfig/network-scripts/ifcfg-eth0 ONBOOT=yes2、关闭SELinux12345$ /usr/sbin/sestatus -v$ setenforce 0 (临时关闭)$ vim /etc/selinux/config 将 SELINUX=enforcing 改为 SELINUX=disabled (永久关闭) sync reboot3、防火墙123$ chkconfig iptables --list (查看)$ chkconfig iptables on/off (永久)$ service iptables start/stop (临时)3.1、设定预设规则(详情参考:http://t.cn/RiONgR0)12345678910$ iptables -P INPUT DROP$ iptables -P OUTPUT ACCEPT$ iptables -P FORWARD DROPeg:开启ssh 22端口$ iptables -A INPUT -p tcp -s 192.168.2.58 --dport 22 -j ACCEPT (除了192.168.2.58其它IP禁止ssh)$ iptables -A OUTPUT -p tcp -s 192.168.2.58 --sport 22 -j ACCEPT (如果OUTPUT设置成DROP则需添加该条)$ service iptables save (手动每条去添加,需要手动保存,不然重启后失效)或者直接在 iptables 编辑添加删除$ vim /etc/sysconfig/iptables (编辑iptables规则)$ /etc/init.d/iptables restart4、设置yum repo源1234567先备份系统源$ mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup$ cd /etc/yum.repos.d/$ wget -c http://mirrors.163.com/.help/CentOS6-Base-163.repo$ vim CentOS-Media.repo 关闭cdrom源$ yum install epel (安装第三方软件源)5 、通过yum group装系统必备软件123456789$ yum grouplist$ yum groupinstall "Development tools"$ yum groupinstall "System Administration Tools"(cent7用 yum group mark install)根据需求去选择软件包$ yum install setuptool.x86_64$ yum install ntsysv$ yum install system-config-network-tui$ yum install system-config-firewall-tui$ yum install system-config-securitylevel-tui二、基础目录结构1.mkdir /data/src 下载存放源码目录 /data/log 站点日志目录 /data/www WEB站点目录 /data/svn SVN仓库目录 /data/mysqldb MYSQL数据库数据目录 /data/backup MYSQL数据备份目录 /data/local/php PHP目录,local下面都是程序编译安装目录 /data/local/nginx /data/local/mysql 三、设置禁止参与 yum 更新的核心软件12$ vim /etc/yum.conf exclude=php* apache* kernel* mysql* nginx* (根据实际情况进行指定不参与yum update的程序)]]></content>
       <categories>
-        <category>CentOS</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>centos</tag>
@@ -486,8 +486,8 @@
       </categories>
       <tags>
         <tag>linux</tag>
-        <tag>mysql</tag>
         <tag>nginx</tag>
+        <tag>mysql</tag>
         <tag>php-fpm</tag>
       </tags>
   </entry>
@@ -519,7 +519,7 @@
     <url>%2F2017%2F03%2F23%2FCentOS_eth0%2F</url>
     <content type="text"><![CDATA[1.首先安装工具,已安装请忽略.1$ yum install pciutiles2.查看网卡型号1$ lspci | grep -i ethernet3.查看网卡驱动版本1$ ethtool -i eth04.网卡驱动安装1234567891011$ yum install kernel-devel kernel-headers $ yum install gcc$ tar zxvf r1000.tgz$ cd r1000/$ make clean modules$ make install$ modprobe r1000$ reboot$ lsmod | grep r1000 或者 ifconfig -a 查看网卡eth0是否加载$ service network restart假如解压出来进文件夹看到有autorun.sh文件的,只需要执行./autorun.sh就可以了,等待完成,重启查看即可.​]]></content>
       <categories>
-        <category>CentOS</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>网卡</tag>
@@ -531,7 +531,7 @@
     <url>%2F2017%2F03%2F23%2Fscp%2F</url>
     <content type="text"><![CDATA[SCP复制(服务器之间传输文件)1.从服务器上拉取目录1scp -p 22 -r user@192.168.2.1:/data/www /data/www/2.从本地上传目录(-p为端口参数,port端口.默认端口可以省略,传输为目录需要 -r 进行目录递归)1scp -r /data/www user@192.168.2.1:/data/www/3.使用ssh-keygen生成密钥和私钥文件,建立两台机器互相通信,可避免每次输入验证密码.1ssh-keygen -t rsa (生成在~/.ssh/目录下id_rsa.pub和id_rsa)4.将id_rsa.pub上传到目标服务器~/.ssh目录下,命名authorized_keys.1scp -r /root/.ssh/id_rsa.pub user@serverip:/root/.ssh/authorized_keys5.如果目标服务器上,已经存在了authorized_keys,就将id_rsa.pub中的内容追加到目标服务器的authorized_keys文件中.1cat /root/.ssh/id_rsa.pub | ssh user@serverip 'cat &gt;&gt; /root/.ssh/authorized_keys']]></content>
       <categories>
-        <category>CentOS</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -543,7 +543,7 @@
     <url>%2F2017%2F03%2F19%2Fvsftp%2F</url>
     <content type="text"><![CDATA[1.安装(源码编译或者yum install)1234$ yum -y install vsftpd$ service vsftpd start$ chkconfig vsftpd on$ yum install -y db4 db4-utils (基于虚拟账户权限认证依赖)目录文件说明/etc/vsftpd/vsftpd.conf vsftpd的核心配置文件/etc/vsftpd/ftpusers 用于指定哪些用户不能访问FTP服务器/etc/vsftpd/user_list 指定允许使用vsftpd的用户列表文件/etc/vsftpd/vsftpd_conf_migrate.sh 是vsftpd操作的一些变量和设置脚本/var/ftp/ 默认情况下匿名用户的根目录=================================基于虚拟账户权限认证====================================sftpd的虚拟用户采用单独的用户名/口令保存方式，与系统账户分离，很大程度上增强了系统的安全性.vsftpd可以采用数据库文件来保存用户/口令，eg:hash;也可以将用户/口令保存在数据库服务器中，eg:MySQL。vsftpd验证虚拟用户，则采用PAM方式.=======================================================================================2.创建虚拟用户账号和密码(奇数行为用户名，偶数行为用户密码）123$ vim /etc/vsftpd/virtual.users ftpuser (虚拟用户名) 123456 (用户口令)生成虚拟用户认证的db文件12$ db_load -T -t hash -f /etc/vsftpd/virtual.users /etc/vsftpd/vsftpd.login.db$ chmod 600 /etc/vsftpd/vsftpd.login.db3.配置PAM信息123$ vim /etc/pam.d/vsftpd.pamauth required /lib64/security/pam_userdb.so db=/etc/vsftpd/vsftpd.loginaccount required /lib64/security/pam_userdb.so db=/etc/vsftpd/vsftpd.login4.配置vsftpd.conf1234567891011121314151617181920212223$ cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.bak$ vim /etc/vsftpd/vsftpd.conf anonymous_enable=NO local_enable=YES write_enable=YES local_umask=022 anon_umask=022 xferlog_enable=YES connect_from_port_20=YES xferlog_std_format=YES ascii_upload_enable=YES ascii_download_enable=YES ftpd_banner=Welcome to blah FTP service. chroot_local_user=YES listen=YES pam_service_name=vsftpd.pam userlist_enable=YES tcp_wrappers=YES guest_username=ftp guest_enable=YES user_config_dir=/etc/vsftpd/vsftpd_user_conf pasv_min_port=30001 pasv_max_port=310005.创建用户名的配置文件123456789101112131415$ mkdir -p /etc/vsftpd/vsftpd_user_conf$ cd /etc/vsftpd/vsftpd_user_conf$ vim ftpuser (ftpuser文件名就是上面创建虚拟用户名字) local_root=/data/www write_enable=yes download_enable=yes anon_upload_enable=yes anon_mkdir_write_enable=yes anon_other_write_enable=yes anon_world_readable_only=no idle_session_timeout=600 data_connection_timeout=120 max_clients=2 max_per_ip=3 local_max_rate=512000 (拥有全部权限)6.日常管理虚拟用户账号和密码i.修改文件1$ vi /etc/vsftpd/virtual.usersii.生成虚拟用户认证的db文件1db_load -T -t hash -f /etc/vsftpd/virtual.users /etc/vsftpd/vsftpd.login.dbiii.重启ftp服务(能登录就不重启)1service vsftpd restart7.添加防火墙规则123-A INPUT -p tcp -m state --state NEW -m tcp --dport 20 -j ACCEPT-A INPUT -p tcp -m state --state NEW -m tcp --dport 21 -j ACCEPT-A INPUT -p tcp -m tcp --dport 30001:31000 -j ACCEPT]]></content>
       <categories>
-        <category>CentOS</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>ftp</tag>
@@ -555,7 +555,7 @@
     <url>%2F2017%2F03%2F17%2FCentOS_ip%2F</url>
     <content type="text"><![CDATA[1234567891011121314151617181920212223242526272829$ cat /etc/sysconfig/network-scripts/ifcfg-eth1DEVICE=eth1TYPE=EthernetUUID=84a6bff5-0241-41d8-bbc5-65c923655340ONBOOT=yesNM_CONTROLLED=yesBOOTPROTO=staticDEFROUTE=yesIPV4_FAILURE_FATAL=yesIPV6INIT=noNAME="System eth1"USERCTL=noNETMASK=255.255.255.0IPADDR=192.168.2.120PREFIX=24GATEWAY=192.168.2.1IPADDR2=192.168.1.120PREFIX2=24GATEWAY2=192.168.1.0IPADDR3=192.168.0.120PREFIX3=24GATEWAY3=192.168.0.1IPV6_AUTOCONF=yesIPV6_DEFROUTE=yesIPV6_FAILURE_FATAL=yesIPV6_PEERDNS=yesIPV6_PEERROUTES=yesHWADDR=68:05:CA:47:32:50LAST_CONNECT=1499933988]]></content>
       <categories>
-        <category>CentOS</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>ip</tag>
@@ -566,7 +566,7 @@
     <url>%2F2017%2F03%2F01%2Fyum%2F</url>
     <content type="text"><![CDATA[Yum命令作用yum repolist all列出所有仓库。yum list all列出仓库中所有软件包yum info 软件包名称查看软件包信息yum install 软件包名称安装软件包yum reinstall 软件包名称重新安装软件包yum update 软件包名称升级软件包yum remove 软件包移除软件包yum clean all清除所有仓库缓存yum check-update检查可更新的软件包yum grouplist查看系统中已经安装的软件包组yum groupinstall 软件包组安装指定的软件包组yum groupremove软件包组移除指定的软件包组yum groupinfo 软件包组查询指定的软件包组信息]]></content>
       <categories>
-        <category>CentOS</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>yum</tag>
