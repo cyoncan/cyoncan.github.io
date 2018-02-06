@@ -2,7 +2,7 @@
 title: Linux管道符重定向
 date: 2017-04-24 12:13:12
 categories:
-- CentOS
+- Linux
 tags:
 - linux
 ---

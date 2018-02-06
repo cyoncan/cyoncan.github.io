@@ -2,7 +2,7 @@
 title: CentOS minimal install
 date: 2017-03-27 16:08:59
 categories:
-- CentOS
+- Linux
 tags:
 - centos
 ---

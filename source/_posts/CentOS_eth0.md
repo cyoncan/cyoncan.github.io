@@ -2,7 +2,7 @@
 title: 网卡驱动
 date: 2017-03-23 22:16:21
 categories:
-- CentOS
+- Linux
 tags:
 - 网卡
 - 驱动

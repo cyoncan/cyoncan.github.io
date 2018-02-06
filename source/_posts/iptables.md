@@ -2,7 +2,7 @@
 title: iptables
 date: 2017-04-15 20:31:16
 categories:
-- Firewall
+- Linux
 tags:
 - iptables
 ---

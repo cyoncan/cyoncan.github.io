@@ -2,7 +2,7 @@
 title: Linux内存管理
 date: 2017-04-26 19:21:35
 categories:
-- CentOS
+- Linux
 tags:
 - linux
 ---

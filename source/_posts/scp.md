@@ -2,7 +2,7 @@
 title: SCP
 date: 2017-03-23 19:37:21
 categories:
-- CentOS
+- Linux
 tags:
 - linux
 - scp

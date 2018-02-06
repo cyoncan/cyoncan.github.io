@@ -2,7 +2,7 @@
 title: CentOS6静态ip
 date: 2017-03-17  16:33:56
 categories:
-- CentOS
+- Linux
 tags:
 - ip
 ---

@@ -15,7 +15,7 @@ tags:
 
 ```shell
 $ ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_github -C "yourname@email.com"
-$ ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_gitlab -C "hername@email.com"
+$ ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_gitlab -C "myname@email.com"
 $ eval $(ssh-agent -s)
 $ ssh-add ~/.ssh/id_rsa_github
 $ ssh-add ~/.ssh/id_rsa_gitlab
@@ -25,16 +25,27 @@ $ vim config
 Host github.com
 HostName github.com
 User git
-IdentityFile C:/Users/win/.ssh/id_rsa_github
+IdentityFile ~/.ssh/id_rsa_github
 
 #账号二
 Host gitlab.com
 HostName github.com
 User git
-IdentityFile C:/Users/win/.ssh/id_rsa_gitlab
+IdentityFile ~/.ssh/id_rsa_gitlab
+
 $ ssh -T git@github.com
 Hi xxx! You've successfully authenticated, but GitHub does not provide shell access.
 $ ssh -T git@gitlab.com
 Hi xxx! You've successfully authenticated, but GitHub does not provide shell access.
+```
+
+##### git-config
+
+```bash
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+$ git config --global core.editors vim
+$ git config --global merge.tool vimdiff
+$ git config --global color.diff.meta "blue black bold"
 ```
 

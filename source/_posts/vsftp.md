@@ -2,7 +2,7 @@
 title: FTP_vsftp
 date: 2017-03-19 23:44:21
 categories:
-- CentOS
+- Linux
 tags:
 - ftp
 - vsftp

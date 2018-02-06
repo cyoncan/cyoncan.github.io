@@ -2,7 +2,7 @@
 title: Linux文件隐藏属性
 date: 2017-04-24 12:21:11
 categories:
-- CentOS
+- Linux
 tags:
 - linux
 ---

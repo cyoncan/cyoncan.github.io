@@ -2,7 +2,7 @@
 title: Dns_Server-Bind
 date: 2017-06-7  17:33:16
 categories:
-- CentOS
+- Linux
 tags:
 - dns
 - bind

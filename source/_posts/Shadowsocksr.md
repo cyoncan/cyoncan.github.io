@@ -2,7 +2,7 @@
 title: VPN
 date: 2017-05-03 20:56:21
 categories:
-- CentOS
+- Linux
 tags:
 - vpn
 - linux

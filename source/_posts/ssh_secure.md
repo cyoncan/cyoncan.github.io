@@ -2,7 +2,7 @@
 title: ssh安全
 date: 2017-05-01 10:58:22
 categories:
-- CentOS
+- Linux
 tags:
 - ssh
 - linux

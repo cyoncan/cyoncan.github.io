@@ -2,7 +2,7 @@
 title: yum命令
 date: 2017-03-01 12:13:21
 categories:
-- CentOS
+- Linux
 tag:
 - yum
 ---

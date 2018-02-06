@@ -2,7 +2,7 @@
 title: Jenkins
 date: 2017-07-10  19:53:41
 categories:
-- SmartOps
+- CI&CD
 tags:
 - jenkins
 ---

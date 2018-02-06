@@ -2,7 +2,7 @@
 title: Zabbix搭建
 date: 2017-04-20 00:16:21
 categories:
-- 监控
+- Monitor
 tags:
 - zabbix
 - openssl

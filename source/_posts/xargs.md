@@ -2,7 +2,7 @@
 title: xargs用法
 date: 2017-03-28 20:16:21
 categories:
-- CentOS
+- Linux
 tags:
 - xargs
 - linux

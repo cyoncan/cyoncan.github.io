@@ -2,7 +2,7 @@
 title: Vim常用
 date: 2017-04-10 20:17:22
 categories:
-- CentOS
+- Linux
 tags:
 - vim
 - linux

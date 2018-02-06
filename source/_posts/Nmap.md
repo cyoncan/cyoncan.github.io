@@ -2,7 +2,7 @@
 title: nmap扫描
 date: 2017-05-18 12:50:56
 categories:
-- CentOS
+- Linux
 tags:
 - nmap
 - linux

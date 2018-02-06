@@ -2,7 +2,7 @@
 title: IP地址分类
 date: 2017-06-1  16:19:29
 categories:
-- 计算机基础
+- None
 tags:
 - ip
 ---

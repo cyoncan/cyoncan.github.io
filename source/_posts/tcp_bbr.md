@@ -2,7 +2,7 @@
 title: tcp_bbr
 date: 2017-07-12  19:53:43
 categories:
-- CentOS
+- Linux
 tags:
 - linux
 ---

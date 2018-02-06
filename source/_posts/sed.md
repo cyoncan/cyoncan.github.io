@@ -2,7 +2,7 @@
 title: sed
 date: 2017-05-17  21:23:51
 categories:
-- CentOS
+- Linux
 tags:
 - sed
 - linux
