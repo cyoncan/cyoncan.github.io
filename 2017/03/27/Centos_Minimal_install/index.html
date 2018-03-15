@@ -1,60 +1,4 @@
-<html>
-<head>
-	
-	<title>CentOS minimal install</title>
-	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    
-	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
-    
-        <script src="/js/util.js"></script>
-        <script>
-            if(isMobile()) {
-                loadjscssfile('../css/mobile.css', 'css');
-            } else {
-                loadjscssfile('../css/desktop.css', 'css');
-            }
-        </script> 
-    
-
-    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
-
-    
-	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3"/>
-    
-
-</head>
-
-<body>
-
-
-<h2 class="title">CentOS minimal install</h2>
-<!---
-<div style="text-align:center;margin-top: -10px;">
-<div class="article-category">
-发表于2017年3月27日
-
-
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-
-
-
- </div>
---->
-</div>
-
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、centos-minimal安装后一些设置"><span class="toc-text">一、centos minimal安装后一些设置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、设置开机网卡自动连接"><span class="toc-text">1、设置开机网卡自动连接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、关闭SELinux"><span class="toc-text">2、关闭SELinux</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3、防火墙"><span class="toc-text">3、防火墙</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#3-1、设定预设规则-详情参考-http-t-cn-RiONgR0"><span class="toc-text">3.1、设定预设规则(详情参考:http://t.cn/RiONgR0)</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4、设置yum-repo源"><span class="toc-text">4、设置yum repo源</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-、通过yum-group装系统必备软件"><span class="toc-text">5 、通过yum group装系统必备软件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、基础目录结构"><span class="toc-text">二、基础目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、设置禁止参与-yum-更新的核心软件"><span class="toc-text">三、设置禁止参与 yum 更新的核心软件</span></a></li></ol>
-<a id="more"></a>
-<h3 id="一、centos-minimal安装后一些设置"><a href="#一、centos-minimal安装后一些设置" class="headerlink" title="一、centos minimal安装后一些设置"></a>一、centos minimal安装后一些设置</h3><h5 id="1、设置开机网卡自动连接"><a href="#1、设置开机网卡自动连接" class="headerlink" title="1、设置开机网卡自动连接"></a>1、设置开机网卡自动连接</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">  ONBOOT=yes</span><br></pre></td></tr></table></figure>
-<h5 id="2、关闭SELinux"><a href="#2、关闭SELinux" class="headerlink" title="2、关闭SELinux"></a>2、关闭SELinux</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ /usr/sbin/sestatus -v</span><br><span class="line">$ setenforce 0   (临时关闭)</span><br><span class="line">$ vim /etc/selinux/config</span><br><span class="line">  将 SELINUX=enforcing 改为 SELINUX=disabled   (永久关闭)</span><br><span class="line">  sync reboot</span><br></pre></td></tr></table></figure>
-<h5 id="3、防火墙"><a href="#3、防火墙" class="headerlink" title="3、防火墙"></a>3、防火墙</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ chkconfig iptables --list     (查看)</span><br><span class="line">$ chkconfig iptables on/off     (永久)</span><br><span class="line">$ service iptables start/stop   (临时)</span><br></pre></td></tr></table></figure>
-<h6 id="3-1、设定预设规则-详情参考-http-t-cn-RiONgR0"><a href="#3-1、设定预设规则-详情参考-http-t-cn-RiONgR0" class="headerlink" title="3.1、设定预设规则(详情参考:http://t.cn/RiONgR0)"></a>3.1、设定预设规则(详情参考:<a href="http://t.cn/RiONgR0" target="_blank" rel="noopener">http://t.cn/RiONgR0</a>)</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ iptables -P INPUT DROP</span><br><span class="line">$ iptables -P OUTPUT ACCEPT</span><br><span class="line">$ iptables -P FORWARD DROP</span><br><span class="line">eg:开启ssh 22端口</span><br><span class="line">$ iptables -A INPUT -p tcp -s 192.168.2.58 --dport 22 -j ACCEPT  (除了192.168.2.58其它IP禁止ssh)</span><br><span class="line">$ iptables -A OUTPUT -p tcp -s 192.168.2.58 --sport 22 -j ACCEPT (如果OUTPUT设置成DROP则需添加该条)</span><br><span class="line">$ service iptables save (手动每条去添加,需要手动保存,不然重启后失效)</span><br><span class="line">或者直接在 iptables 编辑添加删除</span><br><span class="line">$ vim /etc/sysconfig/iptables   (编辑iptables规则)</span><br><span class="line">$ /etc/init.d/iptables restart</span><br></pre></td></tr></table></figure>
-<h5 id="4、设置yum-repo源"><a href="#4、设置yum-repo源" class="headerlink" title="4、设置yum repo源"></a>4、设置yum repo源</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">先备份系统源</span><br><span class="line">$ mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup</span><br><span class="line">$ <span class="built_in">cd</span> /etc/yum.repos.d/</span><br><span class="line">$ wget -c http://mirrors.163.com/.<span class="built_in">help</span>/CentOS6-Base-163.repo</span><br><span class="line">$ vim CentOS-Media.repo</span><br><span class="line">  关闭cdrom源</span><br><span class="line">$ yum install epel   (安装第三方软件源)</span><br></pre></td></tr></table></figure>
-<h5 id="5-、通过yum-group装系统必备软件"><a href="#5-、通过yum-group装系统必备软件" class="headerlink" title="5 、通过yum group装系统必备软件"></a>5 、通过yum group装系统必备软件</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ yum grouplist</span><br><span class="line">$ yum groupinstall <span class="string">"Development tools"</span></span><br><span class="line">$ yum groupinstall <span class="string">"System Administration Tools"</span></span><br><span class="line">(cent7用 yum group mark install)根据需求去选择软件包</span><br><span class="line">$ yum install setuptool.x86_64</span><br><span class="line">$ yum install ntsysv</span><br><span class="line">$ yum install system-config-network-tui</span><br><span class="line">$ yum install system-config-firewall-tui</span><br><span class="line">$ yum install system-config-securitylevel-tui</span><br></pre></td></tr></table></figure>
-<h3 id="二、基础目录结构"><a href="#二、基础目录结构" class="headerlink" title="二、基础目录结构"></a>二、基础目录结构</h3><pre><code>1.mkdir
+<html><head><title>CentOS minimal install</title><meta name="keywords" content="linux"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><link href="/css/main.css?v=3" rel="stylesheet" type="text/css"><script src="/js/util.js"></script><script>isMobile()?loadjscssfile("../css/mobile.css","css"):loadjscssfile("../css/desktop.css","css")</script><link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3"></head><body><h2 class="title">CentOS minimal install</h2><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、centos-minimal安装后一些设置"><span class="toc-text">一、centos minimal安装后一些设置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、设置开机网卡自动连接"><span class="toc-text">1、设置开机网卡自动连接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、关闭SELinux"><span class="toc-text">2、关闭SELinux</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3、防火墙"><span class="toc-text">3、防火墙</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#3-1、设定预设规则-详情参考-http-t-cn-RiONgR0"><span class="toc-text">3.1、设定预设规则(详情参考:http://t.cn/RiONgR0)</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4、设置yum-repo源"><span class="toc-text">4、设置yum repo源</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-、通过yum-group装系统必备软件"><span class="toc-text">5 、通过yum group装系统必备软件</span></a></li></ol></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#二、基础目录结构"><span class="toc-text">二、基础目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、设置禁止参与-yum-更新的核心软件"><span class="toc-text">三、设置禁止参与 yum 更新的核心软件</span></a></li><a id="more"></a><h3 id="一、centos-minimal安装后一些设置"><a href="#一、centos-minimal安装后一些设置" class="headerlink" title="一、centos minimal安装后一些设置"></a>一、centos minimal安装后一些设置</h3><h5 id="1、设置开机网卡自动连接"><a href="#1、设置开机网卡自动连接" class="headerlink" title="1、设置开机网卡自动连接"></a>1、设置开机网卡自动连接</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">  ONBOOT=yes</span><br></pre></td></tr></table></figure><h5 id="2、关闭SELinux"><a href="#2、关闭SELinux" class="headerlink" title="2、关闭SELinux"></a>2、关闭SELinux</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ /usr/sbin/sestatus -v</span><br><span class="line">$ setenforce 0   (临时关闭)</span><br><span class="line">$ vim /etc/selinux/config</span><br><span class="line">  将 SELINUX=enforcing 改为 SELINUX=disabled   (永久关闭)</span><br><span class="line">  sync reboot</span><br></pre></td></tr></table></figure><h5 id="3、防火墙"><a href="#3、防火墙" class="headerlink" title="3、防火墙"></a>3、防火墙</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ chkconfig iptables --list     (查看)</span><br><span class="line">$ chkconfig iptables on/off     (永久)</span><br><span class="line">$ service iptables start/stop   (临时)</span><br></pre></td></tr></table></figure><h6 id="3-1、设定预设规则-详情参考-http-t-cn-RiONgR0"><a href="#3-1、设定预设规则-详情参考-http-t-cn-RiONgR0" class="headerlink" title="3.1、设定预设规则(详情参考:http://t.cn/RiONgR0)"></a>3.1、设定预设规则(详情参考:<a href="http://t.cn/RiONgR0" target="_blank" rel="noopener">http://t.cn/RiONgR0</a>)</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ iptables -P INPUT DROP</span><br><span class="line">$ iptables -P OUTPUT ACCEPT</span><br><span class="line">$ iptables -P FORWARD DROP</span><br><span class="line">eg:开启ssh 22端口</span><br><span class="line">$ iptables -A INPUT -p tcp -s 192.168.2.58 --dport 22 -j ACCEPT  (除了192.168.2.58其它IP禁止ssh)</span><br><span class="line">$ iptables -A OUTPUT -p tcp -s 192.168.2.58 --sport 22 -j ACCEPT (如果OUTPUT设置成DROP则需添加该条)</span><br><span class="line">$ service iptables save (手动每条去添加,需要手动保存,不然重启后失效)</span><br><span class="line">或者直接在 iptables 编辑添加删除</span><br><span class="line">$ vim /etc/sysconfig/iptables   (编辑iptables规则)</span><br><span class="line">$ /etc/init.d/iptables restart</span><br></pre></td></tr></table></figure><h5 id="4、设置yum-repo源"><a href="#4、设置yum-repo源" class="headerlink" title="4、设置yum repo源"></a>4、设置yum repo源</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">先备份系统源</span><br><span class="line">$ mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup</span><br><span class="line">$ <span class="built_in">cd</span> /etc/yum.repos.d/</span><br><span class="line">$ wget -c http://mirrors.163.com/.<span class="built_in">help</span>/CentOS6-Base-163.repo</span><br><span class="line">$ vim CentOS-Media.repo</span><br><span class="line">  关闭cdrom源</span><br><span class="line">$ yum install epel   (安装第三方软件源)</span><br></pre></td></tr></table></figure><h5 id="5-、通过yum-group装系统必备软件"><a href="#5-、通过yum-group装系统必备软件" class="headerlink" title="5 、通过yum group装系统必备软件"></a>5 、通过yum group装系统必备软件</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ yum grouplist</span><br><span class="line">$ yum groupinstall <span class="string">"Development tools"</span></span><br><span class="line">$ yum groupinstall <span class="string">"System Administration Tools"</span></span><br><span class="line">(cent7用 yum group mark install)根据需求去选择软件包</span><br><span class="line">$ yum install setuptool.x86_64</span><br><span class="line">$ yum install ntsysv</span><br><span class="line">$ yum install system-config-network-tui</span><br><span class="line">$ yum install system-config-firewall-tui</span><br><span class="line">$ yum install system-config-securitylevel-tui</span><br></pre></td></tr></table></figure><h3 id="二、基础目录结构"><a href="#二、基础目录结构" class="headerlink" title="二、基础目录结构"></a>二、基础目录结构</h3><pre><code>1.mkdir
 /data/src        下载存放源码目录
 /data/log        站点日志目录
 /data/www        WEB站点目录
@@ -64,32 +8,4 @@
 /data/local/php  PHP目录,local下面都是程序编译安装目录
 /data/local/nginx
 /data/local/mysql
-</code></pre><h3 id="三、设置禁止参与-yum-更新的核心软件"><a href="#三、设置禁止参与-yum-更新的核心软件" class="headerlink" title="三、设置禁止参与 yum 更新的核心软件"></a>三、设置禁止参与 yum 更新的核心软件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/yum.conf</span><br><span class="line">  exclude=php* apache* kernel* mysql* nginx* (根据实际情况进行指定不参与yum update的程序)</span><br></pre></td></tr></table></figure>
-
-
-<!--<a href="http://cyoncan.github.io/2017/03/27/Centos_Minimal_install/#disqus_thread" class="article-comment-link">Comments</a>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = ''; // required: replace example with your forum shortname
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
--->
-<div style="display:none">
-<script src="http://s4.cnzz.com/stat.php?id=&web_id=" language="JavaScript"></script>script>
-</div>
-
-
-
-
-
-
-</body>
-</html>
+</code></pre><h3 id="三、设置禁止参与-yum-更新的核心软件"><a href="#三、设置禁止参与-yum-更新的核心软件" class="headerlink" title="三、设置禁止参与 yum 更新的核心软件"></a>三、设置禁止参与 yum 更新的核心软件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/yum.conf</span><br><span class="line">  exclude=php* apache* kernel* mysql* nginx* (根据实际情况进行指定不参与yum update的程序)</span><br></pre></td></tr></table></figure><div style="display:none"><script src="http://s4.cnzz.com/stat.php?id=&web_id=" language="JavaScript"></script>script></div></body></html>
