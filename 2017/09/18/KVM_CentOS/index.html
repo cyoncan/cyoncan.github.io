@@ -1,0 +1,219 @@
+<html>
+<head>
+	
+	<title>CentOS7_KVM</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3"/>
+    
+
+</head>
+
+<body>
+
+
+<h2 class="title">CentOS7_KVM</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年9月18日
+
+
+    <a class="article-category-link" href="/categories/Virtual/">Virtual</a>
+
+
+
+ </div>
+--->
+</div>
+
+<ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-验证CPU是否支持KVM"><span class="toc-text">1.验证CPU是否支持KVM</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-安装配置kvm及其相关软件"><span class="toc-text">2.安装配置kvm及其相关软件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-网络"><span class="toc-text">3.网络</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-创建虚拟机"><span class="toc-text">4.创建虚拟机</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#4-1虚拟机常用指令（虚拟机-客户机-访客）"><span class="toc-text">4.1虚拟机常用指令（虚拟机=客户机=访客）</span></a></li></ol></li></ol>
+<a id="more"></a>
+<p>有一段时间比较，刚好利用公司有一台空闲的服务器，配置还行，刚好也在学习虚拟化的一些东西。最初从esxi入门，了解了虚拟化产品大概的原理和一些操作。当然对于最重要的功能集群管理，我还没有去研究。于是趁着这台机器还空闲，就试试看kvm的东西。</p>
+<p>安装kvm前提：需要验证机器是否支持虚拟化，官方文档上是这么说的【主机必须使用支持硬件辅助虚拟化的Intel VT或AMD-V芯片组。】其实整个kvm安装使用的步骤在<a href="https://www.linux-kvm.org/page/HOWTO#General" target="_blank" rel="noopener">官方文档</a>都写的很清楚，只是英文理解着比较慢。</p>
+<p>环境：centos7</p>
+<h5 id="1-验证CPU是否支持KVM"><a href="#1-验证CPU是否支持KVM" class="headerlink" title="1.验证CPU是否支持KVM"></a>1.验证CPU是否支持KVM</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ grep -E <span class="string">'vmx|svm'</span> /proc/cpuinfo</span><br><span class="line">- vmx is <span class="keyword">for</span> Intel processors</span><br><span class="line">- svm is <span class="keyword">for</span> AMD processors</span><br></pre></td></tr></table></figure>
+<p>如果有结果输出，则表示支持。vmx处理器功能标志表示Intel VT芯片组，而svm标志表示AMD-V。</p>
+<h5 id="2-安装配置kvm及其相关软件"><a href="#2-安装配置kvm及其相关软件" class="headerlink" title="2.安装配置kvm及其相关软件"></a>2.安装配置kvm及其相关软件</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装kvm及相关软件包</span></span><br><span class="line">$ yum install qemu-kvm kvm libvirt libvirt-python libkvmfs-tools virt-install</span><br><span class="line"><span class="comment"># 加载kvm模块</span></span><br><span class="line">$ modprobe kvm</span><br><span class="line"><span class="comment"># 加载特定芯片（cpu）的kvm模块</span></span><br><span class="line"><span class="comment"># For the AMD chip (svm flag):</span></span><br><span class="line">$ modprobe kvm-amd</span><br><span class="line"><span class="comment"># For Intel chip (vmx flag):</span></span><br><span class="line">$ modprobe kvm-intel</span><br><span class="line"><span class="comment"># 验证内核模块是否加载</span></span><br><span class="line">$ lsmod | grep kvm</span><br><span class="line">kvm_intel             200704  0 </span><br><span class="line">kvm                   589824  1 kvm_intel</span><br><span class="line">irqbypass              16384  1 kvm</span><br><span class="line"><span class="comment"># 启动 libvirtd</span></span><br><span class="line">$ systemctl <span class="built_in">enable</span> libvirtd.service &amp;&amp; systemctl start libvirtd.service</span><br></pre></td></tr></table></figure>
+<h5 id="3-网络"><a href="#3-网络" class="headerlink" title="3.网络"></a>3.网络</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验证安装的虚拟网卡是否有效</span></span><br><span class="line">$ ip link show virbr0	有输出信息代表可以了</span><br><span class="line">官方文档上是这么说的：“你可以使用默认的网络设置，或在主机中设置一个网桥。默认网络只允许来自KVM访客的出站通信。如果KVM访客需要完整的网络访问权限，包括与外部主机的通信，则在主机中设置一个Linux网桥。”</span><br><span class="line"><span class="comment"># 设置网桥</span></span><br><span class="line">$ cp /etc/sysconfig/network-scripts/ifcfg-eno1 /root/.</span><br><span class="line">$ <span class="built_in">cd</span> /etc/sysconfig/network-scripts/</span><br><span class="line">$ cp ifcfg-eno1 ifcfg-br0</span><br><span class="line">$ vim ifcfg-br0 <span class="comment">#内容如下</span></span><br><span class="line">DEVICE=br0</span><br><span class="line">ONBOOT=yes</span><br><span class="line">TYPE=Bridge	<span class="comment">#桥是区分大小写的，必须大写“B”和小写“ridge”。</span></span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NM_CONTROLLED=no <span class="comment">#指定网卡不受网络管理员控制。为了使网桥正常工作，Network Manager只能控制一台设备。</span></span><br><span class="line">IPADDR=192.168.2.80</span><br><span class="line">NETMASK=255.255.255.0 </span><br><span class="line">GATEWAY=192.168.2.1</span><br><span class="line">DNS1=119.29.29.29</span><br><span class="line"><span class="comment"># 网桥里面不应该出现硬件地址，网桥只是充当eno1的扩展。</span></span><br><span class="line">$ systemctl restart network.service</span><br></pre></td></tr></table></figure>
+<p>两个文件主要配置地方的对比</p>
+<table>
+<thead>
+<tr>
+<th>ifcfg-eno1</th>
+<th>ifcfg-br0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEVICE=eno1</td>
+<td>DEVICE=br0</td>
+</tr>
+<tr>
+<td>TYPE=Ethernet</td>
+<td>TYPE=Bridge</td>
+</tr>
+<tr>
+<td>NM_CONTROLLED=no</td>
+<td>NM_CONTROLLED=no</td>
+</tr>
+<tr>
+<td>ONBOOT=yes</td>
+<td>BOOTPROTO=static</td>
+</tr>
+<tr>
+<td></td>
+<td>IPADDR=192.168.2.80</td>
+</tr>
+<tr>
+<td>BRIDGE=br0 把eno1和br0连接起来</td>
+<td>NETMASK=255.255.255.0</td>
+</tr>
+<tr>
+<td></td>
+<td>ONBOOT=yes</td>
+</tr>
+</tbody>
+</table>
+<p>######3.1.禁用桥接通信中的Netfilter处理：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/sysctl.conf</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 0</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 0</span><br><span class="line">net.bridge.bridge-nf-call-arptables = 0</span><br><span class="line">net.ipv4.ip_forward = 1 <span class="comment">#开启网络转发</span></span><br><span class="line">$ sysctl -p</span><br></pre></td></tr></table></figure>
+<h5 id="4-创建虚拟机"><a href="#4-创建虚拟机" class="headerlink" title="4.创建虚拟机"></a>4.创建虚拟机</h5><p>关闭SELinux，如果不能关闭，请参考<a href="http://linux.dell.com/files/whitepapers/KVM_Virtualization_in_RHEL_7_Made_Easy.pdf" target="_blank" rel="noopener">官方文档</a>的做法。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 有两种方法安装虚拟机</span></span><br><span class="line">①virt-manager: a GUI tool</span><br><span class="line">②virt-install: a <span class="built_in">command</span> line tool.</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建存储池，虚拟机映像的存放位置</span></span><br><span class="line">$ mkdir /home/kvm/image</span><br><span class="line">$ virsh <span class="comment">#不加任何参数直接进入交互式控制终端</span></span><br><span class="line">	pool-define-as kvm_pool --<span class="built_in">type</span> dir --target /home/kvm/image <span class="comment">#定义一个存储池绑定目录，如果是lvm卷类型改成logical，还其它的自己查</span></span><br><span class="line">	pool-build kvm_pool <span class="comment">#建立存储池</span></span><br><span class="line">	pool-start kvm_pool <span class="comment">#启动存储池</span></span><br><span class="line">	pool-list --all <span class="comment">#验证该存储池是否启动</span></span><br><span class="line">	pool-autostart kvm_pool <span class="comment">#存储池开机自动运行</span></span><br><span class="line">	pool-info kvm_pool <span class="comment">#查看存储池信息</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 移除存储池</span></span><br><span class="line">$ virsh</span><br><span class="line">	pool-destroy kvm_pool <span class="comment">#销毁存储池</span></span><br><span class="line">	pool-undefine kvm_pool <span class="comment">#取消定义存储池</span></span><br><span class="line">	pool-delete kvm_pool <span class="comment">#删除存储池</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建卷</span></span><br><span class="line">$ virsh</span><br><span class="line">	vol-create-as --pool kvm_pool --name disk0.img --capacity 50G --allocation 1G --format raw</span><br><span class="line"><span class="comment"># 或者用qemu-img</span></span><br><span class="line">$ qemu-img create -f qcow2 disk0.img 50G</span><br><span class="line"><span class="comment"># raw和qcow2格式之间的转换</span></span><br><span class="line">$ qemu-img convert -f raw -O qcow2 test.raw test.raw.qcow2</span><br><span class="line"><span class="comment"># raw格式镜像增加减少大小(qcow2不可以)</span></span><br><span class="line">$ qemu-img resize disk0.img -10G/+10G</span><br><span class="line"></span><br><span class="line"><span class="comment"># 命令安装虚拟机(至少要带的参数有 --name,--ram,--disk/filesystem/nodisk,安装选项)</span></span><br><span class="line">$ virt-install \</span><br><span class="line">       --virt-type=kvm \</span><br><span class="line">       --name=centos7.0 \</span><br><span class="line">       --vcpus=2 \</span><br><span class="line">       --memory=2048 \</span><br><span class="line">       --location=/home/iso/centos7.iso \</span><br><span class="line">       --disk path=/home/kvm/image/centos7.img \</span><br><span class="line">       --network bridge:br0 \</span><br><span class="line">       --graphics none \</span><br><span class="line">       --extra-args=<span class="string">"console=ttyS0"</span> \</span><br><span class="line">       --force</span><br><span class="line"><span class="comment"># qemu安装方式</span></span><br><span class="line">$ qemu-system-x86_64 -m 2048 -smp 1 -<span class="built_in">enable</span>-kvm centos7.img -cdrom /home/iso/centos.iso</span><br><span class="line"><span class="comment"># 安装的过程出现报错什么的请自己去Google解决。</span></span><br><span class="line"><span class="comment"># 克隆导出虚拟机</span></span><br><span class="line">$ virsh	dumpxml centos7.0 &gt; /home/kvm/vm-demo.xml</span><br><span class="line">$ cp /home/kvm/vm-demo.xml /home/kvm/centos7.0a1.xml</span><br><span class="line"><span class="comment"># xml文件需要做些修改在以下的几个参数：（name、uuid、镜像地址、MAC地址、）uuid用uuidgen生成</span></span><br><span class="line"><span class="comment"># MAC地址生成</span></span><br><span class="line">$ openssl rand -hex 6 | sed <span class="string">'s/..\B/&amp;:/g'</span></span><br><span class="line"><span class="comment"># 注册新虚拟机</span></span><br><span class="line">$ virsh define /home/kvm/centos7.0a1.xml</span><br></pre></td></tr></table></figure>
+<h6 id="4-1虚拟机常用指令（虚拟机-客户机-访客）"><a href="#4-1虚拟机常用指令（虚拟机-客户机-访客）" class="headerlink" title="4.1虚拟机常用指令（虚拟机=客户机=访客）"></a>4.1虚拟机常用指令（虚拟机=客户机=访客）</h6><table>
+<thead>
+<tr>
+<th>命令选项</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>virsh connect</td>
+<td>连接至 KVM 管理程序</td>
+</tr>
+<tr>
+<td>virsh pool-list –all</td>
+<td>列出所有的存储池</td>
+</tr>
+<tr>
+<td>virsh list –all</td>
+<td>列出本地所有的虚拟主机</td>
+</tr>
+<tr>
+<td>virsh start kvm_name –console</td>
+<td>启动不处于活动状态的虚拟主机，并进入控制台</td>
+</tr>
+<tr>
+<td>virsh autostart kvm_name</td>
+<td>虚拟主机随宿主机启动而自启动</td>
+</tr>
+<tr>
+<td>virsh autostart -disable kvm_name</td>
+<td>禁止虚拟主机随宿主机启动后自启动</td>
+</tr>
+<tr>
+<td>virsh shutdown kvm_name</td>
+<td>关闭处于活动状态的虚拟主机</td>
+</tr>
+<tr>
+<td>virsh reboot kvm_name</td>
+<td>重启虚拟主机</td>
+</tr>
+<tr>
+<td>virsh suspend kvm_name</td>
+<td>暂停虚拟主机</td>
+</tr>
+<tr>
+<td>virsh resume kvm_name</td>
+<td>启动暂停的虚拟主机</td>
+</tr>
+<tr>
+<td>virsh destroy kvm_name</td>
+<td>强制关闭虚拟主机（类似断电）</td>
+</tr>
+<tr>
+<td>virsh dumpxml kvm_name</td>
+<td>显示虚拟主机的当前配置</td>
+</tr>
+<tr>
+<td>virsh dominfo kvm_name</td>
+<td>显示虚拟主机信息</td>
+</tr>
+<tr>
+<td>virsh domid kvm_name</td>
+<td>显示虚拟主机id</td>
+</tr>
+<tr>
+<td>virt-top</td>
+<td>显示虚拟主机内存CPU使用量</td>
+</tr>
+<tr>
+<td>virt-df kvm_name</td>
+<td>显示虚拟主机磁盘的使用量</td>
+</tr>
+<tr>
+<td>virsh</td>
+<td>进入虚拟化控制台</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>#####5.选择一款web管理kvm的软件（WebVirtMgr）（可以选择用linux桌面环境用相关的软件管理virt-manger，我也试过这个操作就是点点了，看个人爱好了，我受不了一台服务器有桌面环境，乐意在服务器上捣腾。）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">内容比较简单，它在github上面有文档说明。https://github.com/retspen/webvirtmgr/wiki</span><br></pre></td></tr></table></figure>
+
+
+<!--<a href="http://cyoncan.github.io/2017/09/18/KVM_CentOS/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = ''; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=&web_id=" language="JavaScript"></script>script>
+</div>
+
+
+
+
+
+
+</body>
+</html>

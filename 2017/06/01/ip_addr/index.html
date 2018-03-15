@@ -1,0 +1,147 @@
+<html>
+<head>
+	
+	<title>IP地址分类</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3"/>
+    
+
+</head>
+
+<body>
+
+
+<h2 class="title">IP地址分类</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年6月1日
+
+
+    <a class="article-category-link" href="/categories/None/">None</a>
+
+
+
+ </div>
+--->
+</div>
+
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、IP包头"><span class="toc-text">一、IP包头</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、ip地址分类"><span class="toc-text">二、ip地址分类</span></a></li></ol>
+<a id="more"></a>
+<h3 id="一、IP包头"><a href="#一、IP包头" class="headerlink" title="一、IP包头"></a>一、IP包头</h3><p>ip包头固定长度180位（bit）= 20字节</p>
+<h3 id="二、ip地址分类"><a href="#二、ip地址分类" class="headerlink" title="二、ip地址分类"></a>二、ip地址分类</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">网络类别</th>
+<th>最大网络数</th>
+<th>IP地址范围</th>
+<th>最大主机数</th>
+<th>私有地址范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">A</td>
+<td>126=2^7-2</td>
+<td>1.0.0.0~126.255.255.255</td>
+<td>2^24-2</td>
+<td>10.0.0.0~10.255.255.255</td>
+</tr>
+<tr>
+<td style="text-align:center">B</td>
+<td>16384=2^14</td>
+<td>128.0.0.0~191.255.255.255</td>
+<td>2^16-2</td>
+<td>172.16.0.0.~172.31.255.255</td>
+</tr>
+<tr>
+<td style="text-align:center">C</td>
+<td>2097152=2^21</td>
+<td>192.0.0.0~223.255.255.255</td>
+<td>2^8-2</td>
+<td>192.168.0.0~192.168.255.255</td>
+</tr>
+<tr>
+<td style="text-align:center">D</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">E</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>127.0.0.1代表电脑本机地址。</p>
+<p>A类地址，第一位数代表网段；B类地址，前两段位数代表网段；C类地址，前三段位数代表网段。不同网段之间的访问需要通过路由。</p>
+<p>私有地址可以在局域网内使用，不能被公网直接访问。例如192.168.0.1</p>
+<table>
+<thead>
+<tr>
+<th>二进制</th>
+<th>十进制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00000000.00000000.00000000.00000000</td>
+<td>0.0.0.0</td>
+</tr>
+<tr>
+<td>11111111.11111111.11111111.11111111</td>
+<td>255.255.255.255</td>
+</tr>
+</tbody>
+</table>
+
+
+<!--<a href="http://cyoncan.github.io/2017/06/01/ip_addr/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = ''; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=&web_id=" language="JavaScript"></script>script>
+</div>
+
+
+
+
+
+
+</body>
+</html>

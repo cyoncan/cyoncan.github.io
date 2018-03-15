@@ -1,0 +1,82 @@
+<html>
+<head>
+	
+	<title>MySQL</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3"/>
+    
+
+</head>
+
+<body>
+
+
+<h2 class="title">MySQL</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年3月27日
+
+
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+
+
+
+ </div>
+--->
+</div>
+
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL"><span class="toc-text">MySQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装Cmake"><span class="toc-text">1.安装Cmake</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-安装MySQL"><span class="toc-text">2.安装MySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-MySQL备份-有一个为zentao的数据库"><span class="toc-text">3.MySQL备份(有一个为zentao的数据库)</span></a></li></ol></li></ol>
+<a id="more"></a>
+<h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><h3 id="1-安装Cmake"><a href="#1-安装Cmake" class="headerlink" title="1.安装Cmake"></a>1.安装Cmake</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ yum -y install gcc gcc-c++ make autoconf libtool</span><br><span class="line">$ <span class="built_in">cd</span> /data/src</span><br><span class="line">$ wget -c http://www.cmake.org/files/v3.7/cmake-3.7.2.tar.gz</span><br><span class="line">$ tar -zxvf cmake-3.7.2.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> cmake-3.7.2</span><br><span class="line">$ ./bootstrap</span><br><span class="line">$ make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h3 id="2-安装MySQL"><a href="#2-安装MySQL" class="headerlink" title="2.安装MySQL"></a>2.安装MySQL</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">$ yum -y install gcc gcc-c++ make autoconf libtool-ltdl-devel gd-devel freetype-devel libxml2-devel libjpeg-devel libpng-devel openssl-devel curl-devel bison patch unzip libmcrypt-devel libmhash-devel ncurses-devel bzip2 flex libaio-devel</span><br><span class="line">$ groupadd mysql</span><br><span class="line">$ useradd -r -g mysql -s /sbin/nologin mysql</span><br><span class="line">$ wget -c http://mirrors.sohu.com/mysql/MySQL-5.6/mysql-5.6.35.tar.gz</span><br><span class="line">$ tar mysql-5.6.35.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> mysql-5.6.35</span><br><span class="line">$ cmake -DCMAKE_INSTALL_PREFIX=/data/<span class="built_in">local</span>/mysql/ -DMYSQL_DATADIR=/data/mysqldb -DMYSQL_TCP_PORT=3306 –<span class="built_in">enable</span>-thread-safe-client</span><br><span class="line">(cmake安装参数参考MySQL官方介绍 http://t.cn/RipwTjB)</span><br><span class="line">$ make &amp;&amp; make install</span><br><span class="line">$ /data/<span class="built_in">local</span>/mysql/bin/mysql --version</span><br><span class="line">$ <span class="built_in">cd</span> /data/<span class="built_in">local</span>/mysql</span><br><span class="line">$ chown -R mysql .  (更改当前目录(mysql)下所有及子目录属mysql用户.因为是通过root用户进行安装的，权限属于root)</span><br><span class="line">$ chgrp -R mysql .</span><br><span class="line">$ scripts/mysql_install_db --user=mysql --basedir=/data/<span class="built_in">local</span>/mysql --datadir=/data/mysqldb</span><br><span class="line">(初始化数据库,确保数据库目录和文件为mysql账户拥有,确保以root用户执行mysql_install_db,--basedir --datadir 分别指定MySQL安装目录和数据库目录，根据需求指定或者默认.)</span><br><span class="line">$ chown -R root .  (改回root或者不改均可)</span><br><span class="line">$ chown -R mysql data  (data数据库目录必须为mysql账户拥有,如果数据库目录更改也要授予mysql权限. tip：有些系统或者分发MySQL可能不是data，是var之类的.根据实际情况选择)</span><br><span class="line">$ cp support-files/mysql.server /etc/init.d/mysqld</span><br><span class="line">$ chkconfig --add mysqld  (设置开机启动/服务)</span><br><span class="line">$ ln -s /data/<span class="built_in">local</span>/mysql/bin/mysql /usr/sbin</span><br><span class="line">$ <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/data/<span class="built_in">local</span>/mysql/bin</span><br><span class="line">$ vim /etc/my.cnf</span><br><span class="line">  [mysqld]</span><br><span class="line">  datadir=/data/mysqldb</span><br><span class="line">  socket=/data/mysqldb/mysql.sock</span><br><span class="line">  user=mysql</span><br><span class="line">  sql_mode=<span class="string">"NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER"</span></span><br><span class="line">  character-set-server=utf8mb4</span><br><span class="line">  <span class="comment"># Disabling symbolic-links is recommended to prevent assorted security risks</span></span><br><span class="line">  symbolic-links=0</span><br><span class="line">  slow_query_log=on</span><br><span class="line">  slow-query-log-file=/data/mysqldb/slowquery.log</span><br><span class="line">  long_query_time=0.03</span><br><span class="line">  <span class="built_in">log</span>-queries-not-using-indexes</span><br><span class="line">  [client]</span><br><span class="line">  default-character-set = utf8mb4</span><br><span class="line">  character-sets-dir=/data/<span class="built_in">local</span>/mysql/share/charsets</span><br><span class="line">  [mysqld_safe]</span><br><span class="line">  <span class="built_in">log</span>-error=/data/mysqldb/mysqld.log</span><br><span class="line">  pid-file=/data/mysqldb/mysqld.pid</span><br><span class="line">  (编辑my.cnf，参考官方文档设置 http://t.cn/Rip42em)</span><br><span class="line">$ bin/mysqld_safe --user=mysql &amp;</span><br><span class="line">$ bin/mysqladmin -u root password <span class="string">"new passwd"</span>   (设置密码,用其它方式参考官方 http://t.cn/R6NhwTv)</span><br><span class="line">如果不行,可以使用重置密码的方式:</span><br><span class="line">$ service mysqld stop</span><br><span class="line">$ /usr/<span class="built_in">local</span>/mysql/bin/mysqld_safe --skip-grant-tables</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ mysql (去新建一个终端登录)</span><br><span class="line">mysql&gt; use mysql</span><br><span class="line">mysql&gt; update user set password=password(&quot;123456&quot;) where user=&quot;root&quot;;</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">mysql&gt; exit;</span><br><span class="line">$ kill mysqld_safe ,启动mysqld , 登录mysql.</span><br><span class="line">mysql&gt; grant all privileges on *.* to &apos;root&apos;@&quot;%&quot; identified by &apos;123456&apos; with grant option;</span><br><span class="line">mysql&gt; grant all privileges on *.* to &apos;root&apos;@&quot;%&quot; identified by &apos;123456&apos; with grant option;</span><br><span class="line">(grant做一个授权,%表示*.*(所有的库和表)允许被远程连接,使用这里指定的用户密码或者指定IP操作mysql,如果是单个数据库授权,dbname.* to username@&quot;%&quot;...)</span><br><span class="line">flush privileges;</span><br><span class="line">mysql&gt; quit;</span><br><span class="line">  tip: grant操作需要flush ,注意再操作完成后删除user表中匿名和空用户,或者给他们加上密码.</span><br><span class="line">mysql&gt; delete from user where user=&quot;&quot;;</span><br><span class="line"># mysql -h localhost 和 mysql -h 127.0.0.1 的区别,通过localhost连接到mysql是使用UNIX socket,通过127.0.0.1连接到mysql是使用TCP/IP.</span><br></pre></td></tr></table></figure>
+<h3 id="3-MySQL备份-有一个为zentao的数据库"><a href="#3-MySQL备份-有一个为zentao的数据库" class="headerlink" title="3.MySQL备份(有一个为zentao的数据库)"></a>3.MySQL备份(有一个为zentao的数据库)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">mysql5.6及以上,使用mysqldump在脚本里面登录数据库,防止报错信息.利用mysql/bin/mysql_config_editor保存 -uroot -p .</span><br><span class="line">$ /data/<span class="built_in">local</span>/mysql/bin/mysql_config_editor <span class="built_in">set</span> --login-path=dbname --host=127.0.0.1 --user=root --password</span><br><span class="line">  Enter password:</span><br><span class="line">  上面的Enter password后面输入root登录MySQL的密码,即可生成 --login-path=dbname .</span><br><span class="line">  下面就可以写入shell脚本.</span><br><span class="line">$ vim mysql_backup.sh</span><br><span class="line">  <span class="comment">#!/bin/sh</span></span><br><span class="line">  dump=/data/<span class="built_in">local</span>/mysql/bin/mysqldump</span><br><span class="line">  backup_dir=/data/backup/mysql/</span><br><span class="line">  linux_user=root</span><br><span class="line">  db_name=zentao</span><br><span class="line">  days=15</span><br><span class="line">  <span class="built_in">cd</span> <span class="variable">$backup_dir</span></span><br><span class="line">  date=`date +%Y-%m-%d`</span><br><span class="line">  backup_sql=<span class="variable">$date</span>.sql</span><br><span class="line">  tar_sql=<span class="string">"energy_bak_<span class="variable">$date</span>.tar.gz"</span></span><br><span class="line">$ dump --login-path==dbname <span class="variable">$db_name</span> --default-character-set=utf8 --opt -Q -R --skip-lock-tables&gt;<span class="variable">$backip_sql</span></span><br><span class="line">  tar -czf <span class="variable">$tar_sql</span> ./<span class="variable">$backup_sql</span></span><br><span class="line">  rm <span class="variable">$backup_sql</span></span><br><span class="line">  chown <span class="variable">$linux_user</span>:<span class="variable">$linux_user</span> <span class="variable">$backup_dir</span>/<span class="variable">$tar_sql</span></span><br><span class="line">  find <span class="variable">$backup_dir</span> -name <span class="string">"energy_bak*"</span> -<span class="built_in">type</span> f -mtime +<span class="variable">$days</span> -<span class="built_in">exec</span> rm &#123;&#125; \;</span><br><span class="line">    </span><br><span class="line">从压缩备份文件中恢复(.tar.sql)</span><br><span class="line">$ gzip &lt; 2017-03-21.sql.tar.gz | mysql -uroot -p zentao</span><br><span class="line">  或者:</span><br><span class="line">$ zcat 2017-03-21.sql.tar.gz | mysql -uroot -p</span><br><span class="line">  从备份文件恢复(.sql)</span><br><span class="line">$ mysql -uroot -p zentao &lt; 2017-03-21.sql</span><br></pre></td></tr></table></figure>
+
+
+<!--<a href="http://cyoncan.github.io/2017/03/27/MySQL/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = ''; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=&web_id=" language="JavaScript"></script>script>
+</div>
+
+
+
+
+
+
+</body>
+</html>

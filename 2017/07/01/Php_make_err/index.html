@@ -1,0 +1,89 @@
+<html>
+<head>
+	
+	<title>php编译报错</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3"/>
+    
+
+</head>
+
+<body>
+
+
+<h2 class="title">php编译报错</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年7月1日
+
+
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+
+
+
+ </div>
+--->
+</div>
+
+
+<a id="more"></a>
+<p>PHP重新编译安装报错：</p>
+<p>configure: error: Cannot find libmysqlclient_r under /data/local/mysql<br>Note that the MySQL client library is not bundled anymore!</p>
+<p>php编译参数：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/data/local/php --with-config-file-path=/data/local/php/etc --with-apxs2=/data/local/httpd/bin/apxs --with-mysql=/data/local/mysql --with-mysqli=/data/local/mysql/bin/mysql_config --with-pdo-mysql=/data/local/mysql --with-pcre-dir=/data/local/pcre/bin/pcre-config --enable-bcmath --enable-exif --enable-fpm --enable-ftp --enable-gd-native-ttf --enable-inline-optimization --enable-mbstring --enable-opcache --enable-pcntl --enable-pdo_mysql --enable-soap --enable-shmop --enable-sockets --enable-sysvsem --enable-sysvmsg --enable-sysvshm --enable-zip --with-bz2 --with-curl --with-freetype-dir --with-gd --with-gdbm --with-gmp --with-gettext --with-jpeg-dir --with-libxml-dir --with-libdir --with-mhash --with-mcrypt --with-openssl --with-pear --with-png-dir --with-xsl --with-zlib-dir</span><br></pre></td></tr></table></figure>
+<p><em>–with-mysql=mysqlnd是不报错的参数</em></p>
+<p>原因：</p>
+<p>我之前搭建的lnmp环境，没有使用httpd，在后来编译APACHE的时候，使用–with-mpm模块，所以就必须在编译MYSQL的时候加上 –enable-thread-safe-client.</p>
+<p>因为MySQL不能随意停止进行重新编译，怕造成问题故障。可定是不能重新编译MySQL的。查了下这个问题是PHP5.2的一个改进，在PHP5.2.0之前的版本都不需要MYSQL启用安全线程。就找了下其他方法，看到大多数的都是说需要 mysql-devel，这个我之前mysql安装的时候都是有的，包括报错提示的libmysqlclient_r.so在我的目录/dala/local/mysql/lib下都是存在的。但是还是一直报哪个错误，在网上查了好多都是说做个软连或者复制libmysqlclient.so.18.1.0到libmysqlclient_r.so就可以了。我试了很多都不行，包括ln -s lib lib64 。后来直接改了–with-mysql=mysqlnd就OK了。后来想想或许这种也可以–with-mysql -lib-dir=/data/local/mysql/lib</p>
+<p>在这里记录下httpd的编译参数：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/data/local/httpd --with-apr=/data/local/apr/bin/apr-1-config --with-apr-util=/data/local/apr-util/bin/apu-1-config --with-pcre=/data/local/pcre/bin/pcre-config --with-mpm=worker --enable-access-compat --enable-alias --enable-authn-core --enable-authn-file --enable-auth-basic --enable-authz-core --enable-authz-host --enable-authz-user --enable-authz-groupfile --enable-autoindex --enable-cgi --enable-cache --enable-cache-disk --enable-dir --enable-deflate --enable-debugger-mode --enable-env --enable-expires --enable-file-cache --enable-filter --enable-http --enable-headers --enable-log-config --enable-load-all-modules --enable-mime --enable-modules=most --enable-reqtimeout --enable-rewrite --enable-so --enable-setenvif --enable-status --enable-speling --enable-static-support --enable-unixd --enable-version --enable-vhost-alias --enable-mods-shared=all</span><br></pre></td></tr></table></figure>
+<p>查看nginx编译参数：/data/local/nginx/sbin/nginx -V<br>查看apache编译参数：cat /data/local/httpd/build/config.nice<br>查看mysql编译参数：cat /data/local/mysql/bin/mysqlbug | grep CONFIGURE_LINE<br>查看php编译参数：/data/local/php/bin/php -i | grep configure   或者 php -r “phpinfo();”|grep configure</p>
+
+
+<!--<a href="http://cyoncan.github.io/2017/07/01/Php_make_err/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = ''; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=&web_id=" language="JavaScript"></script>script>
+</div>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<html>
+<head>
+	
+	<title>MySQL_backup_</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3"/>
+    
+
+</head>
+
+<body>
+
+
+<h2 class="title">MySQL_backup_</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年7月20日
+
+
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+
+
+
+ </div>
+--->
+</div>
+
+
+<a id="more"></a>
+<p>开始是纠结mysql做备份的时候要不要给表加锁,加不加锁的依据是什么?查了下资料,综合自己经验看来,加锁是一定没问题的,最保险的做法.但是没搞明白加锁进行备份是仅仅多了一步加锁解锁的步骤还是会影响备份的效率呢!问了一些人,都没怎么关注过这个.记录了一些资料,在做分析</p>
+<p><strong>1.MySQL备份的几种类型</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">① 热备份:可以正常读写操作,业务正常进行</span><br><span class="line">② 冷备份:不能进行读写操作,数据库需要关闭服务</span><br><span class="line">③ 温备份:可以进行读操作,但是不能进行写的操作</span><br></pre></td></tr></table></figure>
+<p><strong>2.MySQL的几种存储引擎</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MyISAM , InnoDB , MEMORY , MERGE , CSV , ARCHIVE </span><br><span class="line">其中MyISAM不支持热备,InnoDB都可以支持.</span><br></pre></td></tr></table></figure>
+<p><strong>3.MySQL的几种备份工具</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">① mysqldump: 支持所有的存储引擎,支持温备,完全,部分,对于InnoDB可以热备.</span><br><span class="line">② mysqlhotcopy: 仅支持MyISAM,冷备份.如果表均为MyISAM.可以使用这个</span><br><span class="line">② xtrabackup: InnoDB/XtraDB热备,支持完全,增量</span><br><span class="line">④ lvm2 snpashot: 热备,使用文件系统管理工具进行备份</span><br></pre></td></tr></table></figure>
+<p>(1) 用mysqldump备份</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mysqldump -uroot -p --single-transaction --databases db1 --tables t1 &gt; /tmp/db1-t1.sql   <span class="comment">#--single-transaction此选项能实现热备InnoDB表和库,因此不需要同时使用--lock-all-tables;</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mysqldump -uroot -p --lock-all-tables --all-databases &gt; /tmp/bak.sql   <span class="comment">#备份全部的数据库</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mysqldump -uroot -p --lock-all-tables --databases db1 db2 &gt; /tmp/db1-db2.sql   <span class="comment">#备份多个数据库</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mysqldump -uroot -p -h=ip1 --databases db1 | mysql -uroot -ppassword -hip2 db2   <span class="comment">#ip1机器的db1导入到ip2机器的db2数据库,db2要创建好</span></span></span><br></pre></td></tr></table></figure>
+<p>锁表这一步也可以在mysql终端里面进行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; flush tables with read lock   #刷新锁定全部的库和表.</span><br><span class="line">mysql&gt; flush logs;   #刷新滚动日志,在锁定表后执行.</span><br><span class="line">$ mysqldump -uroot -p --databases db1 &gt; /tmp/db1.sql   #起新终端</span><br><span class="line">mysql&gt; unlock tables</span><br></pre></td></tr></table></figure>
+<p>mysqldump常用的几个参数:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--no-data   #只导出表结构不导出数据</span><br><span class="line">--lock-tables   #对所有表加读锁.(默认开启,-skip-lock-tables来关闭)</span><br><span class="line">--lock-all-tables   #锁定所有库中的表,通过在整个dump的过程中持有全局读锁来实现,会自动关闭--single-transactionh和--lock-tables</span><br></pre></td></tr></table></figure>
+
+
+<!--<a href="http://cyoncan.github.io/2017/07/20/MySQL_backup/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = ''; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=&web_id=" language="JavaScript"></script>script>
+</div>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<html>
+<head>
+	
+	<title>Linux内存管理</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3"/>
+    
+
+</head>
+
+<body>
+
+
+<h2 class="title">Linux内存管理</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年4月26日
+
+
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+
+
+
+ </div>
+--->
+</div>
+
+
+<a id="more"></a>
+<p><strong>释放内存</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ sync</span><br><span class="line">$ free -m</span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line">Mem:          7869       6660       1208          0        741       1174</span><br><span class="line">-/+ buffers/cache:       4743       3125</span><br><span class="line">Swap:            0          0          0</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> 1 &gt; /proc/sys/vm/drop_caches   <span class="comment">#释放 pagecache</span></span><br><span class="line">$ <span class="built_in">echo</span> 2 &gt; /proc/sys/vm/drop_caches   <span class="comment">#释放 dentries和inodes</span></span><br><span class="line">$ <span class="built_in">echo</span> 3 &gt; /proc/sys/vm/drop_caches   <span class="comment">#释放 pagecache, dentries和inodes</span></span><br><span class="line"><span class="comment"># 获取空闲内存</span></span><br><span class="line">$ free -m | grep - | awk -F : <span class="string">'&#123;print $2&#125;'</span> | awk <span class="string">'&#123;print $2&#125;'</span></span><br></pre></td></tr></table></figure>
+
+
+<!--<a href="http://cyoncan.github.io/2017/04/26/Linux_Mem/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = ''; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=&web_id=" language="JavaScript"></script>script>
+</div>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<html>
+<head>
+	
+	<title>FTP_vsftp</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3"/>
+    
+
+</head>
+
+<body>
+
+
+<h2 class="title">FTP_vsftp</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年3月19日
+
+
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+
+
+
+ </div>
+--->
+</div>
+
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装-源码编译或者yum-install"><span class="toc-text">1.安装(源码编译或者yum install)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#目录文件说明"><span class="toc-text">目录文件说明</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-创建虚拟用户账号和密码"><span class="toc-text">2.创建虚拟用户账号和密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-配置PAM信息"><span class="toc-text">3.配置PAM信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-配置vsftpd-conf"><span class="toc-text">4.配置vsftpd.conf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-创建用户名的配置文件"><span class="toc-text">5.创建用户名的配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-日常管理虚拟用户账号和密码"><span class="toc-text">6.日常管理虚拟用户账号和密码</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#i-修改文件"><span class="toc-text">i.修改文件</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#ii-生成虚拟用户认证的db文件"><span class="toc-text">ii.生成虚拟用户认证的db文件</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#iii-重启ftp服务-能登录就不重启"><span class="toc-text">iii.重启ftp服务(能登录就不重启)</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-添加防火墙规则"><span class="toc-text">7.添加防火墙规则</span></a></li></ol>
+<a id="more"></a>
+<h3 id="1-安装-源码编译或者yum-install"><a href="#1-安装-源码编译或者yum-install" class="headerlink" title="1.安装(源码编译或者yum install)"></a>1.安装(源码编译或者yum install)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ yum -y install vsftpd</span><br><span class="line">$ service vsftpd start</span><br><span class="line">$ chkconfig vsftpd on</span><br><span class="line">$ yum install -y  db4 db4-utils (基于虚拟账户权限认证依赖)</span><br></pre></td></tr></table></figure>
+<h5 id="目录文件说明"><a href="#目录文件说明" class="headerlink" title="目录文件说明"></a>目录文件说明</h5><p>  /etc/vsftpd/vsftpd.conf              vsftpd的核心配置文件<br>  /etc/vsftpd/ftpusers                 用于指定哪些用户不能访问FTP服务器<br>  /etc/vsftpd/user_list                指定允许使用vsftpd的用户列表文件<br>  /etc/vsftpd/vsftpd_conf_migrate.sh   是vsftpd操作的一些变量和设置脚本<br>  /var/ftp/                            默认情况下匿名用户的根目录</p>
+<p>=================================基于虚拟账户权限认证====================================</p>
+<p><em>sftpd的虚拟用户采用单独的用户名/口令保存方式，与系统账户分离，很大程度上增强了系统的安全性.vsftpd可以采用数据库文件来保存用户/口令，eg:hash;也可以将用户/口令保存在数据库服务器中，eg:MySQL。vsftpd验证虚拟用户，则采用PAM方式.</em></p>
+<p>=======================================================================================</p>
+<h3 id="2-创建虚拟用户账号和密码"><a href="#2-创建虚拟用户账号和密码" class="headerlink" title="2.创建虚拟用户账号和密码"></a>2.创建虚拟用户账号和密码</h3><p> (奇数行为用户名，偶数行为用户密码）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/vsftpd/virtual.users</span><br><span class="line">  ftpuser  (虚拟用户名)</span><br><span class="line">  123456   (用户口令)</span><br></pre></td></tr></table></figure>
+<p>生成虚拟用户认证的db文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ db_load -T -t <span class="built_in">hash</span> -f /etc/vsftpd/virtual.users /etc/vsftpd/vsftpd.login.db</span><br><span class="line">$ chmod 600 /etc/vsftpd/vsftpd.login.db</span><br></pre></td></tr></table></figure>
+<h3 id="3-配置PAM信息"><a href="#3-配置PAM信息" class="headerlink" title="3.配置PAM信息"></a>3.配置PAM信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/pam.d/vsftpd.pam</span><br><span class="line">auth required /lib64/security/pam_userdb.so db=/etc/vsftpd/vsftpd.login</span><br><span class="line">account required /lib64/security/pam_userdb.so db=/etc/vsftpd/vsftpd.login</span><br></pre></td></tr></table></figure>
+<h3 id="4-配置vsftpd-conf"><a href="#4-配置vsftpd-conf" class="headerlink" title="4.配置vsftpd.conf"></a>4.配置vsftpd.conf</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.bak</span><br><span class="line">$ vim /etc/vsftpd/vsftpd.conf</span><br><span class="line">  anonymous_enable=NO</span><br><span class="line">  local_enable=YES</span><br><span class="line">  write_enable=YES</span><br><span class="line">  local_umask=022</span><br><span class="line">  anon_umask=022   </span><br><span class="line">  xferlog_enable=YES</span><br><span class="line">  connect_from_port_20=YES</span><br><span class="line">  xferlog_std_format=YES</span><br><span class="line">  ascii_upload_enable=YES</span><br><span class="line">  ascii_download_enable=YES</span><br><span class="line">  ftpd_banner=Welcome to blah FTP service.</span><br><span class="line">  chroot_local_user=YES</span><br><span class="line">  listen=YES</span><br><span class="line">  pam_service_name=vsftpd.pam</span><br><span class="line">  userlist_enable=YES</span><br><span class="line">  tcp_wrappers=YES</span><br><span class="line">  guest_username=ftp</span><br><span class="line">  guest_enable=YES</span><br><span class="line">  user_config_dir=/etc/vsftpd/vsftpd_user_conf</span><br><span class="line">  pasv_min_port=30001</span><br><span class="line">  pasv_max_port=31000</span><br></pre></td></tr></table></figure>
+<h3 id="5-创建用户名的配置文件"><a href="#5-创建用户名的配置文件" class="headerlink" title="5.创建用户名的配置文件"></a>5.创建用户名的配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p /etc/vsftpd/vsftpd_user_conf</span><br><span class="line">$ <span class="built_in">cd</span> /etc/vsftpd/vsftpd_user_conf</span><br><span class="line">$ vim ftpuser (ftpuser文件名就是上面创建虚拟用户名字)</span><br><span class="line">　local_root=/data/www</span><br><span class="line">　write_enable=yes</span><br><span class="line">　download_enable=yes</span><br><span class="line">　anon_upload_enable=yes</span><br><span class="line">　anon_mkdir_write_enable=yes</span><br><span class="line">　anon_other_write_enable=yes</span><br><span class="line">　anon_world_readable_only=no</span><br><span class="line">　idle_session_timeout=600</span><br><span class="line">　data_connection_timeout=120</span><br><span class="line">　max_clients=2</span><br><span class="line">　max_per_ip=3</span><br><span class="line">　local_max_rate=512000 (拥有全部权限)</span><br></pre></td></tr></table></figure>
+<h3 id="6-日常管理虚拟用户账号和密码"><a href="#6-日常管理虚拟用户账号和密码" class="headerlink" title="6.日常管理虚拟用户账号和密码"></a>6.日常管理虚拟用户账号和密码</h3><h6 id="i-修改文件"><a href="#i-修改文件" class="headerlink" title="i.修改文件"></a>i.修改文件</h6>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/vsftpd/virtual.users</span><br></pre></td></tr></table></figure>
+<h6 id="ii-生成虚拟用户认证的db文件"><a href="#ii-生成虚拟用户认证的db文件" class="headerlink" title="ii.生成虚拟用户认证的db文件"></a>ii.生成虚拟用户认证的db文件</h6>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db_load -T -t <span class="built_in">hash</span> -f /etc/vsftpd/virtual.users /etc/vsftpd/vsftpd.login.db</span><br></pre></td></tr></table></figure>
+<h6 id="iii-重启ftp服务-能登录就不重启"><a href="#iii-重启ftp服务-能登录就不重启" class="headerlink" title="iii.重启ftp服务(能登录就不重启)"></a>iii.重启ftp服务(能登录就不重启)</h6>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service vsftpd restart</span><br></pre></td></tr></table></figure>
+<h3 id="7-添加防火墙规则"><a href="#7-添加防火墙规则" class="headerlink" title="7.添加防火墙规则"></a>7.添加防火墙规则</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 20 -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 21 -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m tcp --dport 30001:31000 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+
+<!--<a href="http://cyoncan.github.io/2017/03/19/vsftp/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = ''; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=&web_id=" language="JavaScript"></script>script>
+</div>
+
+
+
+
+
+
+</body>
+</html>

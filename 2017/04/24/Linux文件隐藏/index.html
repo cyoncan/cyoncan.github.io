@@ -1,0 +1,140 @@
+<html>
+<head>
+	
+	<title>Linux文件隐藏属性</title>
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3"/>
+    
+
+</head>
+
+<body>
+
+
+<h2 class="title">Linux文件隐藏属性</h2>
+<!---
+<div style="text-align:center;margin-top: -10px;">
+<div class="article-category">
+发表于2017年4月24日
+
+
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+
+
+
+ </div>
+--->
+</div>
+
+
+<a id="more"></a>
+<p><strong>chattr命令用于设置文件的隐藏权限，格式为：“chattr [参数] 文件”。</strong></p>
+<p>chattr设置文件的隐藏权限，如果要将某个隐藏功能添加到文件，使用<strong>+参数</strong>，如果要将某个隐藏功能移出文件，使用<strong>-参数</strong>。常见的隐藏权限包括有：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>i</td>
+<td>将无法对文件进行修改,若对目录设置后则仅能修改子文件而不能新建或删除。</td>
+</tr>
+<tr>
+<td>a</td>
+<td>仅允许补充（追加）内容.无法覆盖/删除(Append Only)。</td>
+</tr>
+<tr>
+<td>S</td>
+<td>文件内容变更后立即同步到硬盘(sync)。</td>
+</tr>
+<tr>
+<td>s</td>
+<td>彻底从硬盘中删除，不可恢复(用0填充原文件所在硬盘区域)。</td>
+</tr>
+<tr>
+<td>A</td>
+<td>不再修改这个文件的最后访问时间(atime)。</td>
+</tr>
+<tr>
+<td>b</td>
+<td>不再修改文件或目录的存取时间。</td>
+</tr>
+<tr>
+<td>D</td>
+<td>检查压缩文件中的错误。</td>
+</tr>
+<tr>
+<td>d</td>
+<td>当使用dump命令备份时忽略本文件/目录。</td>
+</tr>
+<tr>
+<td>c</td>
+<td>默认将文件或目录进行压缩。</td>
+</tr>
+<tr>
+<td>u</td>
+<td>当删除此文件后依然保留其在硬盘中的数据，方便日后恢复。</td>
+</tr>
+<tr>
+<td>t</td>
+<td>让文件系统支持尾部合并（tail-merging）。</td>
+</tr>
+<tr>
+<td>X</td>
+<td>可以直接访问压缩文件的内容。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>lsattr命令用于显示文件的隐藏权限，格式为：“lsattr [参数] 文件”。</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ root@stu  ~  lsattr</span><br><span class="line">-------------e- ./readme.txt</span><br><span class="line">$ root@stu  ~  chattr +a readme.txt</span><br><span class="line">$ root@stu  ~  rm -rf readme.txt</span><br><span class="line">rm: cannot remove `readme.txt<span class="string">': Operation not permitted</span></span><br><span class="line"><span class="string">$ root@stu  ~  lsattr readme.txt</span></span><br><span class="line"><span class="string">-----a-------e- readme.txt</span></span><br><span class="line"><span class="string">$ root@stu  ~  chattr -a readme.txt</span></span><br><span class="line"><span class="string">$ root@stu  ~  rm readme.txt</span></span><br><span class="line"><span class="string">$ root@stu  ~  ll</span></span><br><span class="line"><span class="string">total 0</span></span><br></pre></td></tr></table></figure>
+
+
+<!--<a href="http://cyoncan.github.io/2017/04/24/Linux文件隐藏/#disqus_thread" class="article-comment-link">Comments</a>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = ''; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+-->
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=&web_id=" language="JavaScript"></script>script>
+</div>
+
+
+
+
+
+
+</body>
+</html>
